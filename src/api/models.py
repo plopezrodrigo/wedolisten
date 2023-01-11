@@ -7,7 +7,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
-    tipo = db.Column(db.Enum("customer","manager"), unique=False, nullable=False)
+    type = db.Column(db.Enum("customer","manager"), unique=False, nullable=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False, default=True)
 
     def __repr__(self):
@@ -102,8 +102,8 @@ class Rate_Customer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     customer_id = db.Column(ForeignKey("customers.id"), nullable=False)
     customer = db.Column(ForeignKey("customers.id"), nullable=False)
-    comercial_place_id = db.Column(ForeignKey("comercial_Places.id"), nullable=False)
-    comercial_place = db.relationship('Comercial_Place', backref='id', lazy=true)
+    comercial_place_id = db.Column(ForeignKey("comercial_places.id"), nullable=False)
+    comercial_place = db.relationship('comercial_places', backref='id', lazy=true)
     rate = db.Column(db.Enum("1","2","3","4","5"), unique=False, nullable=False)
 
     def __repr__(self):
@@ -121,8 +121,8 @@ class Rate_Customer(db.Model):
 class Photo_Comercial_Place(db.Model):
     __tablename__ = "photos_comercial_place"
     id = db.Column(db.Integer, primary_key=True)
-    comercial_place_id = db.Column(ForeignKey("comercial_Places.id"), nullable=False)
-    comercial_place = db.relationship('comercial_places', backref='id', lazy=true)
+    comercial_place_id = db.Column(ForeignKey("comercial_Place.id"), nullable=False)
+    comercial_place = db.relationship('comercial_place', backref='id', lazy=true)
     location = db.Column(db.String(120), unique=True, nullable=False)
     
     def __repr__(self):
@@ -175,7 +175,7 @@ class Photos_Comments(db.Model):
                     "location": self.location
                }
 
-class Favorit(db.Model):
+class Favourit(db.Model):
     __tablename__ = "favorits"
     id = db.Column(db.Integer, primary_key=True)
     customer_id = db.Column(ForeignKey("customers.id"), nullable=False)
