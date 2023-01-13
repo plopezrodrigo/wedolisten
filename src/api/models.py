@@ -121,8 +121,8 @@ class Rate_Customer(db.Model):
 class Photo_Comercial_Place(db.Model):
     __tablename__ = "photos_comercial_place"
     id = db.Column(db.Integer, primary_key=True)
-    comercial_place_id = db.Column(ForeignKey("comercial_Place.id"), nullable=False)
-    comercial_place = db.relationship('comercial_place', backref='id', lazy=true)
+    comercial_place_id = db.Column(ForeignKey("comercial_places.id"), nullable=False)
+    comercial_place = db.relationship('comercial_places', backref='id', lazy=true)
     location = db.Column(db.String(120), unique=True, nullable=False)
     
     def __repr__(self):
