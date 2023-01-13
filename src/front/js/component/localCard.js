@@ -1,28 +1,34 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
+import imagen from "../../img/local1.jpeg";
+
 
 const OpinionCard = (props) => {
   const { store, actions } = useContext(Context);
   console.log(store.favorites);
 
   return (
-    <div className="col-12 col-md-4">
-      <div className="card">
-        <img
-          src={`https://starwars-visualguide.com/assets/img/characters/${props.uid}.jpg`}
-          className="thumb reserved-ratio"
-          alt="Luke Skywalker"
-        />
+    <div className="col-12">
+      <div className="card" id="localcard">
+          <img
+              src={imagen}
+              className="card-img-top"
+              alt=""
+           />
         <div className="card-body">
           <h5 className="card-title">Nombre de la local</h5>
           <p className="card-text">XX/MM/YYYY.</p>
-          <button className="btn btn-outline-success" type="submit">
+          <button className="btn btn-outline-success" type="submit" id="iconbutton">
             <i className="fas fa-heart" />
-            <i className="far fa-comment" />
-            <i className="fas fa-map-marker-alt" />
           </button>
-          <a href="#" className="btn btn-primary">
+          <button className="btn btn-outline-success" type="submit" id="iconbutton">
+          <i className="far fa-comment" />
+          </button>
+          <button className="btn btn-outline-success" type="submit" id="iconbutton">
+          <i className="fas fa-map-marker-alt" />
+          </button>
+          <a href="#" className="btn btn-primary" id="button">
             Ver más
           </a>
         </div>
