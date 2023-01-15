@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import getState from "./flux.js";
+import { getMember } from "../utils";
 
 // Don't change, here is where we initialize our context, by default it's just going to be null.
 export const Context = React.createContext(null);
@@ -29,6 +30,14 @@ const injectContext = PassedComponent => {
 			 * store, instead use actions, like this:
 			 **/
 			state.actions.getMessage(); // <---- calling this function from the flux.js actions
+
+			/**
+			 * recogemos los valores de usuario si este estuviera conectado. Útil sobre todo para la actualizaciones de la página
+			 */
+			let respuesta = {};
+			getMember(respuesta);
+			console.log("useEffect ---> ", respuesta);
+
 		}, []);
 
 		// The initial value for the context is not null anymore, but the current state of this component,

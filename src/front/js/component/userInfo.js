@@ -14,9 +14,7 @@ const UserInfo = (props) => {
           Permite que otros usuarios conozcan tu opinión en la visita a nuestros
           locales y podamos mejorar su experiencia.{" "}
         </p>
-        <a href="#" class="btn btn-lg btn-outline-primary mb-3">
-          Registro
-        </a>
+        <Link to="/signupUser" 	type="button" className="btn btn-primary mx-3">Registro</Link>
       </div>
       <div class="col-md-7 ps-md-5">
         <img
