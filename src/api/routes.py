@@ -1,22 +1,11 @@
 """
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
-import os
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User
 from api.utils import generate_sitemap, APIException
-from flask_jwt_extended import create_access_token
-from flask_jwt_extended import get_jwt_identity
-from flask_jwt_extended import jwt_required
 
 api = Blueprint('api', __name__)
-
-@api.route('/token', methods=['POST'])
-def create_token():
-    email = request.json.get("email", None)
-    password = request.json.get("password", None)
-    if email != "test" or password != "test":
-        return jsonify({"msg": "Bad username or password"}), 401
 
 
 @api.route('/Customer', methods=['GET'])
@@ -61,19 +50,16 @@ def Users_delete(id):
     User = User.query.get(id)
     db.session.delete(User)
     db.session.commit()
-
 @api.route("/Comercial_Place/<id>", methods=["DELETE"])
 def Places_delete(id):
     Place = Comercial_Place.query.get(id)
     db.session.delete(Place)
     db.session.commit()
-
 @api.route("/Comment/<id>", methods=["DELETE"])
 def Comments_delete(id):
     Comment = Comment.query.get(id)
     db.session.delete(Comment)
     db.session.commit()
-
 @api.route("/Favourit/<id>", methods=["DELETE"])
 def Favourits_delete(id):
     Favourit = Favourit.query.get(id)
@@ -179,19 +165,13 @@ def Favourit_add():
     db.session.commit()
 
 
-''' @app.route("/Customer/<id>", methods=["PUT"])
-def Customer_update(id):
-    customer = Customer.query.get(id)
-    name = request.json['name']
-    birthday = request.json['birthday']
-    gender = request.json['gender']
-    subscription = request.json['subscription']
-    address = request.json['address']
+@api.route('/token', methods=['POST'])
+def create_token():
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
+    user = User.filter.query(email=email, password=password).first()
+    if user:
+        return jsonify({"msg": "Bad username or password"}), 401
 
-    customer.name = name
-    customer.birthday = birthday
-    customer.gender = gender
-    customer.subscription = subscription
-    customer.address = address
-
-    db.session.commit() '''
+    access_token = create_access_token(identity=user.id)
+    return jsonify({ "token": access_token, "user_id": user.id })

@@ -1,46 +1,62 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 
-export const Login = () => {
+const Login = () => {
   const { store, actions } = useContext(Context);
-  const { email, setEmail } = useState("");
-  const { password, setPassword } = useState("");
+  const [data, setData] = useState({});
   const token = sessionStorage.getItem("token");
   const navigate = useNavigate();
 
   console.log("This is your token", store.token);
   const handleClick = () => {
-    actions.login(email, password);
+    actions.login(data.email, data.password);
   };
 
-  if (store.token && store.token != "" && store.token != undefined)
-    navigate.push("/");
+  useEffect(()=>{
+    if (store.token && store.token != "" && store.token != undefined){
+      navigate.push("/");
+    }
+  },[])
 
+  const handleChange = (e) => {
+    setData({...data, [e.target.name]:e.target.value})
+  };
+    
   return (
-    <div className="text-center mt-5">
-      <h1>Login</h1>
-      {store.token && store.token != "" && store.token != undefined ? (
-        "You are logged in with this token" + store.token
-      ) : (
-        <div>
-          <input
-            type="text"
-            placeholder="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button onClick={handleClick}>Login</button>
+    <div className="container fluid align-center">
+      <div className="form-body">
+        <div className="row">
+          <h1>Hola de nuevo!</h1>
+          <h5>Bienvenido de nuevo a tu app.</h5>
+          {store.token && store.token != "" && store.token != undefined ? (
+            "You are logged in with this token" + store.token
+          ) : (
+            <div className="col-md-12">
+              <input
+                type="text"
+                placeholder="email"
+                name= "email"
+                onChange={handleChange}
+              />
+
+              <input
+                type="password"
+                placeholder="password"
+                name= "password"
+                onChange={handleChange}
+              />
+              <button onClick={handleClick} id="button">
+                Login
+              </button>
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 };
+
+export default Login
