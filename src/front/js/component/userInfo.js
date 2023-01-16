@@ -26,10 +26,10 @@ const UserInfo = (props) => {
           Permite que otros usuarios conozcan tu opinión en la visita a nuestros
           locales y podamos mejorar su experiencia.{" "}
         </p>
+
         <button href="#" class="btn btn-lg btn-outline-primary mb-3" id="button">
           Registro
         </button>
-
       </div>
     </div>
   );
