@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
+
 import imagen from "../../img/local1.jpeg";
 
 

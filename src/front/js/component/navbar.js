@@ -6,6 +6,7 @@ export const Navbar = () => {
   return (
     <div className="container-fluid">
     <nav className="navbar navbar-expand-lg navbar-light">
+
       <div className="container-fluid">
         <Link to="/">
           <span className="navbar-brand mb-0 h1">
@@ -34,7 +35,9 @@ export const Navbar = () => {
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <Link to="/about">
+
                 <a className="nav-link active" aria-current="page" href="#" id="navbarSupportedContent">
+
                   Quienes Somos
                 </a>
               </Link>
@@ -47,6 +50,7 @@ export const Navbar = () => {
               </Link>
             </li>
             <form>
+
             <input
               className="form-control me-2"
               type="search"
@@ -65,5 +69,6 @@ export const Navbar = () => {
       </div>
     </nav>
     </div>
+
   );
 };

@@ -18,6 +18,7 @@ export const Home = () => {
         <div className="row align-items-start">
           <div className="col mb-3">
             <div>
+
               <OpinionCard />
             </div>
           </div>
@@ -28,6 +29,7 @@ export const Home = () => {
           </div>
           <div className="col mb-3">
             <div>
+
               <OpinionCard />
             </div>
           </div>
@@ -43,6 +45,7 @@ export const Home = () => {
           </div>
           <div className="col mb-4">
             <div>
+
               <LocalCard />
             </div>
           </div>

@@ -10,6 +10,7 @@ const UserInfo = (props) => {
 
   return (
     <div class="row mb-5 pb-md-4 align-items-center">
+
       <div class="col-6">
       <img
               src={imagen}
@@ -28,6 +29,7 @@ const UserInfo = (props) => {
         <button href="#" class="btn btn-lg btn-outline-primary mb-3" id="button">
           Registro
         </button>
+
       </div>
     </div>
   );

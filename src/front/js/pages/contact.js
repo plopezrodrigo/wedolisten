@@ -129,6 +129,7 @@ export const Contact = (props) => {
                   </button>
                 </div>
               </form>
+
             </div>
           </div>
         </div>
@@ -136,3 +137,4 @@ export const Contact = (props) => {
     </div>
   );
 };
+
