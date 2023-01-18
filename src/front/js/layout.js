@@ -5,11 +5,13 @@ import ScrollToTop from "./component/scrollToTop";
 import { Home } from "./pages/home";
 import { About } from "./pages/about";
 import { Contact } from "./pages/contact";
+import { Account } from "./pages/account";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import Login  from "./pages/login";
+import { SignupUser } from "./component/signupUser";
 
 //create your first component
 const Layout = () => {
