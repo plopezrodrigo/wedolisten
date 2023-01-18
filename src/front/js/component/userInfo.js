@@ -27,11 +27,8 @@ const UserInfo = (props) => {
           locales y podamos mejorar su experiencia.{" "}
         </p>
 
-        <button href="#" className="btn btn-lg btn-outline-primary mb-3" id="button">
+        <Link to="/signupUser" className="btn btn-lg btn-outline-primary mb-3" id="button">
           Registro
-        </button>
-        <Link to="/signupUser" className="btn btn-lg btn-outline-primary mb-3" id="registro">
-          Registro User
         </Link>        
       </div>
     </div>
