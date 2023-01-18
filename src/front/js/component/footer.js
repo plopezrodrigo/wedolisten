@@ -97,6 +97,5 @@ export const Footer = () => (
           </ul>
         </div>
       </div>
-    </div>
   </footer>
 );
