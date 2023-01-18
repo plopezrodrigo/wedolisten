@@ -5,6 +5,30 @@
     one more css for each page that will contain the selected used 
     on that page only (the ones not reused in other pages).
 */
-body{
-    background-color: #FFE9C8;    
-}
+body {
+    background-color: #ffe9c8;
+    color: #5e2e2e;
+    font-family: poppins;
+  }
+  #tituloHome{
+    padding: 50px;
+  }
+  #iconbutton{
+    color: #FF9500;
+    border: none;
+  }
+  #opinionbutton{
+    border: none;
+    background-color: none;
+  }
+  #opinioncard{
+    background-color: #ffc6708a;
+    border: none;
+    box-shadow: 10px;
+    border-radius: 10%;
+  }
+  #localcard{
+    border: none;
+    box-shadow: 10px;
+    border-radius: 10%;
+  }
