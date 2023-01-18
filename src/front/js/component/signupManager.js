@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../../styles/home.css";
 import { Link, useNavigate } from "react-router-dom";
 
-export const SignupGestor = () => {
+export const SignupManager = () => {
 	const [formData, setFormData] = useState({});
 	const navigate = useNavigate();
 
