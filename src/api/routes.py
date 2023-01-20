@@ -8,6 +8,26 @@ from api.utils import generate_sitemap, APIException
 api = Blueprint('api', __name__)
 
 
+
+@api.route('/signup', methods=['POST'])
+def signup():
+    data = request.json
+    print("Alta ---------------------------------------: ");
+    print(data);
+    print("Alta ---------------------------------------: ");
+    user = User.query.filter_by(email=data['user']).first()
+
+    if user:
+        return jsonify({"msg": "No se puede crear este usuario"}), 401
+    else:
+        user = User(nombre=data['nombre'], email=data['user'], password=data['pwd'], is_active=True)
+        db.session.add(user)
+        db.session.commit()
+        # access_token = create_access_token(identity=data['user'])
+        # return jsonify(access_token=access_token), 200
+        return jsonify({"msg": "Usuario creado correctamente"}), 401
+
+
 @api.route('/Customer', methods=['GET'])
 def list_customers():
     Customers = Customer.query.all()

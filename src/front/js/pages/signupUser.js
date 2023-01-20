@@ -21,17 +21,18 @@ export const SignupUser = () => {
 			   headers:{"Content-Type": "application/json"},
 			   body: JSON.stringify(formData),
 			  })
-		.then(response => response.json())
-		.then((response)=>{	console.log(response)
+		.then(response => {return response.json()})
+		.then((response)=>{	console.log("signup", response)
 							navigate("/login");
 			 })
-
 	}
 
 	useEffect(()=>{
+		/*
 		if (store.token && store.token != "" && store.token != undefined){
 		  navigate("/");
 		}
+		*/
 	  },[]);
 
 	return (
@@ -41,22 +42,21 @@ export const SignupUser = () => {
 			  <h1>Hola!</h1>
 			  <h5>Bienvenido a tu App para valorar establecimientos</h5>
 				<div className="col-md-12">
-					<form action={handleSubmit} method="post">
-					<div class="form-group">
-							<label for="InputEmail1">Nombre y apellidos</label>
-							<input type="text" className="form-control" id="InputName1" aria-describedby="nameHelp" placeholder="Nombre y apellidos" onChange={handleChange} />
+					<form onSubmit={handleSubmit}>
+						<div className="form-group">
+							<label htmlFor="InputEmail1">Nombre y apellidos</label>
+							<input type="text" name="name" className="form-control" id="InputName1" aria-describedby="nameHelp" placeholder="Nombre y apellidos" onChange={handleChange} />
 						</div>
-						<div class="form-group">
-							<label for="InputEmail1">Email address</label>
-							<input type="email" className="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="email" onChange={handleChange} />
+						<div className="form-group">
+							<label htmlFor="InputEmail1">Email address</label>
+							<input type="email" name="user" className="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="email" onChange={handleChange} />
 						</div>
-						<div class="form-group">
-							<label for="InputPassword1">Password</label>
-							<input type="password" className="form-control" id="InputPassword1" placeholder="Password" onChange={handleChange} />
+						<div className="form-group">
+							<label htmlFor="InputPassword1">Password</label>
+							<input type="password" name="password" className="form-control" id="InputPassword1" placeholder="Password" onChange={handleChange} />
 						</div>
 						<br/>
-						<button type="submit" class="btn btn-primary">Submit</button>
-						{/*<button onClick={handleSubmit} id="button">Registrarme</button>*/}
+						<button type="submit"  id="button">Registrarme</button>
 					</form>				  
 				</div>
 			</div>
