@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User
+from api.models import db, User, Customer
 from api.utils import generate_sitemap, APIException
 
 api = Blueprint('api', __name__)
@@ -20,11 +20,25 @@ def signup():
     if user:
         return jsonify({"msg": "No se puede crear este usuario"}), 401
     else:
-        user = User(nombre=data['nombre'], email=data['user'], password=data['pwd'], is_active=True)
+        user = User(email=data['user'], password=data['password'], is_active=True)
         db.session.add(user)
+
+        if data['tipo'] == "C": # Es un Customer
+            customer = Customer(user_id  = user.id
+                               ,name     = data['name']
+                               ,birthday = data.get('birthday')
+                               ,gender   = data.get('gender')
+                               ,subscription = data.get('subscription', False)
+                               ,address  = data.get('address'))
+            db.session.add(customer)
+        else:                   # es un manager
+            manager = Manager(user_id = user.id
+                             ,name    = request.json['name']
+                             )
+            db.session.add(manager)
+
         db.session.commit()
-        # access_token = create_access_token(identity=data['user'])
-        # return jsonify(access_token=access_token), 200
+
         return jsonify({"msg": "Usuario creado correctamente"}), 401
 
 
@@ -96,7 +110,6 @@ def Users_add():
         type=request.json['type'],
     )
     db.session.add(user)
-    db.session.commit()
     if request.json['type'] == 'customer':
         customer = Customer(
             name=request.json['name'],
@@ -106,7 +119,6 @@ def Users_add():
             address=request.json['address']
         )
         db.session.add(customer)
-        db.session.commit()
     else:
         manager = Manager(
             user_id=user.id,

@@ -4,7 +4,8 @@ import "../../styles/home.css";
 import { Link, useNavigate } from "react-router-dom";
 
 export const SignupUser = () => {
-	const [formData, setFormData] = useState({});
+	const [formData, setFormData] = useState({tipo:"C"});
+	const [mensaje, setMensaje] = useState(null);
 	const { store, actions } = useContext(Context);
 	const navigate = useNavigate();
   
@@ -14,17 +15,18 @@ export const SignupUser = () => {
 
 	const handleSubmit = (evento)=>{
 		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
-		console.log("signup antes :", formData, process.env.BACKEND_URL)
+		console.log("Fordata", formData)
 
 		fetch(process.env.BACKEND_URL + "/api/signup", 
-			  {method: 'POST',
-			   headers:{"Content-Type": "application/json"},
-			   body: JSON.stringify(formData),
-			  })
+			{method: 'POST',
+			headers:{"Content-Type": "application/json"},
+			body: JSON.stringify(formData),
+			})
 		.then(response => {return response.json()})
 		.then((response)=>{	console.log("signup", response)
 							navigate("/login");
-			 })
+			})
+
 	}
 
 	useEffect(()=>{
@@ -55,8 +57,34 @@ export const SignupUser = () => {
 							<label htmlFor="InputPassword1">Password</label>
 							<input type="password" name="password" className="form-control" id="InputPassword1" placeholder="Password" onChange={handleChange} />
 						</div>
+						
+						<div className="form-group">
+							<label htmlFor="InputCumple1">Cumpleaños</label>
+							<input type="date" name="birthday" className="form-control" id="InputCumple1" aria-describedby="nameHelp" placeholder="Cumpleaños" onChange={handleChange} />
+						</div>
+
+						<div className="form-group">
+							<label htmlFor="InputGender1">Género</label>
+							<select name="gender" id="InputGender1" className="form-control" aria-describedby="nameHelp" onChange={handleChange} >
+								<option value="">--Elige una opción--</option>
+								<option value="female">female</option>
+								<option value="male">male</option>
+							</select>
+						</div>
+						<br/>
+						<div className="form-group">
+							<label htmlFor="InputSubs1">Subscripción</label>
+							<input type="checkbox" name="subscription" className="form-check-input" id="InputSubs1" aria-describedby="nameHelp" placeholder="Subscripción" onChange={handleChange} />
+						</div>	   
+						<br/>
+						<div className="form-group">
+							<label htmlFor="InputPostal1">Dirección postal</label>
+							<input type="text" required name="address" className="form-control" id="InputPostal1" aria-describedby="nameHelp" placeholder="Dirección postal" onChange={handleChange} />
+						</div>	   
+
 						<br/>
 						<button type="submit"  id="button">Registrarme</button>
+						{(mensaje != null) && <p>{mensaje}</p>}
 					</form>				  
 				</div>
 			</div>
