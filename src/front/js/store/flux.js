@@ -1,6 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
+      favorites: [],
       token: null,
       message: null,
       demo: [
@@ -68,7 +69,14 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.error("There has been an error login in");
         }
       },
-
+      addFavourites: (nombre) => {
+				const store = getStore()
+				setStore({favorites:[...store.favorites, nombre]})
+			},
+			deleteFavourites: (nombre) => {
+				const store = getStore()
+				store.favorites=store.favorites.filter((obj)=>nombre != obj)
+			},
       getMessage: async () => {
         try {
           // fetching data from the backend

@@ -6,6 +6,9 @@ import { Home } from "./pages/home";
 import { About } from "./pages/about";
 import { Contact } from "./pages/contact";
 import { Account } from "./pages/account";
+import { Data } from "./pages/data";
+import { Favorites } from "./pages/favorites";
+import { Comments } from "./pages/comments";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -33,6 +36,9 @@ const Layout = () => {
                         <Route element={<Contact />} path="/contact" />
                         <Route element={<Login />} path="/login" />
                         <Route element={<Account />} path="/account" />
+                        <Route element={<Data />} path="/data" />
+                        <Route element={<Favorites/>} path="/favorites" />
+                        <Route element={<Comments/>} path="/comments" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
