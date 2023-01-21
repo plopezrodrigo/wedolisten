@@ -46,7 +46,7 @@ def signup():
 
         db.session.commit()
 
-        return jsonify({"msg": "Usuario creado correctamente"}), 401
+        return jsonify({"msg": "Usuario creado correctamente"}), 200
 
 
 @api.route('/Customer', methods=['GET'])

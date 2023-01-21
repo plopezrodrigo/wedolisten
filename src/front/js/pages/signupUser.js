@@ -9,10 +9,16 @@ export const SignupUser = () => {
   
 	const handleChange = (evento) =>{
 		setFormData({...formData, [evento.target.name]: evento.target.value});
-	}
+	} 
 
 	const handleSubmit = (evento)=>{
 		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
+
+		if (formData["subscription"]){
+			console.log("subscription",formData["subscription"]);
+			setFormData({...formData, "subscription": (formData["subscription"]=='on')});
+			console.log("subscription2",formData);
+		}
 
 		fetch(process.env.BACKEND_URL + "/api/signup", 
 			{method: 'POST',
@@ -20,7 +26,8 @@ export const SignupUser = () => {
 			body: JSON.stringify(formData),
 			})
 		.then(response => {	return response.json()})
-		.then((response)=>{	if(response["msg"]){
+		.then((response)=>{	console.log(response)
+							if(response["msg"]){
 								setMensaje(response["msg"]);
 							}else{
 								navigate("/login");
