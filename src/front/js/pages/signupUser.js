@@ -1,12 +1,10 @@
-import React, { useContext, useState, useEffect } from "react";
-import { Context } from "../store/appContext";
+import React, { useState, useEffect } from "react";
 import "../../styles/home.css";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const SignupUser = () => {
-	const [formData, setFormData] = useState({tipo:"C"});
+	const [formData, setFormData] = useState({tipo:"customer"});
 	const [mensaje, setMensaje] = useState(null);
-	const { store, actions } = useContext(Context);
 	const navigate = useNavigate();
   
 	const handleChange = (evento) =>{
@@ -15,18 +13,19 @@ export const SignupUser = () => {
 
 	const handleSubmit = (evento)=>{
 		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
-		console.log("Fordata", formData)
 
 		fetch(process.env.BACKEND_URL + "/api/signup", 
 			{method: 'POST',
 			headers:{"Content-Type": "application/json"},
 			body: JSON.stringify(formData),
 			})
-		.then(response => {return response.json()})
-		.then((response)=>{	console.log("signup", response)
-							navigate("/login");
+		.then(response => {	return response.json()})
+		.then((response)=>{	if(response["msg"]){
+								setMensaje(response["msg"]);
+							}else{
+								navigate("/login");
+							}
 			})
-
 	}
 
 	useEffect(()=>{
@@ -47,15 +46,15 @@ export const SignupUser = () => {
 					<form onSubmit={handleSubmit}>
 						<div className="form-group">
 							<label htmlFor="InputEmail1">Nombre y apellidos</label>
-							<input type="text" name="name" className="form-control" id="InputName1" aria-describedby="nameHelp" placeholder="Nombre y apellidos" onChange={handleChange} />
+							<input type="text" name="name" required className="form-control" id="InputName1" aria-describedby="nameHelp" placeholder="Nombre y apellidos" onChange={handleChange} />
 						</div>
 						<div className="form-group">
 							<label htmlFor="InputEmail1">Email address</label>
-							<input type="email" name="user" className="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="email" onChange={handleChange} />
+							<input type="email" name="user" required className="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="email" onChange={handleChange} />
 						</div>
 						<div className="form-group">
 							<label htmlFor="InputPassword1">Password</label>
-							<input type="password" name="password" className="form-control" id="InputPassword1" placeholder="Password" onChange={handleChange} />
+							<input type="password" name="password" required className="form-control" id="InputPassword1" placeholder="Password" onChange={handleChange} />
 						</div>
 						
 						<div className="form-group">
@@ -79,7 +78,7 @@ export const SignupUser = () => {
 						<br/>
 						<div className="form-group">
 							<label htmlFor="InputPostal1">Dirección postal</label>
-							<input type="text" required name="address" className="form-control" id="InputPostal1" aria-describedby="nameHelp" placeholder="Dirección postal" onChange={handleChange} />
+							<input type="text" name="address" className="form-control" id="InputPostal1" aria-describedby="nameHelp" placeholder="Dirección postal" onChange={handleChange} />
 						</div>	   
 
 						<br/>
@@ -88,49 +87,7 @@ export const SignupUser = () => {
 					</form>				  
 				</div>
 			</div>
-			{/*
-			<div>
-				<p>Bienvenido a tu App para valorar establecimientos
-				<Link to="/login">
-					<button className="btn btn-primary" id="button">
-						Log in
-					</button>
-				</Link>
-				</p>
-			</div>
-			*/}
 		  </div>
 		</div>
 	  );
 };
-
-
-
-
-
-
-
-/*
-
-
-import { useNavigate } from "react-router-dom";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
-import "../../styles/home.css";
-
-const Login = () => {
-  const [data, setData] = useState({});
-
-  console.log("This is your token", store.token);
-  const handleClick = () => {
-    actions.login(data.email, data.password);
-  };
-
-
-  const handleChange = (e) => {
-    setData({...data, [e.target.name]:e.target.value})
-  };
-    
-
-};
-export default Login
-*/

@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Customer
+from api.models import db, User, Customer, Manager
 from api.utils import generate_sitemap, APIException
 
 api = Blueprint('api', __name__)
@@ -12,28 +12,35 @@ api = Blueprint('api', __name__)
 @api.route('/signup', methods=['POST'])
 def signup():
     data = request.json
-    print("Alta ---------------------------------------: ");
+    for i in range(3):
+        print("Alta ---------------------------------------: ");
     print(data);
-    print("Alta ---------------------------------------: ");
+ 
     user = User.query.filter_by(email=data['user']).first()
 
     if user:
-        return jsonify({"msg": "No se puede crear este usuario"}), 401
+        return jsonify({"msg": "No se puede crear este usuario porque ya existe"}), 401
     else:
-        user = User(email=data['user'], password=data['password'], is_active=True)
+        user = User(email=data['user'], password=data['password'], is_active=False, type=data['tipo'])
         db.session.add(user)
+        db.session.commit()
 
-        if data['tipo'] == "C": # Es un Customer
+        print(user.id);
+        for i in range(3):
+            print("Alta ---------------------------------------: ");  
+
+        if data['tipo'] == "customer": # Es un Customer
             customer = Customer(user_id  = user.id
+                               #,user     = user.id 
                                ,name     = data['name']
                                ,birthday = data.get('birthday')
                                ,gender   = data.get('gender')
                                ,subscription = data.get('subscription', False)
                                ,address  = data.get('address'))
             db.session.add(customer)
-        else:                   # es un manager
+        else:  # es un manager
             manager = Manager(user_id = user.id
-                             ,name    = request.json['name']
+                             ,name    = data['name']
                              )
             db.session.add(manager)
 

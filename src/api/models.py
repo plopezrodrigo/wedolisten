@@ -9,7 +9,7 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
     type = db.Column(db.Enum("customer","manager", name='type_types'), unique=False, nullable=False)
-    is_active = db.Column(db.Boolean(), unique=False, nullable=False, default=True)
+    is_active = db.Column(db.Boolean(), unique=False, nullable=False, default=False)
 
     def __repr__(self):
         return f'<User {self.email}>'
@@ -25,11 +25,11 @@ class Customer(db.Model):
     __tablename__ = "customers"
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.ForeignKey("users.id"), nullable=False)
-    user = db.Column(db.ForeignKey("users.id"), nullable=False)
+    # user = db.Column(db.ForeignKey("users.id"), nullable=False)
     name = db.Column(db.String(80), unique=False, nullable=False)
     birthday = db.Column(db.Date(), unique=False, nullable=True)
     gender = db.Column(db.Enum("female","male", name='gender_types'), unique=False, nullable=True)
-    subscription = db.Column(db.Boolean(), unique=False, nullable=True)
+    subscription = db.Column(db.Boolean(), unique=False, nullable=True, default=False)
     address = db.Column(db.String(150), unique=False, nullable=True)
 
     def __repr__(self):
@@ -50,7 +50,7 @@ class Manager(db.Model):
     __tablename__ = "managers"
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.ForeignKey("users.id"), nullable=False)
-    user = db.Column(db.ForeignKey("users.id"), nullable=False)
+    #user = db.Column(db.ForeignKey("users.id"), nullable=False)
     name = db.Column(db.String(80), unique=False, nullable=False)
 
     def __repr__(self):
