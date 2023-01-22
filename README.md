@@ -61,9 +61,9 @@ It is recomended to install the backend first, make sure you have Python 3.8, Pi
 | MySQL     | mysql://username:password@localhost:port/example    |
 | Postgress | postgres://username:password@localhost:5432/example |
 
+3.1                    `$ pip install flask-jwt-extended`
 4. Migrate the migrations: `$ pipenv run migrate` (skip if you have not made changes to the models on the `./src/api/models.py`)
 5. Run the migrations: `$ pipenv run upgrade`
-5.1                    `$ pip install flask-jwt-extended`
 6. Run the application: `$ pipenv run start`
 
 ### Backend Populate Table Users
@@ -99,3 +99,13 @@ To update with all yours tables you can edit the file app.py and go to the line 
 ## Publish your website!
 
 This boilerplate it's 100% read to deploy with Render.com and Herkou in a matter of minutes. Please read the [official documentation about it](https://start.4geeksacademy.com/deploy).
+
+
+
+rm -R -f ./migrations &&
+pipenv run init &&
+psql -U gitpod -c 'DROP DATABASE example;' || true &&
+psql -U gitpod -c 'CREATE DATABASE example;' &&
+psql -U gitpod -c 'CREATE EXTENSION unaccent;' -d example &&
+pipenv run migrate &&
+pipenv run upgrade
