@@ -67,7 +67,7 @@ class Comercial_Place(db.Model):
     __tablename__ = "comercial_places"
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.ForeignKey("users.id"), nullable=False)
-    user = db.Column(db.ForeignKey("users.id"), nullable=False)
+    user = db.relationship(User, backref="comercial_place")
     name = db.Column(db.String(80), unique=False, nullable=False)
     address = db.Column(db.String(150), unique=False, nullable=False)
     url = db.Column(db.String(150), unique=False, nullable=True)
@@ -75,9 +75,12 @@ class Comercial_Place(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=True)
     location = db.Column(db.String(120), unique=True, nullable=True)
     description = db.Column(db.String(120), unique=True, nullable=False)
-    cambiador = db.Column(db.Boolean(), unique=False, nullable=False)
-    trono = db.Column(db.Boolean(), unique=False, nullable=False)
-    childs = db.Column(db.Boolean(), unique=False, nullable=False)
+    cambiador = db.Column(db.Boolean(), unique=False, default=False)
+    trona = db.Column(db.Boolean(), unique=False, default=False)
+    accessible_carrito = db.Column(db.Boolean(), unique=False, default=False)
+    espacio_carrito = db.Column(db.Boolean(), unique=False, default=False)
+    ascensor = db.Column(db.Boolean(), unique=False, default=False)
+    productos_higiene = db.Column(db.Boolean(), unique=False, default=False)
 
     def __repr__(self):
         return f'<User {self.name}>'
@@ -85,7 +88,6 @@ class Comercial_Place(db.Model):
     def serialize(self):
         return {    "id": self.id,
                     "user_id": self.user_id,
-                    "user_name": self.user.name,
                     "name": self.name,
                     "address": self.address,
                     "url": self.url,
@@ -94,8 +96,11 @@ class Comercial_Place(db.Model):
                     "location": self.location,
                     "description": self.description,
                     "cambiador": self.cambiador,
-                    "trono": self.trono,
-                    "childs": self.childs
+                    "trona": self.trona,
+                    "accessible": self.accessible_carrito,
+                    "espacio_carrito": self.espacio_carrito,
+                    "ascensor": self.ascensor,
+                    "productos_higiene": self.productos_higiene,
                }
 
 class Rate_Customer(db.Model):
