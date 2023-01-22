@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User
+from api.models import db, User, Comercial_Place
 from api.utils import generate_sitemap, APIException
 
 api = Blueprint('api', __name__)
@@ -22,12 +22,17 @@ def list_Managers():
     return jsonify(data), 200
 
 
-@api.route('/Comercial_Place', methods=['GET'])
+@api.route('/comercial-place', methods=['GET'])
 def list_Comercial_Places():
-    Comercial_Places = Comercial_Place.query.all()
-    data = [Comercial_Place.serialize()
-            for Comercial_Places in Comercial_Place]
+    comercial_places = Comercial_Place.query.all()
+    data = [comercial_place.serialize()
+            for comercial_place in comercial_places]
     return jsonify(data), 200
+
+@api.route('/comercial-place/<id>', methods=['GET'])
+def Comercial_Places_Detail(id):
+    comercial_place = Comercial_Place.query.filter_by(id=id).first()
+    return jsonify(comercial_place.serialize()), 200
 
 
 @api.route('/Comment', methods=['GET'])

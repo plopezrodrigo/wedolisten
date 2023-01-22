@@ -1,11 +1,10 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
-
 import imagen from "../../img/local1.jpeg";
 
 
-const OpinionCard = (props) => {
+const LocalCard = (props) => {
   const { store, actions } = useContext(Context);
   console.log(store.favorites);
 
@@ -18,7 +17,7 @@ const OpinionCard = (props) => {
               alt=""
            />
         <div className="card-body">
-          <h5 className="card-title">Nombre de la local</h5>
+          <h5 className="card-title">Nombre del local</h5>
           <p className="card-text">XX/MM/YYYY.</p>
           <button className="btn btn-outline-success" type="submit" id="iconbutton">
             <i className="fas fa-heart" />
@@ -38,4 +37,4 @@ const OpinionCard = (props) => {
   );
 };
 
-export default OpinionCard;
+export default LocalCard;
