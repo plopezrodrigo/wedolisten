@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import imagen from "../../img/user.png";
+import {tokenValid} from "../utils"
 
 
 const UserInfo = (props) => {
@@ -26,10 +27,11 @@ const UserInfo = (props) => {
           Permite que otros usuarios conozcan tu opinión en la visita a nuestros
           locales y podamos mejorar su experiencia.{" "}
         </p>
-
-        <Link to="/signupUser" className="btn btn-lg btn-outline-primary mb-3" id="button">
-          Registro
-        </Link>        
+        {/*!(tokenValid(store.token)) &&*/}
+          <Link to="/signupUser" className="btn btn-lg btn-outline-primary mb-3" id="button">
+            Registro
+          </Link>        
+        
       </div>
     </div>
   );
