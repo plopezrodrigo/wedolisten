@@ -14,20 +14,41 @@ body {
   color: #5e2e2e;
   font-family: poppins;
 }
-#footer{
-  padding: 50px;
+#footer {
+  padding: 20px;
+  background-color: #ffe9c8;
+  color: #5e2e2e;
 }
-#navbarSupportedContent{
+#navbarSupportedContent {
   font-size: large;
   font-weight: bold;
   text-decoration: none;
   color: #5e2e2e;
 }
-#button{
-  background-color: #FFCCF4;
+#button {
+  background-color: #ffccf4;
   color: #5e2e2e;
-  border-color: #FF69DE;
+  border-color: #ff69de;
   border-width: 3px;
   border-radius: 10px;
   font-weight: bold;
+}
+#fecha {
+  border: none;
+  width: 360px;
+  color: grey;
+  margin-left: 10px;
+}
+#socialcopy{
+  color: #FF9500;
+}
+#rating{
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+#descripcion{
+  margin-top: 30px;
+}
+#avatar{
+  border-radius: 50%;
 }

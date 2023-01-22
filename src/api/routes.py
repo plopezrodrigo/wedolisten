@@ -24,9 +24,9 @@ def list_Managers():
 
 @api.route('/Comercial_Place', methods=['GET'])
 def list_Comercial_Places():
-    Comercial_Places = Comercial_Place.query.all()
-    data = [Comercial_Place.serialize()
-            for Comercial_Places in Comercial_Place]
+    comercial_places = Comercial_Place.query.all()
+    data = [comercial_place.serialize()
+            for comercial_place in comercial_places]
     return jsonify(data), 200
 
 
