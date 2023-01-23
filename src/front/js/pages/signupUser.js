@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "../../styles/home.css";
 import { useNavigate } from "react-router-dom";
 
+// prueba
+
 export const SignupUser = () => {
 	const [formData, setFormData] = useState({tipo:"customer"});
 	const [mensaje, setMensaje] = useState(null);
