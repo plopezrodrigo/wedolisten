@@ -42,8 +42,8 @@ export const OpinionUser = () => {
 		<div className="container fluid align-center">
 		  <div className="form-body">
 			<div className="row">
-			    <h1>Escriba una opinión y ayúdanos a mejorar</h1>
-			    <h5>Historias como la suya ayudan a mejorar. Comparte tu experiencia y ayudanos</h5>
+			    <h1 className="text-center">Escriba una opinión y ayúdanos a mejorar</h1>
+			    <h5 className="text-center">Historias como la suya ayudan a mejorar. Comparte tu experiencia y ayudanos</h5>
             </div>
 			<div className="row">
                 <div className="row justify-content-center">
@@ -57,36 +57,68 @@ export const OpinionUser = () => {
                     </div>
                 </div>
                 <div className="row">
-                    <h1>Tu experiencia es muy valiosa para nosotros. ¡Muchas gracias!</h1>
+                    <h1 className="text-center">Tu experiencia es muy valiosa para nosotros.</h1>
+                    <h1 className="text-center">¡Muchas gracias!</h1>
                 </div>
 				<div className="col-md-12">
 					<form onSubmit={handleSubmit}>
-
                         <div className="form-group">
-							<label htmlFor="InputSubs1">Puntuación</label>
+							<h5>Puntuación</h5>
 							<input type="radio" name="puntuacion" className="form-check-input" id="InputPuntua1" aria-describedby="nameHelp" value="1" onChange={handleChange} />
-							<input type="radio" name="puntuacion" className="form-check-input" id="InputPuntua1" aria-describedby="nameHelp" value="2" onChange={handleChange} />
-							<input type="radio" name="puntuacion" className="form-check-input" id="InputPuntua1" aria-describedby="nameHelp" value="3" onChange={handleChange} />
-							<input type="radio" name="puntuacion" className="form-check-input" id="InputPuntua1" aria-describedby="nameHelp" value="4" onChange={handleChange} />
-							<input type="radio" name="puntuacion" className="form-check-input" id="InputPuntua1" aria-describedby="nameHelp" value="5" onChange={handleChange} />
+							<input type="radio" name="puntuacion" className="form-check-input" id="InputPuntua2" aria-describedby="nameHelp" value="2" onChange={handleChange} />
+							<input type="radio" name="puntuacion" className="form-check-input" id="InputPuntua3" aria-describedby="nameHelp" value="3" onChange={handleChange} />
+							<input type="radio" name="puntuacion" className="form-check-input" id="InputPuntua4" aria-describedby="nameHelp" value="4" onChange={handleChange} />
+							<input type="radio" name="puntuacion" className="form-check-input" id="InputPuntua5" aria-describedby="nameHelp" value="5" onChange={handleChange} />
 						</div>	   
-
-
+                        <br/>
 						<div className="form-group">
-							<label htmlFor="InputEmail1">Nombre y apellidos</label>
-							<input type="text" name="name" required className="form-control" id="InputName1" aria-describedby="nameHelp" placeholder="Nombre y apellidos" onChange={handleChange} />
+							<h5>Tu opinión</h5>
+							<input type="text" name="comments" required className="form-control" id="InputComment1" aria-describedby="contactHelp" onChange={handleChange} />
 						</div>
+                        <br/>
 						<div className="form-group">
-							<label htmlFor="InputEmail1">Email address</label>
-							<input type="email" name="user" required className="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="email" onChange={handleChange} />
+    						<div>
+							    <h5 className="d-inline">Nos puedes contar algo mas</h5>
+                                <p className="d-inline">(opcional)</p>
+                            </div>
+							<select name="price" id="InputPrice1" className="form-control" aria-describedby="PriceHelp" onChange={handleChange} >
+								<option value="">--Elige una opción--</option>
+								<option value="Barato">Barato</option>
+								<option value="Normal">Normal</option>
+								<option value="Caro">Caro</option>
+							</select>
+							<select name="a_domicilio" id="InputA_domicilio1" className="form-control" aria-describedby="A_domicilioHelp" onChange={handleChange} >
+								<option value="">--Elige una opción--</option>
+								<option value="Si">Si</option>
+								<option value="No">No</option>
+							</select>
+							<select name="mesa" id="InputMesa1" className="form-control" aria-describedby="MesaHelp" onChange={handleChange} >
+								<option value="">--Elige una opción--</option>
+								<option value="Si">Si</option>
+								<option value="No">No</option>
+							</select>
+							<select name="alcohol" id="InputAlcohol1" className="form-control" aria-describedby="AlcoholHelp" onChange={handleChange} >
+								<option value="">--Elige una opción--</option>
+								<option value="Si">Si</option>
+								<option value="No">No</option>
+							</select>
 						</div>
-						<div className="form-group">
-							<label htmlFor="InputPassword1">Password</label>
-							<input type="password" name="password" required className="form-control" id="InputPassword1" placeholder="Password" onChange={handleChange} />
-						</div>
-						
+                        <br/>
+                        <div className="form-group">
+                            <h5>¿Que tipo de visita hiciste?</h5>
+                            <input type="radio" name="tipo_visita" className="form-check-input" id="InputTVisit1" aria-describedby="nameHelp" value="Pareja" onChange={handleChange} />
+                            <label htmlFor="InputTVisit1">Pareja</label><br/>
+                            <input type="radio" name="tipo_visita" className="form-check-input" id="InputTVisit2" aria-describedby="nameHelp" value="Familia" onChange={handleChange} />
+                            <label htmlFor="InputTVisit2">Familia</label><br/>
+                            <input type="radio" name="tipo_visita" className="form-check-input" id="InputTVisit3" aria-describedby="nameHelp" value="Solo" onChange={handleChange} />
+                            <label htmlFor="InputTVisit3">Solo</label><br/>
+                            <input type="radio" name="tipo_visita" className="form-check-input" id="InputTVisit4" aria-describedby="nameHelp" value="Amigos" onChange={handleChange} />
+                            <label htmlFor="InputTVisit4">Amigos</label><br/>
+                            <input type="radio" name="tipo_visita" className="form-check-input" id="InputTVisit5" aria-describedby="nameHelp" value="Negocios" onChange={handleChange} />
+                            <label htmlFor="InputTVisit5">Negocios</label><br/>
+                        </div>
 						<br/>
-						<button type="submit"  id="button">Registrarme</button>
+						<button type="submit"  id="button">Comentar</button>
 						{(mensaje != null) && <p>{mensaje}</p>}
 					</form>				  
 				</div>

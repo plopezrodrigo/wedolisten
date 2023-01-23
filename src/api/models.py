@@ -151,6 +151,10 @@ class Comment(db.Model):
     comment_id = db.Column(db.ForeignKey("comments.id"), nullable=False)
     date = db.Column(db.DateTime(), unique=False, nullable=False)
     comment = db.Column(db.String(1000), unique=False, nullable=False)
+    price = db.Column(db.Enum("Barato","Normal", "Caro", name='price_types'), unique=False, nullable=True)
+    a_domicilio = db.Column(db.Enum("Si","No", name='a_domicilio_types'), unique=False, nullable=True)
+    mesa = db.Column(db.Enum("Si","No", name='mesa_types'), unique=False, nullable=True)
+    alcohol = db.Column(db.Enum("Si","No", name='alcohol_types'), unique=False, nullable=True)
     
     def __repr__(self):
         return f'<User {self.customer_id}>'
