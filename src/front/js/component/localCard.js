@@ -17,8 +17,8 @@ const LocalCard = (props) => {
               alt=""
            />
         <div className="card-body">
-          <h5 className="card-title">Nombre del local</h5>
-          <p className="card-text">XX/MM/YYYY.</p>
+          <h5 className="card-title">{props.name}</h5>
+          <p className="card-text">{props.date}</p>
           <button className="btn btn-outline-success" type="submit" id="iconbutton">
             <i className="fas fa-heart" />
           </button>
@@ -28,9 +28,13 @@ const LocalCard = (props) => {
           <button className="btn btn-outline-success" type="submit" id="iconbutton">
           <i className="fas fa-map-marker-alt" />
           </button>
-          <a href="#" className="btn btn-primary" id="button">
-            Ver más
-          </a>
+          <button id="button">
+            <Link 
+              to={`/localDetail/${props.id}`} 
+              className="">
+              Ver más
+            </Link>
+          </button>
         </div>
       </div>
     </div>

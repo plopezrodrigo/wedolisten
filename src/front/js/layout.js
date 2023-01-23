@@ -17,7 +17,6 @@ import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { SignupUser} from "./component/signupUser";
 import Login  from "./pages/login";
-import { SignupUser } from "./component/signupUser";
 
 //create your first component
 const Layout = () => {
@@ -43,7 +42,7 @@ const Layout = () => {
                         <Route element={<Favorites/>} path="/favorites" />
                         <Route element={<Comments/>} path="/comments" />
                         <Route element={<ListLocales/>} path="/listlocales" />
-                        <Route element={<LocalDetail/>} path="/localDetail/"/>
+                        <Route element={<LocalDetail/>} path="/localDetail/:id"/>
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
