@@ -18,6 +18,7 @@ import { Footer } from "./component/footer";
 import { SignupManager} from "./pages/signupManager";
 import { SignupUser} from "./pages/signupUser";
 import Login  from "./pages/login";
+import { OpinionUser } from "./pages/opinionUser";
 
 //create your first component
 const Layout = () => {
@@ -45,6 +46,7 @@ const Layout = () => {
                         <Route element={<Comments/>} path="/comments" />
                         <Route element={<ListLocales/>} path="/listlocales" />
                         <Route element={<LocalDetail/>} path="/localDetail/:id"/>
+                        <Route element={<OpinionUser/>} path="/opinionUser" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
