@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: e7d76cb114ad
+Revision ID: 6971a662755a
 Revises: 
-Create Date: 2023-01-18 18:06:27.900282
+Create Date: 2023-01-23 17:36:08.656596
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'e7d76cb114ad'
+revision = '6971a662755a'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -30,7 +30,6 @@ def upgrade():
     op.create_table('comercial_places',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('user', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=80), nullable=False),
     sa.Column('address', sa.String(length=150), nullable=False),
     sa.Column('url', sa.String(length=150), nullable=True),
@@ -38,10 +37,12 @@ def upgrade():
     sa.Column('email', sa.String(length=120), nullable=True),
     sa.Column('location', sa.String(length=120), nullable=True),
     sa.Column('description', sa.String(length=120), nullable=False),
-    sa.Column('cambiador', sa.Boolean(), nullable=False),
-    sa.Column('trono', sa.Boolean(), nullable=False),
-    sa.Column('childs', sa.Boolean(), nullable=False),
-    sa.ForeignKeyConstraint(['user'], ['users.id'], ),
+    sa.Column('cambiador', sa.Boolean(), nullable=True),
+    sa.Column('trona', sa.Boolean(), nullable=True),
+    sa.Column('accessible_carrito', sa.Boolean(), nullable=True),
+    sa.Column('espacio_carrito', sa.Boolean(), nullable=True),
+    sa.Column('ascensor', sa.Boolean(), nullable=True),
+    sa.Column('productos_higiene', sa.Boolean(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('description'),
@@ -51,22 +52,18 @@ def upgrade():
     op.create_table('customers',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('user', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=80), nullable=False),
     sa.Column('birthday', sa.Date(), nullable=True),
     sa.Column('gender', sa.Enum('female', 'male', name='gender_types'), nullable=True),
     sa.Column('subscription', sa.Boolean(), nullable=True),
     sa.Column('address', sa.String(length=150), nullable=True),
-    sa.ForeignKeyConstraint(['user'], ['users.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('managers',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('user', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=80), nullable=False),
-    sa.ForeignKeyConstraint(['user'], ['users.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )

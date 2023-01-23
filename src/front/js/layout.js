@@ -15,7 +15,8 @@ import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
-import { SignupUser} from "./component/signupUser";
+import { SignupManager} from "./pages/signupManager";
+import { SignupUser} from "./pages/signupUser";
 import Login  from "./pages/login";
 
 //create your first component
@@ -24,7 +25,7 @@ const Layout = () => {
     // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
     const basename = process.env.BASENAME || "";
 
-    return (
+    return ( 
         <div>
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
@@ -32,6 +33,7 @@ const Layout = () => {
                     <Routes>
                         <Route element={<Home />} path="/" />
 
+                        <Route element={<SignupManager />} path="/signupManager" />
                         <Route element={<SignupUser />} path="/signupUser" />
 
                         <Route element={<About />} path="/about" />

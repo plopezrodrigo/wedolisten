@@ -2,10 +2,54 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Comercial_Place
+from api.models import db, User, Customer, Manager
 from api.utils import generate_sitemap, APIException
 
 api = Blueprint('api', __name__)
+
+
+
+@api.route('/signup', methods=['POST'])
+def signup():
+    data = request.json
+    for i in range(3):
+        print("Alta ---------------------------------------: ");
+    print(data);
+
+    try:
+        user = User.query.filter_by(email=data['user']).first()
+
+        if user:
+            return jsonify({"msg": "No se puede crear este usuario porque ya existe"}), 401
+        else:
+            user = User(email=data['user'], password=data['password'], is_active=False, type=data['tipo'])
+            db.session.add(user)
+            db.session.commit()
+
+            print(user.id);
+            for i in range(3):
+                print("Alta ---------------------------------------: ");  
+
+            if data['tipo'] == "customer": # Es un Customer
+                customer = Customer(user_id  = user.id
+                                #,user     = user.id 
+                                ,name     = data['name']
+                                ,birthday = data.get('birthday')
+                                ,gender   = data.get('gender')
+                                ,subscription = data.get('subscription', False)
+                                ,address  = data.get('address'))
+                db.session.add(customer)
+            else:  # es un manager
+                manager = Manager(user_id = user.id
+                                ,name    = data['name']
+                                )
+                db.session.add(manager)
+        db.session.commit()
+
+    except Exception:
+        db.session.rollback()
+
+    return jsonify({"msg": "Usuario creado correctamente"}), 200
 
 
 @api.route('/Customer', methods=['GET'])
@@ -81,7 +125,6 @@ def Users_add():
         type=request.json['type'],
     )
     db.session.add(user)
-    db.session.commit()
     if request.json['type'] == 'customer':
         customer = Customer(
             name=request.json['name'],
@@ -91,7 +134,6 @@ def Users_add():
             address=request.json['address']
         )
         db.session.add(customer)
-        db.session.commit()
     else:
         manager = Manager(
             user_id=user.id,
