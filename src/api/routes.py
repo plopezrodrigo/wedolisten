@@ -15,38 +15,41 @@ def signup():
     for i in range(3):
         print("Alta ---------------------------------------: ");
     print(data);
- 
-    user = User.query.filter_by(email=data['user']).first()
 
-    if user:
-        return jsonify({"msg": "No se puede crear este usuario porque ya existe"}), 401
-    else:
-        user = User(email=data['user'], password=data['password'], is_active=False, type=data['tipo'])
-        db.session.add(user)
+    try:
+        user = User.query.filter_by(email=data['user']).first()
+
+        if user:
+            return jsonify({"msg": "No se puede crear este usuario porque ya existe"}), 401
+        else:
+            user = User(email=data['user'], password=data['password'], is_active=False, type=data['tipo'])
+            db.session.add(user)
+            db.session.commit()
+
+            print(user.id);
+            for i in range(3):
+                print("Alta ---------------------------------------: ");  
+
+            if data['tipo'] == "customer": # Es un Customer
+                customer = Customer(user_id  = user.id
+                                #,user     = user.id 
+                                ,name     = data['name']
+                                ,birthday = data.get('birthday')
+                                ,gender   = data.get('gender')
+                                ,subscription = data.get('subscription', False)
+                                ,address  = data.get('address'))
+                db.session.add(customer)
+            else:  # es un manager
+                manager = Manager(user_id = user.id
+                                ,name    = data['name']
+                                )
+                db.session.add(manager)
         db.session.commit()
 
-        print(user.id);
-        for i in range(3):
-            print("Alta ---------------------------------------: ");  
+    except Exception:
+        db.session.rollback()
 
-        if data['tipo'] == "customer": # Es un Customer
-            customer = Customer(user_id  = user.id
-                               #,user     = user.id 
-                               ,name     = data['name']
-                               ,birthday = data.get('birthday')
-                               ,gender   = data.get('gender')
-                               ,subscription = data.get('subscription', False)
-                               ,address  = data.get('address'))
-            db.session.add(customer)
-        else:  # es un manager
-            manager = Manager(user_id = user.id
-                             ,name    = data['name']
-                             )
-            db.session.add(manager)
-
-        db.session.commit()
-
-        return jsonify({"msg": "Usuario creado correctamente"}), 200
+    return jsonify({"msg": "Usuario creado correctamente"}), 200
 
 
 @api.route('/Customer', methods=['GET'])

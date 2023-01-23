@@ -19,13 +19,14 @@ export const SignupManager = () => {
 			headers:{"Content-Type": "application/json"},
 			body: JSON.stringify(formData),
 			})
-		.then(response => {	return response.json()})
-		.then((response)=>{	if(response["msg"]){
-								setMensaje(response["msg"]);
-							}else{
-								navigate("/login");
-							}
-			})
+		.then(response => {
+			if (response.status == 200){ 
+				navigate("/login")
+			}else{ 
+				setMensaje(response["msg"])
+			}
+			return response.json();
+		})
 	}
 
 	useEffect(()=>{

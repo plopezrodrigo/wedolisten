@@ -18,7 +18,6 @@ import { Footer } from "./component/footer";
 import { SignupManager} from "./pages/signupManager";
 import { SignupUser} from "./pages/signupUser";
 import Login  from "./pages/login";
-import { SignupUser } from "./component/signupUser";
 
 //create your first component
 const Layout = () => {
