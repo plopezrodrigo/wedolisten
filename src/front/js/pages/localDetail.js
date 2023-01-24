@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect} from "react";
 import imagen from "../../img/mapa.jpeg";
 import OpinionComments from "../component/opinionComments";
 import { useParams } from "react-router-dom";
+import { Context } from "../store/appContext";
 
-const LocalDetail = () => {
+
+const LocalDetail = (props) => {
   const params = useParams();
   const [local, setLocales] = useState({});
+  const { store, actions } = useContext(Context);
 
   useEffect(() => {
     fetch(`${process.env.BACKEND_URL}/api/comercial-place/${params.id}`)
@@ -22,9 +25,23 @@ const LocalDetail = () => {
       <div className="row">
         <div className="col-10">{local ? <h1>{local.name}</h1> : ""}</div>
         <div className="col-1">
-          <a href="">
-            <i className="fas fa-heart" id="iconbutton"></i>
-          </a>
+          <button 
+            id="iconbutton"
+            onClick={()=>{
+              store.favorites.includes(props.id)
+              ? actions.deleteFavourites(props.id)
+              : actions.addFavourites(props.id)
+              }
+              }>
+              <i 
+              className=
+              {
+              store.favorites.includes(props.id)
+              ?"fas fa-heart-o"
+              :"fas fa-heart"
+              }
+              ></i>
+          </button>
         </div>
         <div className="col-1">
           <a href="">
