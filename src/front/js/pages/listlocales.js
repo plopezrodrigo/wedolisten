@@ -19,7 +19,7 @@ const ListLocales = () => {
         <div className="container">
             <h3>Listado de Locales</h3>
             <div className="row">
-                <div className="row flex-row flex-nowrap overflow-auto">
+                <div className="col-3">
                 {
                 locales && locales.map((local, index)=>{
                     return <LocalCard 

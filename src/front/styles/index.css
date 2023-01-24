@@ -34,3 +34,12 @@ body {
 #commentinput {
   height: 150px;
 }
+#ubicacion{
+  margin-top: 50px;
+}
+#descripcion{
+  margin-top: 20px;
+}
+#ubicacionelements{
+  margin-top: 8px;
+}

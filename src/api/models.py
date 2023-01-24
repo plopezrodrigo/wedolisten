@@ -74,7 +74,7 @@ class Comercial_Place(db.Model):
     telf = db.Column(db.String(15), unique=False, nullable=True)
     email = db.Column(db.String(120), unique=True, nullable=True)
     location = db.Column(db.String(120), unique=True, nullable=True)
-    description = db.Column(db.String(120), unique=True, nullable=False)
+    description = db.Column(db.String(700), unique=True, nullable=False)
     cambiador = db.Column(db.Boolean(), unique=False, default=False)
     trona = db.Column(db.Boolean(), unique=False, default=False)
     accessible_carrito = db.Column(db.Boolean(), unique=False, default=False)
