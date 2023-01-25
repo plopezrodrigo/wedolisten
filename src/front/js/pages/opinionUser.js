@@ -118,6 +118,14 @@ export const OpinionUser = () => {
                             <input type="radio" name="visita" className="form-check-input" id="InputTVisit5" aria-describedby="visitaHelp" value="Negocios" onChange={handleChange} />
                             <label htmlFor="InputTVisit5">Negocios</label><br/>
                         </div>
+                        <br/>
+						<div className="form-group">
+							<h5>Introduce hasta 3 imágenes</h5>
+                            <input type="text" name="photo_location1" className="form-control" id="InputTphoto_location1" aria-describedby="photo_locationHelp" onChange={handleChange} />
+                            <input type="text" name="photo_location2" className="form-control" id="InputTphoto_location2" aria-describedby="photo_locationHelp" onChange={handleChange} />
+                            <input type="text" name="photo_location3" className="form-control" id="InputTphoto_location3" aria-describedby="photo_locationHelp" onChange={handleChange} />
+						</div>
+
 						<br/>
 						<button type="submit"  id="button">Comentar</button>
 						{(mensaje != null) && <p>{mensaje}</p>}

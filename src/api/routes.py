@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Customer, Manager, Comment, Comercial_Place
+from api.models import db, User, Customer, Manager, Comment, Comercial_Place, Photos_Comments
 from api.utils import generate_sitemap, APIException
 
 api = Blueprint('api', __name__)
@@ -181,12 +181,23 @@ def Comments_add():
 
         db.session.add(comments)
         db.session.commit()
-
-        if data.get('Photos_Comments'):
-            photos = Photos_Comments(comment_id = coments.id,
-                                     location   = data['location'])
+        
+        if data.get('photo_location1'):
+            photos = Photos_Comments(comment_id = comments.id,
+                                     location   = data['photo_location1'])
             db.session.add(photos)
-            db.session.commit()
+
+        if data.get('photo_location2'):
+            photos = Photos_Comments(comment_id = comments.id,
+                                     location   = data['photo_location2'])
+            db.session.add(photos)
+
+        if data.get('photo_location3'):
+            photos = Photos_Comments(comment_id = comments.id,
+                                     location   = data['photo_location3'])
+            db.session.add(photos)
+
+        db.session.commit()
     
     except Exception as e:
         print('--------------------------------------')
