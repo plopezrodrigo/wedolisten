@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Customer, Manager, Comment
+from api.models import db, User, Customer, Manager, Comment, Comercial_Place
 from api.utils import generate_sitemap, APIException
 
 api = Blueprint('api', __name__)
@@ -152,17 +152,32 @@ def Photo_add():
 def Comments_add():
     data = request.json
 
+    print('----------------------------------------------')
+    print('----------------------------------------------')
+    print('----------------------------------------------')
+
+    user = User.query.filter_by(email='p@p.es').first()
+    data['user_id'] = user.id
+    comercial = Comercial_Place.query.filter_by(email='lvicente@hangarxxi.com').first()
+    data['comercial_place_id'] = comercial.id
+
+    print(data)
+
+    print('----------------------------------------------')
+    print('----------------------------------------------')
+    print('----------------------------------------------')
+
     try:
         comments = Comment( user_id            = data['user_id'],
                             comercial_place_id = data['comercial_place_id'],
                             comment         = data['comment'],
-                            # user          = data['user'], relationship
-                            #comercial_place = data['comercial_place'], relationship
-                            comment_id      = data['comment_id'],
-                            price           = data['price'],
-                            a_domicilio     = data['a_domicilio'],
-                            mesa            = data['mesa'],
-                            alcohol         = data['alcohol'])
+                            comment_id      = data.get('comment_id'),
+                            puntuacion      = data.get('puntuacion'),
+                            price           = data.get('price'),
+                            a_domicilio     = data.get('a_domicilio'),
+                            mesa            = data.get('mesa'),
+                            alcohol         = data.get('alcohol'),
+                            visita          = data.get('visita'))
 
         db.session.add(comments)
         db.session.commit()

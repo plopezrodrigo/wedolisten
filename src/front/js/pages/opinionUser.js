@@ -107,15 +107,15 @@ export const OpinionUser = () => {
                         <br/>
                         <div className="form-group">
                             <h5>¿Que tipo de visita hiciste?</h5>
-                            <input type="radio" name="tipo_visita" className="form-check-input" id="InputTVisit1" aria-describedby="nameHelp" value="Pareja" onChange={handleChange} />
+                            <input type="radio" name="visita" className="form-check-input" id="InputTVisit1" aria-describedby="visitaHelp" value="Pareja" onChange={handleChange} />
                             <label htmlFor="InputTVisit1">Pareja</label><br/>
-                            <input type="radio" name="tipo_visita" className="form-check-input" id="InputTVisit2" aria-describedby="nameHelp" value="Familia" onChange={handleChange} />
+                            <input type="radio" name="visita" className="form-check-input" id="InputTVisit2" aria-describedby="visitaHelp" value="Familia" onChange={handleChange} />
                             <label htmlFor="InputTVisit2">Familia</label><br/>
-                            <input type="radio" name="tipo_visita" className="form-check-input" id="InputTVisit3" aria-describedby="nameHelp" value="Solo" onChange={handleChange} />
+                            <input type="radio" name="visita" className="form-check-input" id="InputTVisit3" aria-describedby="visitaHelp" value="Solo" onChange={handleChange} />
                             <label htmlFor="InputTVisit3">Solo</label><br/>
-                            <input type="radio" name="tipo_visita" className="form-check-input" id="InputTVisit4" aria-describedby="nameHelp" value="Amigos" onChange={handleChange} />
+                            <input type="radio" name="visita" className="form-check-input" id="InputTVisit4" aria-describedby="visitaHelp" value="Amigos" onChange={handleChange} />
                             <label htmlFor="InputTVisit4">Amigos</label><br/>
-                            <input type="radio" name="tipo_visita" className="form-check-input" id="InputTVisit5" aria-describedby="nameHelp" value="Negocios" onChange={handleChange} />
+                            <input type="radio" name="visita" className="form-check-input" id="InputTVisit5" aria-describedby="visitaHelp" value="Negocios" onChange={handleChange} />
                             <label htmlFor="InputTVisit5">Negocios</label><br/>
                         </div>
 						<br/>
