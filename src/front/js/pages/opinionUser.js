@@ -4,7 +4,7 @@ import imagen from "../../img/logo.png";
 import { useNavigate } from "react-router-dom";
 
 export const OpinionUser = () => {
-	const [formData, setFormData] = useState({tipo:"manager"});
+	const [formData, setFormData] = useState({tipo:"manager", user_id:1, comercial_place_id:1, comment_id: null});
 	const [mensaje, setMensaje] = useState(null);
 	const navigate = useNavigate();
   
@@ -14,6 +14,7 @@ export const OpinionUser = () => {
 
 	const handleSubmit = (evento)=>{
 		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
+		console.log("Opinion User", formData);
 
 		fetch(process.env.BACKEND_URL + "/api/Comment", 
 			{method: 'POST',

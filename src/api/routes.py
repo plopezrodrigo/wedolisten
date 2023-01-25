@@ -153,15 +153,12 @@ def Comments_add():
     data = request.json
 
     try:
-        comments = Comment( user            = data['user'],
-                            comercial_place = data['comercial_place'],
-                            comment         = data['comment'],
-                            user_id         = data['user_id'],
-                            # user          = data['user'], relationship
+        comments = Comment( user_id            = data['user_id'],
                             comercial_place_id = data['comercial_place_id'],
+                            comment         = data['comment'],
+                            # user          = data['user'], relationship
                             #comercial_place = data['comercial_place'], relationship
                             comment_id      = data['comment_id'],
-                            #comment         = data['comment'],
                             price           = data['price'],
                             a_domicilio     = data['a_domicilio'],
                             mesa            = data['mesa'],
