@@ -26,7 +26,7 @@ export const OpinionUser = () => {
 			}else{ 
 				setMensaje(response["msg"])
 			}
-			return response.json();
+			return response.json(); 
 		})
 	}
 
@@ -73,7 +73,7 @@ export const OpinionUser = () => {
                         <br/>
 						<div className="form-group">
 							<h5>Tu opinión</h5>
-							<input type="text" name="comments" required className="form-control" id="InputComment1" aria-describedby="contactHelp" onChange={handleChange} />
+							<textarea name="comment" required rows="3" cols="100" onChange={handleChange} ></textarea>
 						</div>
                         <br/>
 						<div className="form-group">

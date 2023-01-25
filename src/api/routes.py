@@ -2,17 +2,11 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Customer, Manager
+from api.models import db, User, Customer, Manager, Comment
 from api.utils import generate_sitemap, APIException
 
 api = Blueprint('api', __name__)
 
-
-@api.route('/Comment', methods=['GET'])
-def list_Comments():
-    Comments = Comment.query.all()
-    data = [Comment.serialize() for Comments in Comment]
-    return jsonify(data), 200
 
 @api.route('/Customer', methods=['GET'])
 def list_customers():
@@ -39,7 +33,6 @@ def list_Comercial_Places():
 def Comercial_Places_Detail(id):
     comercial_place = Comercial_Place.query.filter_by(id=id).first()
     return jsonify(comercial_place.serialize()), 200
-
 
 @api.route('/Comment', methods=['GET'])
 def list_Comments():
@@ -84,7 +77,6 @@ def signup():
 
     try:
         user = User.query.filter_by(email=data['user']).first()
-
         if user:
             return jsonify({"msg": "No se puede crear este usuario porque ya existe"}), 401
         else:
@@ -108,7 +100,7 @@ def signup():
                 db.session.add(manager)
         db.session.commit()
 
-    except Exception:
+    except Exception as e:
         db.session.rollback()
         return jsonify({"msg": "No se puede crear este usuario"}), 402
 
@@ -169,7 +161,7 @@ def Comments_add():
                             comercial_place_id = data['comercial_place_id'],
                             #comercial_place = data['comercial_place'], relationship
                             comment_id      = data['comment_id'],
-                            comment         = data['comment'],
+                            #comment         = data['comment'],
                             price           = data['price'],
                             a_domicilio     = data['a_domicilio'],
                             mesa            = data['mesa'],
@@ -184,23 +176,16 @@ def Comments_add():
             db.session.add(photos)
             db.session.commit()
     
-    except Exception:
+    except Exception as e:
+        print('--------------------------------------')
+        print('--------------------------------------')
+        print(e)
+        print('--------------------------------------')
+        print('--------------------------------------')
         db.session.rollback()
         return jsonify({"msg": "No se puede crear este comentario"}), 402
 
     return jsonify({"msg": "Comentario creado correctamente"}), 200
-
-
-
-    )
-    db.session.add(comments)
-    db.session.commit()
-    photo = Photos_Comments(
-        comment_id=comments.id,
-        location=request.json['location'],
-    )
-    db.session.add(photo)
-    db.session.commit()
 
 
 @api.route("/Favourit", methods=["POST"])
