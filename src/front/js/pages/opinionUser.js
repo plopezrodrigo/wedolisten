@@ -4,8 +4,8 @@ import imagen from "../../img/logo.png";
 import { useNavigate } from "react-router-dom";
 
 export const OpinionUser = () => {
-	const [formData, setFormData] = useState({tipo:"manager", user_id:1, comercial_place_id:1, comment_id: null});
-	const [mensaje, setMensaje] = useState(null);
+	const [formData, setFormData] = useState({tipo:"customer", user_id:1, comercial_place_id:1, comment_id: null});
+	const [mensaje, setMensaje] = useState(null); 
 	const navigate = useNavigate();
   
 	const handleChange = (evento) =>{
