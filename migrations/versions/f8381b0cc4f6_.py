@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 6971a662755a
+Revision ID: f8381b0cc4f6
 Revises: 
-Create Date: 2023-01-23 17:36:08.656596
+Create Date: 2023-01-25 19:04:04.865136
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '6971a662755a'
+revision = 'f8381b0cc4f6'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -71,9 +71,15 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('comercial_place_id', sa.Integer(), nullable=False),
-    sa.Column('comment_id', sa.Integer(), nullable=False),
+    sa.Column('comment_id', sa.Integer(), nullable=True),
     sa.Column('date', sa.DateTime(), nullable=False),
     sa.Column('comment', sa.String(length=1000), nullable=False),
+    sa.Column('puntuacion', sa.Enum('uno', 'dos', 'tres', 'cuatro', 'cinco', name='puntuaciones'), nullable=True),
+    sa.Column('price', sa.Enum('Barato', 'Normal', 'Caro', name='price_types'), nullable=True),
+    sa.Column('a_domicilio', sa.Enum('Si', 'No', name='a_domicilio_types'), nullable=True),
+    sa.Column('mesa', sa.Enum('Si', 'No', name='mesa_types'), nullable=True),
+    sa.Column('alcohol', sa.Enum('Si', 'No', name='alcohol_types'), nullable=True),
+    sa.Column('visita', sa.Enum('Pareja', 'Familia', 'Solo', 'Amigos', 'Negocios', name='visita_types'), nullable=True),
     sa.ForeignKeyConstraint(['comercial_place_id'], ['comercial_places.id'], ),
     sa.ForeignKeyConstraint(['comment_id'], ['comments.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),

@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 import datetime
+import enum
 
 db = SQLAlchemy()
 
@@ -141,6 +142,13 @@ class Photo_Comercial_Place(db.Model):
                     "location": self.location
                }
 
+class Puntuaciones(enum.Enum):
+    uno="1"
+    dos="2"
+    tres="3"
+    cuatro="4"
+    cinco="5"
+
 class Comment(db.Model):
     __tablename__ = "comments"
     id = db.Column(db.Integer, primary_key=True)
@@ -148,9 +156,15 @@ class Comment(db.Model):
     user = db.relationship('User', backref='comments', lazy=True)
     comercial_place_id = db.Column(db.ForeignKey("comercial_places.id"), nullable=False)
     comercial_place = db.relationship('Comercial_Place', backref='comments', lazy=True)
-    comment_id = db.Column(db.ForeignKey("comments.id"), nullable=False)
-    date = db.Column(db.DateTime(), unique=False, nullable=False)
+    comment_id = db.Column(db.ForeignKey("comments.id"), nullable=True)
+    date = db.Column(db.DateTime(), unique=False, nullable=False,default=datetime.datetime.now())
     comment = db.Column(db.String(1000), unique=False, nullable=False)
+    puntuacion = db.Column(db.Enum(Puntuaciones), unique=False, nullable=True)
+    price = db.Column(db.Enum("Barato","Normal", "Caro", name='price_types'), unique=False, nullable=True)
+    a_domicilio = db.Column(db.Enum("Si","No", name='a_domicilio_types'), unique=False, nullable=True)
+    mesa = db.Column(db.Enum("Si","No", name='mesa_types'), unique=False, nullable=True)
+    alcohol = db.Column(db.Enum("Si","No", name='alcohol_types'), unique=False, nullable=True)
+    visita = db.Column(db.Enum("Pareja","Familia","Solo","Amigos","Negocios", name='visita_types'), unique=False, nullable=True)
     
     def __repr__(self):
         return f'<User {self.customer_id}>'
@@ -163,7 +177,12 @@ class Comment(db.Model):
                     "comercial_Place_name": self.comercial_Place.name,
                     "comment_id": self.comment_id,
                     "date": self.date,
-                    "comment": self.comment
+                    "puntuacion": self.puntuacion,
+                    "price": self.price,
+                    "a_domicilio": self.a_domicilio,
+                    "mesa": self.mesa,
+                    "alcohol": self.alcohol,
+                    "visita": self.visita
                }
 
 class Photos_Comments(db.Model):
