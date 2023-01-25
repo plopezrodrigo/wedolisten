@@ -156,6 +156,8 @@ def Comments_add():
     print('----------------------------------------------')
     print('----------------------------------------------') 
 
+    # coger el usuario por token
+    # validar que es un comentario de user y es un usuario o que es un comentario de gestor y es un gestor
     user = User.query.filter_by(email='p@p.es').first()
     data['user_id'] = user.id
     comercial = Comercial_Place.query.filter_by(email='lvicente@hangarxxi.com').first()
@@ -181,7 +183,7 @@ def Comments_add():
 
         db.session.add(comments)
         db.session.commit()
-        
+
         if data.get('photo_location1'):
             photos = Photos_Comments(comment_id = comments.id,
                                      location   = data['photo_location1'])
