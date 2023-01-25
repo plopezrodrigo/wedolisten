@@ -154,7 +154,7 @@ def Comments_add():
 
     print('----------------------------------------------')
     print('----------------------------------------------')
-    print('----------------------------------------------')
+    print('----------------------------------------------') 
 
     user = User.query.filter_by(email='p@p.es').first()
     data['user_id'] = user.id
@@ -182,7 +182,7 @@ def Comments_add():
         db.session.add(comments)
         db.session.commit()
 
-        if data['Photos_Comments']:
+        if data.get('Photos_Comments'):
             photos = Photos_Comments(comment_id = coments.id,
                                      location   = data['location'])
             db.session.add(photos)
