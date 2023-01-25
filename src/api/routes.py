@@ -8,49 +8,11 @@ from api.utils import generate_sitemap, APIException
 api = Blueprint('api', __name__)
 
 
-
-@api.route('/signup', methods=['POST'])
-def signup():
-    data = request.json
-    for i in range(3):
-        print("Alta ---------------------------------------: ");
-    print(data);
-
-    try:
-        user = User.query.filter_by(email=data['user']).first()
-
-        if user:
-            return jsonify({"msg": "No se puede crear este usuario porque ya existe"}), 401
-        else:
-            user = User(email=data['user'], password=data['password'], is_active=False, type=data['tipo'])
-            db.session.add(user)
-            db.session.commit()
-
-            print(user.id);
-            for i in range(3):
-                print("Alta ---------------------------------------: ");  
-
-            if data['tipo'] == "customer": # Es un Customer
-                customer = Customer(user_id  = user.id
-                                #,user     = user.id 
-                                ,name     = data['name']
-                                ,birthday = data.get('birthday')
-                                ,gender   = data.get('gender')
-                                ,subscription = data.get('subscription', False)
-                                ,address  = data.get('address'))
-                db.session.add(customer)
-            else:  # es un manager
-                manager = Manager(user_id = user.id
-                                ,name    = data['name']
-                                )
-                db.session.add(manager)
-        db.session.commit()
-
-    except Exception:
-        db.session.rollback()
-
-    return jsonify({"msg": "Usuario creado correctamente"}), 200
-
+@api.route('/Comment', methods=['GET'])
+def list_Comments():
+    Comments = Comment.query.all()
+    data = [Comment.serialize() for Comments in Comment]
+    return jsonify(data), 200
 
 @api.route('/Customer', methods=['GET'])
 def list_customers():
@@ -116,31 +78,41 @@ def Favourits_delete(id):
     db.session.commit()
 '''
 
+@api.route('/signup', methods=['POST'])
+def signup():
+    data = request.json
 
-@api.route("/User", methods=["POST"])
-def Users_add():
-    user = User(
-        email=request.json['email'],
-        password=request.json['password'],
-        type=request.json['type'],
-    )
-    db.session.add(user)
-    if request.json['type'] == 'customer':
-        customer = Customer(
-            name=request.json['name'],
-            birthday=request.json['birthday'],
-            gender=request.json['gender'],
-            subscription=request.json['subscription'],
-            address=request.json['address']
-        )
-        db.session.add(customer)
-    else:
-        manager = Manager(
-            user_id=user.id,
-            name=request.json['name'],
-        )
-        db.session.add(manager)
+    try:
+        user = User.query.filter_by(email=data['user']).first()
+
+        if user:
+            return jsonify({"msg": "No se puede crear este usuario porque ya existe"}), 401
+        else:
+            user = User(email=data['user'], password=data['password'], is_active=False, type=data['tipo'])
+            db.session.add(user)
+            db.session.commit()
+
+            if data['tipo'] == "customer": # Es un Customer
+                customer = Customer(user_id  = user.id
+                                #,user     = user.id 
+                                ,name     = data['name']
+                                ,birthday = data.get('birthday')
+                                ,gender   = data.get('gender')
+                                ,subscription = data.get('subscription', False)
+                                ,address  = data.get('address'))
+                db.session.add(customer)
+            else:  # es un manager
+                manager = Manager(user_id = user.id
+                                ,name    = data['name']
+                                )
+                db.session.add(manager)
         db.session.commit()
+
+    except Exception:
+        db.session.rollback()
+        return jsonify({"msg": "No se puede crear este usuario"}), 402
+
+    return jsonify({"msg": "Usuario creado correctamente"}), 200
 
 
 @api.route("/Comercial_Place", methods=["POST"])
@@ -186,10 +158,40 @@ def Photo_add():
 
 @api.route("/Comment", methods=["POST"])
 def Comments_add():
-    comments = Comment(
-        user=request.json['user'],
-        comercial_place=request.json['comercial_place'],
-        comment=request.json['comment']
+    data = request.json
+
+    try:
+        comments = Comment( user            = data['user'],
+                            comercial_place = data['comercial_place'],
+                            comment         = data['comment'],
+                            user_id         = data['user_id'],
+                            # user          = data['user'], relationship
+                            comercial_place_id = data['comercial_place_id'],
+                            #comercial_place = data['comercial_place'], relationship
+                            comment_id      = data['comment_id'],
+                            comment         = data['comment'],
+                            price           = data['price'],
+                            a_domicilio     = data['a_domicilio'],
+                            mesa            = data['mesa'],
+                            alcohol         = data['alcohol'])
+
+        db.session.add(comments)
+        db.session.commit()
+
+        if data['Photos_Comments']:
+            photos = Photos_Comments(comment_id = coments.id,
+                                     location   = data['location'])
+            db.session.add(photos)
+            db.session.commit()
+    
+    except Exception:
+        db.session.rollback()
+        return jsonify({"msg": "No se puede crear este comentario"}), 402
+
+    return jsonify({"msg": "Comentario creado correctamente"}), 200
+
+
+
     )
     db.session.add(comments)
     db.session.commit()

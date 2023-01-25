@@ -15,14 +15,14 @@ export const OpinionUser = () => {
 	const handleSubmit = (evento)=>{
 		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
 
-		fetch(process.env.BACKEND_URL + "/api/signup", 
+		fetch(process.env.BACKEND_URL + "/api/Comment", 
 			{method: 'POST',
 			headers:{"Content-Type": "application/json"},
 			body: JSON.stringify(formData),
 			})
 		.then(response => {
 			if (response.status == 200){ 
-				navigate("/login")
+				navigate("/")
 			}else{ 
 				setMensaje(response["msg"])
 			}

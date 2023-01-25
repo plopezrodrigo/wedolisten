@@ -149,7 +149,7 @@ class Comment(db.Model):
     comercial_place_id = db.Column(db.ForeignKey("comercial_places.id"), nullable=False)
     comercial_place = db.relationship('Comercial_Place', backref='comments', lazy=True)
     comment_id = db.Column(db.ForeignKey("comments.id"), nullable=False)
-    date = db.Column(db.DateTime(), unique=False, nullable=False)
+    date = db.Column(db.DateTime(), unique=False, nullable=False,default=datetime.datetime.now())
     comment = db.Column(db.String(1000), unique=False, nullable=False)
     price = db.Column(db.Enum("Barato","Normal", "Caro", name='price_types'), unique=False, nullable=True)
     a_domicilio = db.Column(db.Enum("Si","No", name='a_domicilio_types'), unique=False, nullable=True)
@@ -167,7 +167,10 @@ class Comment(db.Model):
                     "comercial_Place_name": self.comercial_Place.name,
                     "comment_id": self.comment_id,
                     "date": self.date,
-                    "comment": self.comment
+                    "price": self.price,
+                    "a_domicilio": self.a_domicilio,
+                    "mesa": self.mesa,
+                    "alcohol": self.alcohol
                }
 
 class Photos_Comments(db.Model):
