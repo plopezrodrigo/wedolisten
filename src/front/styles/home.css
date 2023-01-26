@@ -10,11 +10,19 @@ body {
   color: #5e2e2e;
   font-family: poppins;
 }
+.secciones{
+  color: #5e2e2e;
+
+}
 #tituloHome{
   padding: 50px;
 }
 #iconbutton{
   color: #FF9500;
+  border: none;
+}
+#iconbuttonnegativo{
+  color: #ffffff;
   border: none;
 }
 #opinionbutton{

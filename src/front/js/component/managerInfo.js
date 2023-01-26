@@ -16,7 +16,9 @@ const ManagerInfo = (props) => {
         Añade tu local a nuetra red para aumentar tus visitas y que vean lo bien que funciona!!{" "}
         </p>
         <button href="#" class="btn btn-lg btn-outline-primary mb-3" id="button">
-          Registro
+          <Link to="/login">
+            Registro
+          </Link>
         </button>
       </div>
       <div class="col-md-7 ps-md-5">
