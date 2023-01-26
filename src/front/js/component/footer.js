@@ -28,24 +28,24 @@ export const Footer = () => (
           <h5>Enlaces</h5>
           <ul className="nav flex-column">
             <li className="nav-item mb-2">
-              <a href="#" className="nav-link p-0 text-muted">
-                Home
-              </a>
+              <Link to="/">
+              Home
+              </Link>
             </li>
             <li className="nav-item mb-2">
-              <a href="#" className="nav-link p-0 text-muted">
-                Quienes somos
-              </a>
+              <Link to="/">
+              Quienes somos
+              </Link>
             </li>
             <li className="nav-item mb-2">
-              <a href="#" className="nav-link p-0 text-muted">
-                Contacto
-              </a>
+              <Link to="/contact">
+              Contacto
+              </Link>
             </li>
             <li className="nav-item mb-2">
-              <a href="#" className="nav-link p-0 text-muted">
-                Gestores
-              </a>
+              <Link to="/">
+              Gestores
+              </Link>
             </li>
           </ul>
         </div>
@@ -53,19 +53,19 @@ export const Footer = () => (
           <h5>Legal</h5>
           <ul className="nav flex-column">
             <li className="nav-item mb-2">
-              <a href="#" className="nav-link p-0 text-muted">
-                Política de privacidad
-              </a>
+              <Link to="/">
+              Política de Privacidad
+              </Link>
             </li>
             <li className="nav-item mb-2">
-              <a href="#" className="nav-link p-0 text-muted">
-                Aviso Legal
-              </a>
+              <Link to="/">
+              Aviso Legal
+              </Link>
             </li>
             <li className="nav-item mb-2">
-              <a href="#" className="nav-link p-0 text-muted">
-                FAQs
-              </a>
+              <Link to="/">
+              FAQs
+              </Link>
             </li>
           </ul>
         </div>
