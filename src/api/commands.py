@@ -1,6 +1,6 @@
 
 import click
-from api.models import db, User
+from api.models import db, User, Customer, Manager, Comercial_Place
 
 """
 In this file, you can add as many commands as you want using the @app.cli.command decorator
@@ -21,7 +21,7 @@ def setup_commands(app):
         for x in range(1, int(count) + 1):
             user = User()
             user.email = "test_user" + str(x) + "@test.com"
-            user.password = "123456"
+            user.password = "1111"
             user.is_active = True
             db.session.add(user)
             db.session.commit()
@@ -30,3 +30,82 @@ def setup_commands(app):
         print("All test users created")
 
         ### Insert the code to populate others tables if needed
+
+    @app.cli.command("insert-test-inicial")
+    def insert_test_data():
+        print("Borrando datos")
+        Comercial_Place.query.all()
+        cp = Comercial_Place.query.first()
+        db.session.delete(cp)
+        db.session.commit()
+
+        Customer.query.all()
+        customer = Customer.query.first()
+        db.session.delete(customer)
+        db.session.commit()
+
+        Manager.query.all()
+        manager = Manager.query.first()
+        db.session.delete(manager)
+        db.session.commit()
+
+        User.query.all()
+        user = User.query.first()
+        db.session.delete(user)
+        db.session.commit()
+        print("--------------------------------------------------------")
+        print("")
+
+        print("Creating test users customer")
+        user = User()
+        user.email = "p@p.es"
+        user.type = "customer"
+        user.password = "1111"
+        user.is_active = True
+        db.session.add(user)
+        db.session.commit()
+        print("User: ", user.email, " created.")
+        print("--------------------------------------------------------")
+        print("")
+        print("Creating test customer")
+        customer = Customer()
+        customer.user_id = user.id
+        customer.name = 'Nombre cliente'
+        db.session.add(customer)
+        db.session.commit()
+        print("customer: ", customer.name, " created.")
+
+        print("")
+        print("--------------------------------------------------------")
+        print("--------------------------------------------------------")
+        print("")
+
+        print("Creating test users Manager")
+        user = User()
+        user.email = "lvicente@hangarxxi.com"
+        user.type = "manager",
+        user.password = "1111"
+        user.is_active = True
+        db.session.add(user)
+        db.session.commit()
+        print("User: ", user.email, " created.")
+        print("--------------------------------------------------------")
+        print("")
+        print("Creating test Manager")
+        manager = Manager()
+        manager.user_id = user.id
+        manager.name = 'Nombre Manager'
+        db.session.add(manager)
+        db.session.commit()
+        print("manager: ", manager.name, " manager.")
+
+        print("--------------------------------------------------------")
+        print("")
+        print("Creating test Local")
+        cp = Comercial_Place()
+        cp.user_id = user.id
+        cp.name = 'Nombre Comercial_Place'
+        cp.address = 'address'
+        db.session.add(cp)
+        db.session.commit()
+        print("manager: ", cp.name, " Comercial_Place.")

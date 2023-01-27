@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import imagen from "../../img/logo.png";
-import { useNavigate } from "react-router-dom";
 
 export const OpinionUser = () => {
-	const [formData, setFormData] = useState({tipo:"customer", user_id:1, comercial_place_id:1, comment_id: null});
+	const params = useParams()
+	const [local, setLocales] = useState({})
+	const [formData, setFormData] = useState({tipo:"customer", user_id:1, comercial_place_id:params.id_local, comment_id: params.id_comment});
 	const [mensaje, setMensaje] = useState(null); 
 	const navigate = useNavigate();
+	const { store, actions } = useContext(Context);
   
 	const handleChange = (evento) =>{
 		setFormData({...formData, [evento.target.name]: evento.target.value});
@@ -31,13 +35,18 @@ export const OpinionUser = () => {
 		})
 	}
 
-	useEffect(()=>{
-		/*
-		if (store.token && store.token != "" && store.token != undefined){
-		  navigate("/");
-		}
-		*/
-	  },[]);
+	useEffect (()=> {
+		//if (!store.token || store.token == "" || store.token == undefined) {
+		//	navigate("/login");
+		//}
+
+		fetch(`${process.env.BACKEND_URL}/api/comercial-place/${params.id_local}`)
+		.then(response => {
+			return response.json()
+		}).then(response => {
+			setLocales(response)        
+		})
+	}, [])
 
 	return (
 		<div className="container fluid align-center">
@@ -52,9 +61,10 @@ export const OpinionUser = () => {
                         <img src={imagen} className="alinear-derecha" alt="" />
                     </div>
                     <div className="col-4 py-5 px-0 mx-0">
-                        <p className="my-0"><strong>Nombre de mi local</strong></p>
-                        <p className="my-0">dirección</p>
-                        <p className="my-0">Código postal - Localidad - Provincia</p>
+                        <p className="my-0"><strong>{local.name} ({params.id_local} - {params.id_comment})</strong></p>
+                        <p className="my-0">{local.address} </p>
+                        <p className="my-0">{local.telf} - {local.email}</p>
+                        <p className="my-0">{local.url}</p>
                     </div>
                 </div>
                 <div className="row">

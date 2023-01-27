@@ -47,8 +47,8 @@ const Layout = () => {
                         <Route element={<Comments/>} path="/comments" />
                         <Route element={<ListLocales/>} path="/listlocales" />
                         <Route element={<LocalDetail/>} path="/localDetail/:id"/>
-                        <Route element={<OpinionUser/>} path="/opinionUser" />
-                        <Route element={<OpinionManager/>} path="/opinionManager" />
+                        <Route element={<OpinionUser/>} path="/opinionUser/:id_local/:id_comment" />
+                        <Route element={<OpinionManager/>} path="/opinionManager/:id_local/:id_comment" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
