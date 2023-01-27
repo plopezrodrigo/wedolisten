@@ -1,7 +1,6 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      favorites: [],
       token: null,
       message: null,
       demo: [
@@ -69,14 +68,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.error("There has been an error login in");
         }
       },
-      addFavourites: (nombre) => {
-				const store = getStore()
-				setStore({favorites:[...store.favorites, nombre]})
-			},
-			deleteFavourites: (nombre) => {
-				const store = getStore()
-				store.favorites=store.favorites.filter((obj)=>nombre != obj)
-			},
+
       getMessage: async () => {
         try {
           // fetching data from the backend
@@ -99,6 +91,10 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (i === index) elm.background = color;
           return elm;
         });
+        //we have to loop the entire demo array to look for the respective index
+        //and change its color
+
+        //reset the global store
 
         //reset the global store
         setStore({ demo: demo });
