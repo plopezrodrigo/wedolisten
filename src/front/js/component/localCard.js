@@ -29,6 +29,7 @@ const LocalCard = (props) => {
            />
         <div className="card-body">
           <h5 className="card-title">{props.name}</h5>
+                      {/*
           <button 
                     id="iconbutton"
                     onClick={()=>{
@@ -45,8 +46,9 @@ const LocalCard = (props) => {
                         :"fas fa-heart"
                     }
 
-                    ></i>
+                  ></i>
                     </button>
+                */}
           <button className="btn btn-outline-success" type="submit" id="iconbutton">
           <i className="far fa-comment" />
           </button>
