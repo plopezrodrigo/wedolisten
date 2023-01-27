@@ -35,23 +35,27 @@ def setup_commands(app):
     def insert_test_data():
         print("Borrando datos")
         Comercial_Place.query.all()
-        cp = Comercial_Place.query.first()
-        db.session.delete(cp)
+        cp = Comercial_Place.query.all()
+        for x in cp:
+            db.session.delete(x)
         db.session.commit()
 
         Customer.query.all()
-        customer = Customer.query.first()
-        db.session.delete(customer)
+        customer = Customer.query.all()
+        for x in customer:
+            db.session.delete(x)
         db.session.commit()
 
         Manager.query.all()
-        manager = Manager.query.first()
-        db.session.delete(manager)
+        manager = Manager.query.all()
+        for x in manager:
+            db.session.delete(x)
         db.session.commit()
 
         User.query.all()
-        user = User.query.first()
-        db.session.delete(user)
+        user = User.query.all()
+        for x in user:
+            db.session.delete(x)
         db.session.commit()
         print("--------------------------------------------------------")
         print("")
@@ -82,8 +86,8 @@ def setup_commands(app):
 
         print("Creating test users Manager")
         user = User()
-        user.email = "lvicente@hangarxxi.com"
-        user.type = "manager",
+        user.email = "manager@manager.com"
+        user.type = "manager"
         user.password = "1111"
         user.is_active = True
         db.session.add(user)
@@ -105,6 +109,7 @@ def setup_commands(app):
         cp = Comercial_Place()
         cp.user_id = user.id
         cp.name = 'Nombre Comercial_Place'
+        cp.description = 'Descripción Comercial_Place'
         cp.address = 'address'
         db.session.add(cp)
         db.session.commit()

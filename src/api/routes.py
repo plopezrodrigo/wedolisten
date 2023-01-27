@@ -165,8 +165,12 @@ def Comments_add():
 
     user = User.query.filter_by(email='p@p.es').first()
     data['user_id'] = user.id
-    comercial = Comercial_Place.query.filter_by(email='lvicente@hangarxxi.com').first()
+    comercial = Comercial_Place.query.filter_by(name='Nombre Comercial_Place').first()
     data['comercial_place_id'] = comercial.id
+
+    if (data.get('tipo') == "manager"):
+        comment = Comment.query.filter_by(comercial_place_id=comercial.id).first()
+        data['comment_id'] = comment.id
 
     print(data)
 

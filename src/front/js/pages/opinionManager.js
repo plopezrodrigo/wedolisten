@@ -7,7 +7,7 @@ import imagen from "../../img/logo.png";
 export const OpinionManager = () => {
 	const params = useParams()
 	const [local, setLocales] = useState({})
-	const [formData, setFormData] = useState({tipo:"customer", user_id:1, comercial_place_id:params.id_local, comment_id: params.id_comment});
+	const [formData, setFormData] = useState({tipo:"manager", user_id:1, comercial_place_id:params.id_local, comment_id: params.id_comment});
 	const [mensaje, setMensaje] = useState(null); 
 	const navigate = useNavigate();
 	const { store, actions } = useContext(Context);
