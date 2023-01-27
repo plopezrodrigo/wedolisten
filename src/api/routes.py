@@ -4,6 +4,9 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User, Comercial_Place
 from api.utils import generate_sitemap, APIException
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import jwt_required
 
 api = Blueprint('api', __name__)
 
@@ -42,12 +45,28 @@ def list_Comments():
     return jsonify(data), 200
 
 
-@api.route('/Favourit/<customer>', methods=['GET'])
+@api.route('/favourit', methods=['GET'])
+@jwt_required()
 def list_Favourit():
-    Favourits = Favourit.query.get(customer)
-    data = [Favourit.serialize() for Favourits in Favourit]
-    return jsonify(data), 200
+    user_id=get_jwt_identity()
+    customer = Customer.query.filter_by(user_id=user_id)
+    favourit = Favourit.query.filter_by(customer_id=customer.id)
+    return jsonify(favourit), 200
 
+@api.route('/favourit/<id>', methods=['POST'])
+@jwt_required()
+def add_Favourit(id):
+    user_id=get_jwt_identity()
+    customer = Customer.query.filter_by(user_id=user_id)
+    favourit = Favourit.query.filter_by(customer_id=customer.id, comercial_place_id=id).first()
+    if not favourit :
+        favourit = Favourit(customer_id=customer.id, comercial_place_id=id, state=True)
+        db.session.add(favourit)
+        db.session.commit()
+    else :
+        favourit.state = not favourit.state
+        db.session.commit()
+    return jsonify(favourit), 200
 
 ''' 
 @api.route("/User/<id>", methods=["DELETE"])

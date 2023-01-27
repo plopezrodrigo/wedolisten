@@ -71,6 +71,7 @@ class Comercial_Place(db.Model):
     name = db.Column(db.String(80), unique=False, nullable=False)
     address = db.Column(db.String(150), unique=False, nullable=False)
     url = db.Column(db.String(150), unique=False, nullable=True)
+    image_url = db.Column(db.String(250), unique=False, nullable=True)
     telf = db.Column(db.String(15), unique=False, nullable=True)
     email = db.Column(db.String(120), unique=True, nullable=True)
     location = db.Column(db.String(120), unique=True, nullable=True)
@@ -91,6 +92,7 @@ class Comercial_Place(db.Model):
                     "name": self.name,
                     "address": self.address,
                     "url": self.url,
+                    "image_url": self.image_url,
                     "telf": self.telf,
                     "email": self.email,
                     "location": self.location,
