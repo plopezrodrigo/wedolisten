@@ -11,7 +11,11 @@ const Login = () => {
 
   console.log("This is your token", store.token);
   const handleClick = () => {
-    actions.login(data.email, data.password);
+    actions.login(data.email, data.password).then((response) => {
+    if (response) {
+      navigate.push("/");
+    }
+    })
   };
 
   useEffect(() => {
