@@ -68,7 +68,9 @@ export const Footer = () => (
             </li>
           </ul>
         </div>
-        <div className="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+      </div>
+      <div className="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+
           <p>© 2023 Company, Inc. Reservados todos los derechos.</p>
           <ul className="list-unstyled d-flex">
             <li className="ms-3">
@@ -95,6 +97,5 @@ export const Footer = () => (
           </ul>
         </div>
       </div>
-    </div>
   </footer>
 );

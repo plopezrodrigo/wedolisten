@@ -91,6 +91,10 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (i === index) elm.background = color;
           return elm;
         });
+        //we have to loop the entire demo array to look for the respective index
+        //and change its color
+
+        //reset the global store
 
         //reset the global store
         setStore({ demo: demo });

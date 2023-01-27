@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 
 const Login = () => {
@@ -24,7 +23,7 @@ const Login = () => {
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
-
+    
   return (
     <div className="vh-100 gradient-custom">
       <div className="container text-center">
@@ -33,7 +32,7 @@ const Login = () => {
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col-12 col-md-8 col-lg-6 col-xl-5">
             <div className="card" id="card">
-              <div class="card-body text-center">
+              <div className="card-body text-center">
                 <h5 className="ms-3 me-3 mb-3 text-center fw-bold">Login</h5>
               </div>
               <div className="form-outline">
@@ -44,27 +43,27 @@ const Login = () => {
                     "You are logged in with this token" + store.token
                   ) : (
                     <div className="col-12 col-md-8 col-lg-6 col-xl-5">
-                      <label class="form-label" for="typeEmailX">
+                      <label className="form-label" for="typeEmailX">
                         Email
                       </label>
                       <input
                         type="text"
                         id="typeEmailX-2"
-                        class="form-control mb-2"
+                        className="form-control mb-2"
                         name="email"
                         onChange={handleChange}
                       />
-                      <label class="form-label" for="typeEmailX">
+                      <label className="form-label" for="typeEmailX">
                         Contraseña
                       </label>
                       <input
                         type="password"
                         id="typePasswordX-2"
                         name="password"
-                        class="form-control mb-2"
+                        className="form-control mb-2"
                         onChange={handleChange}
                       />
-                      <p class="small mt-2">
+                      <p className="small mt-2">
                         <a href="#!">¿Has olvidado tu contraseña?</a>
                       </p>
                       <button
@@ -80,7 +79,7 @@ const Login = () => {
                     <p className="ms-3 me-3 mb-3 text-center">
                       ¿No tienes una cuenta?
                       <a href="#!" className="fw-bold">
-                        Registrate
+                      Registrate
                       </a>
                     </p>
                   </div>

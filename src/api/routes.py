@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User
+from api.models import db, User, Customer, Manager, Comment, Comercial_Place, Photos_Comments
 from api.utils import generate_sitemap, APIException
 
 api = Blueprint('api', __name__)
@@ -22,13 +22,17 @@ def list_Managers():
     return jsonify(data), 200
 
 
-@api.route('/Comercial_Place', methods=['GET'])
+@api.route('/comercial-place', methods=['GET'])
 def list_Comercial_Places():
-    Comercial_Places = Comercial_Place.query.all()
-    data = [Comercial_Place.serialize()
-            for Comercial_Places in Comercial_Place]
+    comercial_places = Comercial_Place.query.all()
+    data = [comercial_place.serialize()
+            for comercial_place in comercial_places]
     return jsonify(data), 200
 
+@api.route('/comercial-place/<id>', methods=['GET'])
+def Comercial_Places_Detail(id):
+    comercial_place = Comercial_Place.query.filter_by(id=id).first()
+    return jsonify(comercial_place.serialize()), 200
 
 @api.route('/Comment', methods=['GET'])
 def list_Comments():
@@ -37,12 +41,28 @@ def list_Comments():
     return jsonify(data), 200
 
 
-@api.route('/Favourit/<customer>', methods=['GET'])
+@api.route('/favourit', methods=['GET'])
+@jwt_required()
 def list_Favourit():
-    Favourits = Favourit.query.get(customer)
-    data = [Favourit.serialize() for Favourits in Favourit]
-    return jsonify(data), 200
+    user_id=get_jwt_identity()
+    customer = Customer.query.filter_by(user_id=user_id)
+    favourit = Favourit.query.filter_by(customer_id=customer.id)
+    return jsonify(favourit), 200
 
+@api.route('/favourit/<id>', methods=['POST'])
+@jwt_required()
+def add_Favourit(id):
+    user_id=get_jwt_identity()
+    customer = Customer.query.filter_by(user_id=user_id)
+    favourit = Favourit.query.filter_by(customer_id=customer.id, comercial_place_id=id).first()
+    if not favourit :
+        favourit = Favourit(customer_id=customer.id, comercial_place_id=id, state=True)
+        db.session.add(favourit)
+        db.session.commit()
+    else :
+        favourit.state = not favourit.state
+        db.session.commit()
+    return jsonify(favourit), 200
 
 ''' 
 @api.route("/User/<id>", methods=["DELETE"])
@@ -67,33 +87,40 @@ def Favourits_delete(id):
     db.session.commit()
 '''
 
+@api.route('/signup', methods=['POST'])
+def signup():
+    data = request.json
 
-@api.route("/User", methods=["POST"])
-def Users_add():
-    user = User(
-        email=request.json['email'],
-        password=request.json['password'],
-        type=request.json['type'],
-    )
-    db.session.add(user)
-    db.session.commit()
-    if request.json['type'] == 'customer':
-        customer = Customer(
-            name=request.json['name'],
-            birthday=request.json['birthday'],
-            gender=request.json['gender'],
-            subscription=request.json['subscription'],
-            address=request.json['address']
-        )
-        db.session.add(customer)
+    try:
+        user = User.query.filter_by(email=data['user']).first()
+        if user:
+            return jsonify({"msg": "No se puede crear este usuario porque ya existe"}), 401
+        else:
+            user = User(email=data['user'], password=data['password'], is_active=False, type=data['tipo'])
+            db.session.add(user)
+            db.session.commit()
+
+            if data['tipo'] == "customer": # Es un Customer
+                customer = Customer(user_id  = user.id
+                                #,user     = user.id 
+                                ,name     = data['name']
+                                ,birthday = data.get('birthday')
+                                ,gender   = data.get('gender')
+                                ,subscription = data.get('subscription', False)
+                                ,address  = data.get('address'))
+                db.session.add(customer)
+            else:  # es un manager
+                manager = Manager(user_id = user.id
+                                ,name    = data['name']
+                                )
+                db.session.add(manager)
         db.session.commit()
-    else:
-        manager = Manager(
-            user_id=user.id,
-            name=request.json['name'],
-        )
-        db.session.add(manager)
-        db.session.commit()
+
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"msg": "No se puede crear este usuario"}), 402
+
+    return jsonify({"msg": "Usuario creado correctamente"}), 200
 
 
 @api.route("/Comercial_Place", methods=["POST"])
@@ -139,19 +166,67 @@ def Photo_add():
 
 @api.route("/Comment", methods=["POST"])
 def Comments_add():
-    comments = Comment(
-        user=request.json['user'],
-        comercial_place=request.json['comercial_place'],
-        comment=request.json['comment']
-    )
-    db.session.add(comments)
-    db.session.commit()
-    photo = Photos_Comments(
-        comment_id=comments.id,
-        location=request.json['location'],
-    )
-    db.session.add(photo)
-    db.session.commit()
+    data = request.json
+
+    print('----------------------------------------------')
+    print('----------------------------------------------')
+    print('----------------------------------------------') 
+
+    # coger el usuario por token
+    # validar que es un comentario de user y es un usuario o que es un comentario de gestor y es un gestor
+    user = User.query.filter_by(email='p@p.es').first()
+    data['user_id'] = user.id
+    comercial = Comercial_Place.query.filter_by(email='lvicente@hangarxxi.com').first()
+    data['comercial_place_id'] = comercial.id
+
+    print(data)
+
+    print('----------------------------------------------')
+    print('----------------------------------------------')
+    print('----------------------------------------------')
+
+    try:
+        comments = Comment( user_id            = data['user_id'],
+                            comercial_place_id = data['comercial_place_id'],
+                            comment         = data['comment'],
+                            comment_id      = data.get('comment_id'),
+                            puntuacion      = data.get('puntuacion'),
+                            price           = data.get('price'),
+                            a_domicilio     = data.get('a_domicilio'),
+                            mesa            = data.get('mesa'),
+                            alcohol         = data.get('alcohol'),
+                            visita          = data.get('visita'))
+
+        db.session.add(comments)
+        db.session.commit()
+
+        if data.get('photo_location1'):
+            photos = Photos_Comments(comment_id = comments.id,
+                                     location   = data['photo_location1'])
+            db.session.add(photos)
+
+        if data.get('photo_location2'):
+            photos = Photos_Comments(comment_id = comments.id,
+                                     location   = data['photo_location2'])
+            db.session.add(photos)
+
+        if data.get('photo_location3'):
+            photos = Photos_Comments(comment_id = comments.id,
+                                     location   = data['photo_location3'])
+            db.session.add(photos)
+
+        db.session.commit()
+    
+    except Exception as e:
+        print('--------------------------------------')
+        print('--------------------------------------')
+        print(e)
+        print('--------------------------------------')
+        print('--------------------------------------')
+        db.session.rollback()
+        return jsonify({"msg": "No se puede crear este comentario"}), 402
+
+    return jsonify({"msg": "Comentario creado correctamente"}), 200
 
 
 @api.route("/Favourit", methods=["POST"])

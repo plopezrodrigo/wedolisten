@@ -32,3 +32,21 @@ body {
     box-shadow: 10px;
     border-radius: 10%;
   }
+
+  #cajas{
+    /*position: absolute;*/
+    width: 334px;
+    height: 379px;
+    left: 29px;
+    top: 253px;
+
+    background: #FFE9C8;
+    box-shadow: -3px -3px 10px rgba(255, 207, 136, 0.8), 3px 3px 10px rgba(255, 207, 136, 0.8);
+    backdrop-filter: blur(89px);
+    /* Note: backdrop-filter has minimal browser support */
+    border-radius: 28px;
+  }
+
+  .alinear-derecha{
+    float: right;
+    }

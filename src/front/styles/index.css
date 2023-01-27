@@ -14,27 +14,32 @@ body {
   color: #5e2e2e;
   font-family: poppins;
 }
-#footer{
+#footer {
   padding: 50px;
 }
-#navbarSupportedContent{
+#navbarSupportedContent {
   font-size: large;
   font-weight: bold;
   text-decoration: none;
   color: #5e2e2e;
 }
-#button{
-  background-color: #FFCCF4;
+#button {
+  background-color: #ffccf4;
   color: #5e2e2e;
-  border-color: #FF69DE;
+  border-color: #ff69de;
   border-width: 3px;
   border-radius: 10px;
   font-weight: bold;
 }
-#card {
-  background-color: #ffe9c8;
-  border-color: #ff950081;
-  border-radius: 10px;
-  border-width: 2px;
-  box-shadow: 2px 2px 2px 1px #bebdbd;
+#commentinput {
+  height: 150px;
+}
+#ubicacion{
+  margin-top: 50px;
+}
+#descripcion{
+  margin-top: 20px;
+}
+#ubicacionelements{
+  margin-top: 8px;
 }

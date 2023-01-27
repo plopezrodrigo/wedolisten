@@ -51,7 +51,7 @@ const MyComponentSuper = () => {
 
 It is recomended to install the backend first, make sure you have Python 3.8, Pipenv and a database engine (Posgress recomended)
 
-1. Install the python packages: `$ pipenv install`
+1. Install the python packages: `$ pipenv install` y `$ pipenv shell`
 2. Create a .env file based on the .env.example: `$ cp .env.example .env`
 3. Install your database engine and create your database, depending on your database you have to create a DATABASE_URL variable with one of the possible values, make sure yo replace the valudes with your database information:
 
@@ -61,10 +61,11 @@ It is recomended to install the backend first, make sure you have Python 3.8, Pi
 | MySQL     | mysql://username:password@localhost:port/example    |
 | Postgress | postgres://username:password@localhost:5432/example |
 
+3.1                    `$ pip install flask-jwt-extended`
 4. Migrate the migrations: `$ pipenv run migrate` (skip if you have not made changes to the models on the `./src/api/models.py`)
 5. Run the migrations: `$ pipenv run upgrade`
 6. Run the application: `$ pipenv run start`
-
+ 
 ### Backend Populate Table Users
 
 To insert test users in the database execute the following command:
@@ -92,8 +93,19 @@ To update with all yours tables you can edit the file app.py and go to the line 
 -   Make sure you are using node version 14+ and that you have already successfully installed and runned the backend.
 
 1. Install the packages: `$ npm install`
+1.1 para correr el tema de Popups con react-boostrat `$ npm install react-bootstrap bootstrap`
 2. Start coding! start the webpack dev server `$ npm run start`
 
 ## Publish your website!
 
 This boilerplate it's 100% read to deploy with Render.com and Herkou in a matter of minutes. Please read the [official documentation about it](https://start.4geeksacademy.com/deploy).
+
+
+
+rm -R -f ./migrations &&
+pipenv run init &&
+psql -U gitpod -c 'DROP DATABASE example;' || true &&
+psql -U gitpod -c 'CREATE DATABASE example;' &&
+psql -U gitpod -c 'CREATE EXTENSION unaccent;' -d example &&
+pipenv run migrate &&
+pipenv run upgrade
