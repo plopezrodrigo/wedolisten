@@ -31,3 +31,10 @@ body {
   border-radius: 10px;
   font-weight: bold;
 }
+#card {
+  background-color: #ffe9c8;
+  border-color: #ff950081;
+  border-radius: 10px;
+  border-width: 2px;
+  box-shadow: 2px 2px 2px 1px #bebdbd;
+}
