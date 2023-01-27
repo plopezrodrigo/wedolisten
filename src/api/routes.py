@@ -168,16 +168,25 @@ def Photo_add():
 def Comments_add():
     data = request.json
 
+    #if (data.get('tipo') == "manager" and data.get('comment_id') == null):
+    #    return jsonify({"msg": "Un manager no puede generar una respuesta que no sea sobre un comentario de cliente"}), 403
+
     print('----------------------------------------------')
     print('----------------------------------------------')
     print('----------------------------------------------') 
+    # PDTE:
+    #   coger el usuario por token
+    #   validar que es un comentario de user y es un usuario o que es un comentario de gestor y es un gestor
+    #   validar el comment_id
 
-    # coger el usuario por token
-    # validar que es un comentario de user y es un usuario o que es un comentario de gestor y es un gestor
     user = User.query.filter_by(email='p@p.es').first()
     data['user_id'] = user.id
-    comercial = Comercial_Place.query.filter_by(email='lvicente@hangarxxi.com').first()
+    comercial = Comercial_Place.query.filter_by(name='Nombre Comercial_Place').first()
     data['comercial_place_id'] = comercial.id
+
+    if (data.get('tipo') == "manager"):
+        comment = Comment.query.filter_by(comercial_place_id=comercial.id).first()
+        data['comment_id'] = comment.id
 
     print(data)
 
@@ -186,16 +195,16 @@ def Comments_add():
     print('----------------------------------------------')
 
     try:
-        comments = Comment( user_id            = data['user_id'],
-                            comercial_place_id = data['comercial_place_id'],
-                            comment         = data['comment'],
-                            comment_id      = data.get('comment_id'),
-                            puntuacion      = data.get('puntuacion'),
-                            price           = data.get('price'),
-                            a_domicilio     = data.get('a_domicilio'),
-                            mesa            = data.get('mesa'),
-                            alcohol         = data.get('alcohol'),
-                            visita          = data.get('visita'))
+        comments = Comment( user_id             = data['user_id'],
+                            comercial_place_id  = data['comercial_place_id'],
+                            comment             = data['comment'],
+                            comment_id          = data.get('comment_id'),
+                            puntuacion          = data.get('puntuacion'),
+                            price               = data.get('price'),
+                            a_domicilio         = data.get('a_domicilio'),
+                            mesa                = data.get('mesa'),
+                            alcohol             = data.get('alcohol'),
+                            visita              = data.get('visita'))
 
         db.session.add(comments)
         db.session.commit()
