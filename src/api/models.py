@@ -26,6 +26,7 @@ class Customer(db.Model):
     __tablename__ = "customers"
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.ForeignKey("users.id"), nullable=False)
+    user = db.relationship(User, backref="customer")
     # user = db.Column(db.ForeignKey("users.id"), nullable=False)
     name = db.Column(db.String(80), unique=False, nullable=False)
     birthday = db.Column(db.Date(), unique=False, nullable=True)
@@ -51,6 +52,7 @@ class Manager(db.Model):
     __tablename__ = "managers"
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.ForeignKey("users.id"), nullable=False)
+    user = db.relationship(User, backref="manager")
     #user = db.Column(db.ForeignKey("users.id"), nullable=False)
     name = db.Column(db.String(80), unique=False, nullable=False)
 
