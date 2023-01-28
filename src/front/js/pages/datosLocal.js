@@ -6,7 +6,7 @@ import imagen from "../../img/logo.png";
 
 export const DatosLocal = () => {
 	const params = useParams()
-	const [local, setLocales] = useState({})
+	const [local, setLocal] = useState({})
 	const [formData, setFormData] =  useState({tipo:"customer", user_id:1, comercial_place_id:params.id_local, comment_id: params.id_comment});
 	const [mensaje, setMensaje] = useState(null); 
 	const navigate = useNavigate();
@@ -28,7 +28,7 @@ export const DatosLocal = () => {
 		.then(response => { 
 			if (response.status == 200){ 
 				navigate("/")
-			}else{ 
+			}else{  
 				setMensaje(response["msg"])
 			}
 			return response.json(); 
@@ -37,25 +37,27 @@ export const DatosLocal = () => {
 
 	useEffect (()=> {
 		if (store.token && store.token != "" && store.token != undefined) {
-			navigate.push("/login");
+			navigate.push("/login"); 
 		}
+		console.log("comercial_place1", params.local_id);    
 
-		fetch(`${process.env.BACKEND_URL}/api/comercial-place/${params.id_local}`)
+		fetch(`${process.env.BACKEND_URL}/api/a_comercial-place/${params.local_id}`)
 		.then(response => {
 			return response.json()
-		}).then(response => {
-			setLocales(response)        
+		}).then(resp => {
+			setLocal(resp)
+			console.log("comercial_place --> ", local, resp);     
 		})
 	}, [])
 
 	return (
 		<div className="container fluid align-center">
-		  <div className="form-body">
+		  <div className="form-body"> 
 			<div className="row">
 			    <h1 className="text-center">Registro</h1>
 			    <h5 className="text-center">Da de alta tus locales y mantenlos actualizados para recibir opiniones de tus usuarios</h5>
             </div>
-			<div className="row">
+			<div className="row"> 
                 <div className="row justify-content-center">
                     <div className="col-4 py-3 px-0 mx-0">
                         <img src={local.image_url} className="alinear-derecha" alt="" />
@@ -83,27 +85,27 @@ export const DatosLocal = () => {
 
 						<div className="form-group">
 							<label htmlFor="Inputurl1">Información de contacto</label>
-							<input type="text" name="url" required className="form-control" id="Inputurl1" value={local.url} aria-describedby="urlHelp" placeholder="url" onChange={handleChange} />
+							<input type="text" name="url" className="form-control" id="Inputurl1" value={local.url} aria-describedby="urlHelp" placeholder="url" onChange={handleChange} />
 	                        <br/>
 							<input type="text" name="email" required className="form-control" id="InputEmail1" value={local.email} aria-describedby="emailHelp" placeholder="email" onChange={handleChange} />
 							<input type="text" name="telf" required className="form-control" id="InputTelf1" value={local.telf} aria-describedby="TelfHelp" placeholder="Teléfono" onChange={handleChange} />
 							<input type="text" name="address" required className="form-control" id="InputAddress1" value={local.address} ria-describedby="AddressHelp" placeholder="Dirección" onChange={handleChange} />
-							<input type="text" name="location" required className="form-control" id="InputLocation1" value={local.location} aria-describedby="locationHelp" placeholder="Localización" onChange={handleChange} />
+							<input type="text" name="location" className="form-control" id="InputLocation1" value={local.location} aria-describedby="locationHelp" placeholder="Localización" onChange={handleChange} />
 						</div>
                         <br/>
 						<div className="form-group">
-							<label htmlFor="InputTrona1">trona</label>
 							<input type="radio" name="trona" className="form-check-input" id="InputTrona1" aria-describedby="tronaHelp" value={local.trona} onChange={handleChange} />
-                            <label htmlFor="InputCambiador2">cambiador</label><br/>
+							<label htmlFor="InputTrona1">trona</label><br/>
                             <input type="radio" name="cambiador" className="form-check-input" id="InputCambiador2" aria-describedby="cambiadorHelp" value={local.cambiador} onChange={handleChange} />
-                            <label htmlFor="InputAccessible_carrito3">accessible_carrito</label><br/>
+                            <label htmlFor="InputCambiador2">cambiador</label><br/>
                             <input type="radio" name="accessible_carrito" className="form-check-input" id="InputAccessible_carrito3" aria-describedby="visitaHelp" value={local.accessible_carrito} onChange={handleChange} />
-                            <label htmlFor="InputEspacio_carrito3">espacio_carrito</label><br/>
+                            <label htmlFor="InputAccessible_carrito3">accessible_carrito</label><br/>
                             <input type="radio" name="espacio_carrito" className="form-check-input" id="InputEspacio_carrito3" aria-describedby="espacio_carritoHelp" value={local.espacio_carrito} onChange={handleChange} />
-                            <label htmlFor="InputTVisit4">ascensor</label><br/>
+                            <label htmlFor="InputEspacio_carrito3">espacio_carrito</label><br/>
                             <input type="radio" name="ascensor" className="form-check-input" id="InputAscensor5" aria-describedby="ascensorHelp" value={local.ascensor} onChange={handleChange} />
-                            <label htmlFor="InputProductos_higiene5">productos_higiene</label><br/>
+                            <label htmlFor="InputAscensor5">ascensor</label><br/>
                             <input type="radio" name="productos_higiene" className="form-check-input" id="InputProductos_higiene5" aria-describedby="productos_higieneHelp" value={local.productos_higiene} onChange={handleChange} />
+                            <label htmlFor="InputProductos_higiene5">productos_higiene</label><br/>
 						</div>
                         <br/>
 
