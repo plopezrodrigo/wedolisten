@@ -21,6 +21,7 @@ import Login  from "./pages/login";
 import { OpinionUser } from "./pages/opinionUser";
 import { OpinionManager } from "./pages/opinionManager";
 import { MisLocales } from "./pages/misLocales";
+import { DatosLocal } from "./pages/datosLocal";
 
 //create your first component
 const Layout = () => {
@@ -51,6 +52,7 @@ const Layout = () => {
                         <Route element={<OpinionUser/>} path="/opinionUser/:id_local/:id_comment" />
                         <Route element={<OpinionManager/>} path="/opinionManager/:id_local/:id_comment" />
                         <Route element={<MisLocales />} path="/misLocales/:user_id" />
+                        <Route element={<DatosLocal />} path="/datosLocal/:local_id" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />

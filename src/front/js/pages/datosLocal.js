@@ -25,7 +25,7 @@ export const DatosLocal = () => {
 			headers:{"Content-Type": "application/json"},
 			body: JSON.stringify(formData),
 			})
-		.then(response => {
+		.then(response => { 
 			if (response.status == 200){ 
 				navigate("/")
 			}else{ 
@@ -52,13 +52,13 @@ export const DatosLocal = () => {
 		<div className="container fluid align-center">
 		  <div className="form-body">
 			<div className="row">
-			    <h1 className="text-center">Escriba una opinión y ayúdanos a mejorar</h1>
-			    <h5 className="text-center">Historias como la suya ayudan a mejorar. Comparte tu experiencia y ayudanos</h5>
+			    <h1 className="text-center">Registro</h1>
+			    <h5 className="text-center">Da de alta tus locales y mantenlos actualizados para recibir opiniones de tus usuarios</h5>
             </div>
 			<div className="row">
                 <div className="row justify-content-center">
                     <div className="col-4 py-3 px-0 mx-0">
-                        <img src={imagen} className="alinear-derecha" alt="" />
+                        <img src={local.image_url} className="alinear-derecha" alt="" />
                     </div>
                     <div className="col-4 py-5 px-0 mx-0">
                         <p className="my-0"><strong>{local.name} ({params.id_local} - {params.id_comment})</strong></p>
@@ -67,76 +67,46 @@ export const DatosLocal = () => {
                         <p className="my-0">{local.url}</p>
                     </div>
                 </div>
-                <div className="row">
-                    <h1 className="text-center">Tu experiencia es muy valiosa para nosotros.</h1>
-                    <h1 className="text-center">¡Muchas gracias!</h1>
-                </div>
+
 				<div className="col-md-12">
 					<form onSubmit={handleSubmit}>
-                        <div className="form-group">
-							<h5>Puntuación</h5>
-							<input type="radio" name="puntuacion" className="form-check-input" id="InputPuntua1" aria-describedby="nameHelp" value="uno" onChange={handleChange} />
-							<input type="radio" name="puntuacion" className="form-check-input" id="InputPuntua2" aria-describedby="nameHelp" value="dos" onChange={handleChange} />
-							<input type="radio" name="puntuacion" className="form-check-input" id="InputPuntua3" aria-describedby="nameHelp" value="tres" onChange={handleChange} />
-							<input type="radio" name="puntuacion" className="form-check-input" id="InputPuntua4" aria-describedby="nameHelp" value="cuatro" onChange={handleChange} />
-							<input type="radio" name="puntuacion" className="form-check-input" id="InputPuntua5" aria-describedby="nameHelp" value="cinco" onChange={handleChange} />
-						</div>	   
-                        <br/>
 						<div className="form-group">
-							<h5>Tu opinión</h5>
-							<textarea name="comment" required rows="3" cols="100" onChange={handleChange} ></textarea>
+							<label htmlFor="InputEmail1">Nombre del local</label>
+							<input type="text" name="name" required className="form-control" id="InputName1" aria-describedby="nameHelp" placeholder="Nombre del local" onChange={handleChange} />
 						</div>
                         <br/>
 						<div className="form-group">
-    						<div>
-							    <h5 className="d-inline">Nos puedes contar algo mas</h5>
-                                <p className="d-inline">(opcional)</p>
-                            </div>
-							<select name="price" id="InputPrice1" className="form-control" aria-describedby="PriceHelp" onChange={handleChange} >
-								<option value="">--Elige una opción--</option>
-								<option value="Barato">Barato</option>
-								<option value="Normal">Normal</option>
-								<option value="Caro">Caro</option>
-							</select>
-							<select name="a_domicilio" id="InputA_domicilio1" className="form-control" aria-describedby="A_domicilioHelp" onChange={handleChange} >
-								<option value="">--Elige una opción--</option>
-								<option value="Si">Si</option>
-								<option value="No">No</option>
-							</select>
-							<select name="mesa" id="InputMesa1" className="form-control" aria-describedby="MesaHelp" onChange={handleChange} >
-								<option value="">--Elige una opción--</option>
-								<option value="Si">Si</option>
-								<option value="No">No</option>
-							</select>
-							<select name="alcohol" id="InputAlcohol1" className="form-control" aria-describedby="AlcoholHelp" onChange={handleChange} >
-								<option value="">--Elige una opción--</option>
-								<option value="Si">Si</option>
-								<option value="No">No</option>
-							</select>
+							<h5>Descripción</h5>
+							<textarea name="description" required rows="3" cols="100" onChange={handleChange} ></textarea>
 						</div>
                         <br/>
-                        <div className="form-group">
-                            <h5>¿Que tipo de visita hiciste?</h5>
-                            <input type="radio" name="visita" className="form-check-input" id="InputTVisit1" aria-describedby="visitaHelp" value="Pareja" onChange={handleChange} />
-                            <label htmlFor="InputTVisit1">Pareja</label><br/>
-                            <input type="radio" name="visita" className="form-check-input" id="InputTVisit2" aria-describedby="visitaHelp" value="Familia" onChange={handleChange} />
-                            <label htmlFor="InputTVisit2">Familia</label><br/>
-                            <input type="radio" name="visita" className="form-check-input" id="InputTVisit3" aria-describedby="visitaHelp" value="Solo" onChange={handleChange} />
-                            <label htmlFor="InputTVisit3">Solo</label><br/>
-                            <input type="radio" name="visita" className="form-check-input" id="InputTVisit4" aria-describedby="visitaHelp" value="Amigos" onChange={handleChange} />
-                            <label htmlFor="InputTVisit4">Amigos</label><br/>
-                            <input type="radio" name="visita" className="form-check-input" id="InputTVisit5" aria-describedby="visitaHelp" value="Negocios" onChange={handleChange} />
-                            <label htmlFor="InputTVisit5">Negocios</label><br/>
-                        </div>
-                        <br/>
-						<div className="form-group">
-							<h5>Introduce hasta 3 imágenes</h5>
-                            <input type="text" name="photo_location1" className="form-control" id="InputTphoto_location1" aria-describedby="photo_locationHelp" onChange={handleChange} />
-                            <input type="text" name="photo_location2" className="form-control" id="InputTphoto_location2" aria-describedby="photo_locationHelp" onChange={handleChange} />
-                            <input type="text" name="photo_location3" className="form-control" id="InputTphoto_location3" aria-describedby="photo_locationHelp" onChange={handleChange} />
-						</div>
 
-						<br/>
+						<div className="form-group">
+							<label htmlFor="Inputurl1">Información de contacto</label>
+							<input type="text" name="url" required className="form-control" id="Inputurl1" value={local.url} aria-describedby="urlHelp" placeholder="url" onChange={handleChange} />
+	                        <br/>
+							<input type="text" name="email" required className="form-control" id="InputEmail1" value={local.email} aria-describedby="emailHelp" placeholder="email" onChange={handleChange} />
+							<input type="text" name="telf" required className="form-control" id="InputTelf1" value={local.telf} aria-describedby="TelfHelp" placeholder="Teléfono" onChange={handleChange} />
+							<input type="text" name="address" required className="form-control" id="InputAddress1" value={local.address} ria-describedby="AddressHelp" placeholder="Dirección" onChange={handleChange} />
+							<input type="text" name="location" required className="form-control" id="InputLocation1" value={local.location} aria-describedby="locationHelp" placeholder="Localización" onChange={handleChange} />
+						</div>
+                        <br/>
+						<div className="form-group">
+							<label htmlFor="InputTrona1">trona</label>
+							<input type="radio" name="trona" className="form-check-input" id="InputTrona1" aria-describedby="tronaHelp" value={local.trona} onChange={handleChange} />
+                            <label htmlFor="InputCambiador2">cambiador</label><br/>
+                            <input type="radio" name="cambiador" className="form-check-input" id="InputCambiador2" aria-describedby="cambiadorHelp" value={local.cambiador} onChange={handleChange} />
+                            <label htmlFor="InputAccessible_carrito3">accessible_carrito</label><br/>
+                            <input type="radio" name="accessible_carrito" className="form-check-input" id="InputAccessible_carrito3" aria-describedby="visitaHelp" value={local.accessible_carrito} onChange={handleChange} />
+                            <label htmlFor="InputEspacio_carrito3">espacio_carrito</label><br/>
+                            <input type="radio" name="espacio_carrito" className="form-check-input" id="InputEspacio_carrito3" aria-describedby="espacio_carritoHelp" value={local.espacio_carrito} onChange={handleChange} />
+                            <label htmlFor="InputTVisit4">ascensor</label><br/>
+                            <input type="radio" name="ascensor" className="form-check-input" id="InputAscensor5" aria-describedby="ascensorHelp" value={local.ascensor} onChange={handleChange} />
+                            <label htmlFor="InputProductos_higiene5">productos_higiene</label><br/>
+                            <input type="radio" name="productos_higiene" className="form-check-input" id="InputProductos_higiene5" aria-describedby="productos_higieneHelp" value={local.productos_higiene} onChange={handleChange} />
+						</div>
+                        <br/>
+
 						<button type="submit"  id="button">Comentar</button>
 						{(mensaje != null) && <p>{mensaje}</p>}
 					</form>				  

@@ -2,8 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
-import LocalCard from "../component/datosLocal";
-import { DatosLocal } from "./datosLocal";
+import LocalCard from "../component/localCard";
 
 export const MisLocales = () => {
     const params = useParams()
@@ -28,7 +27,7 @@ export const MisLocales = () => {
             <h3>Listado de Locales</h3>
             <div className="row">
                 <div className="col-3">
-                    {locales && locales.map((local, index)=>{return <DatosLocal   name={local.name}
+                {locales && locales.map((local, index)=>{return <LocalCard name={local.name}
                                                                             key={local.id}
                                                                             id={local.id}
                                                                             index={index}
