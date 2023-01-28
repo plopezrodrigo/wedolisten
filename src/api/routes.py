@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Customer, Manager, Comment, Comercial_Place, Photos_Comments
+from api.models import db, User, Customer, Manager, Comment, Comercial_Place, Photos_Comments, Favourit
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -56,7 +56,7 @@ def list_Favourit():
 @jwt_required()
 def add_Favourit(id):
     user_id=get_jwt_identity()
-    customer = Customer.query.filter_by(user_id=user_id)
+    customer = Customer.query.filter_by(user_id=user_id).first()
     favourit = Favourit.query.filter_by(customer_id=customer.id, comercial_place_id=id).first()
     if not favourit :
         favourit = Favourit(customer_id=customer.id, comercial_place_id=id, state=True)
@@ -65,7 +65,7 @@ def add_Favourit(id):
     else :
         favourit.state = not favourit.state
         db.session.commit()
-    return jsonify(favourit), 200
+    return jsonify(favourit.serialize()), 200
 
 ''' 
 @api.route("/User/<id>", methods=["DELETE"])
@@ -256,8 +256,8 @@ def Favourit_add():
 def create_token():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
-    user = User.filter.query(email=email, password=password).first()
-    if user:
+    user = User.query.filter_by(email=email, password=password).first()
+    if not user:
         return jsonify({"msg": "Bad username or password"}), 401
 
     access_token = create_access_token(identity=user.id)

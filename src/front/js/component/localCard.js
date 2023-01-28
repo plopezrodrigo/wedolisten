@@ -19,6 +19,19 @@ const LocalCard = (props) => {
       });
   }, []);
 
+    const add_favourites = (id) => {
+      fetch(`${process.env.BACKEND_URL}/api/favourit/${id}`, { 
+          method: "POST",
+          headers: { Authorization: "Bearer " + sessionStorage.getItem("token"), "Content-Type": "application/json" },
+     })    
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        setLocales(response);
+      });
+    }
+
   return (
     <div className="col-12">
       <div className="card" id="localcard">
@@ -32,6 +45,7 @@ const LocalCard = (props) => {
                       {/*
           <button 
                     id="iconbutton"
+<<<<<<< HEAD
                     onClick={()=>{
                         store.favorites.includes(props.id)
                         ? actions.deleteFavourites(props.id)
@@ -47,6 +61,10 @@ const LocalCard = (props) => {
                     }
 
                   ></i>
+=======
+                    onClick={()=>{add_favourites(props.id)}
+                    }> a
+>>>>>>> Develop
                     </button>
                 */}
           <button className="btn btn-outline-success" type="submit" id="iconbutton">

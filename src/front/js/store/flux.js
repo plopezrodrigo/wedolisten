@@ -51,7 +51,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         try {
           const resp = await fetch(
-            "https://3001-adolfobg-babyfriendlyne-raelxgo90g2.ws-eu82.gitpod.io/api/token",
+            process.env.BACKEND_URL + "/api/token",
             opts
           );
           if (resp.status !== 200) {
@@ -61,8 +61,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           const data = await resp.json();
           console.log("this came form the backend", data);
-          sessionStorage.setItem("token", data.access_token);
-          setStore({ token: data.access_token });
+          sessionStorage.setItem("token", data.token);
+          setStore({ token: data.token });
           return true;
         } catch (error) {
           console.error("There has been an error login in");
