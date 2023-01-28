@@ -36,9 +36,9 @@ export const OpinionManager = () => {
 	}
 
 	useEffect (()=> {
-		//if (!store.token || store.token == "" || store.token == undefined) {
-		//	navigate("/login");
-		//}
+		if (store.token && store.token != "" && store.token != undefined) {
+			navigate.push("/login");
+		}
 
 		fetch(`${process.env.BACKEND_URL}/api/comercial-place/${params.id}`)
 		.then(response => {

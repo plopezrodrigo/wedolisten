@@ -32,10 +32,15 @@ def list_Comercial_Places():
             for comercial_place in comercial_places]
     return jsonify(data), 200
 
-@api.route('/comercial-place/<id>', methods=['GET'])
-def Comercial_Places_Detail(id):
-    comercial_place = Comercial_Place.query.filter_by(id=id).first()
-    return jsonify(comercial_place.serialize()), 200
+@api.route('/comercial-place/<user_id>', methods=['GET'])
+def Comercial_Places_Detail(user_id):
+    comercial_places = Comercial_Place.query.all()
+    # comercial_place = Comercial_Place.query.filter_by(user_id=user_id)
+
+    data = [comercial_place.serialize()
+            for comercial_place in comercial_places]
+
+    return jsonify(data), 200
 
 @api.route('/Comment', methods=['GET'])
 def list_Comments():

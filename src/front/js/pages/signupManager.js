@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "../../styles/home.css";
 import { useNavigate } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 export const SignupManager = () => {
 	const [formData, setFormData] = useState({tipo:"manager"});
 	const [mensaje, setMensaje] = useState(null);
 	const navigate = useNavigate();
-  
+	const { store, actions } = useContext(Context);
+
 	const handleChange = (evento) =>{
 		setFormData({...formData, [evento.target.name]: evento.target.value});
 	}
@@ -30,11 +32,9 @@ export const SignupManager = () => {
 	}
 
 	useEffect(()=>{
-		/*
-		if (store.token && store.token != "" && store.token != undefined){
-		  navigate("/");
+		if (store.token && store.token != "" && store.token != undefined) {
+			navigate.push("/login");
 		}
-		*/
 	  },[]);
 
 	return (

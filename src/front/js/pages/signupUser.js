@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import { useNavigate } from "react-router-dom";
 
@@ -8,6 +9,7 @@ export const SignupUser = () => {
 	const [formData, setFormData] = useState({tipo:"customer"});
 	const [mensaje, setMensaje] = useState(null);
 	const navigate = useNavigate();
+	const { store, actions } = useContext(Context);
   
 	const handleChange = (evento) =>{
 		setFormData({...formData, [evento.target.name]: evento.target.value});
@@ -38,11 +40,9 @@ export const SignupUser = () => {
 	}
 
 	useEffect(()=>{
-		/*
-		if (store.token && store.token != "" && store.token != undefined){
-		  navigate("/");
+		if (store.token && store.token != "" && store.token != undefined) {
+			navigate.push("/login");
 		}
-		*/
 	  },[]);
 
 	return (
