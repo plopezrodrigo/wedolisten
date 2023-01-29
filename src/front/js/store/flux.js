@@ -1,6 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
+      usertype: null,
       token: null,
       message: null,
       demo: [
@@ -24,11 +25,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       syncTokenFromSessionStore: () => {
         const token = sessionStorage.getItem("token");
+        const usertype = sessionStorage.getItem("usertype");
         console.log(
           "Application just loaded, synching the session storage token"
         );
         if (token && token != "" && token != undefined)
           setStore({ token: token });
+          setStore({ usertype: usertype });
       },
 
       logout: () => {
@@ -63,6 +66,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log("this came form the backend", data);
           sessionStorage.setItem("token", data.token);
           setStore({ token: data.token });
+          sessionStorage.setItem("usertype", data.usertype);
+          setStore({ usertype: data.usertype });
           return true;
         } catch (error) {
           console.error("There has been an error login in");

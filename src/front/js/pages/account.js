@@ -10,8 +10,10 @@ export const Account = () => {
       <div className="container fluid">
         <div className="row mb-5 pb-md-4 align-items-center">
           <h6 className="my-account-section-title ma-title" id="iconbutton">
-            Mi cuenta
+            Mi cuenta {store.usertype == "customer" ? "Eres un customer" : "Eres manager"}
           </h6>
+          {store.usertype == "customer" ? 
+          <button>kduhfufi</button> : ""}
           <p className="my-account-section-description" id="iconbutton">
             ¡Hola, Carlos Ortega! Aquí puedes ver tus locales favoritos, editar
             tus datos o realizar cualquier gestión
