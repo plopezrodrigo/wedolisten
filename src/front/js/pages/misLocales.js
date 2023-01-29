@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
 import LocalCard from "../component/localCard";
 
 export const MisLocales = () => {
@@ -18,7 +17,7 @@ export const MisLocales = () => {
         .then(response => {
             return response.json()
         }).then(response => {
-            setLocales(response)    
+            setLocales(response)     
         })
     }, [])
 
@@ -27,18 +26,24 @@ export const MisLocales = () => {
             <h3>Listado de Locales</h3>
             <div className="row">
                 <div className="col-3">
-                {locales && locales.map((local, index)=>{return <LocalCard name={local.name}
-                                                                            key={local.id}
-                                                                            id={local.id}
-                                                                            index={index}
-                                                                            address={local.address}
-                                                                            description={local.description}
-                                                                            email={local.email}
-                                                                            telf={local.telf}
-                                                                            location={local.location}
-                                                                            url={local.url}
-                                                                />
-                                            })
+                {locales && locales.map((local, index)=>{    
+                        return <>
+                                    <LocalCard name={local.name}
+                                                key={local.id}
+                                                id={local.id}
+                                                index={index}
+                                                address={local.address}
+                                                description={local.description}
+                                                email={local.email}
+                                                telf={local.telf}
+                                                location={local.location}
+                                                url={local.url}
+                                    />
+                                    <Link to={`/datosLocal/${local.user_id}`} className="btn btn-lg btn-outline-primary mb-3" id={`button${local.id}`}>
+                                    Modificar
+                                    </Link>      
+                                </>
+                        })
                     }
                 </div>
             </div>
