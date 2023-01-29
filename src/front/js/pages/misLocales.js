@@ -27,22 +27,22 @@ export const MisLocales = () => {
             <h3>Listado de Locales</h3>
             <div className="row">
                 <div>
-                    <table class="table table-striped">
+                    <table className="table table-striped">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col" colspan="2">Nombre</th>
-                                <th scope="col">Acción</th>
+                                <th key="th1" scope="col">#</th>
+                                <th key="th2" scope="col" colSpan="2">Nombre</th>
+                                <th key="th3" scope="col">Acción</th>
                             </tr>
                         </thead>
                         <tbody>
                             {locales && locales.map((local, index)=>{    
                                 return  <>
                                             {/*<LocalCard name={local.name} key={local.id} id={local.id} index={index} address={local.address} description={local.description} email={local.email} telf={local.telf} location={local.location} url={local.url} />*/}
-                                            <tr>
-                                                <th scope="row">{local.id} - {local.user_id}</th>
-                                                <td colspan="2">{local.name}</td>
-                                                <td><a href={`/datosLocal/${local.user_id}`} className="btn btn-lg btn-outline-primary mb-3"><i className="far fa-trash-alt"/></a></td>
+                                            <tr key={index}>
+                                                <td key={`td1-${index}`} scope="row">{local.id} - {local.user_id}</td>
+                                                <td key={`td2-${index}`} colSpan="2">{local.name}</td>
+                                                <td key={`td3-${index}`}><a href={`/datosLocal/${local.user_id}`} className="btn btn-lg btn-outline-primary mb-3" key={`a-${index}`}><i className="far fa-trash-alt" key={`i-${index}`}/></a></td>
                                             </tr>
                                         </>
                                 })
