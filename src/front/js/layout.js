@@ -51,7 +51,7 @@ const Layout = () => {
                         <Route element={<LocalDetail/>} path="/localDetail/:id"/>
                         <Route element={<OpinionUser/>} path="/opinionUser/:id_local/:id_comment" />
                         <Route element={<OpinionManager/>} path="/opinionManager/:id_local/:id_comment" />
-                        <Route element={<MisLocales />} path="/misLocales/:user_id" />
+                        <Route element={<MisLocales />} path="/misLocales" />
                         <Route element={<DatosLocal />} path="/datosLocal/:local_id" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>

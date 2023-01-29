@@ -32,15 +32,22 @@ def list_Comercial_Places():
             for comercial_place in comercial_places]
     return jsonify(data), 200
 
-@api.route('/comercial-place/<user_id>', methods=['GET'])
-def Comercial_Places_of_user(user_id):
-    comercial_places = Comercial_Place.query.all()
-    # comercial_place = Comercial_Place.query.filter_by(user_id=user_id)
+@api.route('/comercial-place-user', methods=['GET'])
+@jwt_required()
+def Comercial_Places_user():
+    userId = get_jwt_identity()
+    print('----------------------------------')
+    print(userId)
+    print('----------------------------------')
+    #comercial_places = Comercial_Place.query.all()
+    comercial_places = Comercial_Place.query.filter_by(user_id = userId)
 
-    data = [comercial_place.serialize()
-            for comercial_place in comercial_places]
-
-    return jsonify(data), 200
+    if comercial_places:
+        data = [comercial_place.serialize()
+                for comercial_place in comercial_places]
+        return jsonify(data), 200
+    else:
+        return jsonify({"msg": "No existen datos"}), 402
 
 @api.route('/a_comercial-place/<comercial_place_id>', methods=['GET'])
 def Comercial_Places_Detail(comercial_place_id):
