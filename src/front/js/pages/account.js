@@ -7,55 +7,69 @@ export const Account = () => {
   const { store, actions } = useContext(Context);
   return (
     <form>
-      <div className="container fluid">
-        <div className="row mb-5 pb-md-4 align-items-center">
-          <h6 className="my-account-section-title ma-title" id="iconbutton">
-            Mi cuenta {store.usertype == "customer" ? "Eres un customer" : "Eres manager"}
-          </h6>
-          {store.usertype == "customer" ? 
-          <button>kduhfufi</button> : ""}
-          <p className="my-account-section-description" id="iconbutton">
-            ¡Hola, Carlos Ortega! Aquí puedes ver tus locales favoritos, editar
-            tus datos o realizar cualquier gestión
-          </p>
-        </div>
-        <div className="col-6">
-          <div className="ma-home-sections">
-            <p className="text ma-home-section">
-              <a className="link" href="">
-                <i className="fas fa-user-edit" id="iconaccount" />
-                <strong className="strong">Mis datos</strong>
-              </a>
-              <span className="description">Edita tus datos personales.</span>
-            </p>
-            <p className="text ma-home-section">
-              <a className="link" href="">
-                <i className="fas fa-star" id="iconaccount" />
-                <strong className="strong">Mis Favoritos</strong>
-              </a>
-              <span className="description">
-                Consulta tus locales añadidos a favoritos.
-              </span>
-               
-            </p>
-            <p className="text ma-home-section">
-              <a className="link" href="">
-                <i className="fas fa-sign-out-alt" id="iconaccount" />
-                <strong className="strong">Cerrar sesión</strong>
-              </a>
-              <span className="description">Cierra tu sesión.</span>
-            </p>
-          </div>
-        </div>
-        <div className="col-6">
-          <div className="imagen">
-            <img
-              src={imagen}
-              className="card-img-top"
-              alt=""
-              width="500"
-              height="500"
-            />
+      <div className="vh-100 gradient-custom">
+        <div className="container text-center">
+          <h4 className="my-account-section-title ma-title" id="iconbutton">
+            Mi cuenta 
+          </h4>
+          <p className="my-account-section-description mb-0">¡Hola, Carlos Ortega!</p>
+          <p className="my-account-section-description mt-0 mb-4">Aquí puedes ver tus locales favoritos, editar tus datos o realizar cualquier gestión</p>
+          <div className="row d-flex justify-content-center h-100">
+            <div className="col-12 col-md-8 col-lg-6 col-xl-5">
+              <div className="card" id="card">
+                <div className="ma-home-sections">
+                    <p className="text ma-home-section mt-3 mb-3">
+                    <a className="link" href="">
+                      <i className="fas fa-user-edit" id="iconaccount" />
+                      <strong className="strong"> Mis datos</strong>
+                    </a>
+                    <p className="description">Edita tus datos personales.</p>
+                    </p>
+                    {store.usertype == "customer" ? 
+                      <p className="text ma-home-section">
+                        <a className="link" href="">
+                          <i className="fas fa-star" id="iconaccount" />
+                          <strong className="strong"> Mis Favoritos</strong>
+                        </a>
+                        <p className="description">
+                          Consulta tus locales añadidos a favoritos.
+                        </p>
+                      </p>
+                      :
+                      <p className="text ma-home-section">
+                        <a className="link" href="">
+                          <i className="fas fa-star" id="iconaccount" />
+                          <strong className="strong"> Mis Comentarios</strong>
+                        </a>
+                        <p className="description">
+                          Consulta los comentarios de tus clientes.
+                        </p>
+                      </p>
+                      }
+                      {store.usertype == "manager" ? 
+                      <p className="text ma-home-section">
+                        <a className="link" href="">
+                          <i className="fas fa-star" id="iconaccount" />
+                          <strong className="strong"> Mis Locales</strong>
+                        </a>
+                        <p className="description">
+                          Consulta tus locales.
+                        </p>
+                      </p>
+                      :
+                      ""
+                      }
+                    <p className="text ma-home-section">
+                    <a className="link" href="">
+                      <i className="fas fa-sign-out-alt" id="iconaccount" />
+                      <strong className="strong"> Cerrar sesión</strong>
+                    </a>
+                    <p className="description">Cierra tu sesión.</p>
+                    </p>
+
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
