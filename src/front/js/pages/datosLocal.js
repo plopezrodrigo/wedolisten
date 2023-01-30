@@ -2,12 +2,31 @@ import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
-import imagen from "../../img/logo.png";
+
 
 export const DatosLocal = () => {
 	const params = useParams()
 	const [local, setLocal] = useState({})
-	const [formData, setFormData] =  useState({tipo:"customer", user_id:1, comercial_place_id:params.id_local, comment_id: params.id_comment});
+	const [formData, setFormData] = useState({"image_url": local.image_url,
+											  "name"            : local.name,
+											  "address"         : local.address,
+											  "url"             : local.url,
+											  "image_url"       : local.image_url,
+											  "telf"            : local.telf,
+											  "email"           : local.email,
+											  "location"        : local.location,
+											  "description"     : local.description,
+											  "cambiador"       : local.cambiador,
+											  "trona"           : local.trona,
+											  "accessible_carrito" : local.accessible_carrito,
+											  "espacio_carrito"    : local.espacio_carrito,
+											  "ascensor"           : local.ascensor,
+											  "productos_higiene"  : local.productos_higiene
+									});
+
+
+
+
 	const [mensaje, setMensaje] = useState(null); 
 	const navigate = useNavigate();
 	const { store, actions } = useContext(Context);
@@ -31,25 +50,20 @@ export const DatosLocal = () => {
 		setFormData({...formData, [evento.target.name]: evento.target.value});
 	}
 
-	const handleSubmit = (evento)=>{
+	const handleSubmit = async (evento)=>{
 		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
 		console.log("Comercial_Place actualizar", formData);
 
-		fetch(process.env.BACKEND_URL + "/api/Comercial_Place", 
+		const resp = await fetch(process.env.BACKEND_URL + "/api/Comercial_Place", 
 			{method: 'POST',
 			headers:{"Content-Type": "application/json",
 					 "Authorization": 'Bearer '+ sessionStorage.getItem("token")
 					},
 			body: JSON.stringify(formData),
-			})
-		.then(response => { 
-			if (response.status == 200){ 
-				navigate("/misLocales")
-			}else{  
-				setMensaje(response["msg"])
-			}
-			return response.json(); 
-		})
+			});
+
+		if (resp.ok) return navigate("/misLocales");
+		else         return setMensaje(await resp.json());  
 	}
 
 	return (
@@ -82,7 +96,6 @@ export const DatosLocal = () => {
 						<div className="form-group">
 							<label htmlFor="Inputurl1">Información de contacto</label>
 							<input type="text" name="url" className="form-control" id="Inputurl1" value={local.url} aria-describedby="urlHelp" placeholder="url" onChange={handleChange} />
-	                        <br/>
 							<input type="text" name="email" required className="form-control" id="InputEmail1" value={local.email} aria-describedby="emailHelp" placeholder="email" onChange={handleChange} />
 							<input type="text" name="telf" required className="form-control" id="InputTelf1" value={local.telf} aria-describedby="TelfHelp" placeholder="Teléfono" onChange={handleChange} />
 							<input type="text" name="address" required className="form-control" id="InputAddress1" value={local.address} ria-describedby="AddressHelp" placeholder="Dirección" onChange={handleChange} />
@@ -110,7 +123,7 @@ export const DatosLocal = () => {
 						</div>
                         <br/>
 
-						<button type="submit"  id="button">Comentar</button>
+						<button type="submit"  id="button">Guardar</button>
 						{(mensaje != null) && <p>{mensaje}</p>}
 					</form>				  
 				</div>
