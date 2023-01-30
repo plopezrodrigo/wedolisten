@@ -36,9 +36,7 @@ def list_Comercial_Places():
 @jwt_required()
 def Comercial_Places_user():
     userId = get_jwt_identity()
-    print('----------------------------------')
-    print(userId)
-    print('----------------------------------')
+
     #comercial_places = Comercial_Place.query.all()
     comercial_places = Comercial_Place.query.filter_by(user_id = userId)
 
@@ -49,18 +47,16 @@ def Comercial_Places_user():
     else:
         return jsonify({"msg": "No existen datos"}), 402
 
-@api.route('/a_comercial-place/<comercial_place_id>', methods=['GET'])
+@api.route('/comercial-place/<comercial_place_id>', methods=['GET'])
 def Comercial_Places_Detail(comercial_place_id):
-    comercial_places = Comercial_Place.query.all()
-    print('----------------------------------')
-    print(comercial_place_id)
-    print('----------------------------------')
-    #data = Comercial_Place.query.filter_by(id=comercial_place_id)
+    comercial_places = Comercial_Place.query.filter_by(id=comercial_place_id)
 
-    data = [comercial_place.serialize()
+    if comercial_places:
+        data = [comercial_place.serialize()
             for comercial_place in comercial_places]
-
-    return jsonify(data), 200
+        return jsonify(data), 200
+    else:
+        return jsonify({"msg": "No existen datos"}), 402
 
 @api.route('/Comment', methods=['GET'])
 def list_Comments():
@@ -152,9 +148,11 @@ def signup():
 
 
 @api.route("/Comercial_Place", methods=["POST"])
+@jwt_required()
 def Comercial_Place_add():
+    userId = get_jwt_identity()
     Place = Comercial_Place(
-        user_id=request.json['user_id'],
+        user_id=userId,
         user=request.json['user'],
         name=request.json['name'],
         address=request.json['address'],

@@ -12,43 +12,45 @@ export const DatosLocal = () => {
 	const navigate = useNavigate();
 	const { store, actions } = useContext(Context);
   
+    const miUseEffect = async () => {
+        const resp = await fetch(`${process.env.BACKEND_URL}/api/comercial-place/${params.local_id}`)
+
+        if (resp.ok) return await resp.json();
+        else         return setMensaje(await resp.json());  
+    }
+
+    useEffect (()=> {
+		if (store.token && store.token != "" && store.token != undefined) {
+			navigate.push("/login"); 
+		}
+
+        miUseEffect().then(resp => setLocal(resp[0]))
+    }, [])
+
 	const handleChange = (evento) =>{
 		setFormData({...formData, [evento.target.name]: evento.target.value});
 	}
 
 	const handleSubmit = (evento)=>{
 		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
-		console.log("Opinion User", formData, store.token);
+		console.log("Comercial_Place actualizar", formData);
 
-		fetch(process.env.BACKEND_URL + "/api/Comment", 
+		fetch(process.env.BACKEND_URL + "/api/Comercial_Place", 
 			{method: 'POST',
-			headers:{"Content-Type": "application/json"},
+			headers:{"Content-Type": "application/json",
+					 "Authorization": 'Bearer '+ sessionStorage.getItem("token")
+					},
 			body: JSON.stringify(formData),
 			})
 		.then(response => { 
 			if (response.status == 200){ 
-				navigate("/")
+				navigate("/misLocales")
 			}else{  
 				setMensaje(response["msg"])
 			}
 			return response.json(); 
 		})
 	}
-
-	useEffect (()=> {
-		if (store.token && store.token != "" && store.token != undefined) {
-			navigate.push("/login"); 
-		}
-		console.log("comercial_place1", params.local_id);    
-
-		fetch(`${process.env.BACKEND_URL}/api/a_comercial-place/${params.local_id}`)
-		.then(response => {
-			return response.json()
-		}).then(resp => {
-			setLocal(resp)
-			console.log("comercial_place --> ", local, resp);     
-		})
-	}, [])
 
 	return (
 		<div className="container fluid align-center">
@@ -62,24 +64,18 @@ export const DatosLocal = () => {
                     <div className="col-4 py-3 px-0 mx-0">
                         <img src={local.image_url} className="alinear-derecha" alt="" />
                     </div>
-                    <div className="col-4 py-5 px-0 mx-0">
-                        <p className="my-0"><strong>{local.name} ({params.id_local} - {params.id_comment})</strong></p>
-                        <p className="my-0">{local.address} </p>
-                        <p className="my-0">{local.telf} - {local.email}</p>
-                        <p className="my-0">{local.url}</p>
-                    </div>
                 </div>
 
 				<div className="col-md-12">
 					<form onSubmit={handleSubmit}>
 						<div className="form-group">
 							<label htmlFor="InputEmail1">Nombre del local</label>
-							<input type="text" name="name" required className="form-control" id="InputName1" aria-describedby="nameHelp" placeholder="Nombre del local" onChange={handleChange} />
+							<input type="text" name="name" value={local.name} required className="form-control" id="InputName1" aria-describedby="nameHelp" placeholder="Nombre del local" onChange={handleChange} />
 						</div>
                         <br/>
 						<div className="form-group">
 							<h5>Descripción</h5>
-							<textarea name="description" required rows="3" cols="100" onChange={handleChange} ></textarea>
+							<textarea name="description" value={local.description} required rows="3" cols="100" onChange={handleChange} ></textarea>
 						</div>
                         <br/>
 
@@ -96,14 +92,19 @@ export const DatosLocal = () => {
 						<div className="form-group">
 							<input type="radio" name="trona" className="form-check-input" id="InputTrona1" aria-describedby="tronaHelp" value={local.trona} onChange={handleChange} />
 							<label htmlFor="InputTrona1">trona</label><br/>
+
                             <input type="radio" name="cambiador" className="form-check-input" id="InputCambiador2" aria-describedby="cambiadorHelp" value={local.cambiador} onChange={handleChange} />
                             <label htmlFor="InputCambiador2">cambiador</label><br/>
-                            <input type="radio" name="accessible_carrito" className="form-check-input" id="InputAccessible_carrito3" aria-describedby="visitaHelp" value={local.accessible_carrito} onChange={handleChange} />
+
+                            <input type="radio" name="accessible_carrito" className="form-check-input" id="InputAccessible_carrito3" aria-describedby="accessible_carritoHelp" value={local.accessible_carrito} onChange={handleChange} />
                             <label htmlFor="InputAccessible_carrito3">accessible_carrito</label><br/>
+
                             <input type="radio" name="espacio_carrito" className="form-check-input" id="InputEspacio_carrito3" aria-describedby="espacio_carritoHelp" value={local.espacio_carrito} onChange={handleChange} />
                             <label htmlFor="InputEspacio_carrito3">espacio_carrito</label><br/>
+
                             <input type="radio" name="ascensor" className="form-check-input" id="InputAscensor5" aria-describedby="ascensorHelp" value={local.ascensor} onChange={handleChange} />
                             <label htmlFor="InputAscensor5">ascensor</label><br/>
+
                             <input type="radio" name="productos_higiene" className="form-check-input" id="InputProductos_higiene5" aria-describedby="productos_higieneHelp" value={local.productos_higiene} onChange={handleChange} />
                             <label htmlFor="InputProductos_higiene5">productos_higiene</label><br/>
 						</div>

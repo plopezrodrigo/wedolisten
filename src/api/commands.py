@@ -113,6 +113,7 @@ def setup_commands(app):
         cp.name = 'Nombre Comercial_Place'
         cp.description = 'Descripción Comercial_Place'
         cp.address = 'address'
+        db.session.add(cp)
         print("manager: ", cp.name, " Comercial_Place.")        
         
         cp = Comercial_Place()
@@ -120,6 +121,7 @@ def setup_commands(app):
         cp.name = 'Nombre Comercial_Place 2'
         cp.description = 'Descripción Comercial_Place 2'
         cp.address = 'address 2'
+        db.session.add(cp)
         print("manager: ", cp.name, " Comercial_Place.")
 
         cp = Comercial_Place()
@@ -127,8 +129,10 @@ def setup_commands(app):
         cp.name = 'Prueba a no visualizar'
         cp.description = 'Prueba a no visualizar como local del manager 2'
         cp.address = 'address 3'
-        print("manager: ", cp.name, " Comercial_Place.")
-
         db.session.add(cp)
+        print("manager: ", cp.name, " Comercial_Place.")
+        print("--------------------------------------------------------")
+        print("")
+
         db.session.commit()
         
