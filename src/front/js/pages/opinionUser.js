@@ -18,7 +18,7 @@ export const OpinionUser = () => {
 
 	const handleSubmit = (evento)=>{
 		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
-		console.log("Opinion User", formData);
+		console.log("Opinion User", formData, store.token);
 
 		fetch(process.env.BACKEND_URL + "/api/Comment", 
 			{method: 'POST',
@@ -36,9 +36,9 @@ export const OpinionUser = () => {
 	}
 
 	useEffect (()=> {
-		//if (!store.token || store.token == "" || store.token == undefined) {
-		//	navigate("/login");
-		//}
+		if (store.token && store.token != "" && store.token != undefined) {
+			navigate.push("/login");
+		}
 
 		fetch(`${process.env.BACKEND_URL}/api/comercial-place/${params.id_local}`)
 		.then(response => {

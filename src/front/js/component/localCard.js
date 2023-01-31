@@ -42,11 +42,31 @@ const LocalCard = (props) => {
            />
         <div className="card-body">
           <h5 className="card-title">{props.name}</h5>
+                      {/*
           <button 
                     id="iconbutton"
+<<<<<<< HEAD
+                    onClick={()=>{
+                        store.favorites.includes(props.id)
+                        ? actions.deleteFavourites(props.id)
+                        : actions.addFavourites(props.id)
+                    }
+                    }>
+                    <i 
+                    className=
+                    {
+                        store.favorites.includes(props.id)
+                        ?"fas fa-heart-o"
+                        :"fas fa-heart"
+                    }
+
+                  ></i>
+=======
                     onClick={()=>{add_favourites(props.id)}
                     }> a
+>>>>>>> Develop
                     </button>
+                */}
           <button className="btn btn-outline-success" type="submit" id="iconbutton">
           <i className="far fa-comment" />
           </button>
