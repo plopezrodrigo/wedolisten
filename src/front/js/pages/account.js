@@ -19,10 +19,12 @@ export const Account = () => {
               <div className="card" id="card">
                 <div className="ma-home-sections">
                     <p className="text ma-home-section mt-3 mb-3">
-                    <a className="link" href="">
+                    <Link to="/data">
+                    <a>
                       <i className="fas fa-user-edit" id="iconaccount" />
                       <strong className="strong"> Mis datos</strong>
                     </a>
+                    </Link>
                     <p className="description">Edita tus datos personales.</p>
                     </p>
                     {store.usertype == "customer" ? 
@@ -37,10 +39,12 @@ export const Account = () => {
                       </p>
                       :
                       <p className="text ma-home-section">
-                        <a className="link" href="">
-                          <i className="fas fa-star" id="iconaccount" />
-                          <strong className="strong"> Mis Comentarios</strong>
-                        </a>
+                        <Link to="/comments">
+                          <a>
+                            <i className="fas fa-star" id="iconaccount" />
+                            <strong className="strong"> Mis Comentarios</strong>
+                          </a>
+                        </Link>
                         <p className="description">
                           Consulta los comentarios de tus clientes.
                         </p>
@@ -48,10 +52,12 @@ export const Account = () => {
                       }
                       {store.usertype == "manager" ? 
                       <p className="text ma-home-section">
-                        <a className="link" href="">
+                        <Link to="/misLocales">
+                        <a>
                           <i className="fas fa-star" id="iconaccount" />
                           <strong className="strong"> Mis Locales</strong>
                         </a>
+                        </Link>
                         <p className="description">
                           Consulta tus locales.
                         </p>
