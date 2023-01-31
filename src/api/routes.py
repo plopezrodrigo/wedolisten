@@ -32,10 +32,31 @@ def list_Comercial_Places():
             for comercial_place in comercial_places]
     return jsonify(data), 200
 
-@api.route('/comercial-place/<id>', methods=['GET'])
-def Comercial_Places_Detail(id):
-    comercial_place = Comercial_Place.query.filter_by(id=id).first()
-    return jsonify(comercial_place.serialize()), 200
+@api.route('/comercial-place-user', methods=['GET'])
+@jwt_required()
+def Comercial_Places_user():
+    userId = get_jwt_identity()
+
+    #comercial_places = Comercial_Place.query.all()
+    comercial_places = Comercial_Place.query.filter_by(user_id = userId)
+
+    if comercial_places:
+        data = [comercial_place.serialize()
+                for comercial_place in comercial_places]
+        return jsonify(data), 200
+    else:
+        return jsonify({"msg": "No existen datos"}), 402
+
+@api.route('/comercial-place/<comercial_place_id>', methods=['GET'])
+def Comercial_Places_Detail(comercial_place_id):
+    comercial_places = Comercial_Place.query.filter_by(id=comercial_place_id)
+
+    if comercial_places:
+        data = [comercial_place.serialize()
+            for comercial_place in comercial_places]
+        return jsonify(data), 200
+    else:
+        return jsonify({"msg": "No existen datos"}), 402
 
 @api.route('/Comment', methods=['GET'])
 def list_Comments():
@@ -127,23 +148,41 @@ def signup():
 
 
 @api.route("/Comercial_Place", methods=["POST"])
+@jwt_required()
 def Comercial_Place_add():
+    userId = get_jwt_identity()
     Place = Comercial_Place(
-        user_id=request.json['user_id'],
-        user=request.json['user'],
-        name=request.json['name'],
-        address=request.json['address'],
-        url=request.json['url'],
-        telf=request.json['telf'],
-        email=request.json['email'],
-        location=request.json['location'],
-        description=request.json['description'],
-        cambiador=request.json['cambiador'],
-        trono=request.json['trono'],
-        childs=request.json['childs'],
+        user_id         = userId,
+        #user           = data.get('user'),
+        name            = data.get('name'),
+        address         = data.get('address'),
+        url             = data.get('url'),
+        image_url       = data.get('image_url'),
+        telf            = data.get('telf'),
+        email           = data.get('email'),
+        location        = data.get('location'),
+        description     = data.get('description'),
+        cambiador       = data.get('cambiador'),
+        trona           = data.get('trona'),
+        accessible_carrito = data.get('accessible_carrito'),
+        espacio_carrito    = data.get('espacio_carrito'),
+        ascensor           = data.get('ascensor'),
+        productos_higiene  = data.get('productos_higiene')
+
     )
     db.session.add(Place)
     db.session.commit()
+
+
+
+
+
+
+
+
+
+
+
 
 
 @api.route("/Rate_Customer", methods=["POST"])

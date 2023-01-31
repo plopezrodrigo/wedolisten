@@ -11,8 +11,12 @@ export const Home = () => {
 
   return (
     <div className="container">
+     {!(store.token && store.token != "" && store.token != undefined) &&
       <UserInfo />
+     }
+     {!(store.token && store.token != "" && store.token != undefined) &&
       <ManagerInfo />
+     }
       <h1 className="text-center" id="tituloHome">Lee lo que otros están opinando...</h1>
       <div className="container fluid">
         <div className="row align-items-start">

@@ -78,6 +78,7 @@ def setup_commands(app):
         db.session.add(customer)
         db.session.commit()
         print("customer: ", customer.name, " created.")
+        cliente = customer.user_id
 
         print("")
         print("--------------------------------------------------------")
@@ -106,11 +107,32 @@ def setup_commands(app):
         print("--------------------------------------------------------")
         print("")
         print("Creating test Local")
+        
         cp = Comercial_Place()
         cp.user_id = user.id
         cp.name = 'Nombre Comercial_Place'
         cp.description = 'Descripción Comercial_Place'
         cp.address = 'address'
         db.session.add(cp)
-        db.session.commit()
+        print("manager: ", cp.name, " Comercial_Place.")        
+        
+        cp = Comercial_Place()
+        cp.user_id = user.id
+        cp.name = 'Nombre Comercial_Place 2'
+        cp.description = 'Descripción Comercial_Place 2'
+        cp.address = 'address 2'
+        db.session.add(cp)
         print("manager: ", cp.name, " Comercial_Place.")
+
+        cp = Comercial_Place()
+        cp.user_id = cliente
+        cp.name = 'Prueba a no visualizar'
+        cp.description = 'Prueba a no visualizar como local del manager 2'
+        cp.address = 'address 3'
+        db.session.add(cp)
+        print("manager: ", cp.name, " Comercial_Place.")
+        print("--------------------------------------------------------")
+        print("")
+
+        db.session.commit()
+        
