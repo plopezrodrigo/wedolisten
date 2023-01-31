@@ -16,12 +16,12 @@ export const DatosLocal = () => {
 											  "email"           : local.email,
 											  "location"        : local.location,
 											  "description"     : local.description,
-											  "cambiador"       : local.cambiador,
-											  "trona"           : local.trona,
-											  "accessible_carrito" : local.accessible_carrito,
-											  "espacio_carrito"    : local.espacio_carrito,
-											  "ascensor"           : local.ascensor,
-											  "productos_higiene"  : local.productos_higiene
+											  "cambiador"       : (local.cambiador ? true : false),
+											  "trona"           : (local.trona ? true : false),
+											  "accessible_carrito" : (local.accessible_carrito ? true : false),
+											  "espacio_carrito"    : (local.espacio_carrito ? true : false),
+											  "ascensor"           : (local.ascensor ? true : false),
+											  "productos_higiene"  : (local.productos_higiene ? true : false)
 									});
 
 	const [mensaje, setMensaje] = useState(null); 
@@ -94,7 +94,8 @@ export const DatosLocal = () => {
 				<div className="col-md-12">
 					<form onSubmit={handleSubmit}>
 						<div className="form-group">
-							{miImput("text", "name", local.name, "Nombre local", true, "form-control", "Nombre del local")}
+						<label htmlFor="InputEmail1">Nombre del local</label>
+  							<input type="text" name="name" value={local.name} required className="form-control" id="InputName1" aria-describedby="nameHelp" placeholder="Nombre del local" onChange={handleChange} />
 						</div>
                         <br/>
 						<div className="form-group">
@@ -104,22 +105,32 @@ export const DatosLocal = () => {
                         <br/>
 
 						<div className="form-group">
-							{miImput("text", "url", local.url, "url", false, "form-control", "Información de contacto")}
-							{miImput("text", "email", local.email, "email", false, "form-control")}
-							{miImput("text", "telf", local.telf, "teléfono", false, "form-control")}
-							{miImput("text", "address", local.address, "Dirección postal", false, "form-control")}
-							{miImput("text", "location", local.location, "location", false, "form-control")}
+							<label htmlFor="Inputurl1">Información de contacto</label>
+							<input type="text" name="url" className="form-control" id="Inputurl1" value={local.url} aria-describedby="urlHelp" placeholder="url" onChange={handleChange} />
+							<input type="text" name="email" required className="form-control" id="InputEmail1" value={local.email} aria-describedby="emailHelp" placeholder="email" onChange={handleChange} />
+							<input type="text" name="telf" required className="form-control" id="InputTelf1" value={local.telf} aria-describedby="TelfHelp" placeholder="Teléfono" onChange={handleChange} />
+							<input type="text" name="address" required className="form-control" id="InputAddress1" value={local.address} ria-describedby="AddressHelp" placeholder="Dirección" onChange={handleChange} />
+							<input type="text" name="location" className="form-control" id="InputLocation1" value={local.location} aria-describedby="locationHelp" placeholder="Localización" onChange={handleChange} />
 						</div>
                         <br/>
 						<div className="form-group">
-							{miImput("radio", "trona", local.trona, "trona", false, "form-check-input")}						
-							<label htmlFor="Inputtrona">trona</label><br/>
+							<input type="checkbox" name="trona" className="form-check-input" id="InputTrona1" aria-describedby="tronaHelp" onChange={handleChange} />
+							<label htmlFor="InputTrona1">trona</label><br/>
 
-							{miImput("radio", "cambiador", local.cambiador, "cambiador", false, "form-check-input", "cambiador")}<br/>
-							{miImput("radio", "accessible_carrito", local.accessible_carrito, "accessible_carrito", false, "form-check-input", "accessible_carrito")}<br/>
-							{miImput("radio", "espacio_carrito", local.espacio_carrito, "espacio_carrito", false, "form-check-input", "espacio_carrito")}<br/>			
-							{miImput("radio", "ascensor", local.ascensor, "ascensor", false, "form-check-input", "ascensor")}<br/>
-							{miImput("radio", "productos_higiene", local.productos_higiene, "productos_higiene", false, "form-check-input", "productos_higiene")}<br/>
+                            <input type="checkbox" name="cambiador" className="form-check-input" id="InputCambiador2" aria-describedby="cambiadorHelp" value={local.cambiador} onChange={handleChange} />
+                            <label htmlFor="InputCambiador2">cambiador</label><br/>
+
+                            <input type="checkbox" name="accessible_carrito" className="form-check-input" id="InputAccessible_carrito3" aria-describedby="accessible_carritoHelp" value={local.accessible_carrito} onChange={handleChange} />
+                            <label htmlFor="InputAccessible_carrito3">accessible_carrito</label><br/>
+
+                            <input type="checkbox" name="espacio_carrito" className="form-check-input" id="InputEspacio_carrito3" aria-describedby="espacio_carritoHelp" value={local.espacio_carrito} onChange={handleChange} />
+                            <label htmlFor="InputEspacio_carrito3">espacio_carrito</label><br/>
+
+                            <input type="checkbox" name="ascensor" className="form-check-input" id="InputAscensor5" aria-describedby="ascensorHelp" value={local.ascensor} onChange={handleChange} />
+                            <label htmlFor="InputAscensor5">ascensor</label><br/>
+
+                            <input type="checkbox" name="productos_higiene" className="form-check-input" id="InputProductos_higiene5" aria-describedby="productos_higieneHelp" value={local.productos_higiene} onChange={handleChange} />
+                            <label htmlFor="InputProductos_higiene5">productos_higiene</label><br/>
 						</div>
                         <br/>
 
@@ -174,5 +185,20 @@ export const DatosLocal = () => {
                             <label htmlFor="InputProductos_higiene5">productos_higiene</label><br/>
 
  * 
- * 
+ * {miImput("text", "url", local.url, "url", false, "form-control", "Información de contacto")}
+							{miImput("text", "email", local.email, "email", false, "form-control")}
+							{miImput("text", "telf", local.telf, "teléfono", false, "form-control")}
+							{miImput("text", "address", local.address, "Dirección postal", false, "form-control")}
+							{miImput("text", "location", local.location, "location", false, "form-control")}
+						</div>
+                        <br/>
+						<div className="form-group">
+							{miImput("radio", "trona", local.trona, "trona", false, "form-check-input")}						
+							<label htmlFor="Inputtrona">trona</label><br/>
+
+							{miImput("radio", "cambiador", local.cambiador, "cambiador", false, "form-check-input", "cambiador")}<br/>
+							{miImput("radio", "accessible_carrito", local.accessible_carrito, "accessible_carrito", false, "form-check-input", "accessible_carrito")}<br/>
+							{miImput("radio", "espacio_carrito", local.espacio_carrito, "espacio_carrito", false, "form-check-input", "espacio_carrito")}<br/>			
+							{miImput("radio", "ascensor", local.ascensor, "ascensor", false, "form-check-input", "ascensor")}<br/>
+							{miImput("radio", "productos_higiene", local.productos_higiene, "productos_higiene", false, "form-check-input", "productos_higiene")}<br/>
  */

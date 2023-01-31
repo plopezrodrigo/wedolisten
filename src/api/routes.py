@@ -153,21 +153,21 @@ def Comercial_Place_add():
     userId = get_jwt_identity()
     Place = Comercial_Place(
         user_id         = userId,
-        #user           = data.get('user'),
-        name            = data.get('name'),
-        address         = data.get('address'),
-        url             = data.get('url'),
-        image_url       = data.get('image_url'),
-        telf            = data.get('telf'),
-        email           = data.get('email'),
-        location        = data.get('location'),
-        description     = data.get('description'),
-        cambiador       = data.get('cambiador'),
-        trona           = data.get('trona'),
-        accessible_carrito = data.get('accessible_carrito'),
-        espacio_carrito    = data.get('espacio_carrito'),
-        ascensor           = data.get('ascensor'),
-        productos_higiene  = data.get('productos_higiene')
+        #user           = request.json.get('user'),
+        name            = request.json.get('name'),
+        address         = request.json.get('address'),
+        url             = request.json.get('url'),
+        image_url       = request.json.get('image_url'),
+        telf            = request.json.get('telf'),
+        email           = request.json.get('email'),
+        location        = request.json.get('location'),
+        description     = request.json.get('description'),
+        cambiador       = true, # request.json.get('cambiador'),
+        trona           = true, # request.json.get('trona'),
+        accessible_carrito = true, # request.json.get('accessible_carrito'),
+        espacio_carrito    = true, # request.json.get('espacio_carrito'),
+        ascensor           = true, # request.json.get('ascensor'),
+        productos_higiene  = true, # request.json.get('productos_higiene')
 
     )
     db.session.add(Place)
