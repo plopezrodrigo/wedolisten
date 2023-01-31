@@ -24,9 +24,6 @@ export const DatosLocal = () => {
 											  "productos_higiene"  : local.productos_higiene
 									});
 
-
-
-
 	const [mensaje, setMensaje] = useState(null); 
 	const navigate = useNavigate();
 	const { store, actions } = useContext(Context);
@@ -66,6 +63,20 @@ export const DatosLocal = () => {
 		else         return setMensaje(await resp.json());  
 	}
 
+
+	const miImput = (tipo, nombre, valor, ph, obligatorio, clase, label) => {
+		const requerido = (obligatorio ? "required" : "")
+		// const codigo = () => {return <label htmlFor={`Input${nombre}>${label}</label>`}}
+		const codigo = () => {return <label>{label}</label>}
+
+		/*label && {`<label htmlFor=Input${nombre}>${label}</label>`}*/
+		return(	<>
+					{label && codigo()}
+					<input type={tipo} name={nombre} value={valor} className={clase} id={`Input${nombre}`} aria-describedby={`${nombre}Help`} placeholder={ph} onChange={handleChange} />
+				</>
+			  )
+	}	
+
 	return (
 		<div className="container fluid align-center">
 		  <div className="form-body"> 
@@ -83,8 +94,49 @@ export const DatosLocal = () => {
 				<div className="col-md-12">
 					<form onSubmit={handleSubmit}>
 						<div className="form-group">
-							<label htmlFor="InputEmail1">Nombre del local</label>
-							<input type="text" name="name" value={local.name} required className="form-control" id="InputName1" aria-describedby="nameHelp" placeholder="Nombre del local" onChange={handleChange} />
+							{miImput("text", "name", local.name, "Nombre local", true, "form-control", "Nombre del local")}
+						</div>
+                        <br/>
+						<div className="form-group">
+							<h5>Descripción</h5>
+							<textarea name="description" value={local.description} required rows="3" cols="100" onChange={handleChange} ></textarea>
+						</div>
+                        <br/>
+
+						<div className="form-group">
+							{miImput("text", "url", local.url, "url", false, "form-control", "Información de contacto")}
+							{miImput("text", "email", local.email, "email", false, "form-control")}
+							{miImput("text", "telf", local.telf, "teléfono", false, "form-control")}
+							{miImput("text", "address", local.address, "Dirección postal", false, "form-control")}
+							{miImput("text", "location", local.location, "location", false, "form-control")}
+						</div>
+                        <br/>
+						<div className="form-group">
+							{miImput("radio", "trona", local.trona, "trona", false, "form-check-input")}						
+							<label htmlFor="Inputtrona">trona</label><br/>
+
+							{miImput("radio", "cambiador", local.cambiador, "cambiador", false, "form-check-input", "cambiador")}<br/>
+							{miImput("radio", "accessible_carrito", local.accessible_carrito, "accessible_carrito", false, "form-check-input", "accessible_carrito")}<br/>
+							{miImput("radio", "espacio_carrito", local.espacio_carrito, "espacio_carrito", false, "form-check-input", "espacio_carrito")}<br/>			
+							{miImput("radio", "ascensor", local.ascensor, "ascensor", false, "form-check-input", "ascensor")}<br/>
+							{miImput("radio", "productos_higiene", local.productos_higiene, "productos_higiene", false, "form-check-input", "productos_higiene")}<br/>
+						</div>
+                        <br/>
+
+						<button type="submit"  id="button">Guardar</button>
+						{(mensaje != null) && <p>{mensaje}</p>}
+					</form>				  
+				</div>
+			</div>
+		  </div>
+		</div>
+	  );
+};
+
+/**
+ * 							<label htmlFor="InputEmail1">Nombre del local</label>
+ * 							<input type="text" name="name" value={local.name} required className="form-control" id="InputName1" aria-describedby="nameHelp" placeholder="Nombre del local" onChange={handleChange} />
+							{miImput("text", "name", local.name, "Nombre del local", true)}
 						</div>
                         <br/>
 						<div className="form-group">
@@ -120,15 +172,7 @@ export const DatosLocal = () => {
 
                             <input type="radio" name="productos_higiene" className="form-check-input" id="InputProductos_higiene5" aria-describedby="productos_higieneHelp" value={local.productos_higiene} onChange={handleChange} />
                             <label htmlFor="InputProductos_higiene5">productos_higiene</label><br/>
-						</div>
-                        <br/>
 
-						<button type="submit"  id="button">Guardar</button>
-						{(mensaje != null) && <p>{mensaje}</p>}
-					</form>				  
-				</div>
-			</div>
-		  </div>
-		</div>
-	  );
-};
+ * 
+ * 
+ */
