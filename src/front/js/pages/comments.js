@@ -73,7 +73,7 @@ export const Comments = () => {
               <th scope="col">Acción</th>
             </tr>
           </thead>
-          <tbody className="listado">
+          {/* <tbody className="listado">
             {!store.favorites ? <tr>no hay favoritos</tr> : ""}
             {store.favorites.map((fav, i) => (
               <tr>
@@ -86,7 +86,7 @@ export const Comments = () => {
                 </button>
               </tr>
             ))}
-          </tbody>
+          </tbody> */}
         </table>
     </div>
   );

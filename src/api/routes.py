@@ -300,4 +300,6 @@ def create_token():
         return jsonify({"msg": "Bad username or password"}), 401
 
     access_token = create_access_token(identity=user.id)
-    return jsonify({ "token": access_token, "user_id": user.id })
+    customer = Customer.query.filter_by(user_id=user.id).first()
+    type = "customer" if customer else "manager"
+    return jsonify({ "token": access_token, "user_id": user.id, "usertype": type })

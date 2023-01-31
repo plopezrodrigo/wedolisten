@@ -43,3 +43,13 @@ body {
 #ubicacionelements{
   margin-top: 8px;
 }
+#iconaccount{
+  color: #FF0DE7;
+}
+.link{
+  color: #5e2e2e;
+}
+#card{
+  border-radius: 10%;
+  align-content: flex-start;
+}
