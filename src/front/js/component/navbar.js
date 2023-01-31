@@ -81,13 +81,11 @@ export const Navbar = () => {
                   </button>
                 </Link>
               ) : (
-                <button
-                  onClick={() => actions.logout()}
-                  className="btn btn-primary"
-                  id="button"
-                >
-                  Log out
-                </button>
+                <Link to="/account">
+                  <button className="btn btn-primary" id="button">
+                  <i className="fas fa-user-circle"></i> Mi cuenta
+                  </button>
+                </Link>
               )}
             </div>
           </div>
