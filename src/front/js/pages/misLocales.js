@@ -25,7 +25,7 @@ export const MisLocales = () => {
     const conPermisos = () => {
 		return (<>
                 <div className="row">
-                    <a href="/datosLocal/0" className="btn btn-lg btn-outline-primary mb-3" key="miLocalAlta">Nuevo local</a>
+                    <a href="/nuevoLocal" className="btn btn-lg btn-outline-primary mb-3" key="miLocalAlta">Nuevo local</a>
                 </div>
 
                 <div className="row">
