@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
+import OpinionCard from "../component/opinionCard";
 
 export const Comentarios = () => {
     const [comentarios, setComentarios] = useState()
@@ -27,21 +28,14 @@ export const Comentarios = () => {
                 <div className="row">
                     <div>
                         <table className="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th key="th1" scope="col">#</th>
-                                    <th key="th2" scope="col" colSpan="2">Nombre</th>
-                                    {/*<th key="th3" scope="col">Acción</th>*/}
-                                </tr>
-                            </thead>
                             <tbody>
                                 {comentarios && comentarios.map((comentario, index)=>{   
                                     return  <>
-                                                <tr key={index}>
-                                                    <td key={`td1-${index}`} scope="row">{comentario.id} - {local.user_id}</td>
-                                                    <td key={`td2-${index}`} colSpan="2">{comentario.comment}</td>
-                                                    {/*<td key={`td3-${index}`}><a href={`/datosLocal/${local.id}`} className="btn btn-lg btn-outline-primary mb-3" key={`a-${index}`}><i className="fas fa-pencil-alt" key={`i-${index}`}/></a></td>*/}
-                                                </tr>
+                                                <div className="col mb-3">
+                                                    <div>
+                                                    <OpinionCard />
+                                                    </div>
+                                                </div>
                                             </>
                                     })
                                 }
