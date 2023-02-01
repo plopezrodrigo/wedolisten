@@ -25,23 +25,26 @@ const LocalDetail = (props) => {
       <div className="row">
         <div className="col-10">{local ? <h1>{local.name}</h1> : ""}</div>
         <div className="col-1">
-          <button 
+          {
+            sessionStorage.getItem("token") ?
+            <button 
             id="iconbutton"
             onClick={()=>{
-              store.favorites.includes(props.id)
-              ? actions.deleteFavourites(props.id)
-              : actions.addFavourites(props.id)
               }
               }>
               <i 
               className=
               {
-              store.favorites.includes(props.id)
-              ?"fas fa-heart-o"
-              :"fas fa-heart"
+              "fas fa-heart"
               }
               ></i>
           </button>
+          :
+          <Link to="/signupUser">
+            Registro
+          </Link>
+          }
+          
         </div>
         <div className="col-1">
           <a href="">

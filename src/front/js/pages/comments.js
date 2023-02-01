@@ -13,7 +13,7 @@ export const Comments = () => {
               <h2>Comentarios</h2>
               <span>Consulta o gestiona los comentarios de tus clientes.</span>
               <div className="contaniner fluid">
-                <table className="table">
+                <table className="table-wrapper">
                 <div class="table-filter">
                   <div class="row">
                     <div class="col-sm-9">
