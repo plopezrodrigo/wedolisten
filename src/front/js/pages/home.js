@@ -11,43 +11,45 @@ export const Home = () => {
 
   return (
     <div className="container">
+     {!(store.token && store.token != "" && store.token != undefined) &&
       <UserInfo />
+     }
+     {!(store.token && store.token != "" && store.token != undefined) &&
       <ManagerInfo />
-      <h1>Lee lo que otros están opinando...</h1>
+     }
+      <h1 className="text-center" id="tituloHome">Lee lo que otros están opinando...</h1>
       <div className="container fluid">
         <div className="row align-items-start">
           <div className="col mb-3">
-            <div className="p-3 border bg-light">
+            <div>
+
               <OpinionCard />
             </div>
           </div>
           <div className="col mb-3">
-            <div className="p-3 border bg-light">
+            <div>
               <OpinionCard />
             </div>
           </div>
           <div className="col mb-3">
-            <div className="p-3 border bg-light">
+            <div>
+
               <OpinionCard />
             </div>
           </div>
         </div>
       </div>
-      <h1>Igual te interesan estos locales...</h1>
+      <h1 className="text-center" id="tituloHome">Igual te interesan estos locales...</h1>
       <div className="container fluid">
         <div className="row align-items-start">
-          <div className="col mb-3">
-            <div className="p-3 border bg-light">
+          <div className="col mb-4">
+            <div>
               <LocalCard />
             </div>
           </div>
-          <div className="col mb-3">
-            <div className="p-3 border bg-light">
-              <LocalCard />
-            </div>
-          </div>
-          <div className="col mb-3">
-            <div className="p-3 border bg-light">
+          <div className="col mb-4">
+            <div>
+
               <LocalCard />
             </div>
           </div>

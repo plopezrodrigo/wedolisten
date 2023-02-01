@@ -1,34 +1,89 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
+import { useParams } from "react-router-dom";
 
-const OpinionCard = (props) => {
+
+const LocalCard = (props) => {
   const { store, actions } = useContext(Context);
-  console.log(store.favorites);
+  const params = useParams();
+  const [local, setLocales] = useState({});
+
+  useEffect(() => {
+    fetch(`${process.env.BACKEND_URL}/api/comercial-place/${params.id}`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        setLocales(response);
+      });
+  }, []);
+
+    const add_favourites = (id) => {
+      fetch(`${process.env.BACKEND_URL}/api/favourit/${id}`, { 
+          method: "POST",
+          headers: { Authorization: "Bearer " + sessionStorage.getItem("token"), "Content-Type": "application/json" },
+     })    
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        setLocales(response);
+      });
+    }
 
   return (
-    <div className="col-12 col-md-4">
-      <div className="card">
-        <img
-          src={`https://starwars-visualguide.com/assets/img/characters/${props.uid}.jpg`}
-          className="thumb reserved-ratio"
-          alt="Luke Skywalker"
-        />
+    <div className="col-12">
+      <div className="card" id="localcard">
+          <img
+              src="https://pbs.twimg.com/media/Fie7-X6WAAALgul.jpg"
+              className="card-img-top"
+              alt=""
+           />
         <div className="card-body">
-          <h5 className="card-title">Nombre de la local</h5>
-          <p className="card-text">XX/MM/YYYY.</p>
-          <button className="btn btn-outline-success" type="submit">
-            <i className="fas fa-heart" />
-            <i className="far fa-comment" />
-            <i className="fas fa-map-marker-alt" />
+          <h5 className="card-title">{props.name}</h5>
+                      {/*
+          <button 
+                    id="iconbutton"
+<<<<<<< HEAD
+                    onClick={()=>{
+                        store.favorites.includes(props.id)
+                        ? actions.deleteFavourites(props.id)
+                        : actions.addFavourites(props.id)
+                    }
+                    }>
+                    <i 
+                    className=
+                    {
+                        store.favorites.includes(props.id)
+                        ?"fas fa-heart-o"
+                        :"fas fa-heart"
+                    }
+
+                  ></i>
+=======
+                    onClick={()=>{add_favourites(props.id)}
+                    }> a
+>>>>>>> Develop
+                    </button>
+                */}
+          <button className="btn btn-outline-success" type="submit" id="iconbutton">
+          <i className="far fa-comment" />
           </button>
-          <a href="#" className="btn btn-primary">
-            Ver más
-          </a>
+          <button className="btn btn-outline-success" type="submit" id="iconbutton">
+          <i className="fas fa-map-marker-alt" />
+          </button>
+          <button id="button">
+            <Link 
+              to={`/localDetail/${props.id}`} 
+              className="">
+              Ver más
+            </Link>
+          </button>
         </div>
       </div>
     </div>
   );
 };
 
-export default OpinionCard;
+export default LocalCard;

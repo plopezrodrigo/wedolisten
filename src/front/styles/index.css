@@ -1,3 +1,55 @@
 /* 
     General Styles used on every website (Don't Repeat Yourself)
 */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto&display=swap");
+
+body,
+html {
+  font-family: "Poppins", sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+body {
+  background-color: #ffe9c8;
+  color: #5e2e2e;
+  font-family: poppins;
+}
+#footer {
+  padding: 50px;
+}
+#navbarSupportedContent {
+  font-size: large;
+  font-weight: bold;
+  text-decoration: none;
+  color: #5e2e2e;
+}
+#button {
+  background-color: #ffccf4;
+  color: #5e2e2e;
+  border-color: #ff69de;
+  border-width: 3px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+#commentinput {
+  height: 150px;
+}
+#ubicacion{
+  margin-top: 50px;
+}
+#descripcion{
+  margin-top: 20px;
+}
+#ubicacionelements{
+  margin-top: 8px;
+}
+#iconaccount{
+  color: #FF0DE7;
+}
+.link{
+  color: #5e2e2e;
+}
+#card{
+  border-radius: 10%;
+  align-content: flex-start;
+}
