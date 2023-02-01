@@ -133,6 +133,23 @@ def setup_commands(app):
         print("manager: ", cp.name, " Comercial_Place.")
         print("--------------------------------------------------------")
         print("")
+        print("Creating test Comentarios")
+ 
+        comment = Comment()
+        comment.user_id = cliente
+        comment.comercial_place_id = cp.id
+        comment.comment = "Comentario que estoy metiendo por inicializar"
+        comment.puntuacion = "1"
+        comment.price = "Barato"
+        comment.a_domicilio = "Si"
+        comment.mesa = "Si"
+        comment.alcohol = "No"
+        comment.visita = "Pareja"
+
+        db.session.add(comment)
+        print("manager: ", comment.comment, " Comentario.")
+        print("--------------------------------------------------------")
+        print("")
 
         db.session.commit()
         
