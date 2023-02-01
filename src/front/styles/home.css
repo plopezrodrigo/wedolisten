@@ -6,40 +6,52 @@
     on that page only (the ones not reused in other pages).
 */
 body {
-  background-color: #ffe9c8;
+    background-color: #ffe9c8;
+    color: #5e2e2e;
+    font-family: poppins;
+  }
+#footer{
   color: #5e2e2e;
-  font-family: poppins;
 }
-.secciones{
-  color: #5e2e2e;
-
-}
-#tituloHome{
-  padding: 50px;
-}
-#iconbutton{
-  color: #FF9500;
-  border: none;
-}
-#iconbuttonnegativo{
-  color: #ffffff;
-  border: none;
-}
-#opinionbutton{
-  border: none;
-  background-color: none;
-}
-#opinioncard{
-  background-color: #ffc6708a;
-  border: none;
-  box-shadow: 10px;
-  border-radius: 10%;
-}
-#localcard{
-  border: none;
-  box-shadow: 10px;
-  border-radius: 10%;
-}
+  #tituloHome{
+    padding: 50px;
+  }
+  #iconbutton{
+    color: #FF9500;
+    border: none;
+  }
+  #opinionbutton{
+    border: none;
+    background-color: #ffc6708a;
+  }
+  #opinioncard{
+    background-color: #ffc6708a;
+    border: none;
+    box-shadow: 10px;
+    border-radius: 10%;
+    align-items: center;
+    position: relative;
+  }
+  #imagenopinion{
+    display: block;
+    z-index: 0;
+    width: 60px;
+    height: 60px;
+    margin-bottom: 60px;
+    margin-top: -40px;
+  }
+  #logofooter{
+    display: block;
+    z-index: 0;
+    width: 150px;
+    height: 150px;
+    margin-bottom: -20px;
+  }
+  #localcard{
+    border: none;
+    box-shadow: 10px;
+    border-radius: 10%;
+  }
 
   #cajas{
     /*position: absolute;*/

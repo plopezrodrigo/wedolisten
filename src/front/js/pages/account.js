@@ -29,10 +29,12 @@ export const Account = () => {
                     </p>
                     {store.usertype == "customer" ? 
                       <p className="text ma-home-section">
-                        <a className="link" href="">
+                        <Link to="/favorites">
+                        <a>
                           <i className="fas fa-star" id="iconaccount" />
                           <strong className="strong"> Mis Favoritos</strong>
                         </a>
+                        </Link>
                         <p className="description">
                           Consulta tus locales añadidos a favoritos.
                         </p>
@@ -66,9 +68,11 @@ export const Account = () => {
                       ""
                       }
                     <p className="text ma-home-section">
-                    <a className="link" href="">
-                      <i className="fas fa-sign-out-alt" id="iconaccount" />
-                      <strong className="strong"> Cerrar sesión</strong>
+                    <a
+                    onClick={() => actions.logout()}
+                    >
+                    <i class="fas fa-sign-out-alt" id="iconaccount"></i>
+                    <strong className="strong"> Cerrar sesión </strong>
                     </a>
                     <p className="description">Cierra tu sesión.</p>
                     </p>
