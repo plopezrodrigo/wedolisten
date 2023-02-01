@@ -10,7 +10,7 @@ const OpinionCard = (props) => {
   return (
     <div className="col-12">
       <div className="card" id="opinioncard">
-        <div className="card-img-top">
+        <div className="card-img-top" id="imagenopinion">
             <img 
               src={imagen}
               className="card-img-top"
