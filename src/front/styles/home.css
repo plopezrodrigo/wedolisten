@@ -19,13 +19,20 @@ body {
   }
   #opinionbutton{
     border: none;
-    background-color: none;
+    background-color: #ffc6708a;
   }
   #opinioncard{
     background-color: #ffc6708a;
     border: none;
     box-shadow: 10px;
     border-radius: 10%;
+    align-items: center;
+  }
+  .card-img-top{
+    display: block;
+    z-index: 0;
+    width: 100px;
+    height: 100px;
   }
   #localcard{
     border: none;

@@ -10,13 +10,13 @@ const OpinionCard = (props) => {
   return (
     <div className="col-12">
       <div className="card" id="opinioncard">
-            <img
+        <div className="card-img-top">
+            <img 
               src={imagen}
               className="card-img-top"
-              alt="80"
-              width="20"
-              height="80"
+              alt=""
             />
+        </div>
         <div className="card-body text-center">
           <h5 className="card-title">William Dore</h5>
           <button id="opinionbutton">
