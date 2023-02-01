@@ -9,16 +9,6 @@ const LocalCard = (props) => {
   const params = useParams();
   const [local, setLocales] = useState({});
 
-  useEffect(() => {
-    fetch(`${process.env.BACKEND_URL}/api/comercial-place/${params.id}`)
-      .then((response) => {
-        return response.json();
-      })
-      .then((response) => {
-        setLocales(response);
-      });
-  }, []);
-
     const add_favourites = (id) => {
       fetch(`${process.env.BACKEND_URL}/api/favourit/${id}`, { 
           method: "POST",
