@@ -4,43 +4,18 @@ import { Context } from "../store/appContext";
 import "../../styles/home.css";
 
 
-export const DatosLocal = () => {
-	const params = useParams()
+export const NuevoLocal = () => {
 	const [local, setLocal] = useState({})
-	const [formData, setFormData] = useState({"image_url"		: local.image_url,
-											  "name"            : local.name,
-											  "address"         : local.address,
-											  "url"             : local.url,
-											  "image_url"       : local.image_url,
-											  "telf"            : local.telf,
-											  "email"           : local.email,
-											  "location"        : local.location,
-											  "description"     : local.description,
-											  "cambiador"       : (local.cambiador ? true : false),
-											  "trona"           : (local.trona ? true : false),
-											  "accessible_carrito" : (local.accessible_carrito ? true : false),
-											  "espacio_carrito"    : (local.espacio_carrito ? true : false),
-											  "ascensor"           : (local.ascensor ? true : false),
-											  "productos_higiene"  : (local.productos_higiene ? true : false)
-									});
+	const [formData, setFormData] = useState({});
 
 	const [mensaje, setMensaje] = useState(null); 
 	const navigate = useNavigate();
 	const { store, actions } = useContext(Context);
   
-    const miUseEffect = async () => {
-        const resp = await fetch(`${process.env.BACKEND_URL}/api/comercial-place/${params.local_id}`)
-
-        if (resp.ok) return await resp.json();
-        else         return setMensaje(await resp.json());  
-    }
-
     useEffect (()=> {
 		if (store.token && store.token != "" && store.token != undefined) {
 			navigate.push("/login"); 
 		}
-
-        miUseEffect().then(resp => setLocal(resp[0]));
     }, [])
 
 	const handleChange = (evento) =>{
@@ -49,7 +24,7 @@ export const DatosLocal = () => {
 
 	const handleSubmit = async (evento)=>{
 		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
-		console.log("Comercial_Place actualizar", formData);
+		console.log("Comercial_Place crear", formData);
 
 		const resp = await fetch(process.env.BACKEND_URL + "/api/Comercial_Place", 
 			{method: 'POST',
@@ -82,6 +57,11 @@ export const DatosLocal = () => {
 						<div className="form-group">
 							<label htmlFor="InputEmail1">Nombre del local</label>
   							<input type="text" name="name" defaultValue={local.name} required className="form-control" id="InputName1" aria-describedby="nameHelp" placeholder="Nombre del local" onChange={handleChange} />
+						</div>
+                        <br/>
+						<div className="form-group">
+							<label htmlFor="InputEmail1">Url de la imagen del local</label>
+  							<input type="text" name="image_url" defaultValue={local.image_url} required className="form-control" id="InputImage_url" aria-describedby="image_urlHelp" placeholder="Url d la imagen del local" onChange={handleChange} />
 						</div>
                         <br/>
 						<div className="form-group">
@@ -120,6 +100,7 @@ export const DatosLocal = () => {
 						</div>
  
                         <br/>
+						
 						<div className="py-3 px-0 mx-0 d-flex justify-content-around">
 							<button type="submit" className="btn btn-primary" id="button">Guardar</button>
 							<a href="/misLocales" className="btn btn-primary" id="button">Volver</a>
