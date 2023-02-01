@@ -9,16 +9,6 @@ const LocalCard = (props) => {
   const params = useParams();
   const [local, setLocales] = useState({});
 
-  useEffect(() => {
-    fetch(`${process.env.BACKEND_URL}/api/comercial-place/${params.id}`)
-      .then((response) => {
-        return response.json();
-      })
-      .then((response) => {
-        setLocales(response);
-      });
-  }, []);
-
     const add_favourites = (id) => {
       fetch(`${process.env.BACKEND_URL}/api/favourit/${id}`, { 
           method: "POST",
@@ -45,26 +35,8 @@ const LocalCard = (props) => {
                       {/*
           <button 
                     id="iconbutton"
-<<<<<<< HEAD
-                    onClick={()=>{
-                        store.favorites.includes(props.id)
-                        ? actions.deleteFavourites(props.id)
-                        : actions.addFavourites(props.id)
-                    }
-                    }>
-                    <i 
-                    className=
-                    {
-                        store.favorites.includes(props.id)
-                        ?"fas fa-heart-o"
-                        :"fas fa-heart"
-                    }
-
-                  ></i>
-=======
                     onClick={()=>{add_favourites(props.id)}
                     }> a
->>>>>>> Develop
                     </button>
                 */}
           <button className="btn btn-outline-success" type="submit" id="iconbutton">

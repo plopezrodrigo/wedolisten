@@ -26,10 +26,26 @@ def list_Managers():
 
 
 @api.route('/comercial-place', methods=['GET'])
+@jwt_required(optional = True)
 def list_Comercial_Places():
+    favorits_id = []
+    user_id = get_jwt_identity()
+    customer = Customer.query.filter_by(user_id=user_id).first() if user_id else None
+
     comercial_places = Comercial_Place.query.all()
     data = [comercial_place.serialize()
             for comercial_place in comercial_places]
+
+    if customer:
+        favourits = Favourit.query.filter_by(customer_id=customer.id)
+        favorits_id = [favorit.comercial_place_id for favorit in favourits]
+
+    for element in data:
+        if element['id'] in favorits_id:
+            element['favorite'] = True 
+        else:
+            element['favorite'] = False 
+
     return jsonify(data), 200
 
 @api.route('/comercial-place-user', methods=['GET'])
@@ -48,12 +64,22 @@ def Comercial_Places_user():
         return jsonify({"msg": "No existen datos"}), 402
 
 @api.route('/comercial-place/<comercial_place_id>', methods=['GET'])
+@jwt_required(optional = True)
 def Comercial_Places_Detail(comercial_place_id):
-    comercial_places = Comercial_Place.query.filter_by(id=comercial_place_id)
+    user_id = get_jwt_identity()
+    customer = Customer.query.filter_by(user_id=user_id).first() if user_id else None
+
+    comercial_places = Comercial_Place.query.filter_by(id=comercial_place_id).first()
+
+    data = comercial_places.serialize()
+
+    if customer:
+        favourits = Favourit.query.filter_by(customer_id=customer.id, comercial_place_id=comercial_places.id).first()
+        data['favorite'] = True if favourits else False
+    else:
+        data['favorite'] = False
 
     if comercial_places:
-        data = [comercial_place.serialize()
-            for comercial_place in comercial_places]
         return jsonify(data), 200
     else:
         return jsonify({"msg": "No existen datos"}), 402
@@ -153,21 +179,21 @@ def Comercial_Place_add():
     userId = get_jwt_identity()
     Place = Comercial_Place(
         user_id         = userId,
-        #user           = data.get('user'),
-        name            = data.get('name'),
-        address         = data.get('address'),
-        url             = data.get('url'),
-        image_url       = data.get('image_url'),
-        telf            = data.get('telf'),
-        email           = data.get('email'),
-        location        = data.get('location'),
-        description     = data.get('description'),
-        cambiador       = data.get('cambiador'),
-        trona           = data.get('trona'),
-        accessible_carrito = data.get('accessible_carrito'),
-        espacio_carrito    = data.get('espacio_carrito'),
-        ascensor           = data.get('ascensor'),
-        productos_higiene  = data.get('productos_higiene')
+        #user           = request.json.get('user'),
+        name            = request.json.get('name'),
+        address         = request.json.get('address'),
+        url             = request.json.get('url'),
+        image_url       = request.json.get('image_url'),
+        telf            = request.json.get('telf'),
+        email           = request.json.get('email'),
+        location        = request.json.get('location'),
+        description     = request.json.get('description'),
+        cambiador       = true, # request.json.get('cambiador'),
+        trona           = true, # request.json.get('trona'),
+        accessible_carrito = true, # request.json.get('accessible_carrito'),
+        espacio_carrito    = true, # request.json.get('espacio_carrito'),
+        ascensor           = true, # request.json.get('ascensor'),
+        productos_higiene  = true, # request.json.get('productos_higiene')
 
     )
     db.session.add(Place)

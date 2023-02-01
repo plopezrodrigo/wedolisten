@@ -1,47 +1,70 @@
-import React, { useContext, useState, useEffect} from "react";
+import React, { useContext, useState, useEffect } from "react";
 import imagen from "../../img/mapa.jpeg";
 import OpinionComments from "../component/opinionComments";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Context } from "../store/appContext";
-
 
 const LocalDetail = (props) => {
   const params = useParams();
-  const [local, setLocales] = useState({});
+  const [local, setLocal] = useState({});
+  const [favoritos, setFavoritos] = useState({});
   const { store, actions } = useContext(Context);
+  let options = {
+    method: "GET",
+  };
 
   useEffect(() => {
-    fetch(`${process.env.BACKEND_URL}/api/comercial-place/${params.id}`)
+    if (sessionStorage.getItem("token") != null) {
+      options.headers = {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + sessionStorage.getItem("token"),
+      };
+    }
+    fetch(
+      `${process.env.BACKEND_URL}/api/comercial-place/${params.id}`,
+      options
+    )
       .then((response) => {
         return response.json();
       })
       .then((response) => {
-        setLocales(response);
+        setLocal(response);
       });
   }, []);
+
+  const add_favourites = (id) => {
+    fetch(`${process.env.BACKEND_URL}/api/favourit/${id}`, {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token"),
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        setLocal(response);
+      });
+  };
 
   return (
     <div className="container fluid">
       <div className="row">
         <div className="col-10">{local ? <h1>{local.name}</h1> : ""}</div>
         <div className="col-1">
-          <button 
-            id="iconbutton"
-            onClick={()=>{
-              store.favorites.includes(props.id)
-              ? actions.deleteFavourites(props.id)
-              : actions.addFavourites(props.id)
-              }
-              }>
-              <i 
-              className=
-              {
-              store.favorites.includes(props.id)
-              ?"fas fa-heart-o"
-              :"fas fa-heart"
-              }
-              ></i>
-          </button>
+          {sessionStorage.getItem("token") ? (
+            <button
+              id="iconbutton"
+              onClick={() => {
+                add_favourites(local.id);
+              }}
+            >
+              <i className={local.favorite ? "fas fa-heart" : ""}></i>
+            </button>
+          ) : (
+            <Link to="/signupUser">Registro</Link>
+          )}
         </div>
         <div className="col-1">
           <a href="">
@@ -186,11 +209,6 @@ const LocalDetail = (props) => {
               </span>
               <span className=""></span>
             </a>
-          </span>
-        </div>
-        <div className="" id="ubicacionelements">
-          <span className="">
-            <i class="fas fa-car-building"></i> A 0,4 km del Aeropuerto
           </span>
         </div>
         <div className="" id="ubicacionelements">
