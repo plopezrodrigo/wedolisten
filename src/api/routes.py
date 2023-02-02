@@ -140,6 +140,7 @@ def Favourits_delete(id):
 @api.route('/signup', methods=['POST'])
 def signup():
     data = request.json
+    subs = False
 
     try:
         user = User.query.filter_by(email=data['user']).first()
@@ -151,20 +152,23 @@ def signup():
             db.session.commit()
 
             if data['tipo'] == "customer": # Es un Customer
+                if data.get('subscription', "off") == "on":
+                    subs = True
                 customer = Customer(user_id  = user.id
-                                #,user     = user.id 
-                                ,name     = data['name']
-                                ,birthday = data.get('birthday')
-                                ,gender   = data.get('gender')
-                                ,subscription = data.get('subscription', False)
-                                ,address  = data.get('address'))
+                            #,user     = user.id 
+                            ,name     = data['name']
+                            ,birthday = data.get('birthday')
+                            ,gender   = data.get('gender')
+                            ,subscription = subs
+                            ,address  = data.get('address'))
                 db.session.add(customer)
             else:  # es un manager
                 manager = Manager(user_id = user.id
                                 ,name    = data['name']
                                 )
                 db.session.add(manager)
-        db.session.commit()
+
+            db.session.commit()
 
     except Exception as e:
         db.session.rollback()

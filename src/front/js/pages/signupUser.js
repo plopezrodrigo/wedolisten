@@ -92,7 +92,7 @@ export const SignupUser = () => {
 
 						<br/>
 						<button type="submit"  id="button">Registrarme</button>
-						{(mensaje != null) && <p>{mensaje}</p>}
+						{(mensaje) && (mensaje != null) && <p>{mensaje}</p>}
 					</form>				  
 				</div>
 			</div>
