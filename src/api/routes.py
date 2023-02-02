@@ -229,6 +229,14 @@ def Comercial_Place_update(idLocal):
     try:
         place = Comercial_Place.query.filter_by(id=idLocal)
         if place:
+            place.cambiador           = True, # request.json.get('cambiador'),
+            place.trona               = True, # request.json.get('trona'),
+            place.accessible_carrito  = True, # request.json.get('accessible_carrito'),
+            place.espacio_carrito     = True, # request.json.get('espacio_carrito'),
+            place.ascensor            = True, # request.json.get('ascensor'),
+            place.productos_higiene   = True, # request.json.get('productos_higiene')
+
+
             place.name                = request.json.get('name'),
             place.address             = request.json.get('address'),
             place.url                 = request.json.get('url'),

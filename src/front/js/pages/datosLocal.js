@@ -35,7 +35,7 @@ export const DatosLocal = () => {
 
     useEffect (()=> {
 		if (store.token && store.token != "" && store.token != undefined) {
-			navigate.push("/login"); 
+			navigate.push("/login");  
 		}
 
         miUseEffect().then(resp => setLocal(resp));
@@ -101,23 +101,24 @@ export const DatosLocal = () => {
 							<input type="checkbox" name="trona" className="form-check-input" id="InputTrona1" aria-describedby="tronaHelp" onChange={handleChange} />
 							<label htmlFor="InputTrona1">trona</label><br/>
 
-                            <input type="checkbox" name="cambiador" className="form-check-input" id="InputCambiador2" aria-describedby="cambiadorHelp" defaultValue={local.cambiador} onChange={handleChange} />
+                            <input type="checkbox" name="cambiador" className="form-check-input" id="InputCambiador2" aria-describedby="cambiadorHelp" onChange={handleChange} />
                             <label htmlFor="InputCambiador2">cambiador</label><br/>
 
-                            <input type="checkbox" name="accessible_carrito" className="form-check-input" id="InputAccessible_carrito3" aria-describedby="accessible_carritoHelp" defaultValue={local.accessible_carrito} onChange={handleChange} />
+                            <input type="checkbox" name="accessible_carrito" className="form-check-input" id="InputAccessible_carrito3" aria-describedby="accessible_carritoHelp" onChange={handleChange} />
                             <label htmlFor="InputAccessible_carrito3">accessible_carrito</label><br/>
 
-                            <input type="checkbox" name="espacio_carrito" className="form-check-input" id="InputEspacio_carrito3" aria-describedby="espacio_carritoHelp" defaultValue={local.espacio_carrito} onChange={handleChange} />
+                            <input type="checkbox" name="espacio_carrito" className="form-check-input" id="InputEspacio_carrito3" aria-describedby="espacio_carritoHelp" onChange={handleChange} />
                             <label htmlFor="InputEspacio_carrito3">espacio_carrito</label><br/>
 
-                            <input type="checkbox" name="ascensor" className="form-check-input" id="InputAscensor5" aria-describedby="ascensorHelp" defaultValue={local.ascensor} onChange={handleChange} />
+                            <input type="checkbox" name="ascensor" className="form-check-input" id="InputAscensor5" aria-describedby="ascensorHelp"  onChange={handleChange} />
                             <label htmlFor="InputAscensor5">ascensor</label><br/>
 
-                            <input type="checkbox" name="productos_higiene" className="form-check-input" id="InputProductos_higiene5" aria-describedby="productos_higieneHelp" defaultValue={local.productos_higiene} onChange={handleChange} />
+                            <input type="checkbox" name="productos_higiene" className="form-check-input" id="InputProductos_higiene5" aria-describedby="productos_higieneHelp" onChange={handleChange} />
                             <label htmlFor="InputProductos_higiene5">productos_higiene</label><br/>
 						</div>
  
                         <br/>
+						{console.log("FormData antes ", formData)}
 						<div className="py-3 px-0 mx-0 d-flex justify-content-around">
 							<button type="submit" className="btn btn-primary" id="button">Guardar</button>
 							<a href="/misLocales" className="btn btn-primary" id="button">Volver</a>
