@@ -48,12 +48,13 @@ def list_Comercial_Places():
 
     return jsonify(data), 200
 
+# ----------------------------------------------------------------------------
+# Locales de un Manager
+# ----------------------------------------------------------------------------
 @api.route('/comercial-place-user', methods=['GET'])
 @jwt_required()
 def Comercial_Places_user():
     userId = get_jwt_identity()
-
-    #comercial_places = Comercial_Place.query.all()
     comercial_places = Comercial_Place.query.filter_by(user_id = userId)
 
     if comercial_places:
@@ -62,6 +63,7 @@ def Comercial_Places_user():
         return jsonify(data), 200
     else:
         return jsonify({"msg": "No existen datos"}), 402
+
 
 @api.route('/comercial-place/<comercial_place_id>', methods=['GET'])
 @jwt_required(optional = True)
@@ -220,13 +222,12 @@ def Comercial_Place_add():
 
 
 
-@api.route("/Comercial_Place/<comercial_place_id>", methods=["POST"])
+@api.route("/Comercial_Place/<idLocal>", methods=["POST"])
 @jwt_required()
 def Comercial_Place_update(idLocal):
     userId = get_jwt_identity()
     try:
         place = Comercial_Place.query.filter_by(id=idLocal)
-
         if place:
             place.name                = request.json.get('name'),
             place.address             = request.json.get('address'),
@@ -244,7 +245,11 @@ def Comercial_Place_update(idLocal):
             place.productos_higiene   = True, # request.json.get('productos_higiene')
 
             db.session.commit()
-        
+            print('--------------------------------------')
+            print('--------------......------------------')
+            print(request.json.get('description'))
+            print('--------------------------------------')
+            print('--------------------------------------')
             return jsonify({"msg": "Local modificado correctamente"}), 200
         else:
             return jsonify({"msg": "No existen datos"}), 402
