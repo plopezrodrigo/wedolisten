@@ -8,21 +8,20 @@ export const Contact = (props) => {
   const { store, actions } = useContext(Context);
   const params = useParams();
     return (
-    <div className="container mx-auto">
-      <div className="form-body">
-        <div className="row">
-          <div className="form-holder">
-            <div className="form-content">
-              <div className="form-items">
-                 <h3>Contacto</h3>
-                 <p>¿Necesitas ayuda?</p>
-                 <p>Ponte en contacto con nosotros</p>
-                 <h3 id="iconbutton">Escríbenos</h3>
-                <form className="requires-validation" novalidate>
+    <div className="vh-100 gradient-custom">
+      <div className="container text-center">
+        <h3>Contacto</h3>
+        <p>¿Necesitas ayuda?</p>
+        <p>Ponte en contacto con nosotros</p>
+        <div className="row d-flex justify-content-center align-items-center h-10">
+          <div className="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div className="card" id="card">
+              <h3 id="iconbutton">Escríbenos</h3>
+                <form className="form-outline" novalidate>
                   <div className="col-md-12">
                     <label for="basic-url" className="form-label">Nombre y Apellidos</label>
                     <input
-                    className="form-control"
+                    className="form-control mb-2"
                     type="text"
                     name="name"
                     required
@@ -37,7 +36,7 @@ export const Contact = (props) => {
                   <div className="col-md-12">
                     <label for="basic-url" className="form-label">Email</label>
                     <input
-                    className="form-control"
+                    className="form-control mb-2"
                     type="email"
                     name="email"
                     required
@@ -50,7 +49,7 @@ export const Contact = (props) => {
                   <div className="col-md-12">
                     <label for="basic-url" className="form-label">Teléfono</label>
                     <input
-                    className="form-control"
+                    className="form-control mb-2"
                     type="telefono"
                     name="Teléfono"
                     required
@@ -77,7 +76,7 @@ export const Contact = (props) => {
                   <div className="col-md-12">
                     <label for="basic-url" className="form-label">Comentarios</label>
                     <input id="commentinput"
-                    className="form-control"
+                    className="form-control mb-2"
                     type="text"
                     name="Comentarios"
                     required
@@ -101,13 +100,12 @@ export const Contact = (props) => {
                     Por favor, confirma que has leido y aceptas la Política de Privacidad y Aviso Legal.
                     </div>
                   </div>
-                  <div className="form-button mt-3">
+                  <div className="form-button mt-3 mb-3">
                     <button id="button" type="submit" className="btn btn-primary">
                     Enviar
                     </button>
                   </div>
                 </form>
-              </div>
             </div>
           </div>
         </div>
