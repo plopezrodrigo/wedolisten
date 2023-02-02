@@ -86,8 +86,8 @@ def Comercial_Places_Detail(comercial_place_id):
 
 @api.route('/Comment', methods=['GET'])
 def list_Comments():
-    Comments = Comment.query.all()
-    data = [Comment.serialize() for Comments in Comment]
+    datos = Comment.query.order_by(Comment.id.desc()).all()
+    data = [comentario.serialize() for comentario in datos]
     return jsonify(data), 200
 
 
