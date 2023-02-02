@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 import "../../styles/home.css";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const { store, actions } = useContext(Context);
@@ -44,7 +45,7 @@ const Login = () => {
                   {store.token &&
                   store.token != "" &&
                   store.token != undefined ? (
-                    "You are logged in with this token" + store.token
+                    <Link to="/"></Link>
                   ) : (
                     <div className="col-12 col-md-8 col-lg-6 col-xl-5">
                       <label className="form-label" for="typeEmailX">

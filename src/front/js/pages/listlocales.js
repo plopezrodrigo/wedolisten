@@ -45,6 +45,7 @@ const ListLocales = () => {
                   telf={local.telf}
                   location={local.location}
                   url={local.url}
+                  image_url={local.image_url}
                 />
               );
             })}

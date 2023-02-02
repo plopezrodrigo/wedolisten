@@ -60,9 +60,18 @@ export const SignupManager = () => {
 							</div>
 							
 							<br/>
+							<div>
+                    		<p className="ms-3 me-3 mb-3 text-center">
+                     		 ¿Ya tienes una cuenta?
+                      		<a href="#!" className="fw-bold">
+                      		Log in
+                      		</a>
+                    		</p>
+                  			</div>
 							<button type="submit"  id="button">Registrarme</button>
 							{(mensaje != null) && <p>{mensaje}</p>}
-					</form>		
+					</form>	
+						
 				</div>							  
 				</div>
 			</div>
