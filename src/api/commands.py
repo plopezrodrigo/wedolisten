@@ -119,6 +119,7 @@ def setup_commands(app):
         cp.name = 'Nombre Comercial_Place'
         cp.description = 'Descripción Comercial_Place'
         cp.address = 'address'
+        cp.image_url = "https://previews.123rf.com/images/kovalnadiya/kovalnadiya2203/kovalnadiya220300248/192887626-patatas-fritas-calientes-frescas-con-sal-y-especias-en-la-tabla-de-cortar-sobre-fondo-de-mesa-de-mad.jpg"
         cp.cambiador = True
         cp.trona = False
         cp.accessible_carrito = False
@@ -133,6 +134,7 @@ def setup_commands(app):
         cp.name = 'Nombre Comercial_Place 2'
         cp.description = 'Descripción Comercial_Place 2'
         cp.address = 'address 2'
+        cp.image_url = "https://previews.123rf.com/images/pilat666/pilat6661808/pilat666180800178/106988422-vista-panor%C3%A1mica-del-famoso-lago-hallstatter-amanecer-de-oto%C3%B1o-brumoso-en-el-peque%C3%B1o-restaurante-chi.jpg"
         cp.cambiador = False
         cp.trona = False
         cp.accessible_carrito = False
@@ -147,6 +149,7 @@ def setup_commands(app):
         cp.name = 'Prueba a no visualizar'
         cp.description = 'Prueba a no visualizar como local del manager 2'
         cp.address = 'address 3'
+        cp.image_url = "https://previews.123rf.com/images/cc0collection/cc0collection2205/cc0collection220548639/186125686-tienda-carne-tienda-restaurante-personas-hombres-chef-noche-abierto-se%C3%B1alizaci%C3%B3n.jpg"
         cp.cambiador = True
         cp.trona = False
         cp.accessible_carrito = False

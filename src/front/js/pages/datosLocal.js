@@ -58,7 +58,7 @@ export const DatosLocal = () => {
 			});
 
 		if (resp.ok) return navigate("/misLocales");
-		else         return setMensaje(await resp.json());  
+		else         return setMensaje(await resp.json());   
 	}
 
 	return (
@@ -69,14 +69,15 @@ export const DatosLocal = () => {
 			    <h5 className="text-center">Da de alta tus locales y mantenlos actualizados para recibir opiniones de tus usuarios</h5>
             </div>
 			<div className="row"> 
-                <div className="row justify-content-center">
-                    <div className="col-4 py-3 px-0 mx-0">
-                        <img src={local.image_url} className="alinear-derecha" alt="" />
-                    </div>
-                </div>
-
 				<div className="col-md-12">
 					<form onSubmit={handleSubmit}>
+						<div className="row justify-content-center">
+							<div className="col py-3 m-0"> 
+								<img src={local.image_url} className="imagenLocal" alt="" />
+	  							<input type="text" name="image_url" defaultValue={local.image_url} required className="form-control imagenLocal" id="Inputimage_url" aria-describedby="image_urlHelp" placeholder="image url" onChange={handleChange} />
+							</div>
+						</div>
+
 						<div className="form-group">
 							<label htmlFor="InputEmail1">Nombre del local</label>
   							<input type="text" name="name" defaultValue={local.name} required className="form-control" id="InputName1" aria-describedby="nameHelp" placeholder="Nombre del local" onChange={handleChange} />
