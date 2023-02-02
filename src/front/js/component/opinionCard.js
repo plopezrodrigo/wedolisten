@@ -18,18 +18,16 @@ const OpinionCard = (props) => {
             />
         </div>
         <div className="card-body text-center">
-          <h5 className="card-title">William Dore</h5>
+          <h5 className="card-title">{props.nombre}</h5>
           <button id="opinionbutton">
-            <i className="fas fa-star" id="iconbutton"/>
+            {props.puntuacion}<i className="fas fa-star" id="iconbutton"/>
             <i className="fas fa-star" id="iconbutton"/>
             <i className="fas fa-star" id="iconbutton"/>
             <i className="fas fa-star" id="iconbutton"/>
             <i className="far fa-star" id="iconbutton"/>
           </button>
           <p className="card-text">
-            Olor sit amet, consectetur adipisci tempor incidunt ut labore et
-            dolore magna aliqua veniam, quis nostrud exercitation ullamcorpor s
-            commodo consequat. Duis autem vel eum irrure esse mo.
+            {props.comment}
           </p>
           <a href="#" className="btn btn-primary" id="button">
             Ver más

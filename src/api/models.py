@@ -180,6 +180,7 @@ class Comment(db.Model):
                     "comercial_place_id": self.comercial_place_id,
                     "comercial_place_name": self.comercial_place.name,
                     "comment_id": self.comment_id,
+                    "comment" : self.comment,
                     "date": self.date,
                     #"puntuacion": self.puntuacion,
                     "price": self.price,

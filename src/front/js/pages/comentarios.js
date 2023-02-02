@@ -30,11 +30,12 @@ export const Comentarios = () => {
                         <table className="table table-striped">
                             <tbody>
                                 {comentarios && comentarios.map((comentario, index)=>{   
-                                    return  <>
-                                                <div className="col mb-3">
-                                                    <div>
-                                                    <OpinionCard />
-                                                    </div>
+                                    return  <> 
+                                                <div className="col mb-3"> 
+                                                    <OpinionCard comment={comentario.comment}
+                                                                 nombre="{comentario.user_name}"
+                                                                 puntuacion="{comentario.puntuacion}"
+                                                                 />
                                                 </div>
                                             </>
                                     })
