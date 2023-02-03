@@ -13,15 +13,16 @@ const Login = () => {
   console.log("This is your token", store.token);
   const handleClick = () => {
     actions.login(data.email, data.password).then((response) => {
+      console.log(response)
     if (response) {
-      navigate.push("/");
+      navigate("/");
     }
     })
   };
 
   useEffect(() => {
     if (store.token && store.token != "" && store.token != undefined) {
-      navigate.push("/");
+      navigate("/");
     }
   }, []);
 
@@ -42,11 +43,6 @@ const Login = () => {
               </div>
               <div className="form-outline">
                 <div className="row d-flex justify-content-center align-items-center h-100">
-                  {store.token &&
-                  store.token != "" &&
-                  store.token != undefined ? (
-                    <Link to="/"></Link>
-                  ) : (
                     <div className="col-12 col-md-8 col-lg-6 col-xl-5">
                       <label className="form-label" for="typeEmailX">
                         Email
@@ -79,7 +75,6 @@ const Login = () => {
                         Login
                       </button>
                     </div>
-                  )}
                   <div>
                     <p className="ms-3 me-3 mb-3 text-center">
                       ¿No tienes una cuenta?

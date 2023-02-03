@@ -95,9 +95,10 @@ def list_Comments():
 @jwt_required()
 def list_Favourit():
     user_id=get_jwt_identity()
-    customer = Customer.query.filter_by(user_id=user_id)
+    customer = Customer.query.filter_by(user_id=user_id).first()
     favourit = Favourit.query.filter_by(customer_id=customer.id)
-    return jsonify(favourit), 200
+    data = [element.serialize() for element in favourit]
+    return jsonify(data), 200
 
 @api.route('/favourit/<id>', methods=['POST'])
 @jwt_required()

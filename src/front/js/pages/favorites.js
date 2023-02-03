@@ -3,20 +3,26 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const Favorites = () => {
+  const [favorites, setFavorites] = useState()
   const { store, actions } = useContext(Context);
 
-      const add_favourites = (id) => {
-      fetch(`${process.env.BACKEND_URL}/api/favourit/${id}`, { 
-          method: "POST",
+      const list_favorites = () => {
+      fetch(`${process.env.BACKEND_URL}/api/favourit/`, { 
+          method: "GET",
           headers: { Authorization: "Bearer " + sessionStorage.getItem("token"), "Content-Type": "application/json" },
      })    
       .then((response) => {
         return response.json();
       })
       .then((response) => {
-        setLocales(response);
+        setFavorites(response);
       });
     }
+
+    useEffect(() => {
+      list_favorites()
+    }
+    ,[])
 
     return (
     <div className="container fluid">
@@ -41,16 +47,19 @@ export const Favorites = () => {
             </tr>
           </thead>
           <tbody className="listado">
-            {!store.favorites ? <tr>no hay favoritos</tr> : ""}
-            {store.favorites.map((fav, i) => (
+            {!favorites ? <tr>no hay favoritos</tr> : 
+            favorites.map((fav, i) => (
               <tr>
-                {fav}
-                <button className="btn">
+                <td>{fav.comercial.id}</td>
+                <td><img src={fav.comercial.image_url}/></td>
+                <td>{fav.comercial.name}</td>
+                <td></td>
+                {/* <button className="btn">
                   <i
                     className="far fa-trash-alt"
                     onClick={() => deleteFavourites(nombre)}
                   />
-                </button>
+                </button> */}
               </tr>
             ))}
           </tbody>

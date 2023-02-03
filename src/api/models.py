@@ -221,6 +221,7 @@ class Favourit(db.Model):
     def serialize(self):
         return {    "id": self.id,
                     "customer_id": self.customer_id,
+                    "comercial" : self.comercial_place.serialize(),
                     "customer_name": self.customer.name,
                     "comercial_place_id": self.comercial_place_id,
                     "comercial_place_name": self.comercial_place.name,
