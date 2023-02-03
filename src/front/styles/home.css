@@ -72,9 +72,14 @@ body {
     }
 
   .imagenLocal{
+    align-items: center;
     max-width: 500px;
     max-height: 500px;
+    display: block;
     /*margin: 10px;
     padding: 10px;*/
-    align-content: center;
+  }
+
+  #imagenLocal1{
+    position: relative;
   }

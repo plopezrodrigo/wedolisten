@@ -12,6 +12,24 @@ export const OpinionManager = () => {
 	const navigate = useNavigate();
 	const { store, actions } = useContext(Context);
   
+	useEffect (()=> {
+		if (store.token && store.token != "" && store.token != undefined) {
+			navigate.push("/login");
+		}
+
+		// Debe venir con un comentario y no de debe ser cero.
+		if (!(params.id_comment) && params.id_comment != 0){  
+			navigate.push("/login");
+		}
+
+		fetch(`${process.env.BACKEND_URL}/api/comercial-place/${params.id}`)
+		.then(response => {
+			return response.json()
+		}).then(response => {
+			setLocales(response)        
+		})
+	}, [])
+
 	const handleChange = (evento) =>{
 		setFormData({...formData, [evento.target.name]: evento.target.value});
 	}
@@ -34,19 +52,6 @@ export const OpinionManager = () => {
 			return response.json(); 
 		})
 	}
-
-	useEffect (()=> {
-		if (store.token && store.token != "" && store.token != undefined) {
-			navigate.push("/login");
-		}
-
-		fetch(`${process.env.BACKEND_URL}/api/comercial-place/${params.id}`)
-		.then(response => {
-			return response.json()
-		}).then(response => {
-			setLocales(response)        
-		})
-	}, [])
 
 	return (
 		<div className="container fluid align-center">
