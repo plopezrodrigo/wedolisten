@@ -44,7 +44,7 @@ export const SignupManager = () => {
 			  <h1>Hola!</h1>
 			  <h5>Bienvenido a tu App para valorar establecimientos</h5>
 				<div className="col-12 col-md-8 col-lg-6 col-xl-5">
-				<div className="card" id="card">
+				<div className="card px-3" id="card">
 					<form onSubmit={handleSubmit}>
 							<div className="form-group">
 								<label htmlFor="InputEmail1">Nombre y apellidos</label>
@@ -60,9 +60,18 @@ export const SignupManager = () => {
 							</div>
 							
 							<br/>
+							<div>
+                    		<p className="ms-3 me-3 mb-3 text-center">
+                     		 ¿Ya tienes una cuenta?
+                      		<a href="#!" className="fw-bold">
+                      		Log in
+                      		</a>
+                    		</p>
+                  			</div>
 							<button type="submit"  id="button">Registrarme</button>
 							{(mensaje != null) && <p>{mensaje}</p>}
-					</form>		
+					</form>	
+						
 				</div>							  
 				</div>
 			</div>

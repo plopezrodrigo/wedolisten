@@ -30,10 +30,8 @@ const ListLocales = () => {
     <div className="container">
       <h3>Listado de Locales</h3>
       <div className="row">
-        <div className="col-3">
-          {locales &&
-            locales.map((local, index) => {
-              return (
+          {locales && locales.map((local, index) => {
+            return <div className="col-3">
                 <LocalCard
                   name={local.name}
                   key={local.id}
@@ -45,10 +43,10 @@ const ListLocales = () => {
                   telf={local.telf}
                   location={local.location}
                   url={local.url}
+                  image_url={local.image_url}
                 />
-              );
+              </div>
             })}
-        </div>
       </div>
     </div>
   );
