@@ -23,22 +23,23 @@ const LocalCard = (props) => {
     }
 
   return (
-    <div className="col-12">
       <div className="card" id="localcard">
           <img
-              src="https://pbs.twimg.com/media/Fie7-X6WAAALgul.jpg"
+              src={props.image_url}
               className="card-img-top"
+              width="200"
+              height= "200"
               alt=""
            />
         <div className="card-body">
           <h5 className="card-title">{props.name}</h5>
-                      {/*
+                     
           <button 
                     id="iconbutton"
                     onClick={()=>{add_favourites(props.id)}
-                    }> a
+                    }> <i class="fas fa-heart"></i>
                     </button>
-                */}
+               
           <button className="btn btn-outline-success" type="submit" id="iconbutton">
           <i className="far fa-comment" />
           </button>
@@ -54,7 +55,6 @@ const LocalCard = (props) => {
           </button>
         </div>
       </div>
-    </div>
   );
 };
 

@@ -63,13 +63,8 @@ const LocalDetail = (props) => {
               <i className={local.favorite ? "fas fa-heart" : ""}></i>
             </button>
           ) : (
-            <Link to="/signupUser">Registro</Link>
+            <Link to="/signupUser"><i className="fas fa-heart"></i></Link>
           )}
-        </div>
-        <div className="col-1">
-          <a href="">
-            <i className="fas fa-share-alt" id="iconbutton"></i>
-          </a>
         </div>
       </div>
       <div className="row">
@@ -95,10 +90,10 @@ const LocalDetail = (props) => {
       <div className="row">
         <div className="mobile_flex_container full_width">
           <img
-            src="https://pbs.twimg.com/media/Fie7-X6WAAALgul.jpg"
+            src={local.image_url}
             className="imagenDetalle"
             width="1100px"
-            height="900px"
+            height="800px"
             alt=""
           />
           <div className="see_all_count_wrap" onclick="">
