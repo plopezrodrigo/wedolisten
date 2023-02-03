@@ -25,7 +25,10 @@ export const MisLocales = () => {
     const conPermisos = () => {
 		return (<>
                 <div className="row">
-                    <a href="/nuevoLocal" className="btn btn-lg btn-outline-primary mb-3" key="miLocalAlta">Nuevo local</a>
+                    <div class="col-sm-10"></div>
+                    <div className="col-2 align-self-end">
+                        <a href="/nuevoLocal" className="btn btn-lg btn-outline-primary mb-3" key="miLocalAlta">Nuevo local</a>
+                    </div>
                 </div>
 
                 <div className="row">
@@ -34,7 +37,7 @@ export const MisLocales = () => {
                             <thead>
                                 <tr>
                                     <th key="th1" scope="col">#</th>
-                                    <th key="th2" scope="col" colSpan="2">Nombre</th>
+                                    <th key="th2" scope="col" colSpan="3">Nombre</th>
                                     <th key="th3" scope="col">Acción</th>
                                 </tr>
                             </thead>
@@ -43,8 +46,9 @@ export const MisLocales = () => {
                                     return  <>
                                                 <tr key={index}>
                                                     <td key={`td1-${index}`} scope="row">{local.id} - {local.user_id}</td>
-                                                    <td key={`td2-${index}`} colSpan="2">{local.name}</td>
-                                                    <td key={`td3-${index}`}><a href={`/datosLocal/${local.id}`} className="btn btn-lg btn-outline-primary mb-3" key={`a-${index}`}><i className="fas fa-pencil-alt" key={`i-${index}`}/></a></td>
+                                                    <td key={`td2-${index}`} colSpan="3">{local.name}</td>
+                                                    <td key={`td3-${index}`}><a href={`/datosLocal/${local.id}`} className="btn btn-lg btn-outline-primary mb-3" key={`a1-${index}`}><i className="fas fa-pencil-alt" key={`i1-${index}`}/></a>
+                                                                             <a href={`/localDetail/${local.id}`} className="btn btn-lg btn-outline-primary mb-3" key={`a2-${index}`}><i className="fas fa-eye" key={`i2-${index}`}/></a></td>
                                                 </tr>
                                             </>
                                     })

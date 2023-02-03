@@ -91,6 +91,7 @@ export const SignupUser = () => {
 								<input type="text" name="address" className="form-control mb-2" id="InputPostal1" aria-describedby="nameHelp" placeholder="Dirección postal" onChange={handleChange} />
 							</div>	   
 
+
 							<br/>
 							<button className="mb-3" type="submit"  id="button">Registrarme</button>
 							{(mensaje != null) && <p>{mensaje}</p>}

@@ -119,6 +119,13 @@ def setup_commands(app):
         cp.name = 'Nombre Comercial_Place'
         cp.description = 'Descripción Comercial_Place'
         cp.address = 'address'
+        cp.image_url = "https://previews.123rf.com/images/kovalnadiya/kovalnadiya2203/kovalnadiya220300248/192887626-patatas-fritas-calientes-frescas-con-sal-y-especias-en-la-tabla-de-cortar-sobre-fondo-de-mesa-de-mad.jpg"
+        cp.cambiador = True
+        cp.trona = False
+        cp.accessible_carrito = False
+        cp.espacio_carrito = False
+        cp.ascensor = False
+        cp.productos_higiene = True
         db.session.add(cp)
         print("manager: ", cp.name, " Comercial_Place.")        
         
@@ -127,6 +134,13 @@ def setup_commands(app):
         cp.name = 'Nombre Comercial_Place 2'
         cp.description = 'Descripción Comercial_Place 2'
         cp.address = 'address 2'
+        cp.image_url = "https://previews.123rf.com/images/pilat666/pilat6661808/pilat666180800178/106988422-vista-panor%C3%A1mica-del-famoso-lago-hallstatter-amanecer-de-oto%C3%B1o-brumoso-en-el-peque%C3%B1o-restaurante-chi.jpg"
+        cp.cambiador = False
+        cp.trona = False
+        cp.accessible_carrito = False
+        cp.espacio_carrito = True
+        cp.ascensor = False
+        cp.productos_higiene = False
         db.session.add(cp)
         print("manager: ", cp.name, " Comercial_Place.")
 
@@ -135,6 +149,13 @@ def setup_commands(app):
         cp.name = 'Prueba a no visualizar'
         cp.description = 'Prueba a no visualizar como local del manager 2'
         cp.address = 'address 3'
+        cp.image_url = "https://previews.123rf.com/images/cc0collection/cc0collection2205/cc0collection220548639/186125686-tienda-carne-tienda-restaurante-personas-hombres-chef-noche-abierto-se%C3%B1alizaci%C3%B3n.jpg"
+        cp.cambiador = True
+        cp.trona = False
+        cp.accessible_carrito = False
+        cp.espacio_carrito = True
+        cp.ascensor = False
+        cp.productos_higiene = True
         db.session.add(cp)
         db.session.commit()
         print("Comercial_Place: ", cp.name, " Comercial_Place.")
@@ -149,39 +170,39 @@ def setup_commands(app):
         comment = Comment()
         comment.user_id = cliente
         comment.comercial_place_id = local
-        comment.comment = "Comentario que estoy metiendo por inicializar 1"
+        comment.comment = "1. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries"
         comment.puntuacion = "uno"
-        comment.price = "Barato"
+        comment.price = "Caro"
         comment.a_domicilio = "Si"
         comment.mesa = "Si"
         comment.alcohol = "No"
-        comment.visita = "Pareja"
+        comment.visita = "Amigos"
         db.session.add(comment)
         db.session.commit()
 
         comment = Comment()
         comment.user_id = cliente
         comment.comercial_place_id = local
-        comment.comment = "Comentario que estoy metiendo por inicializar 2"
-        comment.puntuacion = "uno"
+        comment.comment = "2. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries"
+        comment.puntuacion = "cuatro"
         comment.price = "Barato"
         comment.a_domicilio = "Si"
         comment.mesa = "Si"
         comment.alcohol = "No"
-        comment.visita = "Pareja"
+        comment.visita = "Familia"
         db.session.add(comment)
         db.session.commit()
 
         comment = Comment()
         comment.user_id = cliente
         comment.comercial_place_id = local
-        comment.comment = "Comentario que estoy metiendo por inicializar 3"
-        comment.puntuacion = "uno"
+        comment.comment = "3. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries"
+        comment.puntuacion = "dos"
         comment.price = "Barato"
         comment.a_domicilio = "Si"
         comment.mesa = "Si"
         comment.alcohol = "No"
-        comment.visita = "Pareja"
+        comment.visita = "Solo"
         db.session.add(comment)
         db.session.commit()
 
@@ -189,12 +210,12 @@ def setup_commands(app):
         comment.user_id = cliente
         comment.comercial_place_id = local
         comment.comment = "Comentario que estoy metiendo por inicializar 4"
-        comment.puntuacion = "uno"
-        comment.price = "Barato"
+        comment.puntuacion = "tres"
+        comment.price = "Normal"
         comment.a_domicilio = "Si"
         comment.mesa = "Si"
         comment.alcohol = "No"
-        comment.visita = "Pareja"
+        comment.visita = "Amigos"
         db.session.add(comment)
         db.session.commit()
 
@@ -202,8 +223,8 @@ def setup_commands(app):
         comment.user_id = cliente
         comment.comercial_place_id = local
         comment.comment = "Comentario que estoy metiendo por inicializar 5"
-        comment.puntuacion = "uno"
-        comment.price = "Barato"
+        comment.puntuacion = "cinco"
+        comment.price = "Normal"
         comment.a_domicilio = "Si"
         comment.mesa = "Si"
         comment.alcohol = "No"

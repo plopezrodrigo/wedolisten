@@ -48,12 +48,13 @@ def list_Comercial_Places():
 
     return jsonify(data), 200
 
+# ----------------------------------------------------------------------------
+# Locales de un Manager
+# ----------------------------------------------------------------------------
 @api.route('/comercial-place-user', methods=['GET'])
 @jwt_required()
 def Comercial_Places_user():
     userId = get_jwt_identity()
-
-    #comercial_places = Comercial_Place.query.all()
     comercial_places = Comercial_Place.query.filter_by(user_id = userId)
 
     if comercial_places:
@@ -62,6 +63,7 @@ def Comercial_Places_user():
         return jsonify(data), 200
     else:
         return jsonify({"msg": "No existen datos"}), 402
+
 
 @api.route('/comercial-place/<comercial_place_id>', methods=['GET'])
 @jwt_required(optional = True)
@@ -141,6 +143,7 @@ def Favourits_delete(id):
 @api.route('/signup', methods=['POST'])
 def signup():
     data = request.json
+    subs = False
 
     try:
         user = User.query.filter_by(email=data['user']).first()
@@ -152,20 +155,23 @@ def signup():
             db.session.commit()
 
             if data['tipo'] == "customer": # Es un Customer
+                if data.get('subscription', "off") == "on":
+                    subs = True
                 customer = Customer(user_id  = user.id
-                                #,user     = user.id 
-                                ,name     = data['name']
-                                ,birthday = data.get('birthday')
-                                ,gender   = data.get('gender')
-                                ,subscription = data.get('subscription', False)
-                                ,address  = data.get('address'))
+                            #,user     = user.id 
+                            ,name     = data['name']
+                            ,birthday = data.get('birthday')
+                            ,gender   = data.get('gender')
+                            ,subscription = subs
+                            ,address  = data.get('address'))
                 db.session.add(customer)
             else:  # es un manager
                 manager = Manager(user_id = user.id
                                 ,name    = data['name']
                                 )
                 db.session.add(manager)
-        db.session.commit()
+
+            db.session.commit()
 
     except Exception as e:
         db.session.rollback()
@@ -217,13 +223,12 @@ def Comercial_Place_add():
 
 
 
-@api.route("/Comercial_Place/<comercial_place_id>", methods=["POST"])
+@api.route("/Comercial_Place/<idLocal>", methods=["POST"])
 @jwt_required()
 def Comercial_Place_update(idLocal):
     userId = get_jwt_identity()
     try:
         place = Comercial_Place.query.filter_by(id=idLocal)
-
         if place:
             place.name                = request.json.get('name'),
             place.address             = request.json.get('address'),
@@ -241,7 +246,11 @@ def Comercial_Place_update(idLocal):
             place.productos_higiene   = True, # request.json.get('productos_higiene')
 
             db.session.commit()
-        
+            print('--------------------------------------')
+            print('--------------......------------------')
+            print(request.json.get('description'))
+            print('--------------------------------------')
+            print('--------------------------------------')
             return jsonify({"msg": "Local modificado correctamente"}), 200
         else:
             return jsonify({"msg": "No existen datos"}), 402

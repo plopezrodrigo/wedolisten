@@ -54,7 +54,7 @@ body {
   }
 
   #cajas{
-    /*position: absolute;*/
+    /*position: absolute;*/  
     width: 334px;
     height: 379px;
     left: 29px;
@@ -70,3 +70,11 @@ body {
   .alinear-derecha{
     float: right;
     }
+
+  .imagenLocal{
+    max-width: 500px;
+    max-height: 500px;
+    /*margin: 10px;
+    padding: 10px;*/
+    align-content: center;
+  }
