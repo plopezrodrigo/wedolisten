@@ -228,29 +228,34 @@ def Comercial_Place_add():
 def Comercial_Place_update(idLocal):
     userId = get_jwt_identity()
     try:
-        place = Comercial_Place.query.filter_by(id=idLocal)
+        place = Comercial_Place.query.get(idLocal)
         if place:
-            place.name                = request.json.get('name'),
-            place.address             = request.json.get('address'),
-            place.url                 = request.json.get('url'),
-            place.image_url           = request.json.get('image_url'),
-            place.telf                = request.json.get('telf'),
-            place.email               = request.json.get('email'),
-            place.location            = request.json.get('location'),
-            place.description         = request.json.get('description'),
-            place.cambiador           = True, # request.json.get('cambiador'),
-            place.trona               = True, # request.json.get('trona'),
-            place.accessible_carrito  = True, # request.json.get('accessible_carrito'),
-            place.espacio_carrito     = True, # request.json.get('espacio_carrito'),
-            place.ascensor            = True, # request.json.get('ascensor'),
-            place.productos_higiene   = True, # request.json.get('productos_higiene')
-
-            db.session.commit()
             print('--------------------------------------')
             print('--------------......------------------')
-            print(request.json.get('description'))
+            print(request.json.get('trona'))
+            print(request.json.get('cambiador'))
+            print(request.json.get('accessible_carrito'))
+            print(request.json.get('espacio_carrito'))
+            print(request.json.get('ascensor'))
+            print(request.json.get('productos_higiene'))
             print('--------------------------------------')
             print('--------------------------------------')
+            place.name                = request.json.get('name')
+            place.address             = request.json.get('address')
+            place.url                 = request.json.get('url')
+            place.image_url           = request.json.get('image_url')
+            place.telf                = request.json.get('telf')
+            place.email               = request.json.get('email')
+            place.location            = request.json.get('location')
+            place.description         = request.json.get('description')
+            place.cambiador           = request.json.get('cambiador')
+            place.trona               = request.json.get('trona')
+            place.accessible_carrito  = request.json.get('accessible_carrito')
+            place.espacio_carrito     = request.json.get('espacio_carrito')
+            place.ascensor            = request.json.get('ascensor')
+            place.productos_higiene   = request.json.get('productos_higiene')
+
+            db.session.commit()
             return jsonify({"msg": "Local modificado correctamente"}), 200
         else:
             return jsonify({"msg": "No existen datos"}), 402

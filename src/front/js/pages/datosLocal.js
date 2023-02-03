@@ -15,12 +15,12 @@ export const DatosLocal = () => {
 											  "email"           : local.email,
 											  "location"        : local.location,
 											  "description"     : local.description,
-											  "cambiador"       : (local.cambiador ? true : false),
-											  "trona"           : (local.trona ? true : false),
-											  "accessible_carrito" : (local.accessible_carrito ? true : false),
-											  "espacio_carrito"    : (local.espacio_carrito ? true : false),
-											  "ascensor"           : (local.ascensor ? true : false),
-											  "productos_higiene"  : (local.productos_higiene ? true : false)
+											  "cambiador"       : local.cambiador,
+											  "trona"           : local.trona,
+											  "accessible_carrito" : local.accessible_carrito,
+											  "espacio_carrito"    : local.espacio_carrito,
+											  "ascensor"           : local.ascensor,
+											  "productos_higiene"  : local.productos_higiene
 									});
 	const [mensaje, setMensaje] = useState(null); 
 	const navigate = useNavigate();
@@ -43,6 +43,10 @@ export const DatosLocal = () => {
 
 	const handleChange = (evento) =>{
 		setFormData({...formData, [evento.target.name]: evento.target.value});
+	}
+
+	const handleChangecheck = (evento) =>{
+		local[evento.target.name] = (local[evento.target.name] ? false : true)
 	}
 
 	const handleSubmit = async (evento)=>{
@@ -71,8 +75,8 @@ export const DatosLocal = () => {
 			<div className="row"> 
 				<div className="col-md-12">
 					<form onSubmit={handleSubmit}>
-						<div className="row justify-content-center">
-							<div className="col py-3 m-0"> 
+						<div className="row">
+							<div className="col py-3 m-0">
 								<img src={local.image_url} className="imagenLocal" alt="" />
 	  							<input type="text" name="image_url" defaultValue={local.image_url} required className="form-control imagenLocal" id="Inputimage_url" aria-describedby="image_urlHelp" placeholder="image url" onChange={handleChange} />
 							</div>
@@ -99,22 +103,22 @@ export const DatosLocal = () => {
 						</div>
                         <br/>
 						<div className="form-group">
-							<input type="checkbox" name="trona" className="form-check-input" id="InputTrona1" aria-describedby="tronaHelp" onChange={handleChange} />
+							<input type="checkbox" name="trona" checked={(local.trona) ? "checked" : "" } className="form-check-input" id="InputTrona1" aria-describedby="tronaHelp" onChange={handleChangecheck} />
 							<label htmlFor="InputTrona1">trona</label><br/>
 
-                            <input type="checkbox" name="cambiador" className="form-check-input" id="InputCambiador2" aria-describedby="cambiadorHelp" onChange={handleChange} />
+                            <input type="checkbox" name="cambiador" checked={(local.cambiador) ? "checked" : "" } className="form-check-input" id="InputCambiador2" aria-describedby="cambiadorHelp" onChange={handleChangecheck} />
                             <label htmlFor="InputCambiador2">cambiador</label><br/>
 
-                            <input type="checkbox" name="accessible_carrito" className="form-check-input" id="InputAccessible_carrito3" aria-describedby="accessible_carritoHelp" onChange={handleChange} />
+                            <input type="checkbox" name="accessible_carrito" checked={(local.accessible_carrito) ? "checked" : "" } className="form-check-input" id="InputAccessible_carrito3" aria-describedby="accessible_carritoHelp" onChange={handleChangecheck} />
                             <label htmlFor="InputAccessible_carrito3">accessible_carrito</label><br/>
 
-                            <input type="checkbox" name="espacio_carrito" className="form-check-input" id="InputEspacio_carrito3" aria-describedby="espacio_carritoHelp" onChange={handleChange} />
+                            <input type="checkbox" name="espacio_carrito" checked={(local.espacio_carrito) ? "checked" : "" } className="form-check-input" id="InputEspacio_carrito3" aria-describedby="espacio_carritoHelp" onChange={handleChangecheck} />
                             <label htmlFor="InputEspacio_carrito3">espacio_carrito</label><br/>
 
-                            <input type="checkbox" name="ascensor" className="form-check-input" id="InputAscensor5" aria-describedby="ascensorHelp"  onChange={handleChange} />
+                            <input type="checkbox" name="ascensor" checked={(local.ascensor) ? "checked" : "" } className="form-check-input" id="InputAscensor5" aria-describedby="ascensorHelp"  onChange={handleChangecheck} />
                             <label htmlFor="InputAscensor5">ascensor</label><br/>
 
-                            <input type="checkbox" name="productos_higiene" className="form-check-input" id="InputProductos_higiene5" aria-describedby="productos_higieneHelp" onChange={handleChange} />
+                            <input type="checkbox" name="productos_higiene" checked={(local.productos_higiene) ? "checked" : "" } className="form-check-input" id="InputProductos_higiene5" aria-describedby="productos_higieneHelp" onChange={handleChangecheck} />
                             <label htmlFor="InputProductos_higiene5">productos_higiene</label><br/>
 						</div>
  

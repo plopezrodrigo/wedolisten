@@ -26,19 +26,16 @@ const OpinionComments = (props) => {
           <i className="fas fa-circle"></i>
           <i className="fas fa-circle"></i>
           <i className="far fa-circle"></i>
+          {props.puntuacion}
           <p>Opinion escrita ayer</p>
         </div>
       </div>
       <div className="col-10">
           <h5>De 10</h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehend...</p>
+          <p>{props.comment}</p>
       </div>
       <div className="col-10">
-          <p><strong>Fecha de la visita:</strong> diciembre de 2022</p>
+          <p><strong>Fecha de la visita:</strong> {props.fecha}</p>
       </div>
       </div>
   );

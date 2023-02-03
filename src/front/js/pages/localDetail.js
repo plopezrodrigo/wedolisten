@@ -6,12 +6,26 @@ import { Context } from "../store/appContext";
 
 const LocalDetail = (props) => {
   const params = useParams();
+  const [comentarios, setComentarios] = useState();
   const [local, setLocal] = useState({});
   const [favoritos, setFavoritos] = useState({});
   const { store, actions } = useContext(Context);
   let options = {
     method: "GET",
   };
+
+  const useEffectComments = async () => {
+    const resp = await fetch( process.env.BACKEND_URL + "/api/Comment",{
+        method: 'GET',
+        headers: {"Content-Type": "application/json",
+                  "Authorization": 'Bearer '+ sessionStorage.getItem("token") // hará falta?
+        } 
+      })
+    if (resp.ok) return setComentarios(await resp.json());
+    else         return setMensaje(await resp.json());  
+  }
+
+
 
   useEffect(() => {
     if (sessionStorage.getItem("token") != null) {
@@ -30,6 +44,9 @@ const LocalDetail = (props) => {
       .then((response) => {
         setLocal(response);
       });
+
+      useEffectComments();
+
   }, []);
 
   const add_favourites = (id) => {
@@ -222,16 +239,35 @@ const LocalDetail = (props) => {
           </span>
         </div>
       </div>
+
       <div className="row" id="rating">
         <h2 id="descripcion">Lee lo que otros usuarios opinan</h2>
-        <OpinionComments />
-        <OpinionComments />
+
+        {comentarios && comentarios.map((comentario, index)=>{   
+                                    return  <> 
+                                                <div className="col mb-3"> 
+                                                    <OpinionComments comment={comentario.comment}
+                                                                     fecha={comentario.date}
+                                                                     puntuacion={comentario.puntuacion}
+                                                                 />
+                                                </div>
+                                            </>
+                                    })
+        }
       </div>
-      <div className="col-4">
-        <button className="btn btn-primary" id="button">
-          Escribe tu opinión
-        </button>
-      </div>
+
+      {store.usertype == "customer" &&
+          <p className="text ma-home-section">
+            <Link to="/Comentarios">
+            <a>
+              <i className="fas fa-star" id="iconaccount" />
+              <strong className="strong"> Escribe tu opinión</strong>
+            </a>
+            </Link>
+          </p>
+      }
+
+
     </div>
   );
 };
