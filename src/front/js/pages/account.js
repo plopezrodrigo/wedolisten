@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import imagen from "../../img/account.png";
 
 export const Account = () => {
+  const navigate = useNavigate()
   const { store, actions } = useContext(Context);
   return (
     <form>
@@ -69,7 +70,8 @@ export const Account = () => {
                       }
                     <p className="text ma-home-section">
                     <a
-                    onClick={() => actions.logout()}
+                    onClick={() => {actions.logout()
+                    navigate("/")}}
                     >
                     <i class="fas fa-sign-out-alt" id="iconaccount"></i>
                     <strong className="strong"> Cerrar sesión </strong>

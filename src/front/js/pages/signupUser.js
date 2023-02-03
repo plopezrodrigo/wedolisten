@@ -46,55 +46,66 @@ export const SignupUser = () => {
 	  },[]);
 
 	return (
-		<div className="container fluid align-center">
-		  <div className="form-body">
-			<div className="row">
+		<div className="vh-100 gradient-custom">
+		  <div className="container text-center">
+			<div className="row d-flex justify-content-center align-items-center h-100">
 			  <h1>Hola!</h1>
-			  <h5>Bienvenido a tu App para valorar establecimientos</h5>
-				<div className="col-md-12">
-					<form onSubmit={handleSubmit}>
-						<div className="form-group">
-							<label htmlFor="InputEmail1">Nombre y apellidos</label>
-							<input type="text" name="name" required className="form-control" id="InputName1" aria-describedby="nameHelp" placeholder="Nombre y apellidos" onChange={handleChange} />
-						</div>
-						<div className="form-group">
-							<label htmlFor="InputEmail1">Email address</label>
-							<input type="email" name="user" required className="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="email" onChange={handleChange} />
-						</div>
-						<div className="form-group">
-							<label htmlFor="InputPassword1">Password</label>
-							<input type="password" name="password" required className="form-control" id="InputPassword1" placeholder="Password" onChange={handleChange} />
-						</div>
-						
-						<div className="form-group">
-							<label htmlFor="InputCumple1">Cumpleaños</label>
-							<input type="date" name="birthday" className="form-control" id="InputCumple1" aria-describedby="nameHelp" placeholder="Cumpleaños" onChange={handleChange} />
-						</div>
+			  <h5 className="mb-5">Bienvenido a tu App para valorar establecimientos</h5>
+			<div className="col-12 col-md-8 col-lg-6 col-xl-5">
+				<div className="card">
+					<form className="form-outline" onSubmit={handleSubmit}>
+							<div className="form-group">
+								<label htmlFor="InputEmail1">Nombre y apellidos</label>
+								<input type="text" name="name" required className="form-control mb-2" id="InputName1" aria-describedby="nameHelp" placeholder="Nombre y apellidos" onChange={handleChange} />
+							</div>
+							<div className="form-group">
+								<label htmlFor="InputEmail1">Email address</label>
+								<input type="email" name="user" required className="form-control mb-2" id="InputEmail1" aria-describedby="emailHelp" placeholder="email" onChange={handleChange} />
+							</div>
+							<div className="form-group">
+								<label htmlFor="InputPassword1">Password</label>
+								<input type="password" name="password" required className="form-control mb-2" id="InputPassword1" placeholder="Password" onChange={handleChange} />
+							</div>
+							
+							<div className="form-group">
+								<label htmlFor="InputCumple1">Cumpleaños</label>
+								<input type="date" name="birthday" className="form-control mb-2" id="InputCumple1" aria-describedby="nameHelp" placeholder="Cumpleaños" onChange={handleChange} />
+							</div>
 
-						<div className="form-group">
-							<label htmlFor="InputGender1">Género</label>
-							<select name="gender" id="InputGender1" className="form-control" aria-describedby="nameHelp" onChange={handleChange} >
-								<option value="">--Elige una opción--</option>
-								<option value="female">female</option>
-								<option value="male">male</option>
-							</select>
-						</div>
-						<br/>
-						<div className="form-group">
-							<label htmlFor="InputSubs1">Subscripción</label>
-							<input type="checkbox" name="subscription" className="form-check-input" id="InputSubs1" aria-describedby="nameHelp" placeholder="Subscripción" onChange={handleChange} />
-						</div>	   
-						<br/>
-						<div className="form-group">
-							<label htmlFor="InputPostal1">Dirección postal</label>
-							<input type="text" name="address" className="form-control" id="InputPostal1" aria-describedby="nameHelp" placeholder="Dirección postal" onChange={handleChange} />
-						</div>	   
+							<div className="form-group">
+								<label htmlFor="InputGender1">Género</label>
+								<select name="gender" id="InputGender1" className="form-control mb-2" aria-describedby="nameHelp" onChange={handleChange} >
+									<option value="">--Elige una opción--</option>
+									<option value="female">female</option>
+									<option value="male">male</option>
+								</select>
+							</div>
+							<br/>
+							<div className="form-group">
+								<label htmlFor="InputSubs1">Subscripción</label>
+								<input type="checkbox" name="subscription" className="form-check-input" id="InputSubs1" aria-describedby="nameHelp" placeholder="Subscripción" onChange={handleChange} />
+							</div>	   
+							<br/>
+							<div className="form-group">
+								<label htmlFor="InputPostal1">Dirección postal</label>
+								<input type="text" name="address" className="form-control mb-2" id="InputPostal1" aria-describedby="nameHelp" placeholder="Dirección postal" onChange={handleChange} />
+							</div>	   
 
-						<br/>
-						<button type="submit"  id="button">Registrarme</button>
-						{(mensaje) && (mensaje != null) && <p>{mensaje}</p>}
-					</form>				  
-				</div>
+
+							<br/>
+							<button className="mb-3" type="submit"  id="button">Registrarme</button>
+							{(mensaje != null) && <p>{mensaje}</p>}
+							<div>
+                    		<p className="ms-3 me-3 mb-3 text-center">
+                     		 ¿Ya tienes una cuenta?
+                      		<a href="#!" className="fw-bold">
+                      		Log in
+                      		</a>
+                    		</p>
+                  			</div>
+					</form>	
+				</div>								  
+			</div>
 			</div>
 		  </div>
 		</div>

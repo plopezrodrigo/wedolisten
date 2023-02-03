@@ -27,11 +27,14 @@ const UserInfo = (props) => {
           Permite que otros usuarios conozcan tu opinión en la visita a nuestros
           locales y podamos mejorar su experiencia.{" "}
         </p>
-        {/*!(tokenValid(store.token)) &&*/}
+        {!(sessionStorage.getItem("token")) ?
           <Link to="/signupUser" className="btn btn-lg btn-outline-primary mb-3" id="button">
             Registro
-          </Link>        
-        
+          </Link> :
+          <Link to="/listlocales" className="btn btn-lg btn-outline-primary mb-3" id="button">
+          Escribe tu opinión
+        </Link>        
+        }
       </div>
     </div>
   );
