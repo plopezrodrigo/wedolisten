@@ -65,7 +65,7 @@ It is recomended to install the backend first, make sure you have Python 3.8, Pi
 4. Migrate the migrations: `$ pipenv run migrate` (skip if you have not made changes to the models on the `./src/api/models.py`)
 5. Run the migrations: `$ pipenv run upgrade`
                           flask insert-test-inicial 
-6. Run the application: `$ pipenv run start`
+6. Run the application: `$ pipenv run start` 
  
 ### Backend Populate Table Users 
 

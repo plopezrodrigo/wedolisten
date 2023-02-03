@@ -1,6 +1,6 @@
 
 import click
-from api.models import db, User, Customer, Manager, Comercial_Place
+from api.models import db, User, Customer, Manager, Comercial_Place, Comment
 
 """
 In this file, you can add as many commands as you want using the @app.cli.command decorator
@@ -34,6 +34,12 @@ def setup_commands(app):
     @app.cli.command("insert-test-inicial")
     def insert_test_data():
         print("Borrando datos")
+        Comment.query.all()
+        c = Comment.query.all()
+        for x in c:
+            db.session.delete(x)
+        db.session.commit()
+
         Comercial_Place.query.all()
         cp = Comercial_Place.query.all()
         for x in cp:
@@ -130,9 +136,81 @@ def setup_commands(app):
         cp.description = 'Prueba a no visualizar como local del manager 2'
         cp.address = 'address 3'
         db.session.add(cp)
-        print("manager: ", cp.name, " Comercial_Place.")
+        db.session.commit()
+        print("Comercial_Place: ", cp.name, " Comercial_Place.")
+        local = cp.id
         print("--------------------------------------------------------")
         print("")
-
+        print("Creating test Comentarios")
+ 
+        print("--------------------------------------------------------")
+        print(local)
+        print("--------------------------------------------------------")
+        comment = Comment()
+        comment.user_id = cliente
+        comment.comercial_place_id = local
+        comment.comment = "Comentario que estoy metiendo por inicializar 1"
+        comment.puntuacion = "uno"
+        comment.price = "Barato"
+        comment.a_domicilio = "Si"
+        comment.mesa = "Si"
+        comment.alcohol = "No"
+        comment.visita = "Pareja"
+        db.session.add(comment)
         db.session.commit()
-        
+
+        comment = Comment()
+        comment.user_id = cliente
+        comment.comercial_place_id = local
+        comment.comment = "Comentario que estoy metiendo por inicializar 2"
+        comment.puntuacion = "uno"
+        comment.price = "Barato"
+        comment.a_domicilio = "Si"
+        comment.mesa = "Si"
+        comment.alcohol = "No"
+        comment.visita = "Pareja"
+        db.session.add(comment)
+        db.session.commit()
+
+        comment = Comment()
+        comment.user_id = cliente
+        comment.comercial_place_id = local
+        comment.comment = "Comentario que estoy metiendo por inicializar 3"
+        comment.puntuacion = "uno"
+        comment.price = "Barato"
+        comment.a_domicilio = "Si"
+        comment.mesa = "Si"
+        comment.alcohol = "No"
+        comment.visita = "Pareja"
+        db.session.add(comment)
+        db.session.commit()
+
+        comment = Comment()
+        comment.user_id = cliente
+        comment.comercial_place_id = local
+        comment.comment = "Comentario que estoy metiendo por inicializar 4"
+        comment.puntuacion = "uno"
+        comment.price = "Barato"
+        comment.a_domicilio = "Si"
+        comment.mesa = "Si"
+        comment.alcohol = "No"
+        comment.visita = "Pareja"
+        db.session.add(comment)
+        db.session.commit()
+
+        comment = Comment()
+        comment.user_id = cliente
+        comment.comercial_place_id = local
+        comment.comment = "Comentario que estoy metiendo por inicializar 5"
+        comment.puntuacion = "uno"
+        comment.price = "Barato"
+        comment.a_domicilio = "Si"
+        comment.mesa = "Si"
+        comment.alcohol = "No"
+        comment.visita = "Pareja"
+        db.session.add(comment)
+        db.session.commit()
+
+        print("Comentarios: ", comment.comment, " Comentario.")
+        print("--------------------------------------------------------")
+        print("")       

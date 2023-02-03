@@ -86,8 +86,8 @@ def Comercial_Places_Detail(comercial_place_id):
 
 @api.route('/Comment', methods=['GET'])
 def list_Comments():
-    Comments = Comment.query.all()
-    data = [Comment.serialize() for Comments in Comment]
+    datos = Comment.query.order_by(Comment.id.desc()).all()
+    data = [comentario.serialize() for comentario in datos]
     return jsonify(data), 200
 
 
@@ -95,9 +95,10 @@ def list_Comments():
 @jwt_required()
 def list_Favourit():
     user_id=get_jwt_identity()
-    customer = Customer.query.filter_by(user_id=user_id)
+    customer = Customer.query.filter_by(user_id=user_id).first()
     favourit = Favourit.query.filter_by(customer_id=customer.id)
-    return jsonify(favourit), 200
+    data = [element.serialize() for element in favourit]
+    return jsonify(data), 200
 
 @api.route('/favourit/<id>', methods=['POST'])
 @jwt_required()
@@ -176,38 +177,83 @@ def signup():
 @api.route("/Comercial_Place", methods=["POST"])
 @jwt_required()
 def Comercial_Place_add():
+    try:
+        userId = get_jwt_identity()
+        Place = Comercial_Place(
+            user_id         = userId,
+            name            = request.json.get('name'),
+            address         = request.json.get('address'),
+            url             = request.json.get('url'),
+            image_url       = request.json.get('image_url'),
+            telf            = request.json.get('telf'),
+            email           = request.json.get('email'),
+            location        = request.json.get('location'),
+            description     = request.json.get('description'),
+            cambiador       = True, # request.json.get('cambiador'),
+            trona           = True, # request.json.get('trona'),
+            accessible_carrito = True, # request.json.get('accessible_carrito'),
+            espacio_carrito    = True, # request.json.get('espacio_carrito'),
+            ascensor           = True, # request.json.get('ascensor'),
+            productos_higiene  = True, # request.json.get('productos_higiene')
+
+        )
+        db.session.add(Place)
+        db.session.commit()
+
+        return jsonify({"msg": "Usuario creado correctamente"}), 200
+
+    except Exception as e:
+        print('--------------------------------------')
+        print('--------------------------------------')
+        print(e)
+        print('--------------------------------------')
+        print('--------------------------------------')
+        db.session.rollback()
+        return jsonify({"msg": "No se puede crear este Local"}), 402
+
+    return jsonify({"msg": "Comentario creado correctamente"}), 200
+
+
+
+
+
+@api.route("/Comercial_Place/<comercial_place_id>", methods=["POST"])
+@jwt_required()
+def Comercial_Place_update(idLocal):
     userId = get_jwt_identity()
-    Place = Comercial_Place(
-        user_id         = userId,
-        #user           = request.json.get('user'),
-        name            = request.json.get('name'),
-        address         = request.json.get('address'),
-        url             = request.json.get('url'),
-        image_url       = request.json.get('image_url'),
-        telf            = request.json.get('telf'),
-        email           = request.json.get('email'),
-        location        = request.json.get('location'),
-        description     = request.json.get('description'),
-        cambiador       = true, # request.json.get('cambiador'),
-        trona           = true, # request.json.get('trona'),
-        accessible_carrito = true, # request.json.get('accessible_carrito'),
-        espacio_carrito    = true, # request.json.get('espacio_carrito'),
-        ascensor           = true, # request.json.get('ascensor'),
-        productos_higiene  = true, # request.json.get('productos_higiene')
+    try:
+        place = Comercial_Place.query.filter_by(id=idLocal)
 
-    )
-    db.session.add(Place)
-    db.session.commit()
+        if place:
+            place.name                = request.json.get('name'),
+            place.address             = request.json.get('address'),
+            place.url                 = request.json.get('url'),
+            place.image_url           = request.json.get('image_url'),
+            place.telf                = request.json.get('telf'),
+            place.email               = request.json.get('email'),
+            place.location            = request.json.get('location'),
+            place.description         = request.json.get('description'),
+            place.cambiador           = True, # request.json.get('cambiador'),
+            place.trona               = True, # request.json.get('trona'),
+            place.accessible_carrito  = True, # request.json.get('accessible_carrito'),
+            place.espacio_carrito     = True, # request.json.get('espacio_carrito'),
+            place.ascensor            = True, # request.json.get('ascensor'),
+            place.productos_higiene   = True, # request.json.get('productos_higiene')
 
+            db.session.commit()
+        
+            return jsonify({"msg": "Local modificado correctamente"}), 200
+        else:
+            return jsonify({"msg": "No existen datos"}), 402
 
-
-
-
-
-
-
-
-
+    except Exception as e:
+        print('--------------------------------------')
+        print('--------------------------------------')
+        print(e)
+        print('--------------------------------------')
+        print('--------------------------------------')
+        db.session.rollback()
+        return jsonify({"msg": "No se puede crear este Local"}), 402
 
 
 
@@ -293,6 +339,7 @@ def Comments_add():
             db.session.add(photos)
 
         db.session.commit()
+        return jsonify({"msg": "Comentario creado correctamente"}), 200
     
     except Exception as e:
         print('--------------------------------------')
@@ -302,8 +349,6 @@ def Comments_add():
         print('--------------------------------------')
         db.session.rollback()
         return jsonify({"msg": "No se puede crear este comentario"}), 402
-
-    return jsonify({"msg": "Comentario creado correctamente"}), 200
 
 
 @api.route("/Favourit", methods=["POST"])
