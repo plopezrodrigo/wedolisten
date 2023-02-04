@@ -176,7 +176,7 @@ class Comment(db.Model):
     def serialize(self):
         return {    "id": self.id,
                     "user_id": self.user_id,
-                    #"user_name": self.user.name,
+                    "user_name": self.user.email,
                     "comercial_place_id": self.comercial_place_id,
                     "comercial_place_name": self.comercial_place.name,
                     "comment_id": self.comment_id,

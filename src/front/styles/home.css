@@ -31,6 +31,8 @@ body {
     border-radius: 10%;
     align-items: center;
     position: relative;
+    max-width: 500px;
+    max-height: 500px;
   }
   #imagenopinion{
     display: block;

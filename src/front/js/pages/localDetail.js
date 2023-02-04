@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import imagen from "../../img/mapa.jpeg";
-import OpinionComments from "../component/opinionComments";
+import OpinionCard from "../component/opinionCard";
 import { useParams, Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
@@ -244,20 +244,21 @@ const LocalDetail = (props) => {
         <h2 id="descripcion">Lee lo que otros usuarios opinan</h2>
 
         {comentarios && comentarios.map((comentario, index)=>{   
-                                    return  <> 
-                                                <div className="col mb-3"> 
-                                                    <OpinionComments comment={comentario.comment}
-                                                                     fecha={comentario.date}
-                                                                     puntuacion={comentario.puntuacion}
-                                                                 />
-                                                </div>
-                                            </>
-                                    })
+            return  <> 
+                <div className="col mb-3"> 
+                  <OpinionCard  comment={comentario.comment}
+                                fecha={comentario.date}
+                                nombre={comentario.user_name}
+                                puntuacion={comentario.puntuacion}
+                  />
+                </div>
+                </>
+            })
         }
       </div>
 
       {store.usertype == "customer" &&
-          <p className="text ma-home-section">
+          <p className="text ma-home-section">  
             <Link to="/Comentarios">
             <a>
               <i className="fas fa-star" id="iconaccount" />
