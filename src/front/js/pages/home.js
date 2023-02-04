@@ -21,7 +21,7 @@ export const Home = () => {
         })
       if (resp.ok) return setComentarios(await resp.json());
       else         return setMensaje(await resp.json());  
-  }
+  } 
 
   const useEffectLocales = async () => {
     await fetch(process.env.BACKEND_URL + "/api/comercial-place")

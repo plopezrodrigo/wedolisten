@@ -24,11 +24,11 @@ const OpinionCard = (props) => {
             {() => {for (let i = props.puntuacion; i<5; i++){return <i className="far fa-star" id="iconbutton"/>}}}
             <i className="fas fa-star" id="iconbutton"/>
           </button>
-          <p className="card-text">
+          <p className="card-text"> 
             {props.comment}
           </p>
           <div className="col-10">
-            <p><strong>Fecha de la visita:</strong> {props.fecha}</p>
+            <p><strong>Fecha de la visita:</strong> {props.fecha}</p> 
           </div>
           {store.usertype != "customer" &&
               <p className="text ma-home-section">  
@@ -47,21 +47,3 @@ const OpinionCard = (props) => {
 };
 
 export default OpinionCard;
-
-
-/*
-
-r una .text-truncateclase para truncar el texto con puntos suspensivos. Requiere display: inline-blocko display: block.
-<!-- Block level -->
-<div class="row">
-  <div class="col-2 text-truncate">
-    Praeterea iter est quasdam res quas ex communi.
-  </div>
-</div>
-
-<!-- Inline level -->
-<span class="d-inline-block text-truncate" style="max-width: 150px;">
-  Praeterea iter est quasdam res quas ex communi.
-</span>
-
-*/
