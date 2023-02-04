@@ -86,11 +86,28 @@ def Comercial_Places_Detail(comercial_place_id):
     else:
         return jsonify({"msg": "No existen datos"}), 402
 
-@api.route('/Comment', methods=['GET'])
+
+@api.route('/comercial-place-2/<comercial_place_id>', methods=['GET'])
+def Comercial_Places_2(comercial_place_id):
+    comercial_places = Comercial_Place.query.filter_by(id=comercial_place_id).first()
+
+    data = comercial_places.serialize()
+    if comercial_places:
+        return jsonify(data), 200
+    else:
+        return jsonify({"msg": "No existen datos"}), 402
+
+
+@api.route('/comment', methods=['GET'])
 def list_Comments():
     datos = Comment.query.order_by(Comment.id.desc()).limit(4).all()
     data = [comentario.serialize() for comentario in datos]
     return jsonify(data), 200
+
+@api.route('/comment/<id>', methods=['GET'])
+def get_comment(id):
+    datos = Comment.query.get(id)
+    return jsonify(datos.serialize()), 200
 
 
 @api.route('/favourit', methods=['GET'])
@@ -220,9 +237,6 @@ def Comercial_Place_add():
     return jsonify({"msg": "Comentario creado correctamente"}), 200
 
 
-
-
-
 @api.route("/Comercial_Place/<idLocal>", methods=["POST"])
 @jwt_required()
 def Comercial_Place_update(idLocal):
@@ -292,35 +306,23 @@ def Photo_add():
     db.session.commit()
 
 
-@api.route("/Comment", methods=["POST"])
-def Comments_add():
+@api.route("/comment/<id_comment>", methods=["POST"])
+@jwt_required()
+def Comments_add(id_comment):
+    data['user_id'] = get_jwt_identity()
+    data['comment_id'] = id_comment
     data = request.json
-
-    #if (data.get('tipo') == "manager" and data.get('comment_id') == null):
-    #    return jsonify({"msg": "Un manager no puede generar una respuesta que no sea sobre un comentario de cliente"}), 403
 
     print('----------------------------------------------')
     print('----------------------------------------------')
     print('----------------------------------------------') 
-    # PDTE:
-    #   coger el usuario por token
-    #   validar que es un comentario de user y es un usuario o que es un comentario de gestor y es un gestor
-    #   validar el comment_id
-
-    user = User.query.filter_by(email='p@p.es').first()
-    data['user_id'] = user.id
-    comercial = Comercial_Place.query.filter_by(name='Nombre Comercial_Place').first()
-    data['comercial_place_id'] = comercial.id
-
-    if (data.get('tipo') == "manager"):
-        comment = Comment.query.filter_by(comercial_place_id=comercial.id).first()
-        data['comment_id'] = comment.id
-
     print(data)
+    print('----------------------------------------------')
+    print('----------------------------------------------')
+    print('----------------------------------------------')
 
-    print('----------------------------------------------')
-    print('----------------------------------------------')
-    print('----------------------------------------------')
+    if (data.get('tipo') == "manager" and data.get('comment_id') == null):
+        return jsonify({"msg": "Un manager no puede generar una respuesta que no sea sobre un comentario de cliente"}), 403
 
     try:
         comments = Comment( user_id             = data['user_id'],
@@ -341,18 +343,20 @@ def Comments_add():
             photos = Photos_Comments(comment_id = comments.id,
                                      location   = data['photo_location1'])
             db.session.add(photos)
+            db.session.commit()
 
         if data.get('photo_location2'):
             photos = Photos_Comments(comment_id = comments.id,
                                      location   = data['photo_location2'])
             db.session.add(photos)
+            db.session.commit()
 
         if data.get('photo_location3'):
             photos = Photos_Comments(comment_id = comments.id,
                                      location   = data['photo_location3'])
             db.session.add(photos)
+            db.session.commit()
 
-        db.session.commit()
         return jsonify({"msg": "Comentario creado correctamente"}), 200
     
     except Exception as e:

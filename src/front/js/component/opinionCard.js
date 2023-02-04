@@ -30,9 +30,9 @@ const OpinionCard = (props) => {
           <div className="col-10">
             <p><strong>Fecha de la visita:</strong> {props.fecha}</p> 
           </div>
-          {store.usertype != "customer" &&
+          {store.usertype == "manager" &&
               <p className="text ma-home-section">  
-                <Link to="/Comentarios">
+                <Link to={`/OpinionManager/${props.local_id}/${props.id_comment}`}>
                 <a>
                   <i className="fas fa-star" id="iconaccount" />
                   <strong className="strong">Responde</strong>

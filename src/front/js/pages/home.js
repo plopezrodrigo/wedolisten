@@ -13,7 +13,7 @@ export const Home = () => {
   const [locales, setLocales] = useState();
 
   const useEffectComentarios = async () => {
-      const resp = await fetch( process.env.BACKEND_URL + "/api/Comment",{
+      const resp = await fetch( process.env.BACKEND_URL + "/api/comment",{
           method: 'GET',
           headers: {"Content-Type": "application/json",
                     "Authorization": 'Bearer '+ sessionStorage.getItem("token") // hará falta?
@@ -33,13 +33,10 @@ export const Home = () => {
       });
   }
 
-
   useEffect (()=> {
       useEffectComentarios(); 
       useEffectLocales();
   }, [])
-
-
 
   return (
     <div className="container">
@@ -54,6 +51,8 @@ export const Home = () => {
                                                     <OpinionCard comment ={comentario.comment}
                                                                  puntuacion="4"
                                                                  fecha={comentario.date}
+                                                                 local_id={comentario.comercial_place_id}
+                                                                 id_comment={comentario.id}
                                                     />
                                                 </div> 
                                             </>
