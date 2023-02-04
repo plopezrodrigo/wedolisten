@@ -116,23 +116,23 @@ def setup_commands(app):
         
         cp = Comercial_Place()
         cp.user_id = user.id
-        cp.name = 'Nombre Comercial_Place'
-        cp.description = 'Descripción Comercial_Place'
+        cp.name = 'La panza llena'
+        cp.description = 'Comida mexicana autentica, del mismo Canadá'
         cp.address = 'address'
         cp.image_url = "https://previews.123rf.com/images/kovalnadiya/kovalnadiya2203/kovalnadiya220300248/192887626-patatas-fritas-calientes-frescas-con-sal-y-especias-en-la-tabla-de-cortar-sobre-fondo-de-mesa-de-mad.jpg"
         cp.cambiador = True
         cp.trona = False
         cp.accessible_carrito = False
         cp.espacio_carrito = False
-        cp.ascensor = False
+        cp.ascensor = True
         cp.productos_higiene = True
         db.session.add(cp)
-        print("manager: ", cp.name, " Comercial_Place.")        
+        print("Local: ", cp.name, " Comercial_Place.")        
         
         cp = Comercial_Place()
         cp.user_id = user.id
-        cp.name = 'Nombre Comercial_Place 2'
-        cp.description = 'Descripción Comercial_Place 2'
+        cp.name = 'Divercho'
+        cp.description = 'No tengo mas estrellas porque no me ha dado tiempo!!!'
         cp.address = 'address 2'
         cp.image_url = "https://previews.123rf.com/images/pilat666/pilat6661808/pilat666180800178/106988422-vista-panor%C3%A1mica-del-famoso-lago-hallstatter-amanecer-de-oto%C3%B1o-brumoso-en-el-peque%C3%B1o-restaurante-chi.jpg"
         cp.cambiador = False
@@ -142,7 +142,7 @@ def setup_commands(app):
         cp.ascensor = False
         cp.productos_higiene = False
         db.session.add(cp)
-        print("manager: ", cp.name, " Comercial_Place.")
+        print("Local: ", cp.name, " Comercial_Place.")
 
         cp = Comercial_Place()
         cp.user_id = cliente
@@ -158,7 +158,7 @@ def setup_commands(app):
         cp.productos_higiene = True
         db.session.add(cp)
         db.session.commit()
-        print("Comercial_Place: ", cp.name, " Comercial_Place.")
+        print("Local: ", cp.name, " Comercial_Place.")
         local = cp.id
         print("--------------------------------------------------------")
         print("")
