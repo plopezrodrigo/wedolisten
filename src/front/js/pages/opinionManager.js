@@ -8,7 +8,7 @@ export const OpinionManager = () => {
 	const params = useParams()
 	const [local, setLocales] = useState({})
 	const [comentario, setComentario] = useState();
-	const [formData, setFormData] = useState({tipo:"manager", user_id:1, comercial_place_id:params.id_local, comment_id: params.id_comment});
+	const [formData, setFormData] = useState({tipo:"manager", comercial_place_id:params.id_local, comment_id: params.id_comment});
 	const [mensaje, setMensaje] = useState(null); 
 	const navigate = useNavigate();
 	const { store, actions } = useContext(Context);
@@ -92,6 +92,7 @@ export const OpinionManager = () => {
                     <h1 className="text-center">El usuario es:</h1>
                     <h5 className="text-center">{comentario && comentario.user_name}</h5>
                     <h5 className="text-center">Ha puntuado con 3 estrellas</h5>
+                    {/*<h5 className="text-center">Ha puntuado con {comentario && comentario.puntuacion} estrellas</h5>*/}
                 </div>
 				
 				<div className="border border-warning my-3">
@@ -106,7 +107,7 @@ export const OpinionManager = () => {
 						</div>
 
 						<br/>
-						<button type="submit"  id="button">Comentar</button>
+						<button type="submit"  id="button">Comentario</button>
 						{(mensaje != null) && <p>{mensaje}</p>}
 					</form>				  
 				</div>

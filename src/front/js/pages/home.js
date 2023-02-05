@@ -53,6 +53,7 @@ export const Home = () => {
                                                                  fecha={comentario.date}
                                                                  local_id={comentario.comercial_place_id}
                                                                  id_comment={comentario.id}
+                                                                 nombre={comentario.user_name}
                                                     />
                                                 </div> 
                                             </>
