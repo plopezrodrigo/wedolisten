@@ -5,8 +5,7 @@ import imagen from "../../img/opinion.png";
 
 const OpinionCard = (props) => {
   const { store, actions } = useContext(Context);
-  console.log(store.favorites); 
-
+  
   return (
     <div className="col-12">
       <div className="card" id="opinioncard">
