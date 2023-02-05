@@ -318,15 +318,6 @@ def Comments_add(id_comment):
     data['user_id'] = get_jwt_identity()
     data = request.json                                                                                                                                                                                                                                                                         
 
-    print('----------------------------------------------')
-    print('----------------------------------------------')
-    print('----------------------------------------------') 
-    print(data.get('comment_id'))
-    print(id_comment)
-    print('----------------------------------------------')                                                                                                                                                                                                                              
-    print('----------------------------------------------')
-    print('----------------------------------------------')
-
     if (data.get('tipo') == "manager" and data.get('comment_id') == null):
         return jsonify({"msg": "Un manager no puede generar una respuesta que no sea sobre un comentario de cliente"}), 403
 
@@ -351,20 +342,18 @@ def Comments_add(id_comment):
             photos = Photos_Comments(comment_id = comments.id,
                                      location   = data['photo_location1'])
             db.session.add(photos)
-            db.session.commit()
 
         if data.get('photo_location2'):
             photos = Photos_Comments(comment_id = comments.id,
                                      location   = data['photo_location2'])
             db.session.add(photos)
-            db.session.commit()
 
         if data.get('photo_location3'):
             photos = Photos_Comments(comment_id = comments.id,
                                      location   = data['photo_location3'])
             db.session.add(photos)
-            db.session.commit()
 
+        db.session.commit()
         return jsonify({"msg": "Comentario creado correctamente"}), 200
     
     except Exception as e:

@@ -124,20 +124,32 @@ const LocalDetail = (props) => {
       </div>
       <div className="row" id="rating">
         <div className="col-6">
-          <div><p className={clase(local.trona)}>trona</p></div>
-          <div><p className={()=>{(local.cambiador) ? "tituloHome" : "footer"} }>cambiador</p></div>
-          <div><p className={()=>{(local.accesible) ? "tituloHome" : "footer"} }>accesible</p></div>
+          <div className="form-check">
+            <input type="checkbox" checked={(local.trona) ? "checked" : "" } className="form-check-input" id="Input_trona"/>
+            <label className="form-check-label" for="Input_trona">Trona</label>
+          </div>
+          <div className="form-check">
+            <input type="checkbox" checked={(local.cambiador) ? "checked" : "" } className="form-check-input" id="Input_cambiador"/>
+            <label className="form-check-label" for="Input_cambiador">Cambiador</label>
+          </div>
+          <div className="form-check">
+            <input type="checkbox" checked={(local.accesible) ? "checked" : "" } className="form-check-input" id="Input_accesible"/>
+            <label className="form-check-label" for="Input_accesible">Accesible con carrito</label>
+          </div>
         </div>
         <div className="col-6">
-          <div>
-            {local.espacio_carrito ?
-              (<p className="tituloHome">espacio_carrito</p>)
-            :
-              (<p className="footer">espacio_carrito</p>)
-            }
+          <div className="form-check">
+            <input type="checkbox" checked={(local.espacio_carrito) ? "checked" : "" } className="form-check-input" id="Input_espacio_carrito"/>
+            <label className="form-check-label" for="Input_espacio_carrito">Espacio Carrito</label>
           </div>
-          <div><p className={()=>{(local.ascensor) ? "tituloHome" : "footer"} }>ascensor</p></div>
-          <div><p className={()=>{(local.productos_higiene) ? "tituloHome" : "footer"} }>productos_higiene</p></div>
+          <div className="form-check">
+            <input type="checkbox" checked={(local.ascensor) ? "checked" : "" } className="form-check-input" id="Input_ascensor"/>
+            <label className="form-check-label" for="Input_ascensor">Ascensor</label>
+          </div>
+          <div className="form-check">
+            <input type="checkbox" checked={(local.productos_higiene) ? "checked" : "" } className="form-check-input" id="Input_productos_higiene"/>
+            <label className="form-check-label" for="Input_productos_higiene">Productos higiene</label>
+          </div>
         </div>
       </div>
       <div className="row" id="ubicacion">
