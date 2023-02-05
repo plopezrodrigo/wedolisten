@@ -101,22 +101,22 @@ export const DatosLocal = () => {
 						</div>
                         <br/>
 						<div className="form-group">
-							<input type="checkbox" name="trona" checked={(local.trona) ? "checked" : "" } className="form-check-input" id="InputTrona1" aria-describedby="tronaHelp" onChange={handleChangecheck} />
+							<input type="checkbox" name="trona" checked={(local.trona) ? "checked" : "" } className="form-check-input" id="InputTrona1" onChange={handleChangecheck} />
 							<label htmlFor="InputTrona1">trona</label><br/>
 
-                            <input type="checkbox" name="cambiador" checked={(local.cambiador) ? "checked" : "" } className="form-check-input" id="InputCambiador2" aria-describedby="cambiadorHelp" onChange={handleChangecheck} />
+                            <input type="checkbox" name="cambiador" checked={(local.cambiador) ? "checked" : "" } className="form-check-input" id="InputCambiador2"onChange={handleChangecheck} />
                             <label htmlFor="InputCambiador2">cambiador</label><br/>
 
-                            <input type="checkbox" name="accessible_carrito" checked={(local.accessible_carrito) ? "checked" : "" } className="form-check-input" id="InputAccessible_carrito3" aria-describedby="accessible_carritoHelp" onChange={handleChangecheck} />
+                            <input type="checkbox" name="accessible_carrito" checked={(local.accessible_carrito) ? "checked" : "" } className="form-check-input" id="InputAccessible_carrito3" onChange={handleChangecheck} />
                             <label htmlFor="InputAccessible_carrito3">accessible_carrito</label><br/>
 
-                            <input type="checkbox" name="espacio_carrito" checked={(local.espacio_carrito) ? "checked" : "" } className="form-check-input" id="InputEspacio_carrito3" aria-describedby="espacio_carritoHelp" onChange={handleChangecheck} />
+                            <input type="checkbox" name="espacio_carrito" checked={(local.espacio_carrito) ? "checked" : "" } className="form-check-input" id="InputEspacio_carrito3" onChange={handleChangecheck} />
                             <label htmlFor="InputEspacio_carrito3">espacio_carrito</label><br/>
 
-                            <input type="checkbox" name="ascensor" checked={(local.ascensor) ? "checked" : "" } className="form-check-input" id="InputAscensor5" aria-describedby="ascensorHelp"  onChange={handleChangecheck} />
+                            <input type="checkbox" name="ascensor" checked={(local.ascensor) ? "checked" : "" } className="form-check-input" id="InputAscensor5" onChange={handleChangecheck} />
                             <label htmlFor="InputAscensor5">ascensor</label><br/>
 
-                            <input type="checkbox" name="productos_higiene" checked={(local.productos_higiene) ? "checked" : "" } className="form-check-input" id="InputProductos_higiene5" aria-describedby="productos_higieneHelp" onChange={handleChangecheck} />
+                            <input type="checkbox" name="productos_higiene" checked={(local.productos_higiene) ? "checked" : "" } className="form-check-input" id="InputProductos_higiene5" onChange={handleChangecheck} />
                             <label htmlFor="InputProductos_higiene5">productos_higiene</label><br/>
 						</div>
  

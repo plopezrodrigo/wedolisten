@@ -200,6 +200,8 @@ const LocalDetail = (props) => {
                                 fecha={comentario.date}
                                 nombre={comentario.user_name}
                                 puntuacion={comentario.puntuacion}
+                                local_id={comentario.comercial_place_id}
+                                id_comment={comentario.id}
                   />
                 </div>
                 </>
