@@ -127,8 +127,10 @@ def setup_commands(app):
         cp.ascensor = True
         cp.productos_higiene = True
         db.session.add(cp)
+        db.session.commit()
         print("Local: ", cp.name, " Comercial_Place.")        
-        
+        local = cp.id
+
         cp = Comercial_Place()
         cp.user_id = user.id
         cp.name = 'Divercho'
@@ -141,8 +143,10 @@ def setup_commands(app):
         cp.espacio_carrito = True
         cp.ascensor = False
         cp.productos_higiene = False
-        db.session.add(cp)
         print("Local: ", cp.name, " Comercial_Place.")
+        db.session.add(cp)
+        db.session.commit()
+        local2 = cp.id
 
         cp = Comercial_Place()
         cp.user_id = cliente
@@ -159,7 +163,7 @@ def setup_commands(app):
         db.session.add(cp)
         db.session.commit()
         print("Local: ", cp.name, " Comercial_Place.")
-        local = cp.id
+        local3 = cp.id
         print("--------------------------------------------------------")
         print("")
         print("Creating test Comentarios")
@@ -223,6 +227,34 @@ def setup_commands(app):
         comment.user_id = cliente
         comment.comercial_place_id = local
         comment.comment = "Comentario que estoy metiendo por inicializar 5"
+        comment.puntuacion = "cinco"
+        comment.price = "Normal"
+        comment.a_domicilio = "Si"
+        comment.mesa = "Si"
+        comment.alcohol = "No"
+        comment.visita = "Pareja"
+        db.session.add(comment)
+        db.session.commit()
+
+        print("--------------------------------------------------------")
+        comment = Comment()
+        comment.user_id = cliente
+        comment.comercial_place_id = local2
+        comment.comment = "Comentario al loca2"
+        comment.puntuacion = "cinco"
+        comment.price = "Normal"
+        comment.a_domicilio = "Si"
+        comment.mesa = "Si"
+        comment.alcohol = "No"
+        comment.visita = "Pareja"
+        db.session.add(comment)
+        db.session.commit()
+        print("--------------------------------------------------------")
+        print("--------------------------------------------------------")
+        comment = Comment()
+        comment.user_id = cliente
+        comment.comercial_place_id = local3
+        comment.comment = "Comentario al loca3"
         comment.puntuacion = "cinco"
         comment.price = "Normal"
         comment.a_domicilio = "Si"

@@ -5,8 +5,7 @@ import imagen from "../../img/opinion.png";
 
 const OpinionCard = (props) => {
   const { store, actions } = useContext(Context);
-  console.log(store.favorites); 
-
+  
   return (
     <div className="col-12">
       <div className="card" id="opinioncard">
@@ -20,8 +19,8 @@ const OpinionCard = (props) => {
         <div className="card-body text-center">
           <h5 className="card-title">{props.nombre}</h5>
           <button id="opinionbutton">
-            {() => {for (let i = 0; i<props.puntuacion; i++){return <i className="fas fa-star" id="iconbutton"/>}}}
-            {() => {for (let i = props.puntuacion; i<5; i++){return <i className="far fa-star" id="iconbutton"/>}}}
+            {() => {for (let i = 0; i<props.puntuacion; i++){return (<i className="fas fa-star" id="iconbutton"/>)}}}
+            {() => {for (let i = props.puntuacion; i<5; i++){return (<i className="far fa-star" id="iconbutton"/>)}}}
             <i className="fas fa-star" id="iconbutton"/>
           </button>
           <p className="card-text"> 

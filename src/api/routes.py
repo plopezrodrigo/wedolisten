@@ -109,6 +109,12 @@ def get_comment(id):
     datos = Comment.query.get(id)
     return jsonify(datos.serialize()), 200
 
+@api.route('/comment_local/<id_local>', methods=['GET'])
+def get_comments_local(id_local):
+    datos = Comment.query.filter_by(comercial_place_id = id_local).all()
+    data = [comentario.serialize() for comentario in datos]
+    return jsonify(data), 200
+
 
 @api.route('/favourit', methods=['GET'])
 @jwt_required()
@@ -310,16 +316,7 @@ def Photo_add():
 @jwt_required()
 def Comments_add(id_comment):
     data['user_id'] = get_jwt_identity()
-    data['comment_id'] = id_comment
-    data = request.json
-
-    print('----------------------------------------------')
-    print('----------------------------------------------')
-    print('----------------------------------------------') 
-    print(data)
-    print('----------------------------------------------')
-    print('----------------------------------------------')
-    print('----------------------------------------------')
+    data = request.json                                                                                                                                                                                                                                                                         
 
     if (data.get('tipo') == "manager" and data.get('comment_id') == null):
         return jsonify({"msg": "Un manager no puede generar una respuesta que no sea sobre un comentario de cliente"}), 403
@@ -328,35 +325,35 @@ def Comments_add(id_comment):
         comments = Comment( user_id             = data['user_id'],
                             comercial_place_id  = data['comercial_place_id'],
                             comment             = data['comment'],
-                            comment_id          = data.get('comment_id'),
+                            #comment_id          = null if data.get('comment_id')==0 else data.get('comment_id'),
                             puntuacion          = data.get('puntuacion'),
                             price               = data.get('price'),
                             a_domicilio         = data.get('a_domicilio'),
                             mesa                = data.get('mesa'),
                             alcohol             = data.get('alcohol'),
                             visita              = data.get('visita'))
+        if data.get('comment_id') != 0:
+             comment_id = data.get('comment_id')
 
         db.session.add(comments)
-        db.session.commit()
+        db.session.commit()                                                                         
 
         if data.get('photo_location1'):
             photos = Photos_Comments(comment_id = comments.id,
                                      location   = data['photo_location1'])
             db.session.add(photos)
-            db.session.commit()
 
         if data.get('photo_location2'):
             photos = Photos_Comments(comment_id = comments.id,
                                      location   = data['photo_location2'])
             db.session.add(photos)
-            db.session.commit()
 
         if data.get('photo_location3'):
             photos = Photos_Comments(comment_id = comments.id,
                                      location   = data['photo_location3'])
             db.session.add(photos)
-            db.session.commit()
 
+        db.session.commit()
         return jsonify({"msg": "Comentario creado correctamente"}), 200
     
     except Exception as e:

@@ -7,14 +7,15 @@ import imagen from "../../img/logo.png";
 export const OpinionUser = () => {
 	const params = useParams()
 	const [local, setLocales] = useState({})
-	const [formData, setFormData] = useState({tipo:"customer", user_id:1, comercial_place_id:params.id_local, comment_id: 0});
+	const [formData, setFormData] = useState({tipo:"customer", comercial_place_id:params.id_local, comment_id: params.id_comment});
 	const [mensaje, setMensaje] = useState(null); 
 	const navigate = useNavigate();
 	const { store, actions } = useContext(Context);
   
 	useEffect (()=> {
-		if (store.token && store.token != "" && store.token != undefined) {
-			navigate.push("/login");
+		console.log("Opinion User", formData, store.token);		
+		if (!(store.token && store.token != "" && store.token != undefined)) {
+			navigate("/login");
 		}
 
 		fetch(`${process.env.BACKEND_URL}/api/comercial-place/${params.id_local}`)
@@ -31,7 +32,6 @@ export const OpinionUser = () => {
 
 	const handleSubmit = (evento)=>{
 		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
-		console.log("Opinion User", formData, store.token);
 
 		fetch(process.env.BACKEND_URL + "/api/comment/0", 
 			{method: 'POST',
