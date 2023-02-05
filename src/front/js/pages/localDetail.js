@@ -10,6 +10,7 @@ const LocalDetail = (props) => {
   const [local, setLocal] = useState({});
   const [favoritos, setFavoritos] = useState({});
   const { store, actions } = useContext(Context);
+  const [active, setActive] = useState(false);
   let options = {
     method: "GET",
   };
@@ -71,8 +72,7 @@ const LocalDetail = (props) => {
         <div className="col-10">{local ? <h1>{local.name}</h1> : ""}</div>
         <div className="col-1">
           {sessionStorage.getItem("token") ? (
-            <button
-              id="iconbutton"
+            <button className={`heart-button ${active?"active":""}`}
               onClick={() => {
                 add_favourites(local.id);
               }}
@@ -244,15 +244,16 @@ const LocalDetail = (props) => {
         <h2 id="descripcion">Lee lo que otros usuarios opinan</h2>
 
         {comentarios && comentarios.map((comentario, index)=>{   
-                                    return  <> 
-                                                <div className="col mb-3"> 
-                                                    <OpinionComments comment={comentario.comment}
-                                                                     fecha={comentario.date}
-                                                                     puntuacion={comentario.puntuacion}
-                                                                 />
-                                                </div>
-                                            </>
-                                    })
+          return  <> 
+            <div className="col mb-3"> 
+              <OpinionComments 
+                comment={comentario.comment}
+                fecha={comentario.date}
+                puntuacion={comentario.puntuacion}
+              />
+            </div>
+          </>
+          })
         }
       </div>
 
@@ -260,7 +261,7 @@ const LocalDetail = (props) => {
           <p className="text ma-home-section">
             <Link to="/Comentarios">
             <a>
-              <i className="fas fa-star" id="iconaccount" />
+              <i className="fas fa-star" id="button" />
               <strong className="strong"> Escribe tu opinión</strong>
             </a>
             </Link>

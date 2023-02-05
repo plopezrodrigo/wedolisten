@@ -48,6 +48,18 @@ export const Navbar = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
+                  <Link to="/listlocales">
+                    <a
+                      className="nav-link active"
+                      aria-current="page"
+                      href="#"
+                      id="navbarSupportedContent"
+                    >
+                      Locales
+                    </a>
+                  </Link>
+                </li>
+                <li className="nav-item">
                   <Link to="/contact">
                     <a
                       className="nav-link active"
