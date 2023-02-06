@@ -89,15 +89,8 @@ const LocalDetail = (props) => {
         </div>
       </div>
       <div className="row">
-        <div className="col-2">
-          <i className="fas fa-circle"></i>
-          <i className="fas fa-circle"></i>
-          <i className="fas fa-circle"></i>
-          <i className="fas fa-circle"></i>
-          <i className="far fa-circle"></i>
-        </div>
         <div className="col-6">
-          <p>{comentarios ? (() => {return (<> {comentarios.length()}</>)}) : (() => {return (<> 0 </>)})} Opiniones</p>
+          <p>{comentarios ? comentarios.length : 0} Opiniones</p>
         </div>
         <div className="col-6">
           <p>

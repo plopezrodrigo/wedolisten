@@ -1,6 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 import datetime
-import enum
+import enum, datetime
 
 db = SQLAlchemy()
 
@@ -174,16 +174,24 @@ class Comment(db.Model):
         return f'<User {self.customer_id}>'
 
     def serialize(self):
+        if self.user.type == "customer":
+            nombre = self.user.customer[0].name
+        else:
+            nombre = self.user.manager[0].name
+
+        print(self.date.date())
+
         return {    "id": self.id,
                     "user_id": self.user_id,
-                    "user_name": self.user.email,
+                    "user_name": nombre,
                     "user_type": self.user.type,
                     "comercial_place_id": self.comercial_place_id,
                     "comercial_place_name": self.comercial_place.name,
                     "comment_id": self.comment_id,
                     "comment" : self.comment,
-                    "date": self.date,
-                    #"puntuacion": self.puntuacion,
+                    "datetime": self.date,
+                    "date": self.date.date().strftime("%d/%m/%Y"),
+                    "puntuacion": int(self.puntuacion.value),
                     "price": self.price,
                     "a_domicilio": self.a_domicilio,
                     "mesa": self.mesa,
