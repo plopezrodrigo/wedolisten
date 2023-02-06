@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
-import {format} from 'date-fns'
 import "../../styles/home.css";
 import UserInfo from "../component/userInfo";
 import ManagerInfo from "../component/managerInfo";
@@ -45,8 +44,8 @@ export const Home = () => {
       <ManagerInfo />
       <h1 className="text-center" id="tituloHome">Lee lo que otros están opinando...</h1>
       <div className="container fluid">
-        <div className="row align-items-start">
-            {comentarios && comentarios.map((comentario, index)=>{   
+        <div className="row align-items-start"> 
+            {comentarios && comentarios.map((comentario, index)=>{    
                                     return  <> 
                                                 <div className="col mb-3"> 
                                                     <OpinionCard comment ={comentario.comment}
