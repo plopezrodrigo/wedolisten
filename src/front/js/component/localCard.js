@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 const LocalCard = (props) => {
   const { store, actions } = useContext(Context);
   const params = useParams();
-  const [local, setLocales] = useState({});
+  const [local, setLocales] = useState({}); 
 
     const add_favourites = (id) => {
       fetch(`${process.env.BACKEND_URL}/api/favourit/${id}`, { 

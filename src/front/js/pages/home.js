@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
+import {format} from 'date-fns'
 import "../../styles/home.css";
 import UserInfo from "../component/userInfo";
 import ManagerInfo from "../component/managerInfo";
@@ -49,7 +50,7 @@ export const Home = () => {
                                     return  <> 
                                                 <div className="col mb-3"> 
                                                     <OpinionCard comment ={comentario.comment}
-                                                                 puntuacion="4"
+                                                                 puntuacion={comentario.puntuacion}
                                                                  fecha={comentario.date}
                                                                  local_id={comentario.comercial_place_id}
                                                                  id_comment={comentario.id}
