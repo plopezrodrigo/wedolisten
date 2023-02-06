@@ -63,11 +63,16 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
 
           const data = await resp.json();
-          console.log("this came form the backend", data);
+
           sessionStorage.setItem("token", data.token);
           setStore({ token: data.token });
+
           sessionStorage.setItem("usertype", data.usertype);
           setStore({ usertype: data.usertype });
+
+          sessionStorage.setItem("nameUser", data.name);
+          setStore({ nameUser: data.name });
+
           return true;
         } catch (error) {
           console.error("There has been an error login in");

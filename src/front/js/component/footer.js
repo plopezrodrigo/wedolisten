@@ -48,10 +48,10 @@ export const Footer = () => (
             <a href="#!" class="text-reset">Home</a>
           </p>
           <p>
-            <a href="#!" class="text-reset">Quienes somos</a>
+            <a href="/about" class="text-reset">Quienes somos</a>
           </p>
           <p>
-            <a href="#!" class="text-reset">Contacto</a>
+            <a href="/contact" class="text-reset">Contacto</a>
           </p>
           <p>
             <a href="#!" class="text-reset">Gestores</a>
