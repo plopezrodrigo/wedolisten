@@ -55,17 +55,20 @@ body {
 }
 #localcard{
   margin-bottom: 20px;
+  width: 300px;
+  height: 400px;
 }
 .heart-button {
   display: inline-block;
   border: none;
-  background: none;
+  color: #8a8787;
+  background-color: none;
   display: inline-block;
   text-align:center;
   margin-left: 5px;
-
 }
 
-.heart-button:active {
-    background-color: red;
+.heart-button-active {
+    color: #FF0DE7;
+    background-color: none;
 }

@@ -14,7 +14,7 @@ export const Navbar = () => {
             <Link to="/">
               <span className="navbar-brand mb-0 h1">
                 {" "}
-                <img src={imagen} className="card-img-top" alt="" width="120" height="120" />
+                <img src={imagen} className="card-img-top mt-2" alt="" width="120" height="120" />
               </span>
             </Link>
             <button
@@ -30,15 +30,50 @@ export const Navbar = () => {
             </button>
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
               <ul className="navbar-nav me-auto mb-lg-0">
+              <li className="nav-item">
+                  <Link to="/about">
+                    <a
+                      className="nav-link active mt-4"
+                      aria-current="page"
+                      href="#"
+                      id="navbarSupportedContent"
+                    >
+                      Quienes Somos
+                    </a>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/listlocales">
+                    <a
+                      className="nav-link active mt-4"
+                      aria-current="page"
+                      href="#"
+                      id="navbarSupportedContent"
+                    >
+                      Locales
+                    </a>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/contact">
+                    <a
+                      className="nav-link active mt-4"
+                      href="#"
+                      id="navbarSupportedContent"
+                    >
+                      Contacto
+                    </a>
+                  </Link>
+                </li>
                 <form>
-                  <input className="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar" />
+                  <input className="form-control me-2 mt-4" type="search" placeholder="Buscar" aria-label="Buscar" />
                   <button className="btn btn-outline-success" type="submit" id="iconbutton">
                     <i className="far fa-search" />
                   </button>
                 </form>
               </ul>
 
-              <div className="ml-auto">
+              <div className="">
                 {!store.token ? (
                   <Link to="/login">
                     <button className="btn btn-primary" id="button">Log in</button>

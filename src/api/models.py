@@ -1,6 +1,9 @@
 from flask_sqlalchemy import SQLAlchemy
 import datetime
 import enum, datetime
+from geopy.geocoders import Nominatim
+
+geolocator = Nominatim(user_agent="my-app")
 
 db = SQLAlchemy()
 
@@ -90,10 +93,14 @@ class Comercial_Place(db.Model):
         return f'<User {self.name}>'
 
     def serialize(self):
+        print(self.address)
+        location = geolocator.geocode(self.address)
         return {    "id": self.id,
                     "user_id": self.user_id,
                     "name": self.name,
                     "address": self.address,
+                    "latitude": location.latitude,
+                    "longitude": location.longitude,
                     "url": self.url,
                     "image_url": self.image_url,
                     "telf": self.telf,
@@ -171,7 +178,7 @@ class Comment(db.Model):
     visita = db.Column(db.Enum("Pareja","Familia","Solo","Amigos","Negocios", name='visita_types'), unique=False, nullable=True)
     
     def __repr__(self):
-        return f'<User {self.customer_id}>'
+        return f'<User {self.id}>'
 
     def serialize(self):
         if self.user.type == "customer":
