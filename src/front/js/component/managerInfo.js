@@ -16,9 +16,14 @@ const ManagerInfo = (props) => {
           <p className="lead fw-normal">
           Añade tu local a nuetra red para aumentar tus visitas y que vean lo bien que funciona!!{" "}
           </p>
-          <Link to="/signupManager" className="btn btn-lg btn-outline-primary mb-3" id="button">
+          {!(sessionStorage.getItem("token")) ?
+          <Link to="/signupUser" className="btn btn-lg btn-outline-primary mb-3" id="button">
             Registro
-          </Link>
+          </Link> :
+          <Link to="/misLocales" className="btn btn-lg btn-outline-primary mb-3" id="button">
+          Mis locales
+        </Link>        
+        }
         </div>
         <div className="col-md-7 ps-md-5">
           <img

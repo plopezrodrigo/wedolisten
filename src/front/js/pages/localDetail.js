@@ -11,6 +11,7 @@ const LocalDetail = (props) => {
   const [local, setLocal] = useState({});
   const [favoritos, setFavoritos] = useState({});
   const { store, actions } = useContext(Context);
+  const [active, setActive] = useState(false);
   let options = {
     method: "GET",
   };
@@ -75,8 +76,7 @@ const LocalDetail = (props) => {
         <div className="col-10">{local ? <h1>{local.name}</h1> : ""}</div>
         <div className="col-1">
           {sessionStorage.getItem("token") ? (
-            <button
-              id="iconbutton"
+            <button className={`heart-button ${active?"active":""}`}
               onClick={() => {
                 add_favourites(local.id);
               }}
@@ -206,7 +206,7 @@ const LocalDetail = (props) => {
           <p className="text ma-home-section">  
             <Link to={`/OpinionUser/${params.id}/0`}>
             <a>
-              <i className="fas fa-star" id="iconaccount" />
+              <i className="fas fa-star" id="button" />
               <strong className="strong"> Escribe tu opinión</strong>
             </a>
             </Link>

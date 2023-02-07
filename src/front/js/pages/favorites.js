@@ -51,7 +51,13 @@ export const Favorites = () => {
             favorites.map((fav, i) => (
               <tr>
                 <td>{fav.comercial.id}</td>
-                <td><img src={fav.comercial.image_url}/></td>
+                <td>
+                  <img 
+                  src={fav.comercial.image_url}
+                  width="50px"
+                  height="50px"
+                  />
+                  </td>
                 <td>{fav.comercial.name}</td>
                 <td></td>
                 {/* <button className="btn">

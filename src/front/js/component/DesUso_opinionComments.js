@@ -46,5 +46,3 @@ const OpinionComments = (props) => {
       </div>
   );
 };
-
-export default OpinionComments;
