@@ -14,7 +14,7 @@ export const Navbar = () => {
             <Link to="/">
               <span className="navbar-brand mb-0 h1">
                 {" "}
-                <img src={imagen} className="card-img-top" alt="" width="120" height="120" />
+                <img src={imagen} className="card-img-top mt-2" alt="" width="120" height="120" />
               </span>
             </Link>
             <button
@@ -33,7 +33,7 @@ export const Navbar = () => {
               <li className="nav-item">
                   <Link to="/about">
                     <a
-                      className="nav-link active mt-3"
+                      className="nav-link active mt-4"
                       aria-current="page"
                       href="#"
                       id="navbarSupportedContent"
@@ -45,7 +45,7 @@ export const Navbar = () => {
                 <li className="nav-item">
                   <Link to="/listlocales">
                     <a
-                      className="nav-link active mt-3"
+                      className="nav-link active mt-4"
                       aria-current="page"
                       href="#"
                       id="navbarSupportedContent"
@@ -57,7 +57,7 @@ export const Navbar = () => {
                 <li className="nav-item">
                   <Link to="/contact">
                     <a
-                      className="nav-link active mt-3"
+                      className="nav-link active mt-4"
                       href="#"
                       id="navbarSupportedContent"
                     >
@@ -66,7 +66,7 @@ export const Navbar = () => {
                   </Link>
                 </li>
                 <form>
-                  <input className="form-control me-2 mt-3" type="search" placeholder="Buscar" aria-label="Buscar" />
+                  <input className="form-control me-2 mt-4" type="search" placeholder="Buscar" aria-label="Buscar" />
                   <button className="btn btn-outline-success" type="submit" id="iconbutton">
                     <i className="far fa-search" />
                   </button>
