@@ -121,7 +121,7 @@ def get_comments_local(id_local):
 def list_Favourit():
     user_id=get_jwt_identity()
     customer = Customer.query.filter_by(user_id=user_id).first()
-    favourit = Favourit.query.filter_by(customer_id=customer.id)
+    favourit = Favourit.query.filter_by(customer_id=customer.id, state=True )
     data = [element.serialize() for element in favourit]
     return jsonify(data), 200
 

@@ -63,9 +63,8 @@ body {
   display: inline-block;
   text-align:center;
   margin-left: 5px;
-
 }
 
-.heart-button:active {
+.heart-button-active {
     background-color: red;
 }

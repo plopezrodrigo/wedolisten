@@ -42,6 +42,7 @@ const LocalDetail = (props) => {
       })
       .then((response) => {
         setLocal(response);
+        setActive(response.favorite)
       });
 
       useEffectComments();
@@ -65,9 +66,6 @@ const LocalDetail = (props) => {
       .then((response) => {
         return response.json();
       })
-      .then((response) => {
-        setLocal(response);
-      });
   };
 
   return (
@@ -79,12 +77,13 @@ const LocalDetail = (props) => {
             <button className={`heart-button ${active?"active":""}`}
               onClick={() => {
                 add_favourites(local.id);
+                setActive(!active)
               }}
             >
-              <i className={local.favorite ? "fas fa-heart" : ""}></i>
+              <i className={`heart-button${active?"-active":""} fas fa-heart `}></i>
             </button>
           ) : (
-            <Link to="/signupUser"><i className="fas fa-heart"></i></Link>
+            ""
           )}
         </div>
       </div>
