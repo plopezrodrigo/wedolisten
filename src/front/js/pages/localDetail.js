@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import imagen from "../../img/mapa.jpeg";
-import OpinionComments from "../component/opinionComments";
+import OpinionCard from "../component/opinionCard";
 import { useParams, Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
@@ -19,18 +19,16 @@ const LocalDetail = (props) => {
     const resp = await fetch( process.env.BACKEND_URL + "/api/Comment",{
         method: 'GET',
         headers: {"Content-Type": "application/json",
-                  "Authorization": 'Bearer '+ sessionStorage.getItem("token") // hará falta?
-        } 
+                  "Authorization": 'Bearer '+ sessionStorage.getItem("token") // hará falta? 
+        }
       })
-    if (resp.ok) return setComentarios(await resp.json());
+    if (resp.ok) return setComentarios(await resp.json()); 
     else         return setMensaje(await resp.json());  
   }
 
-
-
   useEffect(() => {
     if (sessionStorage.getItem("token") != null) {
-      options.headers = {
+      options.headers = { 
         "Content-Type": "application/json",
         Authorization: "Bearer " + sessionStorage.getItem("token"),
       };
@@ -47,6 +45,7 @@ const LocalDetail = (props) => {
       });
 
       useEffectComments();
+      console.log(local);
 
   }, []);
 
@@ -93,7 +92,7 @@ const LocalDetail = (props) => {
           <i className="far fa-circle"></i>
         </div>
         <div className="col-6">
-          <p>297 Opiniones</p>
+          <p>{comentarios ? (() => {return (<> {comentarios.length()}</>)}) : (() => {return (<> 0 </>)})} Opiniones</p>
         </div>
         <div className="col-6">
           <p>
@@ -111,14 +110,8 @@ const LocalDetail = (props) => {
             className="imagenDetalle"
             width="1100px"
             height="800px"
-            alt=""
+            alt={local.image_url}
           />
-          <div className="see_all_count_wrap" onclick="">
-            <span className="see_all_count">
-              <span className="ui_icon camera"></span>
-              <span className="details">Ver todo ($)</span>
-            </span>
-          </div>
         </div>
         <div className="descripcion" id="descripcion">
           <p>{local.description}</p>
@@ -127,78 +120,30 @@ const LocalDetail = (props) => {
       <div className="row" id="rating">
         <div className="col-6">
           <div className="form-check">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              name="flexRadioDefault"
-              id="flexRadioDefault1"
-              value={local.trona}
-            />
-            <label className="form-check-label" for="flexRadioDefault1">
-              Trona
-            </label>
+            <input type="checkbox" checked={(local.trona) ? "checked" : "" } className="form-check-input" id="Input_trona"/>
+            <label className="form-check-label" for="Input_trona">Trona</label>
           </div>
           <div className="form-check">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              name="flexRadioDefault"
-              id="flexRadioDefault1"
-              value={local.cambiador}
-            />
-            <label className="form-check-label" for="flexRadioDefault1">
-              Cambiador
-            </label>
+            <input type="checkbox" checked={(local.cambiador) ? "checked" : "" } className="form-check-input" id="Input_cambiador"/>
+            <label className="form-check-label" for="Input_cambiador">Cambiador</label>
           </div>
           <div className="form-check">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              name="flexRadioDefault"
-              id="flexRadioDefault1"
-              value={local.accesible}
-            />
-            <label className="form-check-label" for="flexRadioDefault1">
-              Accesible con carrito
-            </label>
+            <input type="checkbox" checked={(local.accesible) ? "checked" : "" } className="form-check-input" id="Input_accesible"/>
+            <label className="form-check-label" for="Input_accesible">Accesible con carrito</label>
           </div>
         </div>
         <div className="col-6">
           <div className="form-check">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              name="flexRadioDefault"
-              id="flexRadioDefault1"
-              value={local.espacio_carrito}
-            />
-            <label className="form-check-label" for="flexRadioDefault1">
-              Espacio Carrito
-            </label>
+            <input type="checkbox" checked={(local.espacio_carrito) ? "checked" : "" } className="form-check-input" id="Input_espacio_carrito"/>
+            <label className="form-check-label" for="Input_espacio_carrito">Espacio Carrito</label>
           </div>
           <div className="form-check">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              name="flexRadioDefault"
-              id="flexRadioDefault1"
-              value={local.ascensor}
-            />
-            <label className="form-check-label" for="flexRadioDefault1">
-              Ascensor
-            </label>
+            <input type="checkbox" checked={(local.ascensor) ? "checked" : "" } className="form-check-input" id="Input_ascensor"/>
+            <label className="form-check-label" for="Input_ascensor">Ascensor</label>
           </div>
           <div className="form-check">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              name="flexRadioDefault"
-              id="flexRadioDefault1"
-              value={local.productos_higiene}
-            />
-            <label className="form-check-label" for="flexRadioDefault1">
-              Productos higiene
-            </label>
+            <input type="checkbox" checked={(local.productos_higiene) ? "checked" : "" } className="form-check-input" id="Input_productos_higiene"/>
+            <label className="form-check-label" for="Input_productos_higiene">Productos higiene</label>
           </div>
         </div>
       </div>
@@ -244,21 +189,21 @@ const LocalDetail = (props) => {
         <h2 id="descripcion">Lee lo que otros usuarios opinan</h2>
 
         {comentarios && comentarios.map((comentario, index)=>{   
-          return  <> 
-            <div className="col mb-3"> 
-              <OpinionComments 
-                comment={comentario.comment}
-                fecha={comentario.date}
-                puntuacion={comentario.puntuacion}
-              />
-            </div>
-          </>
-          })
+            return  <> 
+                <div className="col mt-5"> 
+                  <OpinionCard  comment={comentario.comment}
+                                fecha={comentario.date}
+                                nombre={comentario.user_name}
+                                puntuacion={comentario.puntuacion}
+                  />
+                </div>
+                </>
+            })
         }
       </div>
 
       {store.usertype == "customer" &&
-          <p className="text ma-home-section">
+          <p className="text ma-home-section">  
             <Link to="/Comentarios">
             <a>
               <i className="fas fa-star" id="button" />

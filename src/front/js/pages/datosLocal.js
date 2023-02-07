@@ -66,7 +66,7 @@ export const DatosLocal = () => {
 	}
 
 	return (
-		<div className="container fluid align-center">
+		<div className="container fluid align-center"> 
 		  <div className="form-body"> 
 			<div className="row">
 			    <h1 className="text-center">Registro</h1>
@@ -75,11 +75,9 @@ export const DatosLocal = () => {
 			<div className="row"> 
 				<div className="col-md-12">
 					<form onSubmit={handleSubmit}>
-						<div className="row">
-							<div className="col py-3 m-0">
-								<img src={local.image_url} className="imagenLocal" alt="" />
-	  							<input type="text" name="image_url" defaultValue={local.image_url} required className="form-control imagenLocal" id="Inputimage_url" aria-describedby="image_urlHelp" placeholder="image url" onChange={handleChange} />
-							</div>
+						<div className="form-group py-3 m-0">
+							<img src={local.image_url} className="imagenLocal" alt="" />
+							<input type="text" name="image_url" defaultValue={local.image_url} required className="form-control imagenLocal" id="Inputimage_url" aria-describedby="image_urlHelp" placeholder="image url" onChange={handleChange} />
 						</div>
 
 						<div className="form-group">

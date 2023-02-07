@@ -32,6 +32,15 @@ body {
     align-items: center;
     position: relative;
   }
+
+  #comentario{
+    width: 300px;
+    height: 500px;
+    max-width: 500px;
+    max-height: 500px;
+  }
+
+
   #imagenopinion{
     display: block;
     z-index: 0;
@@ -71,15 +80,11 @@ body {
     float: right;
     }
 
-  .imagenLocal{
+  #imagenLocal{
     align-items: center;
-    max-width: 500px;
-    max-height: 500px;
+    max-width: 100px;
+    max-height: 100px;
     display: block;
     /*margin: 10px;
     padding: 10px;*/
-  }
-
-  #imagenLocal1{
-    position: relative;
   }

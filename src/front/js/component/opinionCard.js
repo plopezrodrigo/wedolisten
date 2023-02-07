@@ -5,7 +5,7 @@ import imagen from "../../img/opinion.png";
 
 const OpinionCard = (props) => {
   const { store, actions } = useContext(Context);
-  console.log(store.favorites);
+  console.log(store.favorites); 
 
   return (
     <div className="col-12">
@@ -20,18 +20,26 @@ const OpinionCard = (props) => {
         <div className="card-body text-center">
           <h5 className="card-title">{props.nombre}</h5>
           <button id="opinionbutton">
-            {props.puntuacion}<i className="fas fa-star" id="iconbutton"/>
+            {() => {for (let i = 0; i<props.puntuacion; i++){return <i className="fas fa-star" id="iconbutton"/>}}}
+            {() => {for (let i = props.puntuacion; i<5; i++){return <i className="far fa-star" id="iconbutton"/>}}}
             <i className="fas fa-star" id="iconbutton"/>
-            <i className="fas fa-star" id="iconbutton"/>
-            <i className="fas fa-star" id="iconbutton"/>
-            <i className="far fa-star" id="iconbutton"/>
           </button>
-          <p className="card-text">
+          <p className="card-text"> 
             {props.comment}
           </p>
-          <a href="#" className="btn btn-primary" id="button">
-            Ver más
-          </a>
+          <div className="col-10">
+            <p><strong>Fecha de la visita:</strong> {props.fecha}</p> 
+          </div>
+          {store.usertype == "manager" &&
+              <p className="text ma-home-section">  
+                <Link to={`/OpinionManager/${props.local_id}/${props.id_comment}`}>
+                <a>
+                  <i className="fas fa-star" id="iconaccount" />
+                  <strong className="strong">Responde</strong>
+                </a>
+                </Link>
+              </p>
+          }
         </div>
       </div>
     </div>

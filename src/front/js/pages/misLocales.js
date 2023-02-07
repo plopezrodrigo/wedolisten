@@ -27,7 +27,7 @@ export const MisLocales = () => {
                 <div className="row">
                     <div class="col-sm-10"></div>
                     <div className="col-2 align-self-end">
-                        <a href="/nuevoLocal" className="btn btn-lg btn-outline-primary mb-3" key="miLocalAlta">Nuevo</a>
+                        <button href="/nuevoLocal" id="button" key="miLocalAlta">Nuevo</button>
                     </div>
                 </div>
 
