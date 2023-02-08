@@ -8,7 +8,7 @@ export const OpinionManager = () => {
 	const params = useParams()
 	const [local, setLocales] = useState({})
 	const [comentario, setComentario] = useState();
-	const [formData, setFormData] = useState({tipo:"manager", comercial_place_id:params.id_local, comment_id: params.id_comment});
+	const [formData, setFormData] = useState({tipo:"manager", comercial_place_id:params.id_local, comment_id: params.id_comment, puntuacion: None});
 	const [mensaje, setMensaje] = useState(null); 
 	const navigate = useNavigate();
 	const { store, actions } = useContext(Context);
@@ -21,7 +21,7 @@ export const OpinionManager = () => {
 					  "Authorization": 'Bearer '+ sessionStorage.getItem("token") // hará falta?
 			} 
 		  })
-		if (resp.ok) return setComentario(await resp.json());
+		if (resp.ok) return setComentario(await resp.json()); 
 		else         return setMensaje(await resp.json());  
 	} 
 

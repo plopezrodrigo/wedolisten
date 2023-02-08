@@ -154,6 +154,7 @@ class Photo_Comercial_Place(db.Model):
                }
 
 class Puntuaciones(enum.Enum):
+    cero="0"
     uno="1"
     dos="2"
     tres="3"
@@ -170,7 +171,8 @@ class Comment(db.Model):
     comment_id = db.Column(db.ForeignKey("comments.id"), nullable=True)
     date = db.Column(db.DateTime(), unique=False, nullable=False,default=datetime.datetime.now())
     comment = db.Column(db.String(1000), unique=False, nullable=False)
-    puntuacion = db.Column(db.Enum(Puntuaciones), unique=False, nullable=True)
+    #puntuacion = db.Column(db.Enum(Puntuaciones), unique=False, nullable=True)
+    puntuacion = db.Column(db.String(1), unique=False, nullable=True)
     price = db.Column(db.Enum("Barato","Normal", "Caro", name='price_types'), unique=False, nullable=True)
     a_domicilio = db.Column(db.Enum("Si","No", name='a_domicilio_types'), unique=False, nullable=True)
     mesa = db.Column(db.Enum("Si","No", name='mesa_types'), unique=False, nullable=True)

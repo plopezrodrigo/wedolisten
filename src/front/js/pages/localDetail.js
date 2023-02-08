@@ -187,16 +187,16 @@ const LocalDetail = (props) => {
 
         {comentarios && comentarios.map((comentario, index)=>{   
             return  <> 
-                <div  key={comentario.id} className="col mt-5"> 
-                  <OpinionCard  comment={comentario.comment}
-                                fecha={comentario.date}
-                                nombre={comentario.user_name}
-                                puntuacion={comentario.puntuacion}
-                                local_id={comentario.comercial_place_id}
-                                id_comment={comentario.id}
-                  />
-                </div>
-                </>
+                      <div  key={comentario.id} className="col mt-5"> 
+                        <OpinionCard  comment={comentario.comment}
+                                      fecha={comentario.date}
+                                      nombre={comentario.user_name}
+                                      puntuacion={comentario.puntuacion}
+                                      local_id={comentario.comercial_place_id}
+                                      id_comment={comentario.id}
+                        />
+                      </div>
+                    </>
             })
         }
       </div>

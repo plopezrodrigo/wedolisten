@@ -67,7 +67,7 @@ def Comercial_Places_user():
         return jsonify({"msg": "No existen datos"}), 402
 
 # ----------------------------------------------------------------------------
-# Datos de un LOCAL
+# Datos de un LOCAL con favoritos y mas datos
 # ----------------------------------------------------------------------------
 @api.route('/comercial-place/<comercial_place_id>', methods=['GET'])
 @jwt_required(optional = True)
@@ -90,7 +90,9 @@ def Comercial_Places_Detail(comercial_place_id):
     else:
         return jsonify({"msg": "No existen datos"}), 402
 
-
+# ----------------------------------------------------------------------------
+# Datos propios de un LOCAL
+# ----------------------------------------------------------------------------
 @api.route('/comercial-place-2/<comercial_place_id>', methods=['GET'])
 def Comercial_Places_2(comercial_place_id):
     comercial_places = Comercial_Place.query.filter_by(id=comercial_place_id).first()
@@ -101,21 +103,29 @@ def Comercial_Places_2(comercial_place_id):
     else:
         return jsonify({"msg": "No existen datos"}), 402
 
-
+# ----------------------------------------------------------------------------
+# Comentarios de customers
+# ----------------------------------------------------------------------------
 @api.route('/comment', methods=['GET'])
 def list_Comments():
     datos = Comment.query.order_by(Comment.id.desc()).limit(4).all()
     data = [comentario.serialize() for comentario in datos]
     return jsonify(data), 200
 
+# ----------------------------------------------------------------------------
+# Un comentario
+# ----------------------------------------------------------------------------
 @api.route('/comment/<id>', methods=['GET'])
 def get_comment(id):
     datos = Comment.query.get(id)
     return jsonify(datos.serialize()), 200
 
+# ----------------------------------------------------------------------------
+# Comentarios de un LOCAL
+# ----------------------------------------------------------------------------
 @api.route('/comment_local/<id_local>', methods=['GET'])
 def get_comments_local(id_local):
-    datos = Comment.query.filter_by(comercial_place_id = id_local).all()
+    datos = Comment.query.filter_by(comercial_place_id = id_local).filter_by(puntuacion !=  None).all()
     data = [comentario.serialize() for comentario in datos]
     return jsonify(data), 200
 
