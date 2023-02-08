@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import "../../styles/home.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const SignupManager = () => {
@@ -41,34 +41,34 @@ export const SignupManager = () => {
 		<div className="vh-100 gradient-custom">
 		  <div className="container text-center">
 			<div className="row d-flex justify-content-center align-items-center h-100">
-			  <h1>Hola!</h1>
-			  <h5>Bienvenido a tu App para valorar establecimientos</h5>
+			  <h3>¡Hola Gestor!</h3>
+			  <p>Bienvenido a tu App para gestionar tus establecimientos</p>
 				<div className="col-12 col-md-8 col-lg-6 col-xl-5">
 				<div className="card px-3" id="card">
 					<form onSubmit={handleSubmit}>
 							<div className="form-group">
-								<label htmlFor="InputEmail1">Nombre y apellidos</label>
-								<input type="text" name="name" required className="form-control" id="InputName1" aria-describedby="nameHelp" placeholder="Nombre y apellidos" onChange={handleChange} />
+								<label className="alinear-izquierda mt-3" htmlFor="InputEmail1">Nombre y apellidos</label>
+								<input type="text" name="name" required className="form-control mb-2" id="InputName1" aria-describedby="nameHelp"  onChange={handleChange} />
 							</div>
 							<div className="form-group">
-								<label htmlFor="InputEmail1">Email address</label>
-								<input type="email" name="user" required className="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="email" onChange={handleChange} />
+								<label className="alinear-izquierda" htmlFor="InputEmail1">Email address</label>
+								<input type="email" name="user" required className="form-control" id="InputEmail1" aria-describedby="emailHelp" onChange={handleChange} />
 							</div>
 							<div className="form-group">
-								<label htmlFor="InputPassword1">Password</label>
-								<input type="password" name="password" required className="form-control" id="InputPassword1" placeholder="Password" onChange={handleChange} />
+								<label className="alinear-izquierda" htmlFor="InputPassword1">Password</label>
+								<input type="password" name="password" required className="form-control mt-2" id="InputPassword1" placeholder="Password" onChange={handleChange} />
 							</div>
 							
 							<br/>
 							<div>
                     		<p className="ms-3 me-3 mb-3 text-center">
                      		 ¿Ya tienes una cuenta?
-                      		<a href="#!" className="fw-bold">
-                      		Log in
-                      		</a>
+							<Link to="/login">
+                      		<strong className="strong">  Login</strong>
+                      		</Link>
                     		</p>
                   			</div>
-							<button type="submit"  id="button">Registrarme</button>
+							<button className="mb-3" type="submit"  id="button">Registrarme</button>
 							{(mensaje != null) && <p>{mensaje}</p>}
 					</form>	
 						

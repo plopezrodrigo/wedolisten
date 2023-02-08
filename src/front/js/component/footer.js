@@ -44,18 +44,18 @@ export const Footer = () => (
           <h6 class="text-uppercase fw-bold mb-4">
             Secciones
           </h6>
-          <p>
-            <a href="#!" class="text-reset">Home</a>
-          </p>
-          <p>
-            <a href="/about" class="text-reset">Quienes somos</a>
-          </p>
-          <p>
-            <a href="/contact" class="text-reset">Contacto</a>
-          </p>
-          <p>
-            <a href="#!" class="text-reset">Gestores</a>
-          </p>
+            <Link to="/">
+            <p>Home</p>
+            </Link>
+            <Link to="/about">
+            <p>Quienes somos</p>
+            </Link>
+            <Link to="/contact">
+            <p>Contact</p>
+            </Link>
+            <Link to="/signupmanager">
+            <p>Gestores</p>
+            </Link>
           </div>
           <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
           <h6 class="text-uppercase fw-bold mb-4">
