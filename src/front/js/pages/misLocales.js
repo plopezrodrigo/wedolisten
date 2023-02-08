@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
 
 export const MisLocales = () => {
     const [locales, setLocales] = useState()
@@ -27,7 +28,10 @@ export const MisLocales = () => {
                 <div className="row">
                     <div class="col-sm-10"></div>
                     <div className="col-2 align-self-end">
-                        <button href="/nuevoLocal" id="button" key="miLocalAlta">Nuevo</button>
+                        <button id="button" key="miLocalAlta">
+                        <Link to="/nuevoLocal">
+                        </Link> Nuevo
+                        </button>
                     </div>
                 </div>
 
