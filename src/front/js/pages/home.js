@@ -46,19 +46,21 @@ export const Home = () => {
       <div className="container fluid">
         <div className="row align-items-start"> 
             {comentarios && comentarios.map((comentario, index)=>{    
-                                    return  <> 
-                                                <div className="col mb-3"> 
-                                                    <OpinionCard comment ={comentario.comment}
-                                                                 puntuacion={comentario.puntuacion}
-                                                                 fecha={comentario.date}
-                                                                 local_id={comentario.comercial_place_id}
-                                                                 id_comment={comentario.id}
-                                                                 nombre={comentario.user_name}
-                                                    />
-                                                </div> 
-                                            </>
-                                    })
-                                }          
+              return  <> 
+                <div className="col"> 
+                  <OpinionCard 
+                  comment ={comentario.comment}
+                  puntuacion={comentario.puntuacion}
+                  fecha={comentario.date}
+                  local_id={comentario.comercial_place_id}
+                  id_comment={comentario.id}
+                  nombre={comentario.user_name}
+
+                  />
+                 </div> 
+              </>
+             })
+            }          
         </div>
       </div> 
       <h1 className="text-center" id="tituloHome">Igual te interesan estos locales...</h1>

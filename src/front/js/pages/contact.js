@@ -20,7 +20,7 @@ export const Contact = (props) => {
                 <h3 className="mt-3" id="iconbutton">Escríbenos</h3>
                   <form className="form-outline" novalidate>
                     <div className="col-md-12">
-                      <label for="basic-url" className="form-label">Nombre y Apellidos</label>
+                      <label for="basic-url" className="form-label alinear-izquierda mt-3">Nombre y Apellidos</label>
                       <input
                       className="form-control mb-2"
                       type="text"
@@ -35,7 +35,7 @@ export const Contact = (props) => {
                     </div>
                     </div>
                     <div className="col-md-12">
-                      <label for="basic-url" className="form-label">Email</label>
+                      <label for="basic-url" className="form-label alinear-izquierda">Email</label>
                       <input
                       className="form-control mb-2"
                       type="email"
@@ -48,7 +48,7 @@ export const Contact = (props) => {
                       </div>
                     </div>
                     <div className="col-md-12">
-                      <label for="basic-url" className="form-label">Teléfono</label>
+                      <label for="basic-url" className="form-label alinear-izquierda">Teléfono</label>
                       <input
                       className="form-control mb-2"
                       type="telefono"
@@ -61,7 +61,7 @@ export const Contact = (props) => {
                       </div>
                     </div>
                     <div className="col-md-12">
-                      <label for="basic-url" className="form-label">Tema de consulta</label>
+                      <label for="basic-url" className="form-label alinear-izquierda">Tema de consulta</label>
                       <select className="form-select mt-3" required>
                         <option selected disabled value="">Hacerme Gestor </option>
                         <option value="jweb">Información sobre Baby Friendly</option>
@@ -75,7 +75,7 @@ export const Contact = (props) => {
                       </div>
                       </div>
                     <div className="col-md-12">
-                      <label for="basic-url" className="form-label">Comentarios</label>
+                      <label for="basic-url" className="form-label alinear-izquierda mt-3">Comentarios</label>
                       <input id="commentinput"
                       className="form-control mb-2"
                       type="text"
@@ -102,7 +102,7 @@ export const Contact = (props) => {
                       </div>
                     </div>
                     <div className="form-button mt-3 mb-3">
-                      <button id="button" type="submit" className="btn btn-primary">
+                      <button id="button" type="submit" className="btn btn-primary col-md-12 btn-lg px-5 mb-3 mt-3">
                       Enviar
                       </button>
                     </div>

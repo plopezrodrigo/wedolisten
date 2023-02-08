@@ -2,6 +2,8 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       usertype: null,
+      user: null,
+      usuario: null,
       token: null,
       message: null,
       demo: [
@@ -72,6 +74,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           sessionStorage.setItem("nameUser", data.name);
           setStore({ nameUser: data.name });
+          setStore({ user: data.user});
+          setStore({ usuario: data.usuario});
 
           return true;
         } catch (error) {
