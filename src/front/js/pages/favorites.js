@@ -59,13 +59,16 @@ export const Favorites = () => {
                   />
                   </td>
                 <td>{fav.comercial.name}</td>
-                <td></td>
-                {/* <button className="btn">
-                  <i
-                    className="far fa-trash-alt"
-                    onClick={() => deleteFavourites(nombre)}
-                  />
-                </button> */}
+                {""}
+                 {
+                favorites.map((fav, i)=>(
+                <td>{fav.comercial.id}
+                <button className="btn" >
+                  <i className="far fa-trash-alt" onClick={() => deleteFavourites(fav.comercial.id)}/>
+                </button>
+                </td>
+          ))
+        }
               </tr>
             ))}
           </tbody>
