@@ -41,7 +41,6 @@ body {
   max-height: 500px;
 }
 
-
 #imagenopinion{
   display: block;
   z-index: 0;
@@ -81,7 +80,22 @@ body {
 
 .alinear-derecha{
   float: right;
+  font-weight: bold;
   }
+
+.alinear-izquierda{
+    float: left;
+    font-weight: bold;
+    margin-left: 5px;
+  }
+
+.alinear-derecha-checkbox{
+    float: right;
+    }
+  
+.alinear-izquierda-checkbox{
+      float: left;
+    }
 
 #imagenLocal{
   align-items: center;

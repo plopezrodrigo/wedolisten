@@ -28,7 +28,7 @@ body {
   color: #5e2e2e;
   border-color: #ff69de;
   border-width: 3px;
-  border-radius: 10px;
+  border-radius: 20px;
   font-weight: bold;
 }
 #commentinput {
@@ -52,6 +52,10 @@ body {
 #card{
   border-radius: 10%;
   align-content: flex-start;
+  background-color: #FFE9C8;
+  border-color: #FF9500;
+  border-width: 2px;
+  box-shadow: 0px 0px 5px 1px rgb(177, 176, 176); 
 }
 #localcard{
   margin-bottom: 20px;
@@ -62,13 +66,12 @@ body {
   display: inline-block;
   border: none;
   color: #8a8787;
-  background-color: none;
+  background-color: #FFE9C8;
   display: inline-block;
   text-align:center;
-  margin-left: 5px;
 }
 
 .heart-button-active {
     color: #FF0DE7;
-    background-color: none;
+    background-color: #FFE9C8;
 }
