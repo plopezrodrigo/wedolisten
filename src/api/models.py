@@ -93,12 +93,31 @@ class Comercial_Place(db.Model):
         return f'<User {self.name}>'
 
     def serialize(self):
+        return {    "id": self.id,
+                    "user_id": self.user_id,
+                    "name": self.name,
+                    "address": self.address,
+                    "url": self.url,
+                    "image_url": self.image_url,
+                    "telf": self.telf,
+                    "email": self.email,
+                    "location": self.location,
+                    "description": self.description,
+                    "cambiador": self.cambiador,
+                    "trona": self.trona,
+                    "accessible": self.accessible_carrito,
+                    "espacio_carrito": self.espacio_carrito,
+                    "ascensor": self.ascensor,
+                    "productos_higiene": self.productos_higiene,
+               }
+    def serialize_location(self):
         print(self.address)
         location = geolocator.geocode(self.address)
         return {    "id": self.id,
                     "user_id": self.user_id,
                     "name": self.name,
                     "address": self.address,
+                    "google_address": self.address.replace(" ", "+"),
                     "latitude": location.latitude,
                     "longitude": location.longitude,
                     "url": self.url,

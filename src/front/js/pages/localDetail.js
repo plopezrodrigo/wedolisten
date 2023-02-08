@@ -147,13 +147,14 @@ const LocalDetail = (props) => {
       <div className="row" id="ubicacion">
         <h2>Ubicación y contacto</h2>
         <div>
-          <img
-            src={imagen}
-            className="imagenmapa"
-            alt=""
-            width="1100px"
-            height="900px"
-          />
+        <iframe
+          width="450"
+          height="250"
+          frameborder="0" 
+          referrerpolicy="no-referrer-when-downgrade"
+          src={`https://www.google.com/maps/embed/v1/MAP_MODE?key=AIzaSyAv5ZYraM9a5QF6hOcon0IFnHIiuox66Cw&q=${local.google_address}`}
+          allowfullscreen>
+          </iframe>
         </div>
         <div className="" id="ubicacionelements">
           <span>
