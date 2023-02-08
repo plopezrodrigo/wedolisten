@@ -24,7 +24,9 @@ def list_Managers():
     data = [Manager.serialize() for Managers in Manager]
     return jsonify(data), 200
 
-
+# ----------------------------------------------------------------------------
+# Lista de Locales
+# ----------------------------------------------------------------------------
 @api.route('/comercial-place', methods=['GET'])
 @jwt_required(optional = True)
 def list_Comercial_Places():
@@ -64,7 +66,9 @@ def Comercial_Places_user():
     else:
         return jsonify({"msg": "No existen datos"}), 402
 
-
+# ----------------------------------------------------------------------------
+# Datos de un LOCAL
+# ----------------------------------------------------------------------------
 @api.route('/comercial-place/<comercial_place_id>', methods=['GET'])
 @jwt_required(optional = True)
 def Comercial_Places_Detail(comercial_place_id):
@@ -218,12 +222,12 @@ def Comercial_Place_add():
             email           = request.json.get('email'),
             location        = request.json.get('location'),
             description     = request.json.get('description'),
-            cambiador       = True, # request.json.get('cambiador'),
-            trona           = True, # request.json.get('trona'),
-            accessible_carrito = True, # request.json.get('accessible_carrito'),
-            espacio_carrito    = True, # request.json.get('espacio_carrito'),
-            ascensor           = True, # request.json.get('ascensor'),
-            productos_higiene  = True, # request.json.get('productos_higiene')
+            cambiador       = request.json.get('cambiador'),
+            trona           = request.json.get('trona'),
+            accessible_carrito = request.json.get('accessible_carrito'),
+            espacio_carrito    = request.json.get('espacio_carrito'),
+            ascensor           = request.json.get('ascensor'),
+            productos_higiene  = request.json.get('productos_higiene')
 
         )
         db.session.add(Place)
@@ -250,16 +254,6 @@ def Comercial_Place_update(idLocal):
     try:
         place = Comercial_Place.query.get(idLocal)
         if place:
-            print('--------------------------------------')
-            print('--------------......------------------')
-            print(request.json.get('trona'))
-            print(request.json.get('cambiador'))
-            print(request.json.get('accessible_carrito'))
-            print(request.json.get('espacio_carrito'))
-            print(request.json.get('ascensor'))
-            print(request.json.get('productos_higiene'))
-            print('--------------------------------------')
-            print('--------------------------------------')
             place.name                = request.json.get('name')
             place.address             = request.json.get('address')
             place.url                 = request.json.get('url')
@@ -315,10 +309,10 @@ def Photo_add():
 @api.route("/comment/<id_comment>", methods=["POST"])
 @jwt_required()
 def Comments_add(id_comment):
-    data['user_id'] = get_jwt_identity()
     data = request.json                                                                                                                                                                                                                                                                         
+    data['user_id'] = get_jwt_identity()
 
-    if (data.get('tipo') == "manager" and data.get('comment_id') == null):
+    if (data.get('tipo') == "manager" and data.get('comment_id') == 0):
         return jsonify({"msg": "Un manager no puede generar una respuesta que no sea sobre un comentario de cliente"}), 403
 
     try:

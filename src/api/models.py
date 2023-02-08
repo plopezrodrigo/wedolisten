@@ -109,7 +109,7 @@ class Comercial_Place(db.Model):
                     "description": self.description,
                     "cambiador": self.cambiador,
                     "trona": self.trona,
-                    "accessible": self.accessible_carrito,
+                    "accessible_carrito": self.accessible_carrito,
                     "espacio_carrito": self.espacio_carrito,
                     "ascensor": self.ascensor,
                     "productos_higiene": self.productos_higiene,
