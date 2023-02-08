@@ -125,7 +125,7 @@ def get_comment(id):
 # ----------------------------------------------------------------------------
 @api.route('/comment_local/<id_local>', methods=['GET'])
 def get_comments_local(id_local):
-    datos = Comment.query.filter_by(comercial_place_id = id_local).filter_by(puntuacion !=  None).all()
+    datos = Comment.query.filter_by(comercial_place_id = id_local).filter_by(puntuacion != None).all()
     data = [comentario.serialize() for comentario in datos]
     return jsonify(data), 200
 

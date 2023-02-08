@@ -178,7 +178,7 @@ def setup_commands(app):
         comment.user_id = cliente
         comment.comercial_place_id = local
         comment.comment = "1. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries"
-        comment.puntuacion = 4
+        comment.puntuacion = "cuatro"
         comment.price = "Caro"
         comment.a_domicilio = "Si"
         comment.mesa = "Si"
@@ -207,7 +207,7 @@ def setup_commands(app):
         comment.user_id = cliente
         comment.comercial_place_id = local
         comment.comment = "2. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries"
-        comment.puntuacion = 4
+        comment.puntuacion = "cuatro"
         comment.price = "Barato"
         comment.a_domicilio = "Si"
         comment.mesa = "Si"
@@ -221,7 +221,7 @@ def setup_commands(app):
         comment.user_id = cliente
         comment.comercial_place_id = local
         comment.comment = "3. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries"
-        comment.puntuacion = 1
+        comment.puntuacion = "uno"
         comment.price = "Barato"
         comment.a_domicilio = "Si"
         comment.mesa = "Si"
@@ -235,7 +235,7 @@ def setup_commands(app):
         comment.user_id = cliente
         comment.comercial_place_id = local
         comment.comment = "Comentario que estoy metiendo por inicializar 4"
-        comment.puntuacion = 2
+        comment.puntuacion = "dos"
         comment.price = "Normal"
         comment.a_domicilio = "Si"
         comment.mesa = "Si"
@@ -249,7 +249,7 @@ def setup_commands(app):
         comment.user_id = cliente
         comment.comercial_place_id = local
         comment.comment = "Comentario que estoy metiendo por inicializar 5"
-        comment.puntuacion = 3
+        comment.puntuacion = "tres"
         comment.price = "Normal"
         comment.a_domicilio = "Si"
         comment.mesa = "Si"
@@ -263,7 +263,7 @@ def setup_commands(app):
         comment.user_id = cliente
         comment.comercial_place_id = local2
         comment.comment = "Comentario al loca2"
-        comment.puntuacion = 4
+        comment.puntuacion = "cuatro"
         comment.price = "Normal"
         comment.a_domicilio = "Si"
         comment.mesa = "Si"
@@ -277,7 +277,7 @@ def setup_commands(app):
         comment.user_id = cliente
         comment.comercial_place_id = local3
         comment.comment = "Comentario al loca3"
-        comment.puntuacion = 5
+        comment.puntuacion = "cinco"
         comment.price = "Normal"
         comment.a_domicilio = "Si"
         comment.mesa = "Si"
