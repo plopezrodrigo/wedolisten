@@ -173,7 +173,7 @@ class Comment(db.Model):
     comment = db.Column(db.String(1000), unique=False, nullable=False)
     puntuacion = db.Column(db.Enum(Puntuaciones), unique=False, nullable=True)
     price = db.Column(db.Enum("Barato","Normal", "Caro", name='price_types'), unique=False, nullable=True)
-    a_domicilio = db.Column(db.Enum("Si","No", name='a_domicilio_types'), unique=False, nullable=True)
+    a_domicilio = db.Column(db.Enum("Si","No", name='a_domicilio_types'), unique=False, nullable=True) 
     mesa = db.Column(db.Enum("Si","No", name='mesa_types'), unique=False, nullable=True)
     alcohol = db.Column(db.Enum("Si","No", name='alcohol_types'), unique=False, nullable=True)
     visita = db.Column(db.Enum("Pareja","Familia","Solo","Amigos","Negocios", name='visita_types'), unique=False, nullable=True)
