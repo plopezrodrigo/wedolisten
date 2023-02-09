@@ -187,7 +187,7 @@ class Comment(db.Model):
         else:
             nombre = self.user.manager[0].name
         
-        if self.puntuacion.value is not None:
+        if self.puntuacion is not None:
             puntos = int(self.puntuacion.value)
         else:
             puntos = 0
