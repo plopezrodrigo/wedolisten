@@ -139,6 +139,13 @@ def list_Favourit():
     data = [element.serialize() for element in favourit]
     return jsonify(data), 200
 
+
+# ----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
+# POST
+# ----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
+
 @api.route('/favourit/<id>', methods=['POST'])
 @jwt_required()
 def add_Favourit(id):
@@ -154,29 +161,9 @@ def add_Favourit(id):
         db.session.commit()
     return jsonify(favourit.serialize()), 200
 
-''' 
-@api.route("/User/<id>", methods=["DELETE"])
-def Users_delete(id):
-    User = User.query.get(id)
-    db.session.delete(User)
-    db.session.commit()
-@api.route("/Comercial_Place/<id>", methods=["DELETE"])
-def Places_delete(id):
-    Place = Comercial_Place.query.get(id)
-    db.session.delete(Place)
-    db.session.commit()
-@api.route("/Comment/<id>", methods=["DELETE"])
-def Comments_delete(id):
-    Comment = Comment.query.get(id)
-    db.session.delete(Comment)
-    db.session.commit()
-@api.route("/Favourit/<id>", methods=["DELETE"])
-def Favourits_delete(id):
-    Favourit = Favourit.query.get(id)
-    db.session.delete(Favourit)
-    db.session.commit()
-'''
-
+# ----------------------------------------------------------------------------
+# Alta de Customer y Manager
+# ----------------------------------------------------------------------------
 @api.route('/signup', methods=['POST'])
 def signup():
     data = request.json
@@ -216,7 +203,9 @@ def signup():
 
     return jsonify({"msg": "Usuario creado correctamente"}), 200
 
-
+# ----------------------------------------------------------------------------
+# LOCAL - Alta
+# ----------------------------------------------------------------------------
 @api.route("/Comercial_Place", methods=["POST"])
 @jwt_required()
 def Comercial_Place_add():
@@ -256,7 +245,9 @@ def Comercial_Place_add():
 
     return jsonify({"msg": "Comentario creado correctamente"}), 200
 
-
+# ----------------------------------------------------------------------------
+# LOCAL - Modificacion
+# ----------------------------------------------------------------------------
 @api.route("/Comercial_Place/<idLocal>", methods=["POST"])
 @jwt_required()
 def Comercial_Place_update(idLocal):
@@ -294,7 +285,9 @@ def Comercial_Place_update(idLocal):
         return jsonify({"msg": "No se puede crear este Local"}), 402
 
 
-
+# ----------------------------------------------------------------------------
+# Rate_Customer - Alta
+# ----------------------------------------------------------------------------
 @api.route("/Rate_Customer", methods=["POST"])
 def Rate_add():
     rate = Rate_Customer(
@@ -305,7 +298,9 @@ def Rate_add():
     db.session.add(rate)
     db.session.commit()
 
-
+# ----------------------------------------------------------------------------
+# Rate_Customer FOTO - Alta
+# ----------------------------------------------------------------------------
 @api.route("/Photo_Comercial_Place", methods=["POST"])
 def Photo_add():
     photo = Photo_Comercial_Place(
@@ -315,7 +310,9 @@ def Photo_add():
     db.session.add(photo)
     db.session.commit()
 
-
+# ----------------------------------------------------------------------------
+# Comentario - Alta
+# ----------------------------------------------------------------------------
 @api.route("/comment/<id_comment>", methods=["POST"])
 @jwt_required()
 def Comments_add(id_comment):
@@ -369,7 +366,9 @@ def Comments_add(id_comment):
         db.session.rollback()
         return jsonify({"msg": "No se puede crear este comentario"}), 402
 
-
+# ----------------------------------------------------------------------------
+# Favoritos - Alta
+# ----------------------------------------------------------------------------
 @api.route("/Favourit", methods=["POST"])
 def Favourit_add():
     favourite = Favourit(
@@ -380,7 +379,9 @@ def Favourit_add():
     db.session.add(favourite)
     db.session.commit()
 
-
+# ----------------------------------------------------------------------------
+# Login de usuario
+# ----------------------------------------------------------------------------
 @api.route('/token', methods=['POST'])
 def create_token():
     email = request.json.get("email", None)
@@ -398,3 +399,33 @@ def create_token():
     access_token = create_access_token(identity=user.id)
 
     return jsonify({ "token": access_token, "user_id": user.id, "usertype": user.type, "name": usuario.name })
+
+
+# ----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
+# DELETE
+# ----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
+
+''' 
+@api.route("/User/<id>", methods=["DELETE"])
+def Users_delete(id):
+    User = User.query.get(id)
+    db.session.delete(User)
+    db.session.commit()
+@api.route("/Comercial_Place/<id>", methods=["DELETE"])
+def Places_delete(id):
+    Place = Comercial_Place.query.get(id)
+    db.session.delete(Place)
+    db.session.commit()
+@api.route("/Comment/<id>", methods=["DELETE"])
+def Comments_delete(id):
+    Comment = Comment.query.get(id)
+    db.session.delete(Comment)
+    db.session.commit()
+@api.route("/Favourit/<id>", methods=["DELETE"])
+def Favourits_delete(id):
+    Favourit = Favourit.query.get(id)
+    db.session.delete(Favourit)
+    db.session.commit()
+'''

@@ -24,7 +24,7 @@ export const DatosLocal = () => {
       navigate.push("/login");
     }
 
-    miUseEffect().then((resp) => setLocal(resp));
+    miUseEffect().then((resp) => setLocal(resp)); 
   }, []);
 
   const handleChange = (evento) => {

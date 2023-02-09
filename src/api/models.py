@@ -187,8 +187,6 @@ class Comment(db.Model):
         else:
             nombre = self.user.manager[0].name
 
-        print(self.date.date())
-
         return {    "id": self.id,
                     "user_id": self.user_id,
                     "user_name": nombre,
