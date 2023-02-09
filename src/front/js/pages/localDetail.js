@@ -17,15 +17,15 @@ const LocalDetail = (props) => {
   };
 
   const useEffectComments = async () => {
-    const resp = await fetch(`${process.env.BACKEND_URL}/api/comment_local/${params.id}`,{
+    fetch(`${process.env.BACKEND_URL}/api/comment_local/${params.id}`,{
         method: 'GET',
         headers: {"Content-Type": "application/json",
                   "Authorization": 'Bearer '+ sessionStorage.getItem("token") // hará falta? 
         }
       })
-    if (resp.ok) return setComentarios(await resp.json()); 
-    else         return setMensaje(await resp.json());  
-  }
+    .then(res=>{return res.json()})
+    .then(data=>{console.log(data)})
+ }
 
   useEffect(() => { 
     if (sessionStorage.getItem("token") != null) {

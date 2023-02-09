@@ -8,7 +8,7 @@ export const OpinionManager = () => {
 	const params = useParams()
 	const [local, setLocales] = useState({})
 	const [comentario, setComentario] = useState();
-	const [formData, setFormData] = useState({tipo:"manager", comercial_place_id:params.id_local, comment_id: params.id_comment, puntuacion: None});
+	const [formData, setFormData] = useState({tipo:"manager", comercial_place_id:params.id_local, comment_id: params.id_comment, puntuacion: null});
 	const [mensaje, setMensaje] = useState(null); 
 	const navigate = useNavigate();
 	const { store, actions } = useContext(Context);
@@ -61,12 +61,15 @@ export const OpinionManager = () => {
 			body: JSON.stringify(formData),
 			})
 		.then(response => {
-			if (response.status == 200){ 
-				navigate("/")
+			/*if (response.status == 200){ 
+				// navigate("/")
 			}else{ 
 				setMensaje(response["msg"])
-			}
+			}*/
 			return response.json(); 
+		})
+		.then(data => {
+			console.log(data);
 		})
 	}
 

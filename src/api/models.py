@@ -186,6 +186,11 @@ class Comment(db.Model):
             nombre = self.user.customer[0].name
         else:
             nombre = self.user.manager[0].name
+        
+        if self.puntuacion.value is not None:
+            puntos = int(self.puntuacion.value)
+        else:
+            puntos = 0
 
         return {    "id": self.id,
                     "user_id": self.user_id,
@@ -197,7 +202,7 @@ class Comment(db.Model):
                     "comment" : self.comment,
                     "datetime": self.date,
                     "date": self.date.date().strftime("%d/%m/%Y"),
-                    "puntuacion": int(self.puntuacion.value),
+                    "puntuacion": puntos,
                     "price": self.price,
                     "a_domicilio": self.a_domicilio,
                     "mesa": self.mesa,
