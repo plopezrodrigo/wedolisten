@@ -30,6 +30,7 @@ export const Data = () => {
                         name="name"
                         placeholder="Nombre y Apellidos"
                         required
+                        defaultValue={store.usuario?.name}
                       />
                       <div className="valid-feedback">
                         Campo nombre y apellidos es válido.
@@ -45,6 +46,7 @@ export const Data = () => {
                         name="email"
                         placeholder="E-mail"
                         required
+                        defaultValue={store.user?.email}
                       />
                       <div className="valid-feedback">Campo Email es válido.</div>
                       <div className="invalid-feedback">
@@ -58,6 +60,7 @@ export const Data = () => {
                         name="Teléfono"
                         placeholder="Teléfono"
                         required
+                        defaultValue={store.user?.telefono}
                       />
                       <div className="valid-feedback">Campo Teléfono es válido</div>
                       <div className="invalid-feedback">
@@ -190,6 +193,7 @@ export const Data = () => {
                         name="Contraseña"
                         placeholder="Contraseña"
                         required
+                        defaultValue={store.usuario?.password}
                       />
                       <div className="valid-feedback">
                         Campo Contraseña es válido

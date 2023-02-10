@@ -17,7 +17,7 @@ const ManagerInfo = (props) => {
           Añade tu local a nuetra red para aumentar tus visitas y que vean lo bien que funciona!!{" "}
           </p>
           {!(sessionStorage.getItem("token")) ?
-          <Link to="/signupUser" className="btn btn-lg btn-outline-primary mb-3" id="button">
+          <Link to="/signupManager" className="btn btn-lg btn-outline-primary mb-3" id="button">
             Registro
           </Link> :
           <Link to="/misLocales" className="btn btn-lg btn-outline-primary mb-3" id="button">

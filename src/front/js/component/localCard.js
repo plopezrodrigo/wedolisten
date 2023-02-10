@@ -27,8 +27,8 @@ const LocalCard = (props) => {
           <img
               src={props.image_url}
               className="card-img-top"
-              width="200"
-              height= "200"
+              width="150"
+              height= "150"
               alt=""
            />
         <div className="card-body">
