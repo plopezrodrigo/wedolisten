@@ -7,22 +7,36 @@ import imagen from "../../img/logo.png";
 export const OpinionUser = () => {
 	const params = useParams()
 	const [local, setLocales] = useState({})
-	const [formData, setFormData] = useState({tipo:"customer", user_id:1, comercial_place_id:params.id_local, comment_id: params.id_comment});
+	const [formData, setFormData] = useState({tipo:"customer", comercial_place_id:params.id_local, comment_id: params.id_comment});
 	const [mensaje, setMensaje] = useState(null); 
 	const navigate = useNavigate();
 	const { store, actions } = useContext(Context);
   
+	useEffect (()=> {
+		console.log("Opinion User", formData, store.token);		
+		if (!(store.token && store.token != "" && store.token != undefined)) {
+			navigate("/login");
+		}
+
+		fetch(`${process.env.BACKEND_URL}/api/comercial-place/${params.id_local}`)
+		.then(response => {
+			return response.json()
+		}).then(response => {
+			setLocales(response)        
+		})
+	}, [])
+
 	const handleChange = (evento) =>{
 		setFormData({...formData, [evento.target.name]: evento.target.value});
 	}
 
 	const handleSubmit = (evento)=>{
 		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
-		console.log("Opinion User", formData, store.token);
 
-		fetch(process.env.BACKEND_URL + "/api/Comment", 
+		fetch(process.env.BACKEND_URL + "/api/comment/0", 
 			{method: 'POST',
 			headers:{"Content-Type": "application/json"},
+			"Authorization": 'Bearer '+ store.token, 
 			body: JSON.stringify(formData),
 			})
 		.then(response => {
@@ -34,19 +48,6 @@ export const OpinionUser = () => {
 			return response.json(); 
 		})
 	}
-
-	useEffect (()=> {
-		if (store.token && store.token != "" && store.token != undefined) {
-			navigate.push("/login");
-		}
-
-		fetch(`${process.env.BACKEND_URL}/api/comercial-place/${params.id_local}`)
-		.then(response => {
-			return response.json()
-		}).then(response => {
-			setLocales(response)        
-		})
-	}, [])
 
 	return (
 		<div className="container fluid align-center">
@@ -61,7 +62,7 @@ export const OpinionUser = () => {
                         <img src={imagen} className="alinear-derecha" alt="" />
                     </div>
                     <div className="col-4 py-5 px-0 mx-0">
-                        <p className="my-0"><strong>{local.name} ({params.id_local} - {params.id_comment})</strong></p>
+                        <p className="my-0"><strong>{local.name} ({params.id_local})</strong></p>
                         <p className="my-0">{local.address} </p>
                         <p className="my-0">{local.telf} - {local.email}</p>
                         <p className="my-0">{local.url}</p>

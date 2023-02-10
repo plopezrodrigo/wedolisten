@@ -7,6 +7,17 @@ const OpinionComments = (props) => {
   const { store, actions } = useContext(Context);
   console.log(store.favorites);
 
+  function estrellas(){
+    let puntuaciones = "";
+
+    for (let i = 0; i<props.puntuacion; i++){
+      puntuaciones = `${puntuaciones}<i className="fas fa-circle"></i>`
+    }
+    return puntuaciones;
+  }
+
+
+
   return (
     <div className="row">
       <div className="col-2">
@@ -17,31 +28,21 @@ const OpinionComments = (props) => {
               width="20"
               height="80"
             />
-            <p>nombre_usuario</p>
+            <p>{props.nombre}</p>
       </div>
       <div className="row">
         <div className="col-12">
-          <i className="fas fa-circle"></i>
-          <i className="fas fa-circle"></i>
-          <i className="fas fa-circle"></i>
-          <i className="fas fa-circle"></i>
-          <i className="far fa-circle"></i>
-          <p>Opinion escrita ayer</p>
+          {() => {for (let i = 0; i<props.puntuacion; i++){return <i className="fas fa-circle"></i>}}}
+          {() => {for (let i = props.puntuacion; i<5; i++){return <i className="far fa-circle"></i>}}}
         </div>
       </div>
       <div className="col-10">
           <h5>De 10</h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehend...</p>
+          <p>{props.comment}</p> 
       </div>
       <div className="col-10">
-          <p><strong>Fecha de la visita:</strong> diciembre de 2022</p>
+          <p><strong>Fecha de la visita:</strong> {props.fecha}</p>
       </div>
       </div>
   );
 };
-
-export default OpinionComments;

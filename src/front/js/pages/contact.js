@@ -12,12 +12,12 @@ export const Contact = (props) => {
       <div className="vh-100 gradient-custom">
         <div className="container text-center">
           <h3>Contacto</h3>
-          <p>¿Necesitas ayuda?</p>
-          <p>Ponte en contacto con nosotros</p>
+          <p className="mb-0">¿Necesitas ayuda?</p>
+          <p className="mt-0">Ponte en contacto con nosotros</p>
           <div className="row d-flex justify-content-center align-items-center h-10">
             <div className="col-12 col-md-8 col-lg-6 col-xl-5 ">
               <div className="card px-3" id="card">
-                <h3 id="iconbutton">Escríbenos</h3>
+                <h3 className="mt-3" id="iconbutton">Escríbenos</h3>
                   <form className="form-outline" novalidate>
                     <div className="col-md-12">
                       <label for="basic-url" className="form-label">Nombre y Apellidos</label>

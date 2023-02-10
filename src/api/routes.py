@@ -48,12 +48,13 @@ def list_Comercial_Places():
 
     return jsonify(data), 200
 
+# ----------------------------------------------------------------------------
+# Locales de un Manager
+# ----------------------------------------------------------------------------
 @api.route('/comercial-place-user', methods=['GET'])
 @jwt_required()
 def Comercial_Places_user():
     userId = get_jwt_identity()
-
-    #comercial_places = Comercial_Place.query.all()
     comercial_places = Comercial_Place.query.filter_by(user_id = userId)
 
     if comercial_places:
@@ -62,6 +63,7 @@ def Comercial_Places_user():
         return jsonify(data), 200
     else:
         return jsonify({"msg": "No existen datos"}), 402
+
 
 @api.route('/comercial-place/<comercial_place_id>', methods=['GET'])
 @jwt_required(optional = True)
@@ -84,9 +86,32 @@ def Comercial_Places_Detail(comercial_place_id):
     else:
         return jsonify({"msg": "No existen datos"}), 402
 
-@api.route('/Comment', methods=['GET'])
+
+@api.route('/comercial-place-2/<comercial_place_id>', methods=['GET'])
+def Comercial_Places_2(comercial_place_id):
+    comercial_places = Comercial_Place.query.filter_by(id=comercial_place_id).first()
+
+    data = comercial_places.serialize()
+    if comercial_places:
+        return jsonify(data), 200
+    else:
+        return jsonify({"msg": "No existen datos"}), 402
+
+
+@api.route('/comment', methods=['GET'])
 def list_Comments():
-    datos = Comment.query.order_by(Comment.id.desc()).all()
+    datos = Comment.query.order_by(Comment.id.desc()).limit(4).all()
+    data = [comentario.serialize() for comentario in datos]
+    return jsonify(data), 200
+
+@api.route('/comment/<id>', methods=['GET'])
+def get_comment(id):
+    datos = Comment.query.get(id)
+    return jsonify(datos.serialize()), 200
+
+@api.route('/comment_local/<id_local>', methods=['GET'])
+def get_comments_local(id_local):
+    datos = Comment.query.filter_by(comercial_place_id = id_local).all()
     data = [comentario.serialize() for comentario in datos]
     return jsonify(data), 200
 
@@ -96,7 +121,7 @@ def list_Comments():
 def list_Favourit():
     user_id=get_jwt_identity()
     customer = Customer.query.filter_by(user_id=user_id).first()
-    favourit = Favourit.query.filter_by(customer_id=customer.id)
+    favourit = Favourit.query.filter_by(customer_id=customer.id, state=True )
     data = [element.serialize() for element in favourit]
     return jsonify(data), 200
 
@@ -141,6 +166,7 @@ def Favourits_delete(id):
 @api.route('/signup', methods=['POST'])
 def signup():
     data = request.json
+    subs = False
 
     try:
         user = User.query.filter_by(email=data['user']).first()
@@ -152,20 +178,23 @@ def signup():
             db.session.commit()
 
             if data['tipo'] == "customer": # Es un Customer
+                if data.get('subscription', "off") == "on":
+                    subs = True
                 customer = Customer(user_id  = user.id
-                                #,user     = user.id 
-                                ,name     = data['name']
-                                ,birthday = data.get('birthday')
-                                ,gender   = data.get('gender')
-                                ,subscription = data.get('subscription', False)
-                                ,address  = data.get('address'))
+                            #,user     = user.id 
+                            ,name     = data['name']
+                            ,birthday = data.get('birthday')
+                            ,gender   = data.get('gender')
+                            ,subscription = subs
+                            ,address  = data.get('address'))
                 db.session.add(customer)
             else:  # es un manager
                 manager = Manager(user_id = user.id
                                 ,name    = data['name']
                                 )
                 db.session.add(manager)
-        db.session.commit()
+
+            db.session.commit()
 
     except Exception as e:
         db.session.rollback()
@@ -214,34 +243,39 @@ def Comercial_Place_add():
     return jsonify({"msg": "Comentario creado correctamente"}), 200
 
 
-
-
-
-@api.route("/Comercial_Place/<comercial_place_id>", methods=["POST"])
+@api.route("/Comercial_Place/<idLocal>", methods=["POST"])
 @jwt_required()
 def Comercial_Place_update(idLocal):
     userId = get_jwt_identity()
     try:
-        place = Comercial_Place.query.filter_by(id=idLocal)
-
+        place = Comercial_Place.query.get(idLocal)
         if place:
-            place.name                = request.json.get('name'),
-            place.address             = request.json.get('address'),
-            place.url                 = request.json.get('url'),
-            place.image_url           = request.json.get('image_url'),
-            place.telf                = request.json.get('telf'),
-            place.email               = request.json.get('email'),
-            place.location            = request.json.get('location'),
-            place.description         = request.json.get('description'),
-            place.cambiador           = True, # request.json.get('cambiador'),
-            place.trona               = True, # request.json.get('trona'),
-            place.accessible_carrito  = True, # request.json.get('accessible_carrito'),
-            place.espacio_carrito     = True, # request.json.get('espacio_carrito'),
-            place.ascensor            = True, # request.json.get('ascensor'),
-            place.productos_higiene   = True, # request.json.get('productos_higiene')
+            print('--------------------------------------')
+            print('--------------......------------------')
+            print(request.json.get('trona'))
+            print(request.json.get('cambiador'))
+            print(request.json.get('accessible_carrito'))
+            print(request.json.get('espacio_carrito'))
+            print(request.json.get('ascensor'))
+            print(request.json.get('productos_higiene'))
+            print('--------------------------------------')
+            print('--------------------------------------')
+            place.name                = request.json.get('name')
+            place.address             = request.json.get('address')
+            place.url                 = request.json.get('url')
+            place.image_url           = request.json.get('image_url')
+            place.telf                = request.json.get('telf')
+            place.email               = request.json.get('email')
+            place.location            = request.json.get('location')
+            place.description         = request.json.get('description')
+            place.cambiador           = request.json.get('cambiador')
+            place.trona               = request.json.get('trona')
+            place.accessible_carrito  = request.json.get('accessible_carrito')
+            place.espacio_carrito     = request.json.get('espacio_carrito')
+            place.ascensor            = request.json.get('ascensor')
+            place.productos_higiene   = request.json.get('productos_higiene')
 
             db.session.commit()
-        
             return jsonify({"msg": "Local modificado correctamente"}), 200
         else:
             return jsonify({"msg": "No existen datos"}), 402
@@ -278,50 +312,31 @@ def Photo_add():
     db.session.commit()
 
 
-@api.route("/Comment", methods=["POST"])
-def Comments_add():
-    data = request.json
+@api.route("/comment/<id_comment>", methods=["POST"])
+@jwt_required()
+def Comments_add(id_comment):
+    data['user_id'] = get_jwt_identity()
+    data = request.json                                                                                                                                                                                                                                                                         
 
-    #if (data.get('tipo') == "manager" and data.get('comment_id') == null):
-    #    return jsonify({"msg": "Un manager no puede generar una respuesta que no sea sobre un comentario de cliente"}), 403
-
-    print('----------------------------------------------')
-    print('----------------------------------------------')
-    print('----------------------------------------------') 
-    # PDTE:
-    #   coger el usuario por token
-    #   validar que es un comentario de user y es un usuario o que es un comentario de gestor y es un gestor
-    #   validar el comment_id
-
-    user = User.query.filter_by(email='p@p.es').first()
-    data['user_id'] = user.id
-    comercial = Comercial_Place.query.filter_by(name='Nombre Comercial_Place').first()
-    data['comercial_place_id'] = comercial.id
-
-    if (data.get('tipo') == "manager"):
-        comment = Comment.query.filter_by(comercial_place_id=comercial.id).first()
-        data['comment_id'] = comment.id
-
-    print(data)
-
-    print('----------------------------------------------')
-    print('----------------------------------------------')
-    print('----------------------------------------------')
+    if (data.get('tipo') == "manager" and data.get('comment_id') == null):
+        return jsonify({"msg": "Un manager no puede generar una respuesta que no sea sobre un comentario de cliente"}), 403
 
     try:
         comments = Comment( user_id             = data['user_id'],
                             comercial_place_id  = data['comercial_place_id'],
                             comment             = data['comment'],
-                            comment_id          = data.get('comment_id'),
+                            #comment_id          = null if data.get('comment_id')==0 else data.get('comment_id'),
                             puntuacion          = data.get('puntuacion'),
                             price               = data.get('price'),
                             a_domicilio         = data.get('a_domicilio'),
                             mesa                = data.get('mesa'),
                             alcohol             = data.get('alcohol'),
                             visita              = data.get('visita'))
+        if data.get('comment_id') != 0:
+             comment_id = data.get('comment_id')
 
         db.session.add(comments)
-        db.session.commit()
+        db.session.commit()                                                                         
 
         if data.get('photo_location1'):
             photos = Photos_Comments(comment_id = comments.id,
@@ -370,7 +385,12 @@ def create_token():
     if not user:
         return jsonify({"msg": "Bad username or password"}), 401
 
+    if user.type == "customer":
+        usuario = Customer.query.filter_by(user_id=user.id).first()
+    else:
+        usuario = Manager.query.filter_by(user_id=user.id).first()
+
+    #type = "customer" if customer else "manager"
     access_token = create_access_token(identity=user.id)
-    customer = Customer.query.filter_by(user_id=user.id).first()
-    type = "customer" if customer else "manager"
-    return jsonify({ "token": access_token, "user_id": user.id, "usertype": type })
+
+    return jsonify({ "token": access_token, "user_id": user.id, "usertype": user.type, "name": usuario.name })

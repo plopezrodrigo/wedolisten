@@ -1,6 +1,9 @@
 from flask_sqlalchemy import SQLAlchemy
 import datetime
-import enum
+import enum, datetime
+from geopy.geocoders import Nominatim
+
+geolocator = Nominatim(user_agent="my-app")
 
 db = SQLAlchemy()
 
@@ -90,10 +93,14 @@ class Comercial_Place(db.Model):
         return f'<User {self.name}>'
 
     def serialize(self):
+        print(self.address)
+        location = geolocator.geocode(self.address)
         return {    "id": self.id,
                     "user_id": self.user_id,
                     "name": self.name,
                     "address": self.address,
+                    "latitude": location.latitude,
+                    "longitude": location.longitude,
                     "url": self.url,
                     "image_url": self.image_url,
                     "telf": self.telf,
@@ -171,18 +178,27 @@ class Comment(db.Model):
     visita = db.Column(db.Enum("Pareja","Familia","Solo","Amigos","Negocios", name='visita_types'), unique=False, nullable=True)
     
     def __repr__(self):
-        return f'<User {self.customer_id}>'
+        return f'<User {self.id}>'
 
     def serialize(self):
+        if self.user.type == "customer":
+            nombre = self.user.customer[0].name
+        else:
+            nombre = self.user.manager[0].name
+
+        print(self.date.date())
+
         return {    "id": self.id,
                     "user_id": self.user_id,
-                    #"user_name": self.user.name,
+                    "user_name": nombre,
+                    "user_type": self.user.type,
                     "comercial_place_id": self.comercial_place_id,
                     "comercial_place_name": self.comercial_place.name,
                     "comment_id": self.comment_id,
                     "comment" : self.comment,
-                    "date": self.date,
-                    #"puntuacion": self.puntuacion,
+                    "datetime": self.date,
+                    "date": self.date.date().strftime("%d/%m/%Y"),
+                    "puntuacion": int(self.puntuacion.value),
                     "price": self.price,
                     "a_domicilio": self.a_domicilio,
                     "mesa": self.mesa,

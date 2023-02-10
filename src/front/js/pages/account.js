@@ -13,7 +13,7 @@ export const Account = () => {
           <h4 className="my-account-section-title ma-title" id="iconbutton">
             Mi cuenta 
           </h4>
-          <p className="my-account-section-description mb-0">¡Hola, Carlos Ortega!</p>
+          <p className="my-account-section-description mb-0">¡Hola, Patricia López!</p>
           <p className="my-account-section-description mt-0 mb-4">Aquí puedes ver tus locales favoritos, editar tus datos o realizar cualquier gestión</p>
           <div className="row d-flex justify-content-center h-100">
             <div className="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -21,20 +21,16 @@ export const Account = () => {
                 <div className="ma-home-sections">
                     <p className="text ma-home-section mt-3 mb-3">
                     <Link to="/data">
-                    <a>
                       <i className="fas fa-user-edit" id="iconaccount" />
                       <strong className="strong"> Mis datos</strong>
-                    </a>
                     </Link>
                     <p className="description">Edita tus datos personales.</p>
                     </p>
                     {store.usertype == "customer" ? 
                       <p className="text ma-home-section">
                         <Link to="/favorites">
-                        <a>
                           <i className="fas fa-star" id="iconaccount" />
                           <strong className="strong"> Mis Favoritos</strong>
-                        </a>
                         </Link>
                         <p className="description">
                           Consulta tus locales añadidos a favoritos.
@@ -42,11 +38,9 @@ export const Account = () => {
                       </p>
                       :
                       <p className="text ma-home-section">
-                        <Link to="/comments">
-                          <a>
+                        <Link to="/comentarios">
                             <i className="fas fa-star" id="iconaccount" />
                             <strong className="strong"> Mis Comentarios</strong>
-                          </a>
                         </Link>
                         <p className="description">
                           Consulta los comentarios de tus clientes.
@@ -56,10 +50,8 @@ export const Account = () => {
                       {store.usertype == "manager" ? 
                       <p className="text ma-home-section">
                         <Link to="/misLocales">
-                        <a>
                           <i className="fas fa-star" id="iconaccount" />
                           <strong className="strong"> Mis Locales</strong>
-                        </a>
                         </Link>
                         <p className="description">
                           Consulta tus locales.
