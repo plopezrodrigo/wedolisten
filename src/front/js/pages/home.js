@@ -67,8 +67,8 @@ export const Home = () => {
       <div className="container fluid">
         <div className="row align-items-start">
           {locales && locales.map((local, index) => {
-              return  <div key={local.id} className="col-4">
-                        <LocalCard
+              return  <div key={local.id} className="col-3">
+                        <LocalCard id="localcard"
                           name={local.name}
                           key={local.id}
                           id={local.id}

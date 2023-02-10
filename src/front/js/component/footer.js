@@ -65,7 +65,7 @@ export const Footer = () => (
             <a href="#!" class="text-reset">FAQs</a>
           </p>
           <p>
-            <a href="#!" class="text-reset">Aviso Legal</a>
+            <a href={`${process.env.BACKEND_URL}/front/docs/Aviso_Legal.pdf`} target="Aviso Legal" class="text-reset">Aviso Legal</a>
           </p>
           <p>
             <a href="#!" class="text-reset">Política de privacidad</a>

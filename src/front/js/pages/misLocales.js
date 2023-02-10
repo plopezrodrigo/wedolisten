@@ -29,8 +29,7 @@ export const MisLocales = () => {
                     <div class="col-sm-10"></div>
                     <div className="col-2 align-self-end">
                         <button id="button" key="miLocalAlta">
-                        <Link to="/nuevoLocal">
-                        </Link> Nuevo
+                        <Link to="/nuevoLocal">Nuevo</Link>
                         </button>
                     </div>
                 </div>
