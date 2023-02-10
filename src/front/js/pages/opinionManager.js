@@ -66,10 +66,8 @@ export const OpinionManager = () => {
 			}else{ 
 				setMensaje(response["msg"])
 			}*/
-			return response.json(); 
-		})
-		.then(data => {
-			console.log(data);
+			//return response.json(); 
+			navigate(`/localDetail/${params.id_local}`);
 		})
 	}
 

@@ -42,7 +42,7 @@ export const OpinionUser = () => {
 			})
 		.then(response => {
 			if (response.status == 200){ 
-				navigate("/")
+				navigate(`/localDetail/${params.id_local}`);
 			}else{ 
 				setMensaje(response["msg"])
 			}
