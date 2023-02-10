@@ -34,9 +34,10 @@ export const OpinionUser = () => {
 		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
 
 		fetch(process.env.BACKEND_URL + "/api/comment/0", 
-			{method: 'POST',
-			headers:{"Content-Type": "application/json"},
-			"Authorization": 'Bearer '+ store.token, 
+			{	method: 'POST',
+				headers:{"Content-Type": "application/json",
+				"Authorization": 'Bearer '+ store.token
+			},  	
 			body: JSON.stringify(formData),
 			})
 		.then(response => {

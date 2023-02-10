@@ -68,7 +68,7 @@ def setup_commands(app):
 
         print("Creating test users customer")
         user = User()
-        user.email = "p@p.es"
+        user.email = "customer@p.es"
         user.type = "customer"
         user.password = "1111"
         user.is_active = True
@@ -93,13 +93,14 @@ def setup_commands(app):
 
         print("Creating test users Manager")
         user = User()
-        user.email = "manager@manager.com"
+        user.email = "manager@p.es"
         user.type = "manager"
         user.password = "1111"
         user.is_active = True
         db.session.add(user)
         db.session.commit()
         print("User: ", user.email, " created.")
+
         print("--------------------------------------------------------")
         print("")
         print("Creating test Manager")
@@ -109,7 +110,9 @@ def setup_commands(app):
         db.session.add(manager)
         db.session.commit()
         print("manager: ", manager.name, " manager.")
-
+        gestor = manager.user_id
+        print("Gestor : ", gestor, " created.")
+        
         print("--------------------------------------------------------")
         print("")
         print("Creating test Local")
@@ -175,7 +178,7 @@ def setup_commands(app):
         comment.user_id = cliente
         comment.comercial_place_id = local
         comment.comment = "1. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries"
-        comment.puntuacion = "uno"
+        comment.puntuacion = "cuatro"
         comment.price = "Caro"
         comment.a_domicilio = "Si"
         comment.mesa = "Si"
@@ -184,6 +187,22 @@ def setup_commands(app):
         db.session.add(comment)
         db.session.commit()
 
+        print("Comentario del gestor:")
+        print(gestor)
+        comment = Comment()
+        comment.user_id = gestor
+        comment.comercial_place_id = local
+        comment.comment = "Comentario de manager"
+        comment.puntuacion = None
+        comment.price = None
+        comment.a_domicilio = None
+        comment.mesa = None
+        comment.alcohol = None
+        comment.visita = None
+        db.session.add(comment)
+        db.session.commit()
+
+        print("--------------------------------------------------------")
         comment = Comment()
         comment.user_id = cliente
         comment.comercial_place_id = local
@@ -197,11 +216,12 @@ def setup_commands(app):
         db.session.add(comment)
         db.session.commit()
 
+        print("--------------------------------------------------------")
         comment = Comment()
         comment.user_id = cliente
         comment.comercial_place_id = local
         comment.comment = "3. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries"
-        comment.puntuacion = "dos"
+        comment.puntuacion = "uno"
         comment.price = "Barato"
         comment.a_domicilio = "Si"
         comment.mesa = "Si"
@@ -210,11 +230,12 @@ def setup_commands(app):
         db.session.add(comment)
         db.session.commit()
 
+        print("--------------------------------------------------------")
         comment = Comment()
         comment.user_id = cliente
         comment.comercial_place_id = local
         comment.comment = "Comentario que estoy metiendo por inicializar 4"
-        comment.puntuacion = "tres"
+        comment.puntuacion = "dos"
         comment.price = "Normal"
         comment.a_domicilio = "Si"
         comment.mesa = "Si"
@@ -223,11 +244,12 @@ def setup_commands(app):
         db.session.add(comment)
         db.session.commit()
 
+        print("--------------------------------------------------------")
         comment = Comment()
         comment.user_id = cliente
         comment.comercial_place_id = local
         comment.comment = "Comentario que estoy metiendo por inicializar 5"
-        comment.puntuacion = "cinco"
+        comment.puntuacion = "tres"
         comment.price = "Normal"
         comment.a_domicilio = "Si"
         comment.mesa = "Si"
@@ -241,7 +263,7 @@ def setup_commands(app):
         comment.user_id = cliente
         comment.comercial_place_id = local2
         comment.comment = "Comentario al loca2"
-        comment.puntuacion = "cinco"
+        comment.puntuacion = "cuatro"
         comment.price = "Normal"
         comment.a_domicilio = "Si"
         comment.mesa = "Si"
@@ -249,7 +271,7 @@ def setup_commands(app):
         comment.visita = "Pareja"
         db.session.add(comment)
         db.session.commit()
-        print("--------------------------------------------------------")
+
         print("--------------------------------------------------------")
         comment = Comment()
         comment.user_id = cliente

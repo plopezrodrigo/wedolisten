@@ -8,7 +8,7 @@ export const OpinionManager = () => {
 	const params = useParams()
 	const [local, setLocales] = useState({})
 	const [comentario, setComentario] = useState();
-	const [formData, setFormData] = useState({tipo:"manager", comercial_place_id:params.id_local, comment_id: params.id_comment});
+	const [formData, setFormData] = useState({tipo:"manager", comercial_place_id:params.id_local, comment_id: params.id_comment, puntuacion: null});
 	const [mensaje, setMensaje] = useState(null); 
 	const navigate = useNavigate();
 	const { store, actions } = useContext(Context);
@@ -21,21 +21,21 @@ export const OpinionManager = () => {
 					  "Authorization": 'Bearer '+ sessionStorage.getItem("token") // hará falta?
 			} 
 		  })
-		if (resp.ok) return setComentario(await resp.json());
+		if (resp.ok) return setComentario(await resp.json()); 
 		else         return setMensaje(await resp.json());  
 	} 
 
 	useEffect (()=> {
 		if (!(store.token && store.token != "" && store.token != undefined)) {
-			console.log("Con token???", token);
-			navigate.push("/login");
+			console.log("Con token???", store.token);
+			navigate("/login");
 		}
 		// Debe venir con un comentario y no de debe ser cero.
 		if (!(params.id_comment) && params.id_comment != 0){  
 			navigate.push("/login");
 		}
 
-		fetch(`${process.env.BACKEND_URL}/api/comercial-place-2/${params.id_local}`)
+		fetch(`${process.env.BACKEND_URL}/api/comercial-place/${params.id_local}`)
 		.then(response => {
 			return response.json()
 		}).then(response => {
@@ -55,17 +55,21 @@ export const OpinionManager = () => {
 
 		fetch(`${process.env.BACKEND_URL}/api/comment/${params.id_comment}`,		
 			{method: 'POST',
-			headers:{"Content-Type": "application/json"},
-			"Authorization": 'Bearer '+ sessionStorage.getItem("token"), 
+				headers:{"Content-Type": "application/json",
+				"Authorization": 'Bearer '+ sessionStorage.getItem("token"), 
+			},
 			body: JSON.stringify(formData),
 			})
 		.then(response => {
-			if (response.status == 200){ 
-				navigate("/")
+			/*if (response.status == 200){ 
+				// navigate("/")
 			}else{ 
 				setMensaje(response["msg"])
-			}
+			}*/
 			return response.json(); 
+		})
+		.then(data => {
+			console.log(data);
 		})
 	}
 
@@ -91,8 +95,11 @@ export const OpinionManager = () => {
                 <div className="row">
                     <h1 className="text-center">El usuario es:</h1>
                     <h5 className="text-center">{comentario && comentario.user_name}</h5>
-                    <h5 className="text-center">Ha puntuado con 3 estrellas</h5>
-                    {/*<h5 className="text-center">Ha puntuado con {comentario && comentario.puntuacion} estrellas</h5>*/}
+					{/*<button id="opinionbutton">
+						{Array.from(Array(comentario.puntuacion).keys()).map(()=>{return (<i className="fas fa-star" id="iconbutton"/>)})}
+						{comentario.puntuacion <5 ? Array.from(Array(5-comentario.puntuacion).keys()).map(()=>{return (<i className="far fa-star" id="iconbutton"/>)}):""}
+					</button>*/}
+                    <h5 className="text-center">Ha puntuado con {comentario && comentario.puntuacion} estrellas</h5>
                 </div>
 				
 				<div className="border border-warning my-3">
