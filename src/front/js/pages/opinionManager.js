@@ -1,18 +1,29 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 import "../../styles/home.css";
 import imagen from "../../img/logo.png";
 
 export const OpinionManager = () => {
 	const params = useParams()
+	const [salir, setSalir] = useState(false)
 	const [local, setLocales] = useState({})
 	const [comentario, setComentario] = useState();
 	const [formData, setFormData] = useState({tipo:"manager", comercial_place_id:params.id_local, comment_id: params.id_comment, puntuacion: null});
 	const [mensaje, setMensaje] = useState(null); 
 	const navigate = useNavigate();
 	const { store, actions } = useContext(Context);
-  
+
+	const [show, setShow] = useState(false);
+	const handleShow = () => setShow(true);
+	const handleClose = () => { 
+		setShow(false);
+		if (salir){
+			navigate(`/localDetail/${params.id_local}`);
+		}
+	};
 
 	const useEffectComentario = async () => { 
 		const resp = await fetch(`${process.env.BACKEND_URL}/api/comment/${params.id_comment}`,{
@@ -61,15 +72,36 @@ export const OpinionManager = () => {
 			body: JSON.stringify(formData),
 			})
 		.then(response => {
-			/*if (response.status == 200){ 
-				// navigate("/")
+			if (response.status == 200){ 
+				setMensaje("Respuesta cargada correctamente")
+				setSalir(true);
+				handleShow();
 			}else{ 
+				setSalir(false);
 				setMensaje(response["msg"])
-			}*/
-			//return response.json(); 
-			navigate(`/localDetail/${params.id_local}`);
+				handleShow();
+			}
 		})
 	}
+
+	function ModalAceptar() {
+		return (
+		  <>
+			<Modal show={show} onHide={handleClose}>
+			  <Modal.Header closeButton>
+				<Modal.Title>Tu respuesta al mensaje</Modal.Title>
+			  </Modal.Header>
+			  <Modal.Body>{mensaje}</Modal.Body>
+			  <Modal.Footer>
+				<Button variant="secondary" onClick={handleClose}>
+				  Close
+				</Button>
+			  </Modal.Footer>
+			</Modal>
+		  </>
+		);
+	}
+
 
 	return (
 		<div className="container fluid align-center">
@@ -118,6 +150,8 @@ export const OpinionManager = () => {
 				</div>
 			</div>
 		  </div>
+
+		  {ModalAceptar()}
 		</div>
 	  );
 };
