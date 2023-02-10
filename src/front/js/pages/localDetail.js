@@ -187,7 +187,23 @@ const LocalDetail = (props) => {
       <div className="row" id="rating">
         <h2 id="descripcion">Lee lo que otros usuarios opinan</h2>
 
-        {comentarios && comentarios.map((comentario, index)=>{   
+        {comentarios && comentarios.map((comentario, index)=>  
+          {return comentario.puntuacion != 0 ? (<>
+                                            <div  key={comentario.id} className="col mt-5"> 
+                                              <OpinionCard  comment={comentario.comment}
+                                                            fecha={comentario.date}
+                                                            nombre={comentario.user_name}
+                                                            puntuacion={comentario.puntuacion}
+                                                            local_id={comentario.comercial_place_id}
+                                                            id_comment={comentario.id}
+                                              />
+                                            </div>
+                                          </>)
+                                        : (<></>)
+
+          }
+        )}
+{/*
             return  <> 
                       <div  key={comentario.id} className="col mt-5"> 
                         <OpinionCard  comment={comentario.comment}
@@ -199,8 +215,7 @@ const LocalDetail = (props) => {
                         />
                       </div>
                     </>
-            })
-        }
+        */}                    
       </div>
 
       {store.usertype == "customer" &&
@@ -213,8 +228,6 @@ const LocalDetail = (props) => {
             </Link>
           </p>
       }
-
-
     </div>
   );
 };
