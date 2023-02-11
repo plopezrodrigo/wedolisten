@@ -23,9 +23,9 @@ export const Footer = () => (
       </section>
     </div>
     <section>
-      <div class="container text-center text-md-start mt-5">
-        <div class="row mt-3">
-          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+      <div className="container text-center text-md-start mt-5">
+        <div className="row mt-3">
+          <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
             <Link to="/">
               <span id="logofooter">
                 {" "}
@@ -40,47 +40,37 @@ export const Footer = () => (
             Baby Friendly te ayuda a dar tu opinión sobre tus locales favoritos y que éstas puedan ser consultadas por otros usuarios.
             </p>
           </div>
-          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-          <h6 class="text-uppercase fw-bold mb-4">
+          <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+          <h6 className="text-uppercase fw-bold mb-4">
             Secciones
           </h6>
-            <Link to="/">
-            <p>Home</p>
-            </Link>
-            <Link to="/about">
-            <p>Quienes somos</p>
-            </Link>
-            <Link to="/contact">
-            <p>Contact</p>
-            </Link>
-            <Link to="/signupmanager">
-            <p>Gestores</p>
-            </Link>
+            <Link to="/">             <p>Home</p>           </Link>
+            <Link to="/about">        <p>Quienes somos</p>  </Link>
+            <Link to="/contact">      <p>Contact</p>        </Link>
+            <Link to="/signupmanager"><p>Gestores</p>       </Link>
           </div>
-          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-          <h6 class="text-uppercase fw-bold mb-4">
+          <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+          <h6 className="text-uppercase fw-bold mb-4">
             Links útiles
           </h6>
           <p>
-            <a href="#!" class="text-reset">FAQs</a>
+            <a href="#!" className="text-reset">FAQs</a>
           </p>
           <p>
-            <a href={`${process.env.BACKEND_URL}/front/docs/Aviso_Legal.pdf`} target="Aviso Legal" class="text-reset">Aviso Legal</a>
+            <a href={`${process.env.BACKEND_URL}/front/docs/Aviso_Legal.pdf`} target="Aviso Legal" className="text-reset">Aviso Legal</a>
           </p>
           <p>
-            <a href="#!" class="text-reset">Política de privacidad</a>
+            <a href="#!" className="text-reset">Política de privacidad</a>
           </p>
           <p>
-            <a href="#!" class="text-reset">Términos de uso</a>
+            <a href="#!" className="text-reset">Términos de uso</a>
           </p>
-          </div>
-          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
           </div>
         </div>
       </div>
     </section>
-    <div class="text-center p-4">
-    © 2023 Copyright: <a class="text-reset fw-bold" href="">  BabyFriendly.com</a>
+    <div className="text-center p-4">
+        © 2023 Copyright: <a className="text-reset fw-bold" href="">BabyFriendly.com</a>
     </div>
   </footer>
 );

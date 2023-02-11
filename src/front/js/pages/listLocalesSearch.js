@@ -1,40 +1,24 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import LocalCard from "../component/localCard";
 
-const ListLocales = () => {
+export const ListLocalesSearch = () => {
   const params = useParams()
   const [locales, setLocales] = useState();
-  let options = {
-    method: "GET",
-  };
 
   useEffect(() => {
-    if (sessionStorage.getItem("token") != null) {
-      options.headers = {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + sessionStorage.getItem("token"),
-      };
-    }
-
-    console.log("Lista locales:", params.length);
-
-    fetch(process.env.BACKEND_URL + "/api/comercial-place", options)
-      .then((response) => {
-        return response.json();
-      })
-      .then((response) => {
-        setLocales(response);
-      });
+    console.log("Lista de locales:", params.list);
+    setLocales(params.list);
   }, []);
 
   return (
-    <div className="container fluid">
+    <div className="container">
       <h3>Listado de Locales</h3>
-      <div className="row align-items-start">
+      <div className="row">
           {locales && locales.map((local, index) => {
-            return <div key={local.id} className="col-3">
+            return <div className="col-3">
                 <LocalCard
                   name={local.name}
                   key={local.id}
@@ -54,5 +38,3 @@ const ListLocales = () => {
     </div>
   );
 };
-
-export default ListLocales;
