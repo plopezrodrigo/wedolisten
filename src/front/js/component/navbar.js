@@ -11,10 +11,15 @@ export const Navbar = () => {
 	const [salir, setSalir] = useState(false)
 	const [mensaje, setMensaje] = useState(null); 
 	const navigate = useNavigate();
+	const [formData, setFormData] = useState({});
 
 	const [show, setShow] = useState(false);
 	const handleShow  = () => setShow(true);
 	const handleClose = () => setShow(false);
+
+	const handleChange = (evento) =>{
+		setFormData({...formData, [evento.target.name]: evento.target.value});
+	}
 
 	function ModalAceptar() {
 		return (
@@ -36,21 +41,18 @@ export const Navbar = () => {
 
 	const handleSubmit = (evento)=>{
 		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
-		console.log("Que buscamos", evento.target.name, evento.target.value);
+		console.log("Que buscamos", formData, evento.target.name, evento.target.value);
 
 		fetch(`${process.env.BACKEND_URL}/api/comercial-place-search/${evento.target.value}`)
 		.then(response => {
-			if (response.status == 200){ 
-        return response.json()
-			}else{ 
-				setMensaje(response["msg"])
-				handleShow();
-			}
+			if (response.status == 200) return response.json()
+			else                        handleShow();
 		})
-    .then(datos=>{navigate(`/listLocalesSearch/${datos}`);})
+    .then(datos=>{
+      console.log(datos);
+      navigate(`/listLocalesSearch/${datos}`);
+    })
 	}
-
-
 
   return (
     <div className="container-fluid">
@@ -92,7 +94,7 @@ export const Navbar = () => {
                   </Link>
                 </li>
                 <form onSubmit={handleSubmit}>
-                  <input name="busca" className="form-control me-2 mt-4" type="search" placeholder="Buscar" aria-label="Buscar" />
+                  <input name="busca" className="form-control me-2 mt-4" type="search" placeholder="Buscar" aria-label="Buscar"onChange={handleChange}/>
                   <button className="btn btn-outline-success" type="submit" id="iconbutton">
                     <i className="far fa-search" />
                   </button>

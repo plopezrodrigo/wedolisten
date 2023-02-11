@@ -7,9 +7,6 @@ import LocalCard from "../component/localCard";
 export const ListLocalesSearch = () => {
   const params = useParams()
   const [locales, setLocales] = useState();
-  let options = {
-    method: "GET",
-  };
 
   useEffect(() => {
     console.log("Lista de locales:", params.list);
