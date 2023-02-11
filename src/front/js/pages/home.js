@@ -47,6 +47,7 @@ export const Home = () => {
         <div className="row align-items-start"> 
             {comentarios && comentarios.map((comentario, index)=>{    
               return  <> 
+                {comentarios.comment_id}
                 <div className="col"> 
                   <OpinionCard 
                   comment ={comentario.comment}

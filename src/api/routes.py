@@ -151,8 +151,8 @@ def get_comment(id):
 # Respuesta a Un comentario
 # ----------------------------------------------------------------------------
 @api.route('/respuesta/<id>', methods=['GET'])
-def get_comment(id):
-    datos = Comment.query.filter_by(comment_id=id)
+def respuesta(id):
+    datos = Comment.query.filter_by(comment_id=id).first()
     if datos:
         return jsonify(datos.serialize()), 200
     else:
@@ -365,7 +365,7 @@ def Comments_add(id_comment):
         comments = Comment( user_id             = data['user_id'],
                             comercial_place_id  = data['comercial_place_id'],
                             comment             = data['comment'],
-                            #comment_id          = null if data.get('comment_id')==0 else data.get('comment_id'),
+                            comment_id          = null if data.get('comment_id')==0 else data.get('comment_id'),
                             puntuacion          = data.get('puntuacion'),
                             price               = data.get('price'),
                             a_domicilio         = data.get('a_domicilio'),

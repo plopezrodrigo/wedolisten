@@ -29,8 +29,7 @@ const LocalDetail = (props) => {
         }
       })
     .then(res=>{return res.json()})
-    .then(data=>{console.log(data);
-                 setComentarios(data);
+    .then(data=>{setComentarios(data);
     })
  }
 
@@ -54,11 +53,6 @@ const LocalDetail = (props) => {
 
       useEffectComments();
   }, []);
-
-  function clase(valor){
-    return ((valor) ? "tituloHome" : "footer");
-  }
-
 
   const add_favourites = (id) => {
     fetch(`${process.env.BACKEND_URL}/api/favourit/${id}`, {

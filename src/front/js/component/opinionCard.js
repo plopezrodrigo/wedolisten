@@ -1,25 +1,31 @@
-import React, { useContext, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Context } from "../store/appContext";
 import imagen from "../../img/opinion.png";
 
 const OpinionCard = (props) => {
-  const { store, actions } = useContext(Context);
-  const {respuesta, setRespuesta} = useState();
+  const [respuesta, setRespuesta] = useState();
+  const [tieneRespuesta, setTieneRespuesta] = useState(false);
   
+  async function miUseEffect (){
+		await fetch(`${process.env.BACKEND_URL}/api/respuesta/${props.id_comment}`)
+		.then(response => {
+        if (response.status == 200)       setTieneRespuesta(true);
+        else if (response.status != 400)  setTieneRespuesta(false);
+        else console.log("Error gordo, a ver que hacemos");
+
+        return response.json()
+		})
+    .then(response => { if (tieneRespuesta) setRespuesta(response);})
+  }
 
   useEffect (()=> {
-		fetch(`${process.env.BACKEND_URL}/api/respuesta/${props.id_comment}`)
-		.then(response => {
-        if (response.status == 200) return response.json()
-        else if (response.status != 400) console.log("Error gordo, a ver que hacemos")
-		})
-    .then(response => {setRespuesta(response);})
+    miUseEffect();
+    console.log("respuestas", tieneRespuesta, respuesta);
 	}, [])
 
   const mensajeManager = () => {
     return (<div className="text ma-home-section">  
-              <p className="strong">{respuesta}</p>
+              <p className="strong">BabyFriendly: {respuesta}</p>
             </div>
            )
   };
@@ -38,11 +44,7 @@ const OpinionCard = (props) => {
     <div className="col-12">
       <div className="card" id="opinioncard">
         <div className="card-img-top" id="imagenopinion">
-            <img 
-              src={imagen}
-              className="card-img-top"
-              alt=""
-            />
+            <img src={imagen} className="card-img-top" alt="" />
         </div>
         <div className="card-body text-center">
           <h5 className="card-title">{props.nombre}</h5>
@@ -60,7 +62,7 @@ const OpinionCard = (props) => {
           <div className="col-12">
             <p><strong>Fecha de la visita: </strong>{props.fecha}</p> 
           </div>
-          {respuesta ? mensajeManager() : botonRespuesta()}
+          {tieneRespuesta ? mensajeManager() : botonRespuesta()}
         </div>
       </div>
     </div>
@@ -68,14 +70,3 @@ const OpinionCard = (props) => {
 };
 
 export default OpinionCard;
-
-{/*
-{store.usertype == "manager" &&
-    <div className="text ma-home-section">  
-      <Link to={`/OpinionManager/${props.local_id}/${props.id_comment}`}>
-        <i className="fas fa-star" id="iconaccount" />
-        <strong className="strong">Responde</strong>
-      </Link>
-    </div>
-}
-*/}
