@@ -60,7 +60,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             opts
           );
           if (resp.status !== 200) {
-            alert("There has been some error");
+            // alert("There has been some error");
             return false;
           }
 
@@ -79,7 +79,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           return true;
         } catch (error) {
-          console.error("There has been an error login in");
+            console.error("There has been an error login in");
+            return false;
         }
       },
 

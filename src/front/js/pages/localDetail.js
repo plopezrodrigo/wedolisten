@@ -1,9 +1,14 @@
 import React, { useContext, useState, useEffect } from "react";
-import imagen from "../../img/mapa.jpeg";
 import OpinionCard from "../component/opinionCard";
 import { useParams, Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
+import trona             from "../../img/trona.jpg";
+import cambiador         from "../../img/cambiador.jpg";
+import accesible         from "../../img/accesible.jpg";
+import espacio_carrito   from "../../img/espacio_carrito.jpg";
+import ascensor          from "../../img/ascensor.jpg";
+import productos_higiene from "../../img/productos_higiene.jpg";
 
 const LocalDetail = (props) => {
   const params = useParams();
@@ -93,14 +98,6 @@ const LocalDetail = (props) => {
         <div className="col-6">
           <p>{comentarios ? comentarios.length : 0} Opiniones</p>
         </div>
-        <div className="col-6">
-          <p>
-            <i className="fas fa-map-marker-alt"></i> {local.address} -
-            <i className="fas fa-laptop"></i> {local.url} -
-            <i className="fas fa-phone"></i> {local.telf} -
-            <i className="fas fa-envelope"></i> {local.email}
-          </p>
-        </div>
       </div>
       <div className="row">
         <div className="mobile_flex_container full_width">
@@ -116,107 +113,65 @@ const LocalDetail = (props) => {
           <p>{local.description}</p>
         </div>
       </div>
-      <div className="row" id="rating">
-        <div className="col-6">
-          <div className="form-check">
-            <input type="checkbox" checked={(local.trona) ? "checked" : "" } className="form-check-input" id="Input_trona"/>
-            <label className="form-check-label" for="Input_trona">Trona</label>
-          </div>
-          <div className="form-check">
-            <input type="checkbox" checked={(local.cambiador) ? "checked" : "" } className="form-check-input" id="Input_cambiador"/>
-            <label className="form-check-label" for="Input_cambiador">Cambiador</label>
-          </div>
-          <div className="form-check">
-            <input type="checkbox" checked={(local.accesible) ? "checked" : "" } className="form-check-input" id="Input_accesible"/>
-            <label className="form-check-label" for="Input_accesible">Accesible con carrito</label>
-          </div>
-        </div>
-        <div className="col-6">
-          <div className="form-check">
-            <input type="checkbox" checked={(local.espacio_carrito) ? "checked" : "" } className="form-check-input" id="Input_espacio_carrito"/>
-            <label className="form-check-label" for="Input_espacio_carrito">Espacio Carrito</label>
-          </div>
-          <div className="form-check">
-            <input type="checkbox" checked={(local.ascensor) ? "checked" : "" } className="form-check-input" id="Input_ascensor"/>
-            <label className="form-check-label" for="Input_ascensor">Ascensor</label>
-          </div>
-          <div className="form-check">
-            <input type="checkbox" checked={(local.productos_higiene) ? "checked" : "" } className="form-check-input" id="Input_productos_higiene"/>
-            <label className="form-check-label" for="Input_productos_higiene">Productos higiene</label>
-          </div>
-        </div>
+      <div className="row">
+          {(local.trona)             && <div className="col-1"><img src={trona} alt="Trona" width="40" height="40" /></div> }
+          {(local.cambiador)         && <div className="col-1"><img src={cambiador} alt="cambiador" width="40" height="40" /></div> }
+          {(local.accesible)         && <div className="col-1"><img src={accesible} alt="accesible" width="40" height="40" /></div> }
+          {(local.espacio_carrito)   && <div className="col-1"><img src={espacio_carrito} alt="espacio_carrito" width="40" height="40" /></div> }
+          {(local.ascensor)          && <div className="col-1"><img src={ascensor} alt="ascensor" width="40" height="40" /></div> }
+          {(local.productos_higiene) && <div className="col-1"><img src={productos_higiene} alt="productos_higiene" width="40" height="40" /></div> }
       </div>
       <div className="row" id="ubicacion">
         <h2>Ubicación y contacto</h2>
         <div>
-        <iframe
-          width="450"
-          height="250"
-          frameborder="0" 
-          referrerpolicy="no-referrer-when-downgrade"
-          src={`https://www.google.com/maps/embed/v1/MAP_MODE?key=AIzaSyAv5ZYraM9a5QF6hOcon0IFnHIiuox66Cw&q=${local.google_address}`}
-          allowfullscreen>
+          <iframe
+            width="450"
+            height="250"
+            frameborder="0" 
+            referrerpolicy="no-referrer-when-downgrade"
+            src={`https://www.google.com/maps/embed/v1/MAP_MODE?key=AIzaSyAv5ZYraM9a5QF6hOcon0IFnHIiuox66Cw&q=${local.google_address}`}
+            allowfullscreen>
           </iframe>
         </div>
         <div className="" id="ubicacionelements">
           <span>
             <a href="https://maps.google.com/maps?saddr=&amp;daddr=Calle+Bah%C3%ADa+de+Palma%2C+4B%2C+28042+Madrid+Espa%C3%B1a@40.46229,-3.591468">
-              <span className="">
-                <i className="fas fa-map-marker-alt"></i> {local.address}
-              </span>
-              <span className=""></span>
+              <span className=""><i className="fas fa-map-marker-alt"></i> {local.address}</span>
             </a>
           </span>
         </div>
-        <div className="" id="ubicacionelements">
-          <span className="">
-            <i className="fas fa-laptop"></i> {local.url}
-          </span>
-        </div>
-        <div className="" id="ubicacionelements">
-          <span className="">
-            <i className="fas fa-phone"></i> {local.telf}
-          </span>
-        </div>
-        <div className="" id="ubicacionelements">
-          <span className="">
-            <i className="fas fa-envelope"></i> {local.email}
-          </span>
-        </div>
+        {local.url && <div className="" id="ubicacionelements">
+                          <span className=""><i className="fas fa-laptop"></i> {local.url}</span>
+                      </div>
+        }
+        {local.telf &&  <div className="" id="ubicacionelements">
+                          <span className=""><i className="fas fa-phone"></i> {local.telf}</span>
+                        </div>
+        }
+        {local.email && <div className="" id="ubicacionelements">
+                          <span className=""><i className="fas fa-envelope"></i> {local.email}</span>
+                        </div>
+        }
       </div>
-
       <div className="row" id="rating">
         <h2 id="descripcion">Lee lo que otros usuarios opinan</h2>
 
         {comentarios && comentarios.map((comentario, index)=>  
-          {return comentario.puntuacion != 0 ? (<>
-                                            <div  key={comentario.id} className="col mt-5"> 
-                                              <OpinionCard  comment={comentario.comment}
-                                                            fecha={comentario.date}
-                                                            nombre={comentario.user_name}
-                                                            puntuacion={comentario.puntuacion}
-                                                            local_id={comentario.comercial_place_id}
-                                                            id_comment={comentario.id}
-                                              />
-                                            </div>
-                                          </>)
-                                        : (<></>)
+          {return comentario.puntuacion != 0  ? (<>
+                                                  <div  key={comentario.id} className="col mt-5"> 
+                                                    <OpinionCard  comment={comentario.comment}
+                                                                  fecha={comentario.date}
+                                                                  nombre={comentario.user_name}
+                                                                  puntuacion={comentario.puntuacion}
+                                                                  local_id={comentario.comercial_place_id}
+                                                                  id_comment={comentario.id}
+                                                    />
+                                                  </div>
+                                                </>)
+                                              : (<></>)
 
           }
         )}
-{/*
-            return  <> 
-                      <div  key={comentario.id} className="col mt-5"> 
-                        <OpinionCard  comment={comentario.comment}
-                                      fecha={comentario.date}
-                                      nombre={comentario.user_name}
-                                      puntuacion={comentario.puntuacion}
-                                      local_id={comentario.comercial_place_id}
-                                      id_comment={comentario.id}
-                        />
-                      </div>
-                    </>
-        */}                    
       </div>
 
       {store.usertype == "customer" &&

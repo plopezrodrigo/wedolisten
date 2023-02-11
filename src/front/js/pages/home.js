@@ -5,7 +5,7 @@ import UserInfo from "../component/userInfo";
 import ManagerInfo from "../component/managerInfo";
 import OpinionCard from "../component/opinionCard";
 import LocalCard from "../component/localCard";
-import { Link } from "react-router-dom";
+
 
 export const Home = () => {
   const { store, actions } = useContext(Context);

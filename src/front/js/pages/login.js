@@ -1,21 +1,47 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 import "../../styles/home.css";
-import { Link } from "react-router-dom";
+import CustomModal from "../component/customModal";
+import { useModal } from "../hooks/UseModal";
 
 const Login = () => {
   const { store, actions } = useContext(Context);
   const [data, setData] = useState({});
-  const token = sessionStorage.getItem("token");
+	const [mensaje, setMensaje] = useState(null); 
   const navigate = useNavigate();
+  const [isModalOpened, setIsModalOpened, toggleModal] = useModal(true);
 
-  console.log("This is your token", store.token);
+	const [show, setShow] = useState(false);
+	const handleShow  = () => setShow(true);
+	const handleClose = () => setShow(false);
+
+
+	function ModalAceptar() {
+		return (  <>
+                <Modal show={show} onHide={handleClose}>
+                  <Modal.Header closeButton>
+                  <Modal.Title>Acceso al portal del Bebé</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>{mensaje}</Modal.Body>
+                  <Modal.Footer>
+                  <Button variant="secondary" onClick={handleClose}>
+                    Close
+                  </Button>
+                  </Modal.Footer>
+                </Modal>
+              </>
+		);
+	}
+
   const handleClick = () => {
     actions.login(data.email, data.password).then((response) => {
-    if (response) {
-      navigate("/");
-    }
+    if (response) navigate("/");
+    else{ setMensaje("Las credenciales no son correctas");
+          handleShow()};
+          toggleModal();
     })
   };
 
@@ -88,6 +114,14 @@ const Login = () => {
           </div>
         </div>
       </div>
+      {ModalAceptar()}
+      <CustomModal  show={isModalOpened}
+                    titulo="Login en BabyFriendly"
+                    mensaje={mensaje}
+                    handleClose={() => setIsModalOpened(false)}
+      >
+        <div>Este es el texto que debe salir en la modal</div>
+      </CustomModal>
     </div>
   );
 };
