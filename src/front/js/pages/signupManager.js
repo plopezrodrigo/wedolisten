@@ -47,15 +47,15 @@ export const SignupManager = () => {
 				<div className="card px-3" id="card">
 					<form onSubmit={handleSubmit}>
 							<div className="form-group">
-								<label className="alinear-izquierda mt-3" htmlFor="InputEmail1">Nombre y apellidos</label>
+								<label className="alinear-izquierda mt-3" htmlFor="InputEmail1">Nombre y Apellidos</label>
 								<input type="text" name="name" required className="form-control mb-2" id="InputName1" aria-describedby="nameHelp"  onChange={handleChange} />
 							</div>
 							<div className="form-group">
-								<label className="alinear-izquierda" htmlFor="InputEmail1">Email address</label>
+								<label className="alinear-izquierda" htmlFor="InputEmail1">Email</label>
 								<input type="email" name="user" required className="form-control" id="InputEmail1" aria-describedby="emailHelp" onChange={handleChange} />
 							</div>
 							<div className="form-group">
-								<label className="alinear-izquierda" htmlFor="InputPassword1">Password</label>
+								<label className="alinear-izquierda" htmlFor="InputPassword1">Contraseña</label>
 								<input type="password" name="password" required className="form-control mt-2" id="InputPassword1" placeholder="Password" onChange={handleChange} />
 							</div>
 							
@@ -68,7 +68,7 @@ export const SignupManager = () => {
                       		</Link>
                     		</p>
                   			</div>
-							<button className="mb-3" type="submit"  id="button">Registrarme</button>
+							<button className="mb-3 col-md-12 btn-lg px-5 mb-3 mt-3" type="submit"  id="button">Registrarme</button>
 							{(mensaje != null) && <p>{mensaje}</p>}
 					</form>	
 						

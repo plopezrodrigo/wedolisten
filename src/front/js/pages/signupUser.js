@@ -55,15 +55,15 @@ export const SignupUser = () => {
 				<div className="card px-3" id="card">
 					<form className="form-outline" onSubmit={handleSubmit}>
 							<div className="form-group">
-								<label className="alinear-izquierda mt-3 ms-2" htmlFor="InputEmail1">Nombre y apellidos</label>
+								<label className="alinear-izquierda mt-3 ms-2" htmlFor="InputEmail1">Nombre y Apellidos</label>
 								<input type="text" name="name" required className="form-control mb-2" id="InputName1" aria-describedby="nameHelp" onChange={handleChange} />
 							</div>
 							<div className="form-group">
-								<label className="alinear-izquierda mt-3 ms-2" htmlFor="InputEmail1">Email address</label>
+								<label className="alinear-izquierda mt-3 ms-2" htmlFor="InputEmail1">Email</label>
 								<input type="email" name="user" required className="form-control mb-2" id="InputEmail1" aria-describedby="emailHelp" onChange={handleChange} />
 							</div>
 							<div className="form-group">
-								<label className="alinear-izquierda mt-3 ms-2" htmlFor="InputPassword1">Password</label>
+								<label className="alinear-izquierda mt-3 ms-2" htmlFor="InputPassword1">Contraseña</label>
 								<input type="password" name="password" required className="form-control mb-2" id="InputPassword1"  onChange={handleChange} />
 							</div>
 							
@@ -82,7 +82,7 @@ export const SignupUser = () => {
 							</div>
 							<br/>
 							<div className="form-group">
-								<label className="alinear-izquierda" htmlFor="InputSubs1">Subscripción</label>
+								<label className="alinear-izquierda" htmlFor="InputSubs1">Suscripción</label>
 								<input type="checkbox" name="subscription" className="form-check-input alinear-izquierda" id="InputSubs1" aria-describedby="nameHelp" placeholder="Subscripción" onChange={handleChange} />
 							</div>	   
 							<br/>
@@ -93,7 +93,7 @@ export const SignupUser = () => {
 
 
 							<br/>
-							<button className="mb-3" type="submit"  id="button">Registrarme</button>
+							<button className="mb-3 col-md-12 btn-lg px-5 mb-3 mt-3" type="submit"  id="button">Registrarme</button>
 							{(mensaje != null) && <p>{mensaje}</p>}
 							<div>
                     		<p className="ms-3 me-3 mb-3 text-center">

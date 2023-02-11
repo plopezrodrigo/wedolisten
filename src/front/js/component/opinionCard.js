@@ -19,8 +19,12 @@ const OpinionCard = (props) => {
         <div className="card-body text-center">
           <h5 className="card-title">{props.nombre}</h5>
           <button id="opinionbutton">
-            {Array.from(Array(props.puntuacion).keys()).map(()=>{return (<i className="fas fa-star" id="iconbutton"/>)})}
-            {props.puntuacion <5 ? Array.from(Array(5-props.puntuacion).keys()).map(()=>{return (<i className="far fa-star" id="iconbutton"/>)}):""}
+            {/*Array.from(Array(props.puntuacion).keys()).map(()=>{return (<i className="fas fa-star" id="iconbutton"/>)})}
+            {props.puntuacion <5 ? Array.from(Array(5-props.puntuacion).keys()).map(()=>{return (<i className="far fa-star" id="iconbutton"/>)}):""*/}
+            {Array.from(Array(5).keys()).map((e,i)=>{return props.puntuacion <= i ? (<i className="far fa-star" id="iconbutton"/>)
+                                                                              : (<i className="fas fa-star" id="iconbutton"/>)
+                                            })
+            }
           </button>
           <p className="card-text"> 
             {props.comment}

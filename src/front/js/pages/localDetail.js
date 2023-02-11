@@ -17,15 +17,17 @@ const LocalDetail = (props) => {
   };
 
   const useEffectComments = async () => {
-    const resp = await fetch(`${process.env.BACKEND_URL}/api/comment_local/${params.id}`,{
+    await fetch(`${process.env.BACKEND_URL}/api/comment_local/${params.id}`,{
         method: 'GET',
         headers: {"Content-Type": "application/json",
                   "Authorization": 'Bearer '+ sessionStorage.getItem("token") // hará falta? 
         }
       })
-    if (resp.ok) return setComentarios(await resp.json()); 
-    else         return setMensaje(await resp.json());  
-  }
+    .then(res=>{return res.json()})
+    .then(data=>{console.log(data);
+                 setComentarios(data);
+    })
+ }
 
   useEffect(() => { 
     if (sessionStorage.getItem("token") != null) {
@@ -147,13 +149,14 @@ const LocalDetail = (props) => {
       <div className="row" id="ubicacion">
         <h2>Ubicación y contacto</h2>
         <div>
-          <img
-            src={imagen}
-            className="imagenmapa"
-            alt=""
-            width="1100px"
-            height="900px"
-          />
+        <iframe
+          width="450"
+          height="250"
+          frameborder="0" 
+          referrerpolicy="no-referrer-when-downgrade"
+          src={`https://www.google.com/maps/embed/v1/MAP_MODE?key=AIzaSyAv5ZYraM9a5QF6hOcon0IFnHIiuox66Cw&q=${local.google_address}`}
+          allowfullscreen>
+          </iframe>
         </div>
         <div className="" id="ubicacionelements">
           <span>
@@ -185,20 +188,35 @@ const LocalDetail = (props) => {
       <div className="row" id="rating">
         <h2 id="descripcion">Lee lo que otros usuarios opinan</h2>
 
-        {comentarios && comentarios.map((comentario, index)=>{   
+        {comentarios && comentarios.map((comentario, index)=>  
+          {return comentario.puntuacion != 0 ? (<>
+                                            <div  key={comentario.id} className="col mt-5"> 
+                                              <OpinionCard  comment={comentario.comment}
+                                                            fecha={comentario.date}
+                                                            nombre={comentario.user_name}
+                                                            puntuacion={comentario.puntuacion}
+                                                            local_id={comentario.comercial_place_id}
+                                                            id_comment={comentario.id}
+                                              />
+                                            </div>
+                                          </>)
+                                        : (<></>)
+
+          }
+        )}
+{/*
             return  <> 
-                <div  key={comentario.id} className="col mt-5"> 
-                  <OpinionCard  comment={comentario.comment}
-                                fecha={comentario.date}
-                                nombre={comentario.user_name}
-                                puntuacion={comentario.puntuacion}
-                                local_id={comentario.comercial_place_id}
-                                id_comment={comentario.id}
-                  />
-                </div>
-                </>
-            })
-        }
+                      <div  key={comentario.id} className="col mt-5"> 
+                        <OpinionCard  comment={comentario.comment}
+                                      fecha={comentario.date}
+                                      nombre={comentario.user_name}
+                                      puntuacion={comentario.puntuacion}
+                                      local_id={comentario.comercial_place_id}
+                                      id_comment={comentario.id}
+                        />
+                      </div>
+                    </>
+        */}                    
       </div>
 
       {store.usertype == "customer" &&
@@ -211,8 +229,6 @@ const LocalDetail = (props) => {
             </Link>
           </p>
       }
-
-
     </div>
   );
 };

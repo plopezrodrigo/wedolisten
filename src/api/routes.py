@@ -24,7 +24,9 @@ def list_Managers():
     data = [Manager.serialize() for Managers in Manager]
     return jsonify(data), 200
 
-
+# ----------------------------------------------------------------------------
+# Lista de Locales
+# ----------------------------------------------------------------------------
 @api.route('/comercial-place', methods=['GET'])
 @jwt_required(optional = True)
 def list_Comercial_Places():
@@ -64,7 +66,9 @@ def Comercial_Places_user():
     else:
         return jsonify({"msg": "No existen datos"}), 402
 
-
+# ----------------------------------------------------------------------------
+# Datos de un LOCAL con favoritos y mas datos
+# ----------------------------------------------------------------------------
 @api.route('/comercial-place/<comercial_place_id>', methods=['GET'])
 @jwt_required(optional = True)
 def Comercial_Places_Detail(comercial_place_id):
@@ -73,7 +77,7 @@ def Comercial_Places_Detail(comercial_place_id):
 
     comercial_places = Comercial_Place.query.filter_by(id=comercial_place_id).first()
 
-    data = comercial_places.serialize()
+    data = comercial_places.serialize_location()
 
     if customer:
         favourits = Favourit.query.filter_by(customer_id=customer.id, comercial_place_id=comercial_places.id).first()
@@ -86,7 +90,9 @@ def Comercial_Places_Detail(comercial_place_id):
     else:
         return jsonify({"msg": "No existen datos"}), 402
 
-
+# ----------------------------------------------------------------------------
+# Datos propios de un LOCAL
+# ----------------------------------------------------------------------------
 @api.route('/comercial-place-2/<comercial_place_id>', methods=['GET'])
 def Comercial_Places_2(comercial_place_id):
     comercial_places = Comercial_Place.query.filter_by(id=comercial_place_id).first()
@@ -97,20 +103,29 @@ def Comercial_Places_2(comercial_place_id):
     else:
         return jsonify({"msg": "No existen datos"}), 402
 
-
+# ----------------------------------------------------------------------------
+# Comentarios de customers
+# ----------------------------------------------------------------------------
 @api.route('/comment', methods=['GET'])
 def list_Comments():
     datos = Comment.query.order_by(Comment.id.desc()).limit(4).all()
     data = [comentario.serialize() for comentario in datos]
     return jsonify(data), 200
 
+# ----------------------------------------------------------------------------
+# Un comentario
+# ----------------------------------------------------------------------------
 @api.route('/comment/<id>', methods=['GET'])
 def get_comment(id):
     datos = Comment.query.get(id)
     return jsonify(datos.serialize()), 200
 
+# ----------------------------------------------------------------------------
+# Comentarios de un LOCAL
+# ----------------------------------------------------------------------------
 @api.route('/comment_local/<id_local>', methods=['GET'])
 def get_comments_local(id_local):
+    #datos = Comment.query.filter_by(comercial_place_id = id_local).filter_by(puntuacion != 0).all()
     datos = Comment.query.filter_by(comercial_place_id = id_local).all()
     data = [comentario.serialize() for comentario in datos]
     return jsonify(data), 200
@@ -124,6 +139,13 @@ def list_Favourit():
     favourit = Favourit.query.filter_by(customer_id=customer.id, state=True )
     data = [element.serialize() for element in favourit]
     return jsonify(data), 200
+
+
+# ----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
+# POST
+# ----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 
 @api.route('/favourit/<id>', methods=['POST'])
 @jwt_required()
@@ -140,29 +162,9 @@ def add_Favourit(id):
         db.session.commit()
     return jsonify(favourit.serialize()), 200
 
-''' 
-@api.route("/User/<id>", methods=["DELETE"])
-def Users_delete(id):
-    User = User.query.get(id)
-    db.session.delete(User)
-    db.session.commit()
-@api.route("/Comercial_Place/<id>", methods=["DELETE"])
-def Places_delete(id):
-    Place = Comercial_Place.query.get(id)
-    db.session.delete(Place)
-    db.session.commit()
-@api.route("/Comment/<id>", methods=["DELETE"])
-def Comments_delete(id):
-    Comment = Comment.query.get(id)
-    db.session.delete(Comment)
-    db.session.commit()
-@api.route("/Favourit/<id>", methods=["DELETE"])
-def Favourits_delete(id):
-    Favourit = Favourit.query.get(id)
-    db.session.delete(Favourit)
-    db.session.commit()
-'''
-
+# ----------------------------------------------------------------------------
+# Alta de Customer y Manager
+# ----------------------------------------------------------------------------
 @api.route('/signup', methods=['POST'])
 def signup():
     data = request.json
@@ -202,7 +204,9 @@ def signup():
 
     return jsonify({"msg": "Usuario creado correctamente"}), 200
 
-
+# ----------------------------------------------------------------------------
+# LOCAL - Alta
+# ----------------------------------------------------------------------------
 @api.route("/Comercial_Place", methods=["POST"])
 @jwt_required()
 def Comercial_Place_add():
@@ -218,12 +222,12 @@ def Comercial_Place_add():
             email           = request.json.get('email'),
             location        = request.json.get('location'),
             description     = request.json.get('description'),
-            cambiador       = True, # request.json.get('cambiador'),
-            trona           = True, # request.json.get('trona'),
-            accessible_carrito = True, # request.json.get('accessible_carrito'),
-            espacio_carrito    = True, # request.json.get('espacio_carrito'),
-            ascensor           = True, # request.json.get('ascensor'),
-            productos_higiene  = True, # request.json.get('productos_higiene')
+            cambiador       = request.json.get('cambiador'),
+            trona           = request.json.get('trona'),
+            accessible_carrito = request.json.get('accessible_carrito'),
+            espacio_carrito    = request.json.get('espacio_carrito'),
+            ascensor           = request.json.get('ascensor'),
+            productos_higiene  = request.json.get('productos_higiene')
 
         )
         db.session.add(Place)
@@ -242,7 +246,9 @@ def Comercial_Place_add():
 
     return jsonify({"msg": "Comentario creado correctamente"}), 200
 
-
+# ----------------------------------------------------------------------------
+# LOCAL - Modificacion
+# ----------------------------------------------------------------------------
 @api.route("/Comercial_Place/<idLocal>", methods=["POST"])
 @jwt_required()
 def Comercial_Place_update(idLocal):
@@ -250,16 +256,6 @@ def Comercial_Place_update(idLocal):
     try:
         place = Comercial_Place.query.get(idLocal)
         if place:
-            print('--------------------------------------')
-            print('--------------......------------------')
-            print(request.json.get('trona'))
-            print(request.json.get('cambiador'))
-            print(request.json.get('accessible_carrito'))
-            print(request.json.get('espacio_carrito'))
-            print(request.json.get('ascensor'))
-            print(request.json.get('productos_higiene'))
-            print('--------------------------------------')
-            print('--------------------------------------')
             place.name                = request.json.get('name')
             place.address             = request.json.get('address')
             place.url                 = request.json.get('url')
@@ -290,7 +286,9 @@ def Comercial_Place_update(idLocal):
         return jsonify({"msg": "No se puede crear este Local"}), 402
 
 
-
+# ----------------------------------------------------------------------------
+# Rate_Customer - Alta
+# ----------------------------------------------------------------------------
 @api.route("/Rate_Customer", methods=["POST"])
 def Rate_add():
     rate = Rate_Customer(
@@ -301,7 +299,9 @@ def Rate_add():
     db.session.add(rate)
     db.session.commit()
 
-
+# ----------------------------------------------------------------------------
+# Rate_Customer FOTO - Alta
+# ----------------------------------------------------------------------------
 @api.route("/Photo_Comercial_Place", methods=["POST"])
 def Photo_add():
     photo = Photo_Comercial_Place(
@@ -311,14 +311,16 @@ def Photo_add():
     db.session.add(photo)
     db.session.commit()
 
-
+# ----------------------------------------------------------------------------
+# Comentario - Alta
+# ----------------------------------------------------------------------------
 @api.route("/comment/<id_comment>", methods=["POST"])
 @jwt_required()
 def Comments_add(id_comment):
-    data['user_id'] = get_jwt_identity()
     data = request.json                                                                                                                                                                                                                                                                         
+    data['user_id'] = get_jwt_identity()
 
-    if (data.get('tipo') == "manager" and data.get('comment_id') == null):
+    if (data.get('tipo') == "manager" and data.get('comment_id') == 0):
         return jsonify({"msg": "Un manager no puede generar una respuesta que no sea sobre un comentario de cliente"}), 403
 
     try:
@@ -365,7 +367,9 @@ def Comments_add(id_comment):
         db.session.rollback()
         return jsonify({"msg": "No se puede crear este comentario"}), 402
 
-
+# ----------------------------------------------------------------------------
+# Favoritos - Alta
+# ----------------------------------------------------------------------------
 @api.route("/Favourit", methods=["POST"])
 def Favourit_add():
     favourite = Favourit(
@@ -376,7 +380,9 @@ def Favourit_add():
     db.session.add(favourite)
     db.session.commit()
 
-
+# ----------------------------------------------------------------------------
+# Login de usuario
+# ----------------------------------------------------------------------------
 @api.route('/token', methods=['POST'])
 def create_token():
     email = request.json.get("email", None)
@@ -394,3 +400,33 @@ def create_token():
     access_token = create_access_token(identity=user.id)
 
     return jsonify({ "token": access_token, "user_id": user.id, "usertype": user.type, "name": usuario.name })
+
+
+# ----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
+# DELETE
+# ----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
+
+''' 
+@api.route("/User/<id>", methods=["DELETE"])
+def Users_delete(id):
+    User = User.query.get(id)
+    db.session.delete(User)
+    db.session.commit()
+@api.route("/Comercial_Place/<id>", methods=["DELETE"])
+def Places_delete(id):
+    Place = Comercial_Place.query.get(id)
+    db.session.delete(Place)
+    db.session.commit()
+@api.route("/Comment/<id>", methods=["DELETE"])
+def Comments_delete(id):
+    Comment = Comment.query.get(id)
+    db.session.delete(Comment)
+    db.session.commit()
+@api.route("/Favourit/<id>", methods=["DELETE"])
+def Favourits_delete(id):
+    Favourit = Favourit.query.get(id)
+    db.session.delete(Favourit)
+    db.session.commit()
+'''

@@ -24,6 +24,19 @@ export const Favorites = () => {
     }
     ,[])
 
+    const deleteFavourites = (id) => {
+      fetch(`${process.env.BACKEND_URL}/api/deletefavourit/${id}`, { 
+        method: "DELETE",
+        headers: { Authorization: "Bearer " + sessionStorage.getItem("token"), "Content-Type": "application/json" },
+   })    
+    .then((response) => {
+      return response.json();
+    })
+    .then((response) => {
+      setFavorites(response);
+    });
+    }
+
     return (
     <div className="container fluid">
       <div className="myDetails">
@@ -64,7 +77,7 @@ export const Favorites = () => {
                 favorites.map((fav, i)=>(
                 <td>{fav.comercial.id}
                 <button className="btn" >
-                  <i className="far fa-trash-alt" onClick={() => deleteFavourites(fav.comercial.id)}/>
+                  <i className="far fa-trash-alt" onClick={() => deleteFavourites(fav.id)}/>
                 </button>
                 </td>
           ))
