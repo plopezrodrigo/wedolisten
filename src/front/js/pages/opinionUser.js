@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
+import CustomModal from "../component/customModal";
+import { useModal } from "../hooks/UseModal";
 import "../../styles/home.css";
 import imagen from "../../img/logo.png";
 
@@ -11,9 +13,9 @@ export const OpinionUser = () => {
 	const [mensaje, setMensaje] = useState(null); 
 	const navigate = useNavigate();
 	const { store, actions } = useContext(Context);
-  
+	const [isModalOpened, setIsModalOpened, toggleModal] = useModal(false);
+
 	useEffect (()=> {
-		console.log("Opinion User", formData, store.token);		
 		if (!(store.token && store.token != "" && store.token != undefined)) {
 			navigate("/login");
 		}
@@ -42,11 +44,12 @@ export const OpinionUser = () => {
 			})
 		.then(response => {
 			if (response.status == 200){ 
-				navigate(`/localDetail/${params.id_local}`);
+				toggleModal();
 			}else{ 
 				setMensaje(response["msg"])
+				toggleModal();
 			}
-			return response.json(); 
+			// ¿?¿?¿?¿?¿?¿??¿?¿? return response.json(); 
 		})
 	}
 
@@ -145,6 +148,14 @@ export const OpinionUser = () => {
 				</div>
 			</div>
 		  </div>
+
+		  <CustomModal  show={isModalOpened}
+           		        titulo="Gracias por tu comentario!!!"
+                	    handleClose={() => {setIsModalOpened(false);
+										   navigate(`/localDetail/${params.id_local}`);}
+										}>
+				<div>{mensaje}</div>
+		  </CustomModal>
 		</div>
 	  );
 };

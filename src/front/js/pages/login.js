@@ -1,8 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate, Link } from "react-router-dom";
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
 import "../../styles/home.css";
 import CustomModal from "../component/customModal";
 import { useModal } from "../hooks/UseModal";
@@ -12,36 +10,14 @@ const Login = () => {
   const [data, setData] = useState({});
 	const [mensaje, setMensaje] = useState(null); 
   const navigate = useNavigate();
-  const [isModalOpened, setIsModalOpened, toggleModal] = useModal(true);
-
-	const [show, setShow] = useState(false);
-	const handleShow  = () => setShow(true);
-	const handleClose = () => setShow(false);
-
-
-	function ModalAceptar() {
-		return (  <>
-                <Modal show={show} onHide={handleClose}>
-                  <Modal.Header closeButton>
-                  <Modal.Title>Acceso al portal del Bebé</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>{mensaje}</Modal.Body>
-                  <Modal.Footer>
-                  <Button variant="secondary" onClick={handleClose}>
-                    Close
-                  </Button>
-                  </Modal.Footer>
-                </Modal>
-              </>
-		);
-	}
+  const [isModalOpened, setIsModalOpened, toggleModal] = useModal(false);
 
   const handleClick = () => {
     actions.login(data.email, data.password).then((response) => {
     if (response) navigate("/");
     else{ setMensaje("Las credenciales no son correctas");
-          handleShow()};
           toggleModal();
+        } 
     })
   };
 
@@ -69,7 +45,7 @@ const Login = () => {
               <div className="form-outline">
                 <div className="row d-flex justify-content-center align-items-center h-100">
                     <div className="col-md-11">
-                      <label className="form-label" for="typeEmailX">
+                      <label className="form-label" htmlFor="typeEmailX">
                         Email
                       </label>
                       <input
@@ -79,7 +55,7 @@ const Login = () => {
                         name="email"
                         onChange={handleChange}
                       />
-                      <label className="form-label" for="typeEmailX">
+                      <label className="form-label" htmlFor="typeEmailX">
                         Contraseña
                       </label>
                       <input
@@ -114,13 +90,11 @@ const Login = () => {
           </div>
         </div>
       </div>
-      {ModalAceptar()}
+
       <CustomModal  show={isModalOpened}
                     titulo="Login en BabyFriendly"
-                    mensaje={mensaje}
-                    handleClose={() => setIsModalOpened(false)}
-      >
-        <div>Este es el texto que debe salir en la modal</div>
+                    handleClose={() => setIsModalOpened(false)}>
+        <div>{mensaje}</div>
       </CustomModal>
     </div>
   );

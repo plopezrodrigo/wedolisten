@@ -1,4 +1,31 @@
 - Como saco la ventana a un único código??
-
 - Búsqueda like? comercial-place-search
+- Select y llamadas a procedimientos
 
+
+
+
+
+
+
+
+
+
+* Buscar en el NavBar
+en los comentarios poner las respuestas
+* Gracias por tu opinion
+sacar las imágenes
+* titulo 
+favicon
+recordar contraseña
+
+prompt en comentarios
+imagenes en carga de comentarios
+el contacto debe cargar datos
+* no ha funcionado el alta
+
+
+imagen de cabecera de un local
+visualizar contraseña
+
+API para adjuntar imagines --> Cloudinary

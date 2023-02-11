@@ -53,8 +53,6 @@ const LocalDetail = (props) => {
       });
 
       useEffectComments();
-      console.log(local);
-
   }, []);
 
   function clase(valor){

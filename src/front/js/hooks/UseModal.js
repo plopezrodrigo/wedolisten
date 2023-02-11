@@ -1,8 +1,11 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const useModal = (modoInicial = false) => {
-    const [isOpered, setIsOpened] = useState(modoInicial);
-    const toggle = () => setIsOpened(!setIsOpened);
+    const [isOpened, setIsOpened] = useState(modoInicial);
+    const navigate = useNavigate();
+    
+    const toggle = () => {setIsOpened(!isOpened);}
 
-    return [setIsOpened, setIsOpened, toggle];
+    return [isOpened, setIsOpened, toggle];
 };

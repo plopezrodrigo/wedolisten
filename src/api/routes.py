@@ -148,6 +148,17 @@ def get_comment(id):
     return jsonify(datos.serialize()), 200
 
 # ----------------------------------------------------------------------------
+# Respuesta a Un comentario
+# ----------------------------------------------------------------------------
+@api.route('/respuesta/<id>', methods=['GET'])
+def get_comment(id):
+    datos = Comment.query.filter_by(comment_id=id)
+    if datos:
+        return jsonify(datos.serialize()), 200
+    else:
+        return jsonify("No existen respuestas a este comentario todavía"), 400
+
+# ----------------------------------------------------------------------------
 # Comentarios de un LOCAL
 # ----------------------------------------------------------------------------
 @api.route('/comment_local/<id_local>', methods=['GET'])
