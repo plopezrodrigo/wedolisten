@@ -30,9 +30,9 @@ const ListLocales = () => {
   }, []);
 
   return (
-    <div className="container">
+    <div className="container fluid">
       <h3>Listado de Locales</h3>
-      <div className="row">
+      <div className="row align-items-start">
           {locales && locales.map((local, index) => {
             return <div key={local.id} className="col-3">
                 <LocalCard

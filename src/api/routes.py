@@ -104,7 +104,7 @@ def Comercial_Places_Detail(comercial_place_id):
 
     comercial_places = Comercial_Place.query.filter_by(id=comercial_place_id).first()
 
-    data = comercial_places.serialize()
+    data = comercial_places.serialize_location()
 
     if customer:
         favourits = Favourit.query.filter_by(customer_id=customer.id, comercial_place_id=comercial_places.id).first()

@@ -13,7 +13,7 @@ export const Account = () => {
           <h4 className="my-account-section-title ma-title" id="iconbutton">
             Mi cuenta 
           </h4>
-          <p className="my-account-section-description mb-0">¡Hola, Patricia López!</p>
+          <p className="my-account-section-description mb-0">¡Hola, {store.usuario?.name}!</p>
           <p className="my-account-section-description mt-0 mb-4">Aquí puedes ver tus locales favoritos, editar tus datos o realizar cualquier gestión</p>
           <div className="row d-flex justify-content-center h-100">
             <div className="col-12 col-md-8 col-lg-6 col-xl-5">
