@@ -51,6 +51,33 @@ def list_Comercial_Places():
     return jsonify(data), 200
 
 # ----------------------------------------------------------------------------
+# Búsqueda de Locales
+# ----------------------------------------------------------------------------
+@api.route('/comercial-place-search/<buscar>', methods=['GET'])
+@jwt_required(optional = True)
+def list_Comercial_Places_search(buscar):
+    favorits_id = []
+    user_id = get_jwt_identity()
+    customer = Customer.query.filter_by(user_id=user_id).first() if user_id else None
+
+    #comercial_places = Comercial_Place.query.filter(name.ilike(f'%{buscar}%')).all()
+    comercial_places = Comercial_Place.query.all()
+    data = [comercial_place.serialize()
+            for comercial_place in comercial_places]
+
+    if customer:
+        favourits = Favourit.query.filter_by(customer_id=customer.id)
+        favorits_id = [favorit.comercial_place_id for favorit in favourits]
+
+    for element in data:
+        if element['id'] in favorits_id:
+            element['favorite'] = True 
+        else:
+            element['favorite'] = False 
+
+    return jsonify(data), 200
+
+# ----------------------------------------------------------------------------
 # Locales de un Manager
 # ----------------------------------------------------------------------------
 @api.route('/comercial-place-user', methods=['GET'])
