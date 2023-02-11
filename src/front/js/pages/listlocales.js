@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import LocalCard from "../component/localCard";
 
 const ListLocales = () => {
+  const params = useParams()
   const [locales, setLocales] = useState();
   let options = {
     method: "GET",
@@ -16,6 +17,8 @@ const ListLocales = () => {
         Authorization: "Bearer " + sessionStorage.getItem("token"),
       };
     }
+
+    console.log("Lista locales:", params.length);
 
     fetch(process.env.BACKEND_URL + "/api/comercial-place", options)
       .then((response) => {
@@ -31,7 +34,7 @@ const ListLocales = () => {
       <h3>Listado de Locales</h3>
       <div className="row">
           {locales && locales.map((local, index) => {
-            return <div className="col-3">
+            return <div key={local.id} className="col-3">
                 <LocalCard
                   name={local.name}
                   key={local.id}

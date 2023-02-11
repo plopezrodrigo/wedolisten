@@ -1,11 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
-
-import { Context } from "../store/appContext";
+import React from "react";
 
 export const About = () => {
-	const { store, actions } = useContext(Context);
-
 	return (
 		<div className="container">
 			<section className="show">
@@ -20,11 +15,8 @@ export const About = () => {
 							<div className="text-inner-wrapper-main">
 								<h4 className="header-title-right">Misión</h4>
 								<div className="description-paragraph">
-								<p className="paragraph-wrapper">Baby Friendly es una plataforma de contenidos y acción para transformar las ciudades en espacios más amables e inclusivos para las familias.
-								</p>
-								<p className="paragraph-wrapper">
-								Para ello, nuestros usuarios valoran locales basados en su propia experiencia y ayudan a los negocios a mejorar sus servicios para las familias.
-								</p>
+									<p className="paragraph-wrapper">Baby Friendly es una plataforma de contenidos y acción para transformar las ciudades en espacios más amables e inclusivos para las familias.</p>
+									<p className="paragraph-wrapper">Para ello, nuestros usuarios valoran locales basados en su propia experiencia y ayudan a los negocios a mejorar sus servicios para las familias.</p>
 								</div>
 							</div>
 						</div>
@@ -38,10 +30,8 @@ export const About = () => {
 							<div className="text-inner-wrapper-main">
 								<h4 className="header-title-right">Nuestra Historia</h4>
 								<div className="description-paragraph">
-								<p className="paragraph-wrapper">Baby Friendly nació en 2020 de la necesidad y de las ganas de seguir disfrutando del entorno después de la maternidad y rápidamente se convirtió en un proyecto abierto y colaborativo con el que queremos mejorar nuestras ciudades.
-								</p>
-								<p className="paragraph-wrapper">Unos años después, desde baby Friendly compartimos los mejores lugares de la ciudad para disfrutar con la tribu al mismo tiempo que promovemos una ciudad más amable con las familias.
-								</p>
+									<p className="paragraph-wrapper">Baby Friendly nació en 2020 de la necesidad y de las ganas de seguir disfrutando del entorno después de la maternidad y rápidamente se convirtió en un proyecto abierto y colaborativo con el que queremos mejorar nuestras ciudades.</p>
+									<p className="paragraph-wrapper">Unos años después, desde baby Friendly compartimos los mejores lugares de la ciudad para disfrutar con la tribu al mismo tiempo que promovemos una ciudad más amable con las familias.</p>
 								</div>
 							</div>
 						</div>
@@ -59,11 +49,11 @@ export const About = () => {
 					<div className="outsmart-overdrafts-wrapper-main-center">
 						<h4 className="title-container-text header--title-outsmart">Nuestros Valores </h4>
 						<div className="description-wrapper-paragraph">
-							<p className="description-wrapper-paragraph_inner">
-								<p><div>
-								<p className="paragraph-wrapper">Para dar apoyo a cada una de nuestros usuarios, desde Baby Friendly hemos creado la red de Ciudades Family Welcome desde la que queremos contribuir a la transformación de las ciudades.</p>
-								</div></p>
+							<div>
+								<p className="description-wrapper-paragraph_inner">
+									Para dar apoyo a cada una de nuestros usuarios, desde Baby Friendly hemos creado la red de Ciudades Family Welcome desde la que queremos contribuir a la transformación de las ciudades.
 								</p>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -106,12 +96,12 @@ export const About = () => {
 						<div className="col-3">
 							<div className="card-main-item">
 								<div className="top-card-holder-wrapper">
-								<img 
-								className="icon" 
-								alt="icon" 
-								src="//images.ctfassets.net/rkv150f3eozw/7DkJL9yCoc5UU22AXyex3q/d4e325c66194a435a642fea792f10778/helpful.png"
-								width="250px"
-								heigh="250px"/>
+									<img 
+									className="icon" 
+									alt="icon" 
+									src="//images.ctfassets.net/rkv150f3eozw/7DkJL9yCoc5UU22AXyex3q/d4e325c66194a435a642fea792f10778/helpful.png"
+									width="250px"
+									heigh="250px"/>
 								</div>
 								<div className="bottom-card-holder-wrapper">
 									<h4 className="title-wrapper">Ser útil es parte de nuestro ADN.</h4>
@@ -122,12 +112,12 @@ export const About = () => {
 						<div className="col-3">
 							<div className="card-main-item">
 								<div className="top-card-holder-wrapper">
-								<img 
-								className="icon" 
-								alt="icon" 
-								src="https://images.ctfassets.net/rkv150f3eozw/4Xf8PIoq64FhxonfWv1qed/b6155ea3f7cbc76c63837bb062fcc05c/better-together.png"
-								width="250px"
-								heigh="250px"/>
+									<img 
+									className="icon" 
+									alt="icon" 
+									src="https://images.ctfassets.net/rkv150f3eozw/4Xf8PIoq64FhxonfWv1qed/b6155ea3f7cbc76c63837bb062fcc05c/better-together.png"
+									width="250px"
+									heigh="250px"/>
 								</div>
 								<div className="bottom-card-holder-wrapper">
 									<h4 className="title-wrapper">La oportunidad existe para todos en Baby Friendly.</h4>
@@ -138,17 +128,17 @@ export const About = () => {
 					</div>
 				</div>
 			</section>
-			<div className="divider center-divider"></div>
+
 			<section className="mt-5">
 				<div className="container-main-wrapper-holder-outsmart">
 					<div className="outsmart-overdrafts-wrapper-main-center">
 						<h4 className="title-container-text header--title-outsmart">Nuestros Equipo </h4>
 						<div className="description-wrapper-paragraph">
-							<p className="description-wrapper-paragraph_inner">
-								<p><div>
-								<p className="paragraph-wrapper">Ayude a marcar la diferencia para mejorar la relación de nuestros miembros con el dinero y únase a nuestro equipo en crecimiento.</p>
-								</div></p>
-							</p>
+								<div>
+								<p className="description-wrapper-paragraph_inner">
+									Ayude a marcar la diferencia para mejorar la relación de nuestros miembros con el dinero y únase a nuestro equipo en crecimiento.
+								</p>
+								</div>
 							<button data-testid="jobOpeningsButton" id="button">Ver ofertas de trabajo</button>
 						</div>
 					</div>

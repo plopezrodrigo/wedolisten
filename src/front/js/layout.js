@@ -49,8 +49,8 @@ const Layout = () => {
                         <Route element={<Data />} path="/data" />
                         <Route element={<Favorites/>} path="/favorites" />
                         <Route element={<Comments/>} path="/comments" />
-                        <Route element={<ListLocales/>} path="/listlocales" />
-                        <Route element={<ListLocales/>} path="/listLocalesSearch/:list" />
+                        <Route element={<ListLocales/>} path="/listlocales/*" />
+                        <Route element={<ListLocales/>} path="/listLocalesSearch/*" />
                         <Route element={<LocalDetail/>} path="/localDetail/:id"/>
                         <Route element={<OpinionUser/>} path="/opinionUser/:id_local/:id_comment" />
                         <Route element={<OpinionManager/>} path="/opinionManager/:id_local/:id_comment" />
@@ -58,7 +58,7 @@ const Layout = () => {
                         <Route element={<NuevoLocal />} path="/nuevoLocal" />
                         <Route element={<DatosLocal />} path="/datosLocal/:local_id" />
                         <Route element={<Comentarios />} path="/comentarios" />
-                        <Route element={<h1>Not found!</h1>} />
+                        <Route path="*" element={<div>Página no encontrada</div> } />
                     </Routes>
                     <Footer />
                 </ScrollToTop>

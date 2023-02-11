@@ -24,35 +24,13 @@ const LocalCard = (props) => {
 
   return (
       <div className="card" id="localcard">
-          <img
-              src={props.image_url}
-              className="card-img-top"
-              width="200"
-              height= "200"
-              alt=""
-           />
+        <img src={props.image_url} className="card-img-top" width="200" height= "200" alt="" />
         <div className="card-body">
-          <h5 className="card-title">{props.name}</h5>
-                     
-          <button 
-                    id="iconbutton"
-                    onClick={()=>{add_favourites(props.id)}
-                    }> <i class="fas fa-heart"></i>
-                    </button>
-               
-          <button className="btn btn-outline-success" type="submit" id="iconbutton">
-          <i className="far fa-comment" />
-          </button>
-          <button className="btn btn-outline-success" type="submit" id="iconbutton">
-          <i className="fas fa-map-marker-alt" />
-          </button>
-          <button id="button">
-            <Link 
-              to={`/localDetail/${props.id}`} 
-              className="">
-              Ver más
-            </Link>
-          </button>
+            <h5 className="card-title">{props.name}</h5>
+            <button id="iconbutton" onClick={()=>{add_favourites(props.id)}}> <i className="fas fa-heart"></i></button>
+            <button className="btn btn-outline-success" type="submit" id="iconbutton"><i className="far fa-comment" /></button>
+            <button className="btn btn-outline-success" type="submit" id="iconbutton"><i className="fas fa-map-marker-alt" /></button>
+            <Link to={`/localDetail/${props.id}`} className="btn btn-primary" id="button">Ver más</Link>
         </div>
       </div>
   );
