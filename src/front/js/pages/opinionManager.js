@@ -1,29 +1,21 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import CustomModal from "../component/customModal";
+import { useModal } from "../hooks/UseModal";
 import "../../styles/home.css";
 import imagen from "../../img/logo.png";
 
 export const OpinionManager = () => {
 	const params = useParams()
-	const [salir, setSalir] = useState(false)
 	const [local, setLocales] = useState({})
 	const [comentario, setComentario] = useState();
+	const [fotos, setFotos] = useState();
 	const [formData, setFormData] = useState({tipo:"manager", comercial_place_id:params.id_local, comment_id: params.id_comment, puntuacion: null});
 	const [mensaje, setMensaje] = useState(null); 
 	const navigate = useNavigate();
 	const { store, actions } = useContext(Context);
-
-	const [show, setShow] = useState(false);
-	const handleShow = () => setShow(true);
-	const handleClose = () => { 
-		setShow(false);
-		if (salir){
-			navigate(`/localDetail/${params.id_local}`);
-		}
-	};
+	const [isModalOpened, setIsModalOpened, toggleModal] = useModal(false);
 
 	const useEffectComentario = async () => { 
 		const resp = await fetch(`${process.env.BACKEND_URL}/api/comment/${params.id_comment}`,{
@@ -36,24 +28,34 @@ export const OpinionManager = () => {
 		else         return setMensaje(await resp.json());  
 	} 
 
+	const useEffectfotosComentario = async () => { 
+		const resp = await fetch(`${process.env.BACKEND_URL}/api/photos_comment/${params.id_comment}`,{
+			method: 'GET',
+			headers: {"Content-Type": "application/json",
+					  "Authorization": 'Bearer '+ sessionStorage.getItem("token") // hará falta?
+			} 
+		  })
+		if (resp.ok) return setFotos(await resp.json()); 
+		else         return setMensaje(await resp.json());  
+	} 
+
 	useEffect (()=> {
 		if (!(store.token && store.token != "" && store.token != undefined)) {
-			console.log("Con token???", store.token);
 			navigate("/login");
 		}
 		// Debe venir con un comentario y no de debe ser cero.
 		if (!(params.id_comment) && params.id_comment != 0){  
-			navigate.push("/login");
+			navigate("/login");
 		}
 
 		fetch(`${process.env.BACKEND_URL}/api/comercial-place/${params.id_local}`)
-		.then(response => {
-			return response.json()
-		}).then(response => {
-			setLocales(response)        
-		})
+		.then(response => {	return response.json()})
+		.then(response => {	setLocales(response)})
 
 		useEffectComentario();
+
+		useEffectfotosComentario();
+	
 	}, [])
 
 	const handleChange = (evento) =>{
@@ -74,34 +76,13 @@ export const OpinionManager = () => {
 		.then(response => {
 			if (response.status == 200){ 
 				setMensaje("Respuesta cargada correctamente")
-				setSalir(true);
-				handleShow();
+				toggleModal();
 			}else{ 
-				setSalir(false);
 				setMensaje(response["msg"])
-				handleShow();
+				toggleModal();
 			}
 		})
 	}
-
-	function ModalAceptar() {
-		return (
-		  <>
-			<Modal show={show} onHide={handleClose}>
-			  <Modal.Header closeButton>
-				<Modal.Title>Tu respuesta al mensaje</Modal.Title>
-			  </Modal.Header>
-			  <Modal.Body>{mensaje}</Modal.Body>
-			  <Modal.Footer>
-				<Button variant="secondary" onClick={handleClose}>
-				  Close
-				</Button>
-			  </Modal.Footer>
-			</Modal>
-		  </>
-		);
-	}
-
 
 	return (
 		<div className="container fluid align-center">
@@ -113,10 +94,10 @@ export const OpinionManager = () => {
 			<div className="row">
                 <div className="row justify-content-center">
                     <div className="col-4 py-3 px-0 mx-0">
-                        <img src={imagen} className="alinear-derecha" alt="" />
+                        <img src={local.image_url} className="alinear-derecha" alt="" width="60%" height="60%"/>
                     </div>
-                    <div className="col-4 py-5 px-0 mx-0">
-					<p className="my-0"><strong>{local.name} ({params.id_local} - {params.id_comment})</strong></p>
+                    <div className="col-4 py-3 px-2 mx-2">
+						<p className="my-0"><strong>{local.name} ({params.id_local} - {params.id_comment})</strong></p>
                         <p className="my-0">{local.address} </p>
                         <p className="my-0">{local.telf} - {local.email}</p>
                         <p className="my-0">{local.url}</p>
@@ -137,6 +118,28 @@ export const OpinionManager = () => {
 				</div>
 
 				<div className="col-md-12">
+					<div className="text ma-home-section">  
+                          <p><strong>Sobre la relación calidad/precio: </strong>{comentario && comentario.price}</p> 
+                          <p><strong>Indicó si se sive a domicilio: </strong>{comentario && comentario.a_domicilio}</p> 
+                          <p><strong>Indicó si se sive en la mesa: </strong>{comentario && comentario.mesa}</p> 
+                          <p><strong>Indicó si se sive Alcohol: </strong>{comentario && comentario.alcohol}</p> 
+                          <p><strong>Fue una visita: </strong>{comentario && comentario.visita}</p> 
+                          <p><strong>Fue una visita: </strong>{comentario && comentario.photo_location1}</p> 
+						  {fotos && fotos.map((foto, index) => {
+								return  <img src={foto.location}></img>
+						   })}
+
+
+
+
+
+
+
+
+                     </div>
+				</div>
+
+				<div className="col-md-12">
 					<form onSubmit={handleSubmit}>
 						<div className="form-group">
 							<h5>Responde al usuario</h5>
@@ -151,7 +154,13 @@ export const OpinionManager = () => {
 			</div>
 		  </div>
 
-		  {ModalAceptar()}
+		  <CustomModal  show={isModalOpened}
+           		        titulo="Tu respuesta al mensaje"
+                	    handleClose={() => {setIsModalOpened(false);
+										   navigate(`/localDetail/${params.id_local}`);}
+									}>
+				<div>{mensaje}</div>
+		  </CustomModal>
 		</div>
 	  );
 };

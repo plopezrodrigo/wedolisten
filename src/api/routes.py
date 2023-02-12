@@ -148,6 +148,26 @@ def get_comment(id):
     return jsonify(datos.serialize()), 200
 
 # ----------------------------------------------------------------------------
+# Fotos de Un comentario
+# ----------------------------------------------------------------------------
+@api.route('/photos_comment/<id>', methods=['GET'])
+def get_photos_comment(id):
+    fotos = Photos_Comments.query.filter_by(comment_id = id).all()
+    datos = [una.serialize() for una in fotos]
+    return jsonify(datos), 200
+
+# ----------------------------------------------------------------------------
+# Respuesta a Un comentario
+# ----------------------------------------------------------------------------
+@api.route('/respuesta/<id>', methods=['GET'])
+def respuesta(id):
+    datos = Comment.query.filter_by(comment_id=id).first()
+    if datos:
+        return jsonify(datos.serialize()), 200
+    else:
+        return jsonify("No existen respuestas a este comentario todavía"), 201
+
+# ----------------------------------------------------------------------------
 # Comentarios de un LOCAL
 # ----------------------------------------------------------------------------
 @api.route('/comment_local/<id_local>', methods=['GET'])
@@ -339,22 +359,22 @@ def Photo_add():
     db.session.commit()
 
 # ----------------------------------------------------------------------------
-# Comentario - Alta
+# Comentario Usuario- Alta
 # ----------------------------------------------------------------------------
 @api.route("/comment/<id_comment>", methods=["POST"])
 @jwt_required()
-def Comments_add(id_comment):
+def Comments_user_add(id_comment):
     data = request.json                                                                                                                                                                                                                                                                         
     data['user_id'] = get_jwt_identity()
 
-    if (data.get('tipo') == "manager" and data.get('comment_id') == 0):
+    if (data.get('tipo') == "manager" and id_comment == "0"):
         return jsonify({"msg": "Un manager no puede generar una respuesta que no sea sobre un comentario de cliente"}), 403
 
     try:
         comments = Comment( user_id             = data['user_id'],
                             comercial_place_id  = data['comercial_place_id'],
                             comment             = data['comment'],
-                            #comment_id          = null if data.get('comment_id')==0 else data.get('comment_id'),
+                            comment_id          = None if id_comment == "0" else id_comment,
                             puntuacion          = data.get('puntuacion'),
                             price               = data.get('price'),
                             a_domicilio         = data.get('a_domicilio'),
@@ -393,6 +413,7 @@ def Comments_add(id_comment):
         print('--------------------------------------')
         db.session.rollback()
         return jsonify({"msg": "No se puede crear este comentario"}), 402
+
 
 # ----------------------------------------------------------------------------
 # Favoritos - Alta

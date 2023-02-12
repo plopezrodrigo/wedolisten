@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
-import "../../styles/home.css";
 import { useNavigate, Link } from "react-router-dom";
 
-// prueba
+import "../../styles/home.css";
+
 
 export const SignupUser = () => {
 	const [formData, setFormData] = useState({tipo:"customer"});
 	const [mensaje, setMensaje] = useState(null);
 	const navigate = useNavigate();
 	const { store, actions } = useContext(Context);
-  
+
 	const handleChange = (evento) =>{
 		setFormData({...formData, [evento.target.name]: evento.target.value});
 	} 
@@ -19,9 +19,7 @@ export const SignupUser = () => {
 		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
 
 		if (formData["subscription"]){
-			console.log("subscription",formData["subscription"]);
 			setFormData({...formData, "subscription": (formData["subscription"]=='on')});
-			console.log("subscription2",formData);
 		}
 
 		fetch(process.env.BACKEND_URL + "/api/signup", 

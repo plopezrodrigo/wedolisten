@@ -1,4 +1,23 @@
-- Como saco la ventana a un único código??
-
+Preguntas
 - Búsqueda like? comercial-place-search
+- Select y llamadas a procedimientos
 
+
+
+* Ventana para los avisos: Opinion de user y manager y en login
+* Buscar en el NavBar
+* en los comentarios poner las respuestas
+* Gracias por tu opinion
+* el contacto debe cargar datos (a medias)
+* no ha funcionado el alta
+* titulo 
+* sacar las imágenes
+* prompt en comentarios
+* imagenes en carga de comentarios
+* imagen de cabecera de un local
+
+
+favicon
+recordar contraseña
+visualizar contraseña
+API para adjuntar imagines --> Cloudinary

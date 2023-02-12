@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
+import CustomModal from "../component/customModal";
+import { useModal } from "../hooks/UseModal";
 import "../../styles/home.css";
 import imagen from "../../img/logo.png";
 
@@ -11,9 +13,9 @@ export const OpinionUser = () => {
 	const [mensaje, setMensaje] = useState(null); 
 	const navigate = useNavigate();
 	const { store, actions } = useContext(Context);
-  
+	const [isModalOpened, setIsModalOpened, toggleModal] = useModal(false);
+
 	useEffect (()=> {
-		console.log("Opinion User", formData, store.token);		
 		if (!(store.token && store.token != "" && store.token != undefined)) {
 			navigate("/login");
 		}
@@ -42,11 +44,12 @@ export const OpinionUser = () => {
 			})
 		.then(response => {
 			if (response.status == 200){ 
-				navigate(`/localDetail/${params.id_local}`);
+				toggleModal();
 			}else{ 
 				setMensaje(response["msg"])
+				toggleModal();
 			}
-			return response.json(); 
+			// ¿?¿?¿?¿?¿?¿??¿?¿? return response.json(); 
 		})
 	}
 
@@ -95,23 +98,23 @@ export const OpinionUser = () => {
                                 <p className="d-inline">(opcional)</p>
                             </div>
 							<select name="price" id="InputPrice1" className="form-control" aria-describedby="PriceHelp" onChange={handleChange} >
-								<option value="">--Elige una opción--</option>
+								<option value="">--Como te ha parecido la relación calidad/precio--</option>
 								<option value="Barato">Barato</option>
 								<option value="Normal">Normal</option>
 								<option value="Caro">Caro</option>
 							</select>
 							<select name="a_domicilio" id="InputA_domicilio1" className="form-control" aria-describedby="A_domicilioHelp" onChange={handleChange} >
-								<option value="">--Elige una opción--</option>
+								<option value="">--Sirven a domicilio--</option>
 								<option value="Si">Si</option>
 								<option value="No">No</option>
 							</select>
 							<select name="mesa" id="InputMesa1" className="form-control" aria-describedby="MesaHelp" onChange={handleChange} >
-								<option value="">--Elige una opción--</option>
+								<option value="">--Sirven en la mesa--</option>
 								<option value="Si">Si</option>
 								<option value="No">No</option>
 							</select>
 							<select name="alcohol" id="InputAlcohol1" className="form-control" aria-describedby="AlcoholHelp" onChange={handleChange} >
-								<option value="">--Elige una opción--</option>
+								<option value="">--Sirven alcohol--</option>
 								<option value="Si">Si</option>
 								<option value="No">No</option>
 							</select>
@@ -145,6 +148,14 @@ export const OpinionUser = () => {
 				</div>
 			</div>
 		  </div>
+
+		  <CustomModal  show={isModalOpened}
+           		        titulo="Gracias por tu comentario!!!"
+                	    handleClose={() => {setIsModalOpened(false);
+										   navigate(`/localDetail/${params.id_local}`);}
+										}>
+				<div>{mensaje}</div>
+		  </CustomModal>
 		</div>
 	  );
 };

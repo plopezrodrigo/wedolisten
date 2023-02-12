@@ -55,15 +55,10 @@ const getState = ({ getStore, getActions, setStore }) => {
         };
 
         try {
-          const resp = await fetch(
-            process.env.BACKEND_URL + "/api/token",
-            opts
+          const resp = await fetch(process.env.BACKEND_URL + "/api/token",
+                                   opts
           );
-          if (resp.status !== 200) {
-            alert("There has been some error");
-            return false;
-          }
-
+          if (resp.status !== 200) { return false; }
           const data = await resp.json();
 
           sessionStorage.setItem("token", data.token);
@@ -74,12 +69,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           sessionStorage.setItem("nameUser", data.name);
           setStore({ nameUser: data.name });
+
           setStore({ user: data.user});
+
           setStore({ usuario: data.usuario});
 
           return true;
         } catch (error) {
-          console.error("There has been an error login in");
+            console.error("There has been an error login in");
+            return false;
         }
       },
 

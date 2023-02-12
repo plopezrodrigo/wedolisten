@@ -1,14 +1,12 @@
-import React, { useContext, useState, useEffect } from "react";
-import { Context } from "../store/appContext";
+import React, { useState, useEffect } from "react";
 import "../../styles/home.css";
 import UserInfo from "../component/userInfo";
 import ManagerInfo from "../component/managerInfo";
 import OpinionCard from "../component/opinionCard";
 import LocalCard from "../component/localCard";
-import { Link } from "react-router-dom";
+
 
 export const Home = () => {
-  const { store, actions } = useContext(Context);
   const [comentarios, setComentarios] = useState();
   const [locales, setLocales] = useState();
 
@@ -47,15 +45,14 @@ export const Home = () => {
         <div className="row align-items-start"> 
             {comentarios && comentarios.map((comentario, index)=>{    
               return  <> 
+                {comentarios.comment_id}
                 <div className="col"> 
-                  <OpinionCard 
-                  comment ={comentario.comment}
-                  puntuacion={comentario.puntuacion}
-                  fecha={comentario.date}
-                  local_id={comentario.comercial_place_id}
-                  id_comment={comentario.id}
-                  nombre={comentario.user_name}
-
+                  <OpinionCard  comment ={comentario.comment}
+                                puntuacion={comentario.puntuacion}
+                                fecha={comentario.date}
+                                local_id={comentario.comercial_place_id}
+                                id_comment={comentario.id}
+                                nombre={comentario.user_name}
                   />
                  </div> 
               </>
@@ -68,18 +65,18 @@ export const Home = () => {
         <div className="row align-items-start">
           {locales && locales.map((local, index) => {
               return  <div key={local.id} className="col-3">
-                        <LocalCard id="localcard"
-                          name={local.name}
-                          key={local.id}
-                          id={local.id}
-                          index={index}
-                          address={local.address}
-                          description={local.description}
-                          email={local.email}
-                          telf={local.telf}
-                          location={local.location}
-                          url={local.url}
-                          image_url={local.image_url}
+                        <LocalCard  id="localcard"
+                                    name={local.name}
+                                    key={local.id}
+                                    id={local.id}
+                                    index={index}
+                                    address={local.address}
+                                    description={local.description}
+                                    email={local.email}
+                                    telf={local.telf}
+                                    location={local.location}
+                                    url={local.url}
+                                    image_url={local.image_url}
                         />
                       </div>
             })}

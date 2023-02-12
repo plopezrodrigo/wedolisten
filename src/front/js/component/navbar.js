@@ -1,42 +1,20 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
 import { Link } from "react-router-dom";
+import CustomModal from "../component/customModal";
+import { useModal } from "../hooks/UseModal";
 import imagen from "../../img/logo.png";
 
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
-	const [salir, setSalir] = useState(false)
 	const [mensaje, setMensaje] = useState(null); 
 	const navigate = useNavigate();
 	const [formData, setFormData] = useState({});
-
-	const [show, setShow] = useState(false);
-	const handleShow  = () => setShow(true);
-	const handleClose = () => setShow(false);
-
+  const [isModalOpened, setIsModalOpened, toggleModal] = useModal(false);
+	
 	const handleChange = (evento) =>{
 		setFormData({...formData, [evento.target.name]: evento.target.value});
-	}
-
-	function ModalAceptar() {
-		return (
-		  <>
-			<Modal show={show} onHide={handleClose}>
-			  <Modal.Header closeButton>
-				<Modal.Title>Búsqueda de Locales</Modal.Title>
-			  </Modal.Header>
-			  <Modal.Body>{mensaje}</Modal.Body>
-			  <Modal.Footer>
-				<Button variant="secondary" onClick={handleClose}>
-				  Close
-				</Button>
-			  </Modal.Footer>
-			</Modal>
-		  </>
-		);
 	}
 
 	const handleSubmit = (evento)=>{
@@ -48,9 +26,11 @@ export const Navbar = () => {
 			else                        handleShow();
 		})
     .then(datos=>{
-        if (datos.length > 0)   navigate(`/listLocales/${datos}`);
-        else {setMensaje(`No se han encontrado resultados para: "${formData.busca}"`);
-              handleShow()};
+        if (datos.length > 0) 
+              navigate(`/listLocales/${datos}`);
+        else {  setMensaje(`No se han encontrado resultados para: "${formData.busca}"`);
+                toggleModal()
+             };
     })
 	}
 
@@ -109,7 +89,16 @@ export const Navbar = () => {
           </div>
         </nav>
       </div>
-      {ModalAceptar()}
+
+      <CustomModal  show={isModalOpened}
+                    titulo="Búsqueda de Locales"
+                    handleClose={() => setIsModalOpened(false)}>
+        <div>{mensaje}</div>
+      </CustomModal>
     </div>
   );
 };
+
+
+
+

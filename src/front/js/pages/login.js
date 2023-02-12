@@ -1,21 +1,23 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "../../styles/home.css";
-import { Link } from "react-router-dom";
+import CustomModal from "../component/customModal";
+import { useModal } from "../hooks/UseModal";
 
 const Login = () => {
   const { store, actions } = useContext(Context);
   const [data, setData] = useState({});
-  const token = sessionStorage.getItem("token");
+	const [mensaje, setMensaje] = useState(null); 
   const navigate = useNavigate();
+  const [isModalOpened, setIsModalOpened, toggleModal] = useModal(false);
 
-  console.log("This is your token", store.token);
   const handleClick = () => {
     actions.login(data.email, data.password).then((response) => {
-    if (response) {
-      navigate("/");
-    }
+    if (response) navigate("/");
+    else{ setMensaje("Las credenciales no son correctas");
+          toggleModal();
+        } 
     })
   };
 
@@ -43,7 +45,7 @@ const Login = () => {
               <div className="form-outline">
                 <div className="row d-flex justify-content-center align-items-center h-100">
                     <div className="col-md-11">
-                      <label className="form-label" for="typeEmailX">
+                      <label className="form-label" htmlFor="typeEmailX">
                         Email
                       </label>
                       <input
@@ -53,7 +55,7 @@ const Login = () => {
                         name="email"
                         onChange={handleChange}
                       />
-                      <label className="form-label" for="typeEmailX">
+                      <label className="form-label" htmlFor="typeEmailX">
                         Contraseña
                       </label>
                       <input
@@ -88,6 +90,12 @@ const Login = () => {
           </div>
         </div>
       </div>
+
+      <CustomModal  show={isModalOpened}
+                    titulo="Login en BabyFriendly"
+                    handleClose={() => setIsModalOpened(false)}>
+        <div>{mensaje}</div>
+      </CustomModal>
     </div>
   );
 };
