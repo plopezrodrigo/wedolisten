@@ -4,12 +4,6 @@ Preguntas
 
 
 
-
-
-
-
-
-
 * Ventana para los avisos: Opinion de user y manager y en login
 * Buscar en el NavBar
 * en los comentarios poner las respuestas
@@ -18,15 +12,12 @@ Preguntas
 * no ha funcionado el alta
 * titulo 
 * sacar las imágenes
+* prompt en comentarios
+* imagenes en carga de comentarios
+* imagen de cabecera de un local
+
 
 favicon
 recordar contraseña
-
-*prompt en comentarios
-imagenes en carga de comentarios
-
-
-imagen de cabecera de un local
 visualizar contraseña
-
 API para adjuntar imagines --> Cloudinary

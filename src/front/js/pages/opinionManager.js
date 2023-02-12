@@ -10,6 +10,7 @@ export const OpinionManager = () => {
 	const params = useParams()
 	const [local, setLocales] = useState({})
 	const [comentario, setComentario] = useState();
+	const [fotos, setFotos] = useState();
 	const [formData, setFormData] = useState({tipo:"manager", comercial_place_id:params.id_local, comment_id: params.id_comment, puntuacion: null});
 	const [mensaje, setMensaje] = useState(null); 
 	const navigate = useNavigate();
@@ -27,6 +28,17 @@ export const OpinionManager = () => {
 		else         return setMensaje(await resp.json());  
 	} 
 
+	const useEffectfotosComentario = async () => { 
+		const resp = await fetch(`${process.env.BACKEND_URL}/api/photos_comment/${params.id_comment}`,{
+			method: 'GET',
+			headers: {"Content-Type": "application/json",
+					  "Authorization": 'Bearer '+ sessionStorage.getItem("token") // hará falta?
+			} 
+		  })
+		if (resp.ok) return setFotos(await resp.json()); 
+		else         return setMensaje(await resp.json());  
+	} 
+
 	useEffect (()=> {
 		if (!(store.token && store.token != "" && store.token != undefined)) {
 			navigate("/login");
@@ -41,6 +53,9 @@ export const OpinionManager = () => {
 		.then(response => {	setLocales(response)})
 
 		useEffectComentario();
+
+		useEffectfotosComentario();
+	
 	}, [])
 
 	const handleChange = (evento) =>{
@@ -102,8 +117,6 @@ export const OpinionManager = () => {
 					<span className="p-2"><p>{comentario && comentario.comment}</p></span>
 				</div>
 
-
-
 				<div className="col-md-12">
 					<div className="text ma-home-section">  
                           <p><strong>Sobre la relación calidad/precio: </strong>{comentario && comentario.price}</p> 
@@ -111,7 +124,18 @@ export const OpinionManager = () => {
                           <p><strong>Indicó si se sive en la mesa: </strong>{comentario && comentario.mesa}</p> 
                           <p><strong>Indicó si se sive Alcohol: </strong>{comentario && comentario.alcohol}</p> 
                           <p><strong>Fue una visita: </strong>{comentario && comentario.visita}</p> 
-						  <img src={comentario && comentario.photo_location1}></img>
+                          <p><strong>Fue una visita: </strong>{comentario && comentario.photo_location1}</p> 
+						  {fotos && fotos.map((foto, index) => {
+								return  <img src={foto.location}></img>
+						   })}
+
+
+
+
+
+
+
+
                      </div>
 				</div>
 

@@ -148,6 +148,15 @@ def get_comment(id):
     return jsonify(datos.serialize()), 200
 
 # ----------------------------------------------------------------------------
+# Fotos de Un comentario
+# ----------------------------------------------------------------------------
+@api.route('/photos_comment/<id>', methods=['GET'])
+def get_photos_comment(id):
+    fotos = Photos_Comments.query.filter_by(comment_id = id).all()
+    datos = [una.serialize() for una in fotos]
+    return jsonify(datos), 200
+
+# ----------------------------------------------------------------------------
 # Respuesta a Un comentario
 # ----------------------------------------------------------------------------
 @api.route('/respuesta/<id>', methods=['GET'])
