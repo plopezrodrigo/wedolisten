@@ -7,18 +7,16 @@ import {tokenValid} from "../utils"
 
 const UserInfo = (props) => {
   const { store, actions } = useContext(Context);
-  console.log(store.favorites);
 
   return (
     <div className="row mb-5 pb-md-4 align-items-center">
 
       <div className="col-6">
-      <img
-              src={imagen}
-              className="card-img-top"
-              alt=""
-              width="500"
-              height="500"
+      <img  src={imagen}
+            className="card-img-top"
+            alt=""
+            width="500"
+            height="500"
       />
       </div>
       <div className="col-6">

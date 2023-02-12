@@ -156,7 +156,7 @@ def respuesta(id):
     if datos:
         return jsonify(datos.serialize()), 200
     else:
-        return jsonify("No existen respuestas a este comentario todavía"), 400
+        return jsonify("No existen respuestas a este comentario todavía"), 201
 
 # ----------------------------------------------------------------------------
 # Comentarios de un LOCAL

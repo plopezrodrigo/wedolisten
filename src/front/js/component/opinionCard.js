@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../store/appContext";
 import imagen from "../../img/opinion.png";
 
 const OpinionCard = (props) => {
+  const { store, actions } = useContext(Context);
   const [respuesta, setRespuesta] = useState();
   const [tieneRespuesta, setTieneRespuesta] = useState(false);
   
@@ -10,34 +12,36 @@ const OpinionCard = (props) => {
 		await fetch(`${process.env.BACKEND_URL}/api/respuesta/${props.id_comment}`)
 		.then(response => {
         if (response.status == 200)       setTieneRespuesta(true);
-        else if (response.status != 400)  setTieneRespuesta(false);
-        else console.log("Error gordo, a ver que hacemos");
+        else if (response.status == 201)  setTieneRespuesta(false);
+              else console.log("Error gordo, a ver que hacemos", response.status);
 
         return response.json()
 		})
-    .then(response => { if (tieneRespuesta) setRespuesta(response);})
+    .then(response => { setRespuesta(response.comment); })
   }
 
   useEffect (()=> {
     miUseEffect();
-    console.log("respuestas", tieneRespuesta, respuesta);
 	}, [])
 
-  const mensajeManager = () => {
-    return (<div className="text ma-home-section">  
-              <p className="strong">BabyFriendly: {respuesta}</p>
-            </div>
-           )
-  };
 
-  const botonRespuesta = () => {
-      return (<div className="text ma-home-section">  
-                <Link to={`/OpinionManager/${props.local_id}/${props.id_comment}`}>
-                  <i className="fas fa-star" id="iconaccount" />
-                  <strong className="strong">Responde</strong>
-                </Link>
-              </div>
-             )
+  const paraManager = () => {
+    if (store.usertype == "manager"){
+        if (tieneRespuesta){
+              return  (<div className="text ma-home-section">  
+                          <p><strong>BabyFriendly: </strong>{respuesta}</p> 
+                      </div>
+                      )
+        }else{ 
+              return  (<div className="text ma-home-section">  
+                          <Link to={`/OpinionManager/${props.local_id}/${props.id_comment}`}>
+                            <i className="fas fa-star" id="iconaccount" />
+                            <strong className="strong">Responde</strong>
+                          </Link>
+                      </div>
+                      )
+        }
+    }
   };
 
   return (
@@ -62,7 +66,7 @@ const OpinionCard = (props) => {
           <div className="col-12">
             <p><strong>Fecha de la visita: </strong>{props.fecha}</p> 
           </div>
-          {tieneRespuesta ? mensajeManager() : botonRespuesta()}
+          {paraManager()}
         </div>
       </div>
     </div>
