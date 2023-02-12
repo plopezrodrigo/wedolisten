@@ -128,14 +128,6 @@ export const OpinionManager = () => {
 						  {fotos && fotos.map((foto, index) => {
 								return  <img src={foto.location}></img>
 						   })}
-
-
-
-
-
-
-
-
                      </div>
 				</div>
 

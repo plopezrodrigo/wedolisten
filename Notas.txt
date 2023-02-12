@@ -4,19 +4,10 @@ Preguntas
 
 
 
-* Ventana para los avisos: Opinion de user y manager y en login
-* Buscar en el NavBar
-* en los comentarios poner las respuestas
-* Gracias por tu opinion
-* el contacto debe cargar datos (a medias)
-* no ha funcionado el alta
-* titulo 
-* sacar las imágenes
-* prompt en comentarios
-* imagenes en carga de comentarios
-* imagen de cabecera de un local
+* El contacto debe cargar datos cuando es de un usuario logado, lo he conseguido pero solo con el nombre cuando es manager, no entiendo porque no lo carga cuando es customer, además del email,... (a medias)
 
 
+Crear un página par ver los comentarios completos
 favicon
 recordar contraseña
 visualizar contraseña
