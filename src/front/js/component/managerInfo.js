@@ -10,7 +10,7 @@ const ManagerInfo = (props) => {
 
   return (
     <>
-    {(store.usertype == "manager") &&  
+    {(store.usertype != "customer") &&  
         <div className="row mb-5 pb-md-4 align-items-center">
           <div className="col-md-5">
             <h2 className="display-5 fw-normal">Publicita tu local y recibe más clientes</h2>
