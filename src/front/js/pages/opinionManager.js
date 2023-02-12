@@ -79,10 +79,10 @@ export const OpinionManager = () => {
 			<div className="row">
                 <div className="row justify-content-center">
                     <div className="col-4 py-3 px-0 mx-0">
-                        <img src={imagen} className="alinear-derecha" alt="" />
+                        <img src={local.image_url} className="alinear-derecha" alt="" width="60%" height="60%"/>
                     </div>
-                    <div className="col-4 py-5 px-0 mx-0">
-					<p className="my-0"><strong>{local.name} ({params.id_local} - {params.id_comment})</strong></p>
+                    <div className="col-4 py-3 px-2 mx-2">
+						<p className="my-0"><strong>{local.name} ({params.id_local} - {params.id_comment})</strong></p>
                         <p className="my-0">{local.address} </p>
                         <p className="my-0">{local.telf} - {local.email}</p>
                         <p className="my-0">{local.url}</p>
@@ -100,6 +100,19 @@ export const OpinionManager = () => {
 				
 				<div className="border border-warning my-3">
 					<span className="p-2"><p>{comentario && comentario.comment}</p></span>
+				</div>
+
+
+
+				<div className="col-md-12">
+					<div className="text ma-home-section">  
+                          <p><strong>Sobre la relación calidad/precio: </strong>{comentario && comentario.price}</p> 
+                          <p><strong>Indicó si se sive a domicilio: </strong>{comentario && comentario.a_domicilio}</p> 
+                          <p><strong>Indicó si se sive en la mesa: </strong>{comentario && comentario.mesa}</p> 
+                          <p><strong>Indicó si se sive Alcohol: </strong>{comentario && comentario.alcohol}</p> 
+                          <p><strong>Fue una visita: </strong>{comentario && comentario.visita}</p> 
+						  <img src={comentario && comentario.photo_location1}></img>
+                     </div>
 				</div>
 
 				<div className="col-md-12">

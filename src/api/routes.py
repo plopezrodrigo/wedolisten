@@ -350,11 +350,11 @@ def Photo_add():
     db.session.commit()
 
 # ----------------------------------------------------------------------------
-# Comentario - Alta
+# Comentario Usuario- Alta
 # ----------------------------------------------------------------------------
 @api.route("/comment/<id_comment>", methods=["POST"])
 @jwt_required()
-def Comments_add(id_comment):
+def Comments_user_add(id_comment):
     data = request.json                                                                                                                                                                                                                                                                         
     data['user_id'] = get_jwt_identity()
 
@@ -365,7 +365,7 @@ def Comments_add(id_comment):
         comments = Comment( user_id             = data['user_id'],
                             comercial_place_id  = data['comercial_place_id'],
                             comment             = data['comment'],
-                            comment_id          = null if data.get('comment_id')==0 else data.get('comment_id'),
+                            comment_id          = null if id_comment == 0 else id_comment,
                             puntuacion          = data.get('puntuacion'),
                             price               = data.get('price'),
                             a_domicilio         = data.get('a_domicilio'),

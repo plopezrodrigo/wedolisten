@@ -98,23 +98,23 @@ export const OpinionUser = () => {
                                 <p className="d-inline">(opcional)</p>
                             </div>
 							<select name="price" id="InputPrice1" className="form-control" aria-describedby="PriceHelp" onChange={handleChange} >
-								<option value="">--Elige una opción--</option>
+								<option value="">--Como te ha parecido la relación calidad/precio--</option>
 								<option value="Barato">Barato</option>
 								<option value="Normal">Normal</option>
 								<option value="Caro">Caro</option>
 							</select>
 							<select name="a_domicilio" id="InputA_domicilio1" className="form-control" aria-describedby="A_domicilioHelp" onChange={handleChange} >
-								<option value="">--Elige una opción--</option>
+								<option value="">--Sirven a domicilio--</option>
 								<option value="Si">Si</option>
 								<option value="No">No</option>
 							</select>
 							<select name="mesa" id="InputMesa1" className="form-control" aria-describedby="MesaHelp" onChange={handleChange} >
-								<option value="">--Elige una opción--</option>
+								<option value="">--Sirven en la mesa--</option>
 								<option value="Si">Si</option>
 								<option value="No">No</option>
 							</select>
 							<select name="alcohol" id="InputAlcohol1" className="form-control" aria-describedby="AlcoholHelp" onChange={handleChange} >
-								<option value="">--Elige una opción--</option>
+								<option value="">--Sirven alcohol--</option>
 								<option value="Si">Si</option>
 								<option value="No">No</option>
 							</select>
