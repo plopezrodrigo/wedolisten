@@ -85,11 +85,11 @@ export const OpinionUser = () => {
 					<form onSubmit={handleSubmit}>
                         <div className="form-group">
 							<h5>Puntuación</h5>
-							<input type="radio" name="puntuacion" className="form-check-input" id="InputPuntua1" aria-describedby="nameHelp" value="uno" onChange={handleChange} />
-							<input type="radio" name="puntuacion" className="form-check-input" id="InputPuntua2" aria-describedby="nameHelp" value="dos" onChange={handleChange} />
-							<input type="radio" name="puntuacion" className="form-check-input" id="InputPuntua3" aria-describedby="nameHelp" value="tres" onChange={handleChange} />
-							<input type="radio" name="puntuacion" className="form-check-input" id="InputPuntua4" aria-describedby="nameHelp" value="cuatro" onChange={handleChange} />
-							<input type="radio" name="puntuacion" className="form-check-input" id="InputPuntua5" aria-describedby="nameHelp" value="cinco" onChange={handleChange} />
+							<input type="radio" required name="puntuacion" className="form-check-input" id="InputPuntua1" aria-describedby="nameHelp" value="uno" onChange={handleChange} />
+							<input type="radio" required name="puntuacion" className="form-check-input" id="InputPuntua2" aria-describedby="nameHelp" value="dos" onChange={handleChange} />
+							<input type="radio" required name="puntuacion" className="form-check-input" id="InputPuntua3" aria-describedby="nameHelp" value="tres" onChange={handleChange} />
+							<input type="radio" required name="puntuacion" className="form-check-input" id="InputPuntua4" aria-describedby="nameHelp" value="cuatro" onChange={handleChange} />
+							<input type="radio" required name="puntuacion" className="form-check-input" id="InputPuntua5" aria-describedby="nameHelp" value="cinco" onChange={handleChange} />
 						</div>	   
                         <br/>
 						<div className="form-group">
