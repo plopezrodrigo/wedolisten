@@ -26,9 +26,10 @@ export const Navbar = () => {
 			else                        handleShow();
 		})
     .then(datos=>{
-        if (datos.length > 0) 
-              navigate(`/listLocales/${datos}`);
-        else {  setMensaje(`No se han encontrado resultados para: "${formData.busca}"`);
+        if (datos.length > 0){ 
+              console.log("Busqueda:", datos);
+              //navigate(`/listLocales/${datos}`);
+        }else {  setMensaje(`No se han encontrado resultados para: "${formData.busca}"`);
                 toggleModal()
              };
     })
