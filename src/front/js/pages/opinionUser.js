@@ -34,23 +34,28 @@ export const OpinionUser = () => {
 
 	const handleSubmit = (evento)=>{
 		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
-
-		fetch(process.env.BACKEND_URL + "/api/comment/0", 
-			{	method: 'POST',
-				headers:{"Content-Type": "application/json",
-				"Authorization": 'Bearer '+ store.token
-			},  	
-			body: JSON.stringify(formData),
+		if (formData.puntuacion) {
+			fetch(process.env.BACKEND_URL + "/api/comment/0", 
+				{	method: 'POST',
+					headers:{"Content-Type": "application/json",
+					"Authorization": 'Bearer '+ store.token
+				},  	
+				body: JSON.stringify(formData),
+				})
+			.then(response => {
+				if (response.status == 200){ 
+					setMensaje("Lo revisaremos con cariño")
+					toggleModal();
+				}else{ 
+					setMensaje(response["msg"])
+					toggleModal();
+				}
+				// ¿?¿?¿?¿?¿?¿??¿?¿? return response.json(); 
 			})
-		.then(response => {
-			if (response.status == 200){ 
-				toggleModal();
-			}else{ 
-				setMensaje(response["msg"])
-				toggleModal();
-			}
-			// ¿?¿?¿?¿?¿?¿??¿?¿? return response.json(); 
-		})
+		}else{	
+			setMensaje("Debes introducir una puntuación")
+			toggleModal();
+		}
 	}
 
 	return (
@@ -151,8 +156,9 @@ export const OpinionUser = () => {
 
 		  <CustomModal  show={isModalOpened}
            		        titulo="Gracias por tu comentario!!!"
-                	    handleClose={() => {setIsModalOpened(false);
-										   navigate(`/localDetail/${params.id_local}`);}
+                	    handleClose={() => {setIsModalOpened(false); // essto es por pruebas, en realidad no debería venir a modal si es porque no ha puesto puntuación
+											if (formData.puntuacion) navigate(`/localDetail/${params.id_local}`);
+										   }
 										}>
 				<div>{mensaje}</div>
 		  </CustomModal>

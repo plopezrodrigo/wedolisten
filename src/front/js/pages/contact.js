@@ -10,7 +10,7 @@ export const Contact = (props) => {
   console.log(store.user);
 
   return (
-    <div class="bg-contact3">
+    <div className="bg-contact3">
       <div className="vh-100 gradient-custom">
         <div className="container text-center">
           <h3>Contacto</h3>
@@ -20,9 +20,9 @@ export const Contact = (props) => {
             <div className="col-12 col-md-8 col-lg-6 col-xl-5 ">
               <div className="card px-3" id="card">
                 <h3 className="mt-3" id="iconbutton">Escríbenos</h3>
-                  <form className="form-outline" novalidate>
+                  <form className="form-outline" noValidate>
                     <div className="col-md-12">
-                      <label forHtml="basic-url" className="form-label alinear-izquierda mt-3">Nombre y Apellidos</label>
+                      <label forhtml="basic-url" className="form-label alinear-izquierda mt-3">Nombre y Apellidos</label>
                       <input  className="form-control mb-2"
                               type="text"
                               name="name"
@@ -33,7 +33,7 @@ export const Contact = (props) => {
                       <div className="invalid-feedback">Campo nombre y apellidos no puede estar en blanco.</div>
                     </div>
                     <div className="col-md-12">
-                      <label forHtml="basic-url" className="form-label alinear-izquierda">Email</label>
+                      <label forhtml="basic-url" className="form-label alinear-izquierda">Email</label>
                       <input  className="form-control mb-2"
                               type="email"
                               name="email"
@@ -43,7 +43,7 @@ export const Contact = (props) => {
                       <div className="invalid-feedback">Campo Email no puede estar en blanco.</div>
                     </div>
                     <div className="col-md-12">
-                      <label for="basic-url" className="form-label alinear-izquierda">Teléfono</label>
+                      <label forhtml="basic-url" className="form-label alinear-izquierda">Teléfono</label>
                       <input  className="form-control mb-2"
                               type="telefono"
                               name="Teléfono"
@@ -54,7 +54,7 @@ export const Contact = (props) => {
                       </div>
                     </div>
                     <div className="col-md-12">
-                      <label for="basic-url" className="form-label alinear-izquierda">Tema de consulta</label>
+                      <label forhtml="basic-url" className="form-label alinear-izquierda">Tema de consulta</label>
                       <select className="form-select mt-3" required>
                         <option selected disabled value="">Hacerme Gestor </option>
                         <option value="jweb">Información sobre Baby Friendly</option>
@@ -65,7 +65,7 @@ export const Contact = (props) => {
                       <div className="invalid-feedback">Por favor, selecciona un asunto.</div>
                     </div>
                     <div className="col-md-12">
-                      <label for="basic-url" className="form-label alinear-izquierda mt-3">Comentarios</label>
+                      <label forhtml="basic-url" className="form-label alinear-izquierda mt-3">Comentarios</label>
                       <input  id="commentinput"
                               className="form-control mb-2"
                               type="text"

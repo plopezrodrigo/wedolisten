@@ -66,7 +66,9 @@ const OpinionCard = (props) => {
           <div className="col-12">
             <p><strong>Fecha de la visita: </strong>{props.fecha}</p> 
           </div>
+
           {paraManager()}
+          
         </div>
       </div>
     </div>

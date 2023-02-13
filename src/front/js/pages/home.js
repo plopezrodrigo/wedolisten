@@ -41,12 +41,11 @@ export const Home = () => {
       <UserInfo />
       <ManagerInfo />
       <h1 className="text-center" id="tituloHome">Lee lo que otros están opinando...</h1>
-      <div className="container fluid">
+      <div key="DIVComentarios" className="container fluid">
         <div className="row align-items-start"> 
             {comentarios && comentarios.map((comentario, index)=>{    
               return  <> 
-                {comentarios.comment_id}
-                <div className="col"> 
+                <div key={comentario.id} className="col"> 
                   <OpinionCard  comment ={comentario.comment}
                                 puntuacion={comentario.puntuacion}
                                 fecha={comentario.date}
@@ -65,7 +64,7 @@ export const Home = () => {
         <div className="row align-items-start">
           {locales && locales.map((local, index) => {
               return  <div key={local.id} className="col-3">
-                        <LocalCard  id="localcard"
+                        <LocalCard  //id="localcard"
                                     name={local.name}
                                     key={local.id}
                                     id={local.id}
