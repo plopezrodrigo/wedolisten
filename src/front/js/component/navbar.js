@@ -14,26 +14,25 @@ export const Navbar = () => {
   const [isModalOpened, setIsModalOpened, toggleModal] = useModal(false);
 	
 	const handleChange = (evento) =>{
-		setFormData({...formData, [evento.target.name]: evento.target.value});
+		setFormData({...formData, [evento.target.name]: evento.target.value}); 
 	}
 
 	const handleSubmit = (evento)=>{
 		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
 
-		fetch(`${process.env.BACKEND_URL}/api/comercial-place-search/${formData.busca}`)
-		.then(response => {
-			if (response.status == 200) return response.json()
-			else                        handleShow();
-		})
-    .then(datos=>{
-        if (datos.length > 0){ 
-              console.log("Busqueda:", datos);
-              //navigate(`/listLocales/${datos}`);
-        }else {  setMensaje(`No se han encontrado resultados para: "${formData.busca}"`);
-                toggleModal()
-             };
-    })
-	}
+    if (formData.busca.length > 0){
+        // Cargamos store.locales para usarlo en listLocales
+        actions.cargaLocales(formData.busca).then((response) => {
+              if (response){
+                  navigate("/listLocales");
+              }else{
+                  setMensaje(store.message);
+                  toggleModal();
+              }
+        })
+    }
+  }
+
 
   return (
     <div className="container-fluid">
@@ -46,16 +45,13 @@ export const Navbar = () => {
                 <img src={imagen} className="card-img-top mt-2" alt="" width="120" height="120" />
               </span>
             </Link>
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span className="navbar-toggler-icon"></span>
+            <button className="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
             </button>
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
               <ul className="navbar-nav me-auto mb-lg-0">
@@ -99,7 +95,3 @@ export const Navbar = () => {
     </div>
   );
 };
-
-
-
-

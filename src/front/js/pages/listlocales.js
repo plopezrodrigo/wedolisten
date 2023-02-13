@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import LocalCard from "../component/localCard";
 
 const ListLocales = () => {
-  const params = useParams()
+  const { store, actions } = useContext(Context);
   const [locales, setLocales] = useState();
   let options = {
     method: "GET",
@@ -18,16 +17,14 @@ const ListLocales = () => {
       };
     }
 
-    console.log("Lista locales:", params.length);
-
-    fetch(process.env.BACKEND_URL + "/api/comercial-place", options)
-      .then((response) => {
-        return response.json();
-      })
-      .then((response) => {
-        setLocales(response);
-      });
-  }, []);
+    if(store.locales && store.locales.length > 0){
+          setLocales(store.locales);
+    }else{
+          fetch(process.env.BACKEND_URL + "/api/comercial-place", options)
+            .then((response) => {return response.json();})
+            .then((response) => {setLocales(response);});
+    } 
+  },[]);
 
   return (
     <div className="container fluid">

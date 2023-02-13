@@ -61,7 +61,6 @@ def list_Comercial_Places_search(buscar):
     customer = Customer.query.filter_by(user_id=user_id).first() if user_id else None
 
     comercial_places = Comercial_Place.query.filter(Comercial_Place.name.contains(buscar)).all()
-    #comercial_places = Comercial_Place.query.all()
     data = [comercial_place.serialize()
             for comercial_place in comercial_places]
 

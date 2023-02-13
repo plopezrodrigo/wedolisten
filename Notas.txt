@@ -1,9 +1,3 @@
-Preguntas
-- Búsqueda like? comercial-place-search
-- Select y llamadas a procedimientos
-
-
-
 * El contacto debe cargar datos cuando es de un usuario logado, lo he conseguido pero solo con el nombre cuando es manager, no entiendo porque no lo carga cuando es customer, además del email,... (a medias)
  
 

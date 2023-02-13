@@ -6,7 +6,6 @@ import imagen from "../../img/manager.png";
 
 const ManagerInfo = (props) => {
   const { store, actions } = useContext(Context);
-  console.log(store.favorites);
 
   return (
     <>
