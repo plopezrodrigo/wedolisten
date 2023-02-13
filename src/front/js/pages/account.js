@@ -24,53 +24,50 @@ export const Account = () => {
                       <i className="fas fa-user-edit" id="iconaccount" />
                       <strong className="strong"> Mis datos</strong>
                     </Link>
-                    <p className="description">Edita tus datos personales.</p>
                     </p>
+                    <p className="description">Edita tus datos personales.</p>
                     {store.usertype == "customer" ? 
-                      <p className="text ma-home-section">
-                        <Link to="/favorites">
-                          <i className="fas fa-star" id="iconaccount" />
-                          <strong className="strong"> Mis Favoritos</strong>
-                        </Link>
-                        <p className="description">
-                          Consulta tus locales añadidos a favoritos.
-                        </p>
-                      </p>
-                      :
-                      <p className="text ma-home-section">
-                        <Link to="/comentarios">
+                      <>
+                        <p className="text ma-home-section">
+                          <Link to="/favorites">
                             <i className="fas fa-star" id="iconaccount" />
-                            <strong className="strong"> Mis Comentarios</strong>
-                        </Link>
-                        <p className="description">
-                          Consulta los comentarios de tus clientes.
+                            <strong className="strong"> Mis Favoritos</strong>
+                          </Link>
                         </p>
-                      </p>
-                      }
+                        <p className="description">Consulta tus locales añadidos a favoritos.</p>
+                      </>
+                      :
+                      <>
+                        <p className="text ma-home-section">
+                          <Link to="/comentarios">
+                              <i className="fas fa-star" id="iconaccount" />
+                              <strong className="strong"> Mis Comentarios</strong>
+                          </Link>
+                        </p>
+                        <p className="description">Consulta los comentarios de tus clientes.</p>
+                      </>
+                    }
                       {store.usertype == "manager" ? 
-                      <p className="text ma-home-section">
-                        <Link to="/misLocales">
-                          <i className="fas fa-star" id="iconaccount" />
-                          <strong className="strong"> Mis Locales</strong>
-                        </Link>
-                        <p className="description">
-                          Consulta tus locales.
+                      <>
+                        <p className="text ma-home-section">
+                          <Link to="/misLocales">
+                            <i className="fas fa-star" id="iconaccount" />
+                            <strong className="strong"> Mis Locales</strong>
+                          </Link>
                         </p>
-                      </p>
+                        <p className="description">Consulta tus locales.</p>
+                      </>
                       :
                       ""
                       }
                     <p className="text ma-home-section">
-                    <a
-                    onClick={() => {actions.logout()
-                    navigate("/")}}
-                    >
-                    <i class="fas fa-sign-out-alt" id="iconaccount"></i>
-                    <strong className="strong"> Cerrar sesión </strong>
-                    </a>
-                    <p className="description">Cierra tu sesión.</p>
+                      <a onClick={() => {actions.logout();
+                                        navigate("/")}}>
+                        <i className="fas fa-sign-out-alt" id="iconaccount"></i>
+                        <strong className="strong"> Cerrar sesión </strong>
+                      </a>
                     </p>
-
+                    <p className="description">Cierra tu sesión.</p>
                 </div>
               </div>
             </div>

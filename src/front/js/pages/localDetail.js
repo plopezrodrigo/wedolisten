@@ -106,12 +106,12 @@ const LocalDetail = (props) => {
         </div>
       </div>
       <div className="row">
-          {(local.trona)             && <div className="col-1"><img src={trona} alt="Trona" width="40" height="40" /></div> }
-          {(local.cambiador)         && <div className="col-1"><img src={cambiador} alt="cambiador" width="40" height="40" /></div> }
-          {(local.accesible)         && <div className="col-1"><img src={accesible} alt="accesible" width="40" height="40" /></div> }
-          {(local.espacio_carrito)   && <div className="col-1"><img src={espacio_carrito} alt="espacio_carrito" width="40" height="40" /></div> }
-          {(local.ascensor)          && <div className="col-1"><img src={ascensor} alt="ascensor" width="40" height="40" /></div> }
-          {(local.productos_higiene) && <div className="col-1"><img src={productos_higiene} alt="productos_higiene" width="40" height="40" /></div> }
+          {(local.trona)             && <div key="trona"             className="col-1"><img key="trona"             src={trona} alt="Trona" width="40" height="40" /></div> }
+          {(local.cambiador)         && <div key="cambiador"         className="col-1"><img key="cambiador"         src={cambiador} alt="cambiador" width="40" height="40" /></div> }
+          {(local.accesible)         && <div key="accesible"         className="col-1"><img key="accesible"         src={accesible} alt="accesible" width="40" height="40" /></div> }
+          {(local.espacio_carrito)   && <div key="espacio_carrito"   className="col-1"><img key="espacio_carrito"   src={espacio_carrito} alt="espacio_carrito" width="40" height="40" /></div> }
+          {(local.ascensor)          && <div key="ascensor"          className="col-1"><img key="ascensor"          src={ascensor} alt="ascensor" width="40" height="40" /></div> }
+          {(local.productos_higiene) && <div key="productos_higiene" className="col-1"><img key="productos_higiene" src={productos_higiene} alt="productos_higiene" width="40" height="40" /></div> }
       </div>
       <div className="row" id="ubicacion">
         <h2>Ubicación y contacto</h2>
@@ -119,10 +119,10 @@ const LocalDetail = (props) => {
           <iframe
             width="450"
             height="250"
-            frameborder="0" 
-            referrerpolicy="no-referrer-when-downgrade"
+            frameBorder="0"  
+            referrerPolicy="no-referrer-when-downgrade"
             src={`https://www.google.com/maps/embed/v1/MAP_MODE?key=AIzaSyAv5ZYraM9a5QF6hOcon0IFnHIiuox66Cw&q=${local.google_address}`}
-            allowfullscreen>
+            allowFullScreen>
           </iframe>
         </div>
         <div className="" id="ubicacionelements">
@@ -132,15 +132,15 @@ const LocalDetail = (props) => {
             </a>
           </span>
         </div>
-        {local.url && <div className="" id="ubicacionelements">
+        {local.url && <div className="" key="url" id="ubicacionelements">
                           <span className=""><i className="fas fa-laptop"></i> {local.url}</span>
                       </div>
         }
-        {local.telf &&  <div className="" id="ubicacionelements">
+        {local.telf &&  <div className="" key="telf" id="ubicacionelements">
                           <span className=""><i className="fas fa-phone"></i> {local.telf}</span>
                         </div>
         }
-        {local.email && <div className="" id="ubicacionelements">
+        {local.email && <div className="" key="email" id="ubicacionelements">
                           <span className=""><i className="fas fa-envelope"></i> {local.email}</span>
                         </div>
         }
@@ -150,7 +150,7 @@ const LocalDetail = (props) => {
 
         {comentarios && comentarios.map((comentario, index)=>  
           {return comentario.puntuacion != 0  ? (<>
-                                                  <div  key={comentario.id} className="col mt-5"> 
+                                                  <div key={index} className="col mt-5"> 
                                                     <OpinionCard  comment={comentario.comment}
                                                                   fecha={comentario.date}
                                                                   nombre={comentario.user_name}
@@ -169,10 +169,8 @@ const LocalDetail = (props) => {
       {store.usertype == "customer" &&
           <p className="text ma-home-section">  
             <Link to={`/OpinionUser/${params.id}/0`}>
-            <a>
               <i className="fas fa-star" id="button" />
               <strong className="strong"> Escribe tu opinión</strong>
-            </a>
             </Link>
           </p>
       }

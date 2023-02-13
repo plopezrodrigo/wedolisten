@@ -5,7 +5,7 @@ import { Context } from "../store/appContext";
 export const Data = () => {
   const { store, actions } = useContext(Context);
   return (
-    <form>
+    <>
       <div className="myDetails">
         <div className="headerSection">
           <div className="container text-center">
@@ -22,57 +22,46 @@ export const Data = () => {
                 <div className="col-12 col-md-8 col-lg-6 col-xl-5">
                   <div className="card" id="card">
                     <h6 className="mt-3">Datos personales</h6>
-                  <form className="requires-validation" novalidate>
+                  <form className="requires-validation" noValidate>
                     <div className="d-flex justify-content-center ms-3 me-3">
-                      <input
-                        className="form-control p-2"
-                        type="text"
-                        name="name"
-                        placeholder="Nombre y Apellidos"
-                        required
-                        defaultValue={store.usuario?.name}
+                      <input  className="form-control p-2"
+                              type="text"
+                              name="name"
+                              placeholder="Nombre y Apellidos"
+                              required
+                              defaultValue={store.usuario?.name}
                       />
-                      <div className="valid-feedback">
-                        Campo nombre y apellidos es válido.
-                      </div>
-                      <div className="invalid-feedback">
-                        Campo nombre y apellidos no puede estar en blanco.
-                      </div>
+                      <div className="valid-feedback">Campo nombre y apellidos es válido.</div>
+                      <div className="invalid-feedback">Campo nombre y apellidos no puede estar en blanco.</div>
                     </div>
                     <div className="d-flex justify-content-center ms-3 me-3 mt-2">
-                      <input
-                        className="form-control p-2"
-                        type="email"
-                        name="email"
-                        placeholder="E-mail"
-                        required
-                        defaultValue={store.user?.email}
+                      <input  className="form-control p-2"
+                              type="email"
+                              name="email"
+                              placeholder="E-mail"
+                              required
+                              defaultValue={store.user?.email}
                       />
                       <div className="valid-feedback">Campo Email es válido.</div>
-                      <div className="invalid-feedback">
-                        Campo Email no puede estar en blanco.
-                      </div>
+                      <div className="invalid-feedback">Campo Email no puede estar en blanco.</div>
                     </div>
                     <div className="d-flex justify-content-center ms-3 me-3 mt-2">
-                      <input
-                        className="form-control p-2"
-                        type="telefono"
-                        name="Teléfono"
-                        placeholder="Teléfono"
-                        required
-                        defaultValue={store.user?.telefono}
+                      <input  className="form-control p-2"
+                              type="telefono"
+                              name="Teléfono"
+                              placeholder="Teléfono"
+                              required
+                              defaultValue={store.user?.telefono}
                       />
                       <div className="valid-feedback">Campo Teléfono es válido</div>
-                      <div className="invalid-feedback">
-                        Campo Teléfono no puede estar en blanco
-                      </div>
+                      <div className="invalid-feedback">Campo Teléfono no puede estar en blanco</div>
                     </div>
                     {store.usertype == "customer" ? 
                       <div className="selectContent">
                         <div className="row">
                           <div className="col-md-4 birthdayDay">
                             <select id="fecha">
-                              <option value="" selected="selected">Día</option>
+                              <option selected="selected">Día</option>
                               <option value="1">1</option>
                               <option value="2">2</option>
                               <option value="3">3</option>
@@ -108,7 +97,7 @@ export const Data = () => {
                           </div>
                           <div className="col-md-4 birthdayMonth">
                             <select id="fecha">
-                              <option value="" selected="selected">Mes</option>
+                              <option selected="selected">Mes</option>
                               <option value="1">Enero</option>
                               <option value="2">Febrero</option>
                               <option value="3">Marzo</option>
@@ -125,7 +114,7 @@ export const Data = () => {
                           </div>
                           <div className="col-md-4 birthdayYear">
                             <select id="fecha">
-                              <option value="" selected="selected">Año</option>
+                              <option selected="selected">Año</option>
                               <option value="1">2008</option>
                               <option value="2">2007</option>
                               <option value="3">2006</option>
@@ -231,6 +220,6 @@ export const Data = () => {
           </div>
         </div>
       </div>
-    </form>
+    </>
   );
 };
