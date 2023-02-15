@@ -65,7 +65,7 @@ class Manager(db.Model):
     def serialize(self):
         return {    "id": self.id,
                     "user_id": self.user_id,
-                    "user_email": self.user.email,
+                    "user_email": email,
                     "name": self.name
                }
 
