@@ -449,9 +449,9 @@ def create_token():
     return jsonify({    "token": access_token, 
                         "user_id": user.id, 
                         "usertype": user.type, 
-                        "email_user": user.email,
-                        "user": usuario,
-                        "name": usuario.name
+                        "name": usuario.name,
+                        "user": user,
+                        "usuario": usuario
                     })
 
 

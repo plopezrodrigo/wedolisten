@@ -98,7 +98,11 @@ const getState = ({ getStore, getActions, setStore }) => {
           sessionStorage.setItem("nameUser", data.name);
           setStore({ nameUser: data.name });
 
+          console.log("flux", data.user)
+
           setStore({ user: data.user});
+
+          console.log("flux2", user)
 
           setStore({ usuario: data.usuario});
 
