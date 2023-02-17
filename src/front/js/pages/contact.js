@@ -35,7 +35,7 @@ export const Contact = (props) => {
                       <input  className="form-control mb-2"
                               type="email"
                               name="email"
-                              defaultValue={ store.user ? store.user.email : ""}
+                              defaultValue={ store.email }
                               required
                       />
                       <div className="valid-feedback">Campo Email es válido.</div>
