@@ -7,8 +7,6 @@ export const Contact = (props) => {
   const { store, actions } = useContext(Context);
   const params = useParams();
 
-  console.log(store.user);
-
   return (
     <div className="bg-contact3">
       <div className="vh-100 gradient-custom">
@@ -37,6 +35,7 @@ export const Contact = (props) => {
                       <input  className="form-control mb-2"
                               type="email"
                               name="email"
+                              defaultValue={ store.email }
                               required
                       />
                       <div className="valid-feedback">Campo Email es válido.</div>
@@ -50,13 +49,12 @@ export const Contact = (props) => {
                               required
                       />
                       <div className="valid-feedback">Campo Teléfono es válido</div>
-                      <div className="invalid-feedback">Campo Teléfono no puede estar en blanco
-                      </div>
+                      <div className="invalid-feedback">Campo Teléfono no puede estar en blanco</div>
                     </div>
                     <div className="col-md-12">
                       <label forhtml="basic-url" className="form-label alinear-izquierda">Tema de consulta</label>
                       <select className="form-select mt-3" required>
-                        <option selected disabled value="">Hacerme Gestor </option>
+                        <option selected value="hgestor">Hacerme Gestor </option>
                         <option value="jweb">Información sobre Baby Friendly</option>
                         <option value="sweb">Claves de acceso</option>
                         <option value="pmanager">Otras consultas</option>

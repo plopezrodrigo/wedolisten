@@ -446,7 +446,20 @@ def create_token():
     #type = "customer" if customer else "manager"
     access_token = create_access_token(identity=user.id)
 
-    return jsonify({ "token": access_token, "user_id": user.id, "usertype": user.type, "name": usuario.name })
+    print('--------------------------------------')
+    print('--------------------------------------')
+    print(usuario.name)
+    print('--------------------------------------')
+    print('--------------------------------------')
+
+    return jsonify({    "token": access_token, 
+                        "user_id": user.id, 
+                        "usertype": user.type, 
+                        "name": usuario.name,
+                        "email": user.email
+                        #"user": user
+                        #"usuario": usuario
+                    })
 
 
 # ----------------------------------------------------------------------------
