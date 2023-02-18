@@ -16,6 +16,14 @@ body {
 }
 #footer {
   padding: 50px;
+  color: #5e2e2e;
+}
+#textosfooter {
+  color: #5e2e2e;
+}
+#textosfooter2 {
+  color: #FF9500;
+  font-weight: bold;
 }
 #navbarSupportedContent {
   font-size: large;
@@ -61,6 +69,13 @@ body {
   margin-bottom: 20px;
   width: 300px;
   height: 400px;
+}
+#imagenlocal{
+  width: 290px;
+  height: 180px;
+}
+.iconbuttonmouseover{
+  color: #FFCCF4;
 }
 .heart-button {
   display: inline-block;

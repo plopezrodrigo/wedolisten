@@ -38,11 +38,11 @@ export const Navbar = () => {
     <div className="container-fluid">
       <div className="container-fluid">
         <nav className="navbar navbar-expand-lg navbar-light">
-          <div className="container-fluid">
+          <div className="container-fluid me-5 ms-5">
             <Link to="/">
               <span className="navbar-brand mb-0 h1">
                 {" "}
-                <img src={imagen} className="card-img-top mt-2" alt="" width="120" height="120" />
+                <img src={imagen} className="card-img-top mt-3" alt="" width="120" height="120" />
               </span>
             </Link>
             <button className="navbar-toggler"
@@ -54,7 +54,7 @@ export const Navbar = () => {
                     aria-label="Toggle navigation">
             </button>
             <div className="collapse navbar-collapse " id="navbarSupportedContent">
-              <ul className="navbar-nav me-auto mb-lg-0">
+              <ul className="navbar-nav me-auto mb-lg-0 text-end">
                 <li className="nav-item">
                   <Link to="/about" className="nav-link active mt-4 ms-4" aria-current="page" href="#" id="navbarSupportedContent" >Quienes Somos</Link>
                 </li>

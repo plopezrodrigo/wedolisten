@@ -20,6 +20,7 @@ body {
 #iconbutton{
   color: #FF9500;
   border: none;
+  background-color: none;
 }
 #opinionbutton{
   border: none;
