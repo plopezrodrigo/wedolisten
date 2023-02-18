@@ -53,28 +53,27 @@ export const Navbar = () => {
                     aria-expanded="false"
                     aria-label="Toggle navigation">
             </button>
-            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <div className="collapse navbar-collapse " id="navbarSupportedContent">
               <ul className="navbar-nav me-auto mb-lg-0">
                 <li className="nav-item">
-                  <Link to="/about" className="nav-link active mt-4" aria-current="page" href="#" id="navbarSupportedContent" >Quienes Somos</Link>
+                  <Link to="/about" className="nav-link active mt-4 ms-4" aria-current="page" href="#" id="navbarSupportedContent" >Quienes Somos</Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/listlocales" className="nav-link active mt-4" aria-current="page" href="#" id="navbarSupportedContent">Locales</Link>
+                  <Link to="/listlocales" className="nav-link active mt-4 ms-2" aria-current="page" href="#" id="navbarSupportedContent">Locales</Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/contact" className="nav-link active mt-4" href="#" id="navbarSupportedContent">Contacto</Link>
+                  <Link to="/contact" className="nav-link active mt-4 ms-2" href="#" id="navbarSupportedContent">Contacto</Link>
                 </li>
                 <form onSubmit={handleSubmit}>
-                  <input name="busca" className="form-control me-2 mt-4" type="search" placeholder="Buscar" aria-label="Buscar"onChange={handleChange}/>
-                  <button className="btn btn-outline-success" type="submit" id="iconbutton">
-                    <i className="far fa-search" />
+                  <input name="busca" className="form-control ms-4 me-2 mt-4" type="search" placeholder="Buscar" aria-label="Buscar"onChange={handleChange}/>
+                  <button className="" type="submit" id="iconbutton">
                   </button>
                 </form>
               </ul>
 
               <div className="">
                 {!store.token ? (
-                  <Link to="/login" className="btn btn-primary" id="button">Log in</Link>
+                  <Link to="/login" className="btn btn-primary" id="button">Iniciar Sesión</Link>
                 ) : (
                   <>
                   {store.nameUser}{"   "}

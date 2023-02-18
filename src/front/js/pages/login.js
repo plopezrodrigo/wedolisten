@@ -34,18 +34,17 @@ const Login = () => {
   return (
     <div className="vh-100 gradient-custom">
       <div className="container text-center">
-        <h1>Hola de nuevo!</h1>
+        <h1>¡Hola de nuevo!</h1>
         <h5 className="mb-5">Bienvenido de nuevo a tu app.</h5>
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col-12 col-md-8 col-lg-6 col-xl-5">
             <div className="card" id="card">
               <div className="card-body text-center">
-                <h5 className="ms-3 me-3 mb-3 text-center fw-bold">Login</h5>
               </div>
               <div className="form-outline">
                 <div className="row d-flex justify-content-center align-items-center h-100">
                     <div className="col-md-11">
-                      <label className="form-label" htmlFor="typeEmailX">
+                      <label className="form-label alinear-izquierda" htmlFor="typeEmailX">
                         Email
                       </label>
                       <input
@@ -55,7 +54,7 @@ const Login = () => {
                         name="email"
                         onChange={handleChange}
                       />
-                      <label className="form-label" htmlFor="typeEmailX">
+                      <label className="form-label alinear-izquierda" htmlFor="typeEmailX">
                         Contraseña
                       </label>
                       <input
@@ -65,7 +64,7 @@ const Login = () => {
                         className="form-control mb-2 me-2"
                         onChange={handleChange}
                       />
-                      <p className="small mt-2">
+                      <p className="small mt-2 alinear-izquierda">
                         <a href="#!">¿Has olvidado tu contraseña?</a>
                       </p>
                       <button

@@ -9,12 +9,12 @@ const CustomModal = ({show, children, titulo, handleClose}) => {
         <>
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-              <Modal.Title>{titulo}</Modal.Title>
+              <Modal.Title >{titulo}</Modal.Title>
             </Modal.Header>
             <Modal.Body>{children}</Modal.Body>
             <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
-                Close
+              <Button variant="secondary" id="button" onClick={handleClose}>
+                Cerrar
               </Button>
             </Modal.Footer>
           </Modal>
