@@ -11,7 +11,7 @@ export const Footer = () => (
         </div>
         <div>
           <a href="" className="me-4 tex t-reset" >
-            <i className="fab fa-facebook-f" id="iconbutton"></i>
+            <i className="fab fa-facebook-f" id="button"></i>
           </a>
           <a href="" className="me-4 text-reset">
             <i className="fab fa-twitter" id="iconbutton"></i>
