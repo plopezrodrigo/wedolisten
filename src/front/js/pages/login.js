@@ -45,7 +45,7 @@ const Login = () => {
                 <div className="row d-flex justify-content-center align-items-center h-100">
                     <div className="col-md-11">
                       <label className="form-label alinear-izquierda" htmlFor="typeEmailX">
-                        Email
+                        Dirección de correo electrónico
                       </label>
                       <input
                         type="text"
@@ -64,23 +64,35 @@ const Login = () => {
                         className="form-control mb-2 me-2"
                         onChange={handleChange}
                       />
-                      <p className="small mt-2 alinear-izquierda">
-                        <a href="#!">¿Has olvidado tu contraseña?</a>
+                      <p className="small mt-2 alinear-izquierda2">
+                      <a href="#!">¿Olvidaste la contraseña?</a>
                       </p>
+                      <div className="form-check alinear-izquierda2">
+                      <input  className="form-check-input"
+                              type="checkbox"
+                              value=""
+                              id="invalidCheck"
+                              required
+                      />
+                      <label className="form-check-label alinear-izquierda2"> Confirmo que he leido y acepto la Política de Privacidad y Aviso Legal.</label>
+                      <div className="invalid-feedback">Por favor, confirma que has leido y aceptas la Política de Privacidad y Aviso Legal.</div>
+                      </div>
                       <button
                         className="col-md-12 btn-lg px-5 mb-3 mt-3"
                         onClick={handleClick}
                         id="button"
                       >
-                        Login
+                        Iniciar Sesión
                       </button>
                     </div>
                   <div>
-                    <p className="ms-3 me-3 mb-3 text-center">
+                      <p className="ms-3 me-3 mb-3 text-center">
                       ¿No tienes una cuenta?
+                      <p className="ms-3 me-3 mt-3 text-center">
                       <Link to="/signupUser">
-                      <strong className="strong"> Registrate</strong>
+                      <strong className="strong "> Registrate </strong>
                       </Link>
+                      para descubrir lo mejor de Baby Friendly</p>
                     </p>
                   </div>
                 </div>

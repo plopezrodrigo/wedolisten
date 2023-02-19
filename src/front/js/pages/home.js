@@ -22,7 +22,7 @@ export const Home = () => {
   } 
 
   const useEffectLocales = async () => {
-    await fetch(process.env.BACKEND_URL + "/api/comercial-place")
+    await fetch(process.env.BACKEND_URL + "/api/comercial-place-home")
       .then((response) => {
         return response.json();
       })

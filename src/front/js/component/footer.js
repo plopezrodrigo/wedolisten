@@ -24,6 +24,15 @@ export const Footer = () => (
           </div>
           <div className="col-md-3 col-lg-2 col-xl-2 mb-4" id="textosfooter">
           <h6 className="text-uppercase fw-bold mb-4">
+          
+          </h6>
+            <p id="textosfooter"></p>
+            <p id="textosfooter"></p>
+            <p id="textosfooter"></p>
+            <p id="textosfooter"></p>
+          </div>
+          <div className="col-md-3 col-lg-2 col-xl-2 mb-4" id="textosfooter">
+          <h6 className="text-uppercase fw-bold mb-4">
             Secciones
           </h6>
             <Link to="/">             <p id="textosfooter">Home</p>           </Link>
