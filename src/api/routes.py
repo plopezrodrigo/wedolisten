@@ -50,6 +50,29 @@ def list_Comercial_Places():
 
     return jsonify(data), 200
 
+@api.route('/comercial-place-home', methods=['GET'])
+@jwt_required(optional = True)
+def list_Comercial_Places_home():
+    favorits_id = []
+    user_id = get_jwt_identity()
+    customer = Customer.query.filter_by(user_id=user_id).first() if user_id else None
+
+    comercial_places = Comercial_Place.query.limit(4).all()
+    data = [comercial_place.serialize()
+            for comercial_place in comercial_places]
+
+    if customer:
+        favourits = Favourit.query.filter_by(customer_id=customer.id)
+        favorits_id = [favorit.comercial_place_id for favorit in favourits]
+
+    for element in data:
+        if element['id'] in favorits_id:
+            element['favorite'] = True 
+        else:
+            element['favorite'] = False 
+
+    return jsonify(data), 200
+
 # ----------------------------------------------------------------------------
 # Búsqueda de Locales
 # ----------------------------------------------------------------------------
@@ -415,17 +438,20 @@ def Comments_user_add(id_comment):
 
 
 # ----------------------------------------------------------------------------
-# Favoritos - Alta
+# Favoritos 
 # ----------------------------------------------------------------------------
-@api.route("/Favourit", methods=["POST"])
-def Favourit_add():
-    favourite = Favourit(
-        customer=request.json['customer'],
-        comercial_place=request.json['comercial_place'],
-        state=request.json['state'],
-    )
-    db.session.add(favourite)
-    db.session.commit()
+
+@api.route('/deletefavourit/<id>', methods=['DELETE'])
+@jwt_required()
+def delete_Favourit(id):
+    try:
+        favourit = Favourit.query.filter_by(id=id).first()
+        print(favourit)
+        db.session.delete(favourit)
+        db.session.commit()
+    except Exception as e:
+        return jsonify({"mensaje": str(e)}), 400
+    return jsonify({"mensaje":"ok"}), 200
 
 # ----------------------------------------------------------------------------
 # Login de usuario
@@ -468,6 +494,7 @@ def create_token():
 # ----------------------------------------------------------------------------
 # ----------------------------------------------------------------------------
 
+
 ''' 
 @api.route("/User/<id>", methods=["DELETE"])
 def Users_delete(id):
@@ -483,10 +510,5 @@ def Places_delete(id):
 def Comments_delete(id):
     Comment = Comment.query.get(id)
     db.session.delete(Comment)
-    db.session.commit()
-@api.route("/Favourit/<id>", methods=["DELETE"])
-def Favourits_delete(id):
-    Favourit = Favourit.query.get(id)
-    db.session.delete(Favourit)
     db.session.commit()
 '''

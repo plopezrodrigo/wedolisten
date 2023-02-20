@@ -25,8 +25,8 @@ export const Favorites = () => {
     ,[])
 
     const deleteFavourites = (id) => {
-      fetch(`${process.env.BACKEND_URL}/api/deletefavourit/${id}`, { 
-        method: "DELETE",
+      fetch(`${process.env.BACKEND_URL}/api/favourit/${id}`, { 
+        method: "POST",
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token"), "Content-Type": "application/json" },
    })    
     .then((response) => {
