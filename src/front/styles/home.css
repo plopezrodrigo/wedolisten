@@ -15,7 +15,12 @@ body {
 }
 
 #tituloHome{
-  padding: 50px;
+  margin-left: 12px;
+  margin-top: 50px;
+  margin-bottom: 10px;
+}
+#subtituloHome{
+  margin-left: 12px;
 }
 #iconbutton{
   color: #FF9500;
@@ -119,3 +124,53 @@ body {
   width: 100%;
   height: 50%;    
 }
+/* .section {
+  position: relative;
+  background-repeat: repeat-x;
+}
+.helpr-section {
+  background: url('https://as2.ftcdn.net/v2/jpg/03/09/77/01/1000_F_309770182_CS9UFI0di8bHPdZpSL47eBhdooxJx0v0.jpg');
+  background-position: top center;
+  background-size: cover;
+}
+.helpr-text {
+  height: 150px;
+}
+.webHomeTitle {
+  display: block;
+}
+.home-service {
+  width: 600px;
+  margin: 40px auto 100px auto;
+  border-radius: 8px;
+  background: #fff;
+  -webkit-box-shadow: 0 4px 8px rgba(2,2,2,0.14);
+  -moz-box-shadow: 0 4px 8px rgba(2,2,2,0.14);
+  box-shadow: 0 4px 8px rgba(2,2,2,0.14);
+  height: 65px;
+}
+.helpr-title {
+  padding: 190px 190px 10px;
+  font-size: 40px;
+  -webkit-text-shadow: 0 4px 6px rgba(0,0,0,.20);
+  -moz-text-shadow: 0 4px 6px rgba(0,0,0,.20);
+  text-shadow: 0 4px 6px rgba(0,0,0,.20);
+  text-align: center;
+  color: #ffffff;
+  margin: 0;
+  position: relative;
+}
+.helpr-content {
+  display: table;
+  width: 100%;
+}
+@media (max-width: 3000px){
+    .helpr-text {
+      display: flexbox !important;
+  }
+
+}.wrapper-demo1 {
+  float:left;
+  margin:11px 0 0 15px;
+} */
+
