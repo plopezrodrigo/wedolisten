@@ -6,6 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       usuario: null,
       token: null,
       message: null,
+      locales: null,
       demo: [
         {
           title: "FIRST",
@@ -23,6 +24,33 @@ const getState = ({ getStore, getActions, setStore }) => {
       // Use getActions to call a function within a fuction
       exampleFunction: () => {
         getActions().changeColor(0, "green");
+      },
+
+      // -------------------------------------------------------------------
+      // Carga lista de locales con un string de búsqueda para el nombre
+      // -------------------------------------------------------------------
+      cargaLocales: async (buscar) => {
+        try{
+            const resp = await fetch(`${process.env.BACKEND_URL}/api/comercial-place-search/${buscar}`);
+
+            if (resp.status !== 200){ 
+                setStore({message: `No se han encontrado resultados para: "${buscar}"` });
+                return false;
+            }
+            const data = await resp.json();
+
+            if (data.length == 0){ 
+                  setStore({message: `No se han encontrado resultados para: "${buscar}"` });
+                  return false;
+            };
+
+          setStore({ locales: data});
+          return true;
+
+        }catch (error) {
+            console.error("No se han podido cargar datos", error);
+            return false;
+          }
       },
 
       syncTokenFromSessionStore: () => {
@@ -55,15 +83,10 @@ const getState = ({ getStore, getActions, setStore }) => {
         };
 
         try {
-          const resp = await fetch(
-            process.env.BACKEND_URL + "/api/token",
-            opts
+          const resp = await fetch(process.env.BACKEND_URL + "/api/token",
+                                   opts
           );
-          if (resp.status !== 200) {
-            alert("There has been some error");
-            return false;
-          }
-
+          if (resp.status !== 200) { return false; }
           const data = await resp.json();
 
           sessionStorage.setItem("token", data.token);
@@ -74,12 +97,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           sessionStorage.setItem("nameUser", data.name);
           setStore({ nameUser: data.name });
-          setStore({ user: data.user});
-          setStore({ usuario: data.usuario});
+
+          sessionStorage.setItem("email", data.email);
+          setStore({ email: data.email });
+
+          //console.log("flux", data.user)
+          //setStore({ user: data.user});
+          //console.log("flux2", user)
+          //setStore({ usuario: data.usuario});
 
           return true;
         } catch (error) {
-          console.error("There has been an error login in");
+            console.error("There has been an error login in");
+            return false;
         }
       },
 

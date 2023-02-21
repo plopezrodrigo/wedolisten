@@ -4,28 +4,10 @@ import imagen from "../../img/logo.png";
 
 export const Footer = () => (
   <footer className="text-center text-lg-start text-muted" id="footer">
-    <div className="container fluid">
-      <section className="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-        <div className="me-5 d-none d-lg-block">
-          <span>Conéctate con nosotros en redes sociales:</span>
-        </div>
-        <div>
-          <a href="" className="me-4 tex t-reset" >
-            <i className="fab fa-facebook-f" id="button"></i>
-          </a>
-          <a href="" className="me-4 text-reset">
-            <i className="fab fa-twitter" id="iconbutton"></i>
-          </a>
-          <a href="" className="me-4 text-reset" >
-          <i className="fab fa-instagram" id="iconbutton"></i>
-        </a>
-        </div>
-      </section>
-    </div>
     <section>
-      <div class="container text-center text-md-start mt-5">
-        <div class="row mt-3">
-          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+      <div className="container text-center text-md-start mt-5">
+        <div className="row mt-3">
+          <div className="col-md-4 col-lg-6 col-xl-4 ms-4">
             <Link to="/">
               <span id="logofooter">
                 {" "}
@@ -36,51 +18,55 @@ export const Footer = () => (
                 />
               </span>
             </Link>
-            <p className="mt-0">
+            <p className="mt-0" id="textosfooter">
             Baby Friendly te ayuda a dar tu opinión sobre tus locales favoritos y que éstas puedan ser consultadas por otros usuarios.
             </p>
           </div>
-          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-          <h6 class="text-uppercase fw-bold mb-4">
+          <div className="col-md-3 col-lg-2 col-xl-2 mb-4" id="textosfooter">
+          <h6 className="text-uppercase fw-bold mb-4">
+          
+          </h6>
+            <p id="textosfooter"></p>
+            <p id="textosfooter"></p>
+            <p id="textosfooter"></p>
+            <p id="textosfooter"></p>
+          </div>
+          <div className="col-md-3 col-lg-2 col-xl-2 mb-4" id="textosfooter">
+          <h6 className="text-uppercase fw-bold mb-4">
             Secciones
           </h6>
-            <Link to="/">
-            <p>Home</p>
-            </Link>
-            <Link to="/about">
-            <p>Quienes somos</p>
-            </Link>
-            <Link to="/contact">
-            <p>Contact</p>
-            </Link>
-            <Link to="/signupmanager">
-            <p>Gestores</p>
-            </Link>
+            <Link to="/">             <p id="textosfooter">Home</p>           </Link>
+            <Link to="/about">        <p id="textosfooter">Quienes somos</p>  </Link>
+            <Link to="/contact">      <p id="textosfooter">Contact</p>        </Link>
+            <Link to="/signupmanager"><p id="textosfooter">Gestores</p>       </Link>
           </div>
-          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-          <h6 class="text-uppercase fw-bold mb-4">
+          <div className="col-md-3 col-lg-2 col-xl-2 mb-4">
+          <h6 className="text-uppercase fw-bold mb-4" id="textosfooter">
             Links útiles
           </h6>
-          <p>
-            <a href="#!" class="text-reset">FAQs</a>
-          </p>
-          <p>
-            <a href={`${process.env.BACKEND_URL}/front/docs/Aviso_Legal.pdf`} target="Aviso Legal" class="text-reset">Aviso Legal</a>
-          </p>
-          <p>
-            <a href="#!" class="text-reset">Política de privacidad</a>
-          </p>
-          <p>
-            <a href="#!" class="text-reset">Términos de uso</a>
-          </p>
-          </div>
-          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+          <Link to="/">             <p id="textosfooter">FAQS</p>           </Link>
+          <Link to="/">             <p id="textosfooter">Aviso Legal</p>           </Link>
+          <Link to="/">             <p id="textosfooter">Política de Privacidad</p>           </Link>
+          <Link to="/">             <p id="textosfooter">Términos de uso</p>           </Link>
           </div>
         </div>
       </div>
     </section>
-    <div class="text-center p-4">
-    © 2023 Copyright: <a class="text-reset fw-bold" href="">  BabyFriendly.com</a>
+    <div className="container fluid">
+      <section className="d-flex justify-content-center justify-content-lg-between p-4 border-bottom" id="textosfooter2">
+        <div className="me-5 d-none d-lg-block">
+          <span className="me-3" id="textosfooter2">Conéctate con nosotros en redes sociales:</span>
+          <a href="" className="me-4 tex t-reset" >
+            <i className="fab fa-facebook-f" id="iconbutton"></i>
+          </a>
+          <a href="" className="me-4 text-reset">
+            <i className="fab fa-twitter" id="iconbutton"></i>
+          </a>
+          <a href="" className="me-4 text-reset" >
+          <i className="fab fa-instagram" id="iconbutton"></i>
+          </a>
+        </div>
+      </section>
     </div>
   </footer>
 );

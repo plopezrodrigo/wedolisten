@@ -1,0 +1,22 @@
+  File "/workspace/Baby_friendly_new/.venv/lib/python3.10/site-packages/flask/json/provider.py", line 122, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Customer is not JSON serializable
+
+   return jsonify({    "token": access_token, 
+                        "user_id": user.id, 
+                        "usertype": user.type, 
+                        "email_user": user.email,
+                        "user": usuario,
+                        "name": usuario.name
+                    })
+
+                    
+
+* El contacto debe cargar datos cuando es de un usuario logado, lo he conseguido pero solo con el nombre cuando es manager, no entiendo porque no lo carga cuando es customer, además del email,... (a medias)
+ 
+
+Crear un página par ver los comentarios completos
+favicon
+recordar contraseña
+visualizar contraseña
+API para adjuntar imagines --> Cloudinary 

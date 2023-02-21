@@ -86,32 +86,57 @@ export const NuevoLocal = () => {
 										</div>
 										<br/>
 										<div>
-										<label className="alinear-izquierda" htmlFor="InputEmail1">Características</label>
+										<label className="alinear-izquierda" htmlFor="InputEmail1">Características</label><br/>
 
 										</div>
 										<div className="form-group">
-											<div className="row">
-													<div className="col-6">
-														<input type="checkbox" name="trona" className="form-check-input" id="InputTrona1" aria-describedby="tronaHelp" onChange={handleChangecheck} />
-														<label  htmlFor="InputTrona1">trona</label><br/>
-
-														<input type="checkbox" name="cambiador" className="form-check-input" id="InputCambiador2" aria-describedby="cambiadorHelp"  onChange={handleChangecheck}/>
-														<label className="alinear-izquierda-checkbox" htmlFor="InputCambiador2">cambiador</label><br/>
-
-														<input type="checkbox" name="accessible_carrito" className="form-check-input" id="InputAccessible_carrito3" aria-describedby="accessible_carritoHelp" onChange={handleChangecheck}/>
-														<label className="alinear-izquierda-checkbox" htmlFor="InputAccessible_carrito3">accessible_carrito</label><br/>
-													</div>
-													<div className="col-6">
-														<input type="checkbox" name="espacio_carrito" className="form-check-input" id="InputEspacio_carrito3" aria-describedby="espacio_carritoHelp" onChange={handleChangecheck} />
-														<label className="alinear-derecha-checkbox" htmlFor="InputEspacio_carrito3">espacio_carrito</label><br/>
-
-														<input type="checkbox" name="ascensor" className="form-check-input" id="InputAscensor5" aria-describedby="ascensorHelp" onChange={handleChangecheck} />
-														<label className="alinear-derecha-checkbox" htmlFor="InputAscensor5">ascensor</label><br/>
-
-														<input type="checkbox" name="productos_higiene" className="form-check-input" id="InputProductos_higiene5" aria-describedby="productos_higieneHelp" onChange={handleChangecheck} />
-														<label className="alinear-derecha-checkbox" htmlFor="InputProductos_higiene5">productos_higiene</label><br/>
-													</div>
+											<div className="row alinear-izquierda-checkbox">
+												<div className="col-12">
+													<input type="checkbox" name="trona" className="form-check-input mx-2" id="InputTrona1" aria-describedby="tronaHelp" onChange={handleChangecheck} />
+													<label htmlFor="InputTrona1">trona</label>
 												</div>
+											</div>
+											<br/>
+
+											<div className="row alinear-izquierda-checkbox">
+												<div className="col-12">
+														<input type="checkbox" name="cambiador" className="form-check-input mx-2" id="InputCambiador2" aria-describedby="cambiadorHelp"  onChange={handleChangecheck}/>
+														<label htmlFor="InputCambiador2">cambiador</label><br/>
+												</div>
+											</div>
+											<br/>
+
+											<div className="row alinear-izquierda-checkbox">
+												<div className="col-12">
+														<input type="checkbox" name="accessible_carrito" className="form-check-input mx-2" id="InputAccessible_carrito3" aria-describedby="accessible_carritoHelp" onChange={handleChangecheck}/>
+														<label htmlFor="InputAccessible_carrito3">accessible_carrito</label><br/>
+												</div>
+											</div>
+											<br/>
+
+											<div className="row alinear-izquierda-checkbox">
+												<div className="col-12">
+														<input type="checkbox" name="espacio_carrito" className="form-check-input mx-2" id="InputEspacio_carrito3" aria-describedby="espacio_carritoHelp" onChange={handleChangecheck} />
+														<label htmlFor="InputEspacio_carrito3">espacio_carrito</label><br/>
+												</div>
+											</div>
+											<br/>
+
+											<div className="row alinear-izquierda-checkbox">
+												<div className="col-12">
+														<input type="checkbox" name="ascensor" className="form-check-input mx-2" id="InputAscensor5" aria-describedby="ascensorHelp" onChange={handleChangecheck} />
+														<label htmlFor="InputAscensor5">ascensor</label><br/>
+												</div>
+											</div>
+											<br/>
+
+											<div className="row alinear-izquierda-checkbox">
+												<div className="col-12">
+														<input type="checkbox" name="productos_higiene" className="form-check-input mx-2" id="InputProductos_higiene5" aria-describedby="productos_higieneHelp" onChange={handleChangecheck} />
+														<label htmlFor="InputProductos_higiene5">productos_higiene</label><br/>
+												</div>
+											</div>
+											<br/>
 										</div>
 										<div className="py-3 px-0 mx-0 d-flex justify-content-around">
 											<button type="submit" className="btn btn-primary" id="button">Guardar</button>
@@ -129,3 +154,26 @@ export const NuevoLocal = () => {
 		</div>
 	  );
 };
+
+{/*
+														<input type="checkbox" name="trona" className="form-check-input" id="InputTrona1" aria-describedby="tronaHelp" onChange={handleChangecheck} />
+														<label  htmlFor="InputTrona1">trona</label><br/>
+
+														<input type="checkbox" name="cambiador" className="form-check-input" id="InputCambiador2" aria-describedby="cambiadorHelp"  onChange={handleChangecheck}/>
+														<label className="alinear-izquierda-checkbox" htmlFor="InputCambiador2">cambiador</label><br/>
+
+														<input type="checkbox" name="accessible_carrito" className="form-check-input" id="InputAccessible_carrito3" aria-describedby="accessible_carritoHelp" onChange={handleChangecheck}/>
+														<label className="alinear-izquierda-checkbox" htmlFor="InputAccessible_carrito3">accessible_carrito</label><br/>
+
+														<input type="checkbox" name="espacio_carrito" className="form-check-input" id="InputEspacio_carrito3" aria-describedby="espacio_carritoHelp" onChange={handleChangecheck} />
+														<label className="alinear-derecha-checkbox" htmlFor="InputEspacio_carrito3">espacio_carrito</label><br/>
+
+														<input type="checkbox" name="ascensor" className="form-check-input" id="InputAscensor5" aria-describedby="ascensorHelp" onChange={handleChangecheck} />
+														<label className="alinear-derecha-checkbox" htmlFor="InputAscensor5">ascensor</label><br/>
+
+														<input type="checkbox" name="productos_higiene" className="form-check-input" id="InputProductos_higiene5" aria-describedby="productos_higieneHelp" onChange={handleChangecheck} />
+														<label className="alinear-derecha-checkbox" htmlFor="InputProductos_higiene5">productos_higiene</label><br/>
+
+	
+
+*/}

@@ -50,6 +50,55 @@ def list_Comercial_Places():
 
     return jsonify(data), 200
 
+@api.route('/comercial-place-home', methods=['GET'])
+@jwt_required(optional = True)
+def list_Comercial_Places_home():
+    favorits_id = []
+    user_id = get_jwt_identity()
+    customer = Customer.query.filter_by(user_id=user_id).first() if user_id else None
+
+    comercial_places = Comercial_Place.query.limit(4).all()
+    data = [comercial_place.serialize()
+            for comercial_place in comercial_places]
+
+    if customer:
+        favourits = Favourit.query.filter_by(customer_id=customer.id)
+        favorits_id = [favorit.comercial_place_id for favorit in favourits]
+
+    for element in data:
+        if element['id'] in favorits_id:
+            element['favorite'] = True 
+        else:
+            element['favorite'] = False 
+
+    return jsonify(data), 200
+
+# ----------------------------------------------------------------------------
+# Búsqueda de Locales
+# ----------------------------------------------------------------------------
+@api.route('/comercial-place-search/<buscar>', methods=['GET'])
+@jwt_required(optional = True)
+def list_Comercial_Places_search(buscar):
+    favorits_id = []
+    user_id = get_jwt_identity()
+    customer = Customer.query.filter_by(user_id=user_id).first() if user_id else None
+
+    comercial_places = Comercial_Place.query.filter(Comercial_Place.name.contains(buscar)).all()
+    data = [comercial_place.serialize()
+            for comercial_place in comercial_places]
+
+    if customer:
+        favourits = Favourit.query.filter_by(customer_id=customer.id)
+        favorits_id = [favorit.comercial_place_id for favorit in favourits]
+
+    for element in data:
+        if element['id'] in favorits_id:
+            element['favorite'] = True 
+        else:
+            element['favorite'] = False 
+
+    return jsonify(data), 200
+
 # ----------------------------------------------------------------------------
 # Locales de un Manager
 # ----------------------------------------------------------------------------
@@ -119,6 +168,26 @@ def list_Comments():
 def get_comment(id):
     datos = Comment.query.get(id)
     return jsonify(datos.serialize()), 200
+
+# ----------------------------------------------------------------------------
+# Fotos de Un comentario
+# ----------------------------------------------------------------------------
+@api.route('/photos_comment/<id>', methods=['GET'])
+def get_photos_comment(id):
+    fotos = Photos_Comments.query.filter_by(comment_id = id).all()
+    datos = [una.serialize() for una in fotos]
+    return jsonify(datos), 200
+
+# ----------------------------------------------------------------------------
+# Respuesta a Un comentario
+# ----------------------------------------------------------------------------
+@api.route('/respuesta/<id>', methods=['GET'])
+def respuesta(id):
+    datos = Comment.query.filter_by(comment_id=id).first()
+    if datos:
+        return jsonify(datos.serialize()), 200
+    else:
+        return jsonify("No existen respuestas a este comentario todavía"), 201
 
 # ----------------------------------------------------------------------------
 # Comentarios de un LOCAL
@@ -312,22 +381,22 @@ def Photo_add():
     db.session.commit()
 
 # ----------------------------------------------------------------------------
-# Comentario - Alta
+# Comentario Usuario- Alta
 # ----------------------------------------------------------------------------
 @api.route("/comment/<id_comment>", methods=["POST"])
 @jwt_required()
-def Comments_add(id_comment):
+def Comments_user_add(id_comment):
     data = request.json                                                                                                                                                                                                                                                                         
     data['user_id'] = get_jwt_identity()
 
-    if (data.get('tipo') == "manager" and data.get('comment_id') == 0):
+    if (data.get('tipo') == "manager" and id_comment == "0"):
         return jsonify({"msg": "Un manager no puede generar una respuesta que no sea sobre un comentario de cliente"}), 403
 
     try:
         comments = Comment( user_id             = data['user_id'],
                             comercial_place_id  = data['comercial_place_id'],
                             comment             = data['comment'],
-                            #comment_id          = null if data.get('comment_id')==0 else data.get('comment_id'),
+                            comment_id          = None if id_comment == "0" else id_comment,
                             puntuacion          = data.get('puntuacion'),
                             price               = data.get('price'),
                             a_domicilio         = data.get('a_domicilio'),
@@ -367,18 +436,22 @@ def Comments_add(id_comment):
         db.session.rollback()
         return jsonify({"msg": "No se puede crear este comentario"}), 402
 
+
 # ----------------------------------------------------------------------------
-# Favoritos - Alta
+# Favoritos 
 # ----------------------------------------------------------------------------
-@api.route("/Favourit", methods=["POST"])
-def Favourit_add():
-    favourite = Favourit(
-        customer=request.json['customer'],
-        comercial_place=request.json['comercial_place'],
-        state=request.json['state'],
-    )
-    db.session.add(favourite)
-    db.session.commit()
+
+@api.route('/deletefavourit/<id>', methods=['DELETE'])
+@jwt_required()
+def delete_Favourit(id):
+    try:
+        favourit = Favourit.query.filter_by(id=id).first()
+        print(favourit)
+        db.session.delete(favourit)
+        db.session.commit()
+    except Exception as e:
+        return jsonify({"mensaje": str(e)}), 400
+    return jsonify({"mensaje":"ok"}), 200
 
 # ----------------------------------------------------------------------------
 # Login de usuario
@@ -399,7 +472,20 @@ def create_token():
     #type = "customer" if customer else "manager"
     access_token = create_access_token(identity=user.id)
 
-    return jsonify({ "token": access_token, "user_id": user.id, "usertype": user.type, "name": usuario.name })
+    print('--------------------------------------')
+    print('--------------------------------------')
+    print(usuario.name)
+    print('--------------------------------------')
+    print('--------------------------------------')
+
+    return jsonify({    "token": access_token, 
+                        "user_id": user.id, 
+                        "usertype": user.type, 
+                        "name": usuario.name,
+                        "email": user.email
+                        #"user": user
+                        #"usuario": usuario
+                    })
 
 
 # ----------------------------------------------------------------------------
@@ -407,6 +493,7 @@ def create_token():
 # DELETE
 # ----------------------------------------------------------------------------
 # ----------------------------------------------------------------------------
+
 
 ''' 
 @api.route("/User/<id>", methods=["DELETE"])
@@ -423,10 +510,5 @@ def Places_delete(id):
 def Comments_delete(id):
     Comment = Comment.query.get(id)
     db.session.delete(Comment)
-    db.session.commit()
-@api.route("/Favourit/<id>", methods=["DELETE"])
-def Favourits_delete(id):
-    Favourit = Favourit.query.get(id)
-    db.session.delete(Favourit)
     db.session.commit()
 '''

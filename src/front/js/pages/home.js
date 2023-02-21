@@ -1,16 +1,16 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import UserInfo from "../component/userInfo";
 import ManagerInfo from "../component/managerInfo";
 import OpinionCard from "../component/opinionCard";
 import LocalCard from "../component/localCard";
-import { Link } from "react-router-dom";
+
 
 export const Home = () => {
-  const { store, actions } = useContext(Context);
   const [comentarios, setComentarios] = useState();
   const [locales, setLocales] = useState();
+  const { store, actions } = useContext(Context);
 
   const useEffectComentarios = async () => {
       const resp = await fetch( process.env.BACKEND_URL + "/api/comment",{
@@ -24,7 +24,7 @@ export const Home = () => {
   } 
 
   const useEffectLocales = async () => {
-    await fetch(process.env.BACKEND_URL + "/api/comercial-place")
+    await fetch(process.env.BACKEND_URL + "/api/comercial-place-home")
       .then((response) => {
         return response.json();
       })
@@ -40,51 +40,114 @@ export const Home = () => {
 
   return (
     <div className="container">
+      {/* <section id="home" className="helpr-section helpr-layout-1 section section-inverse-color" >
+      <div class="container">
+        <div class="helpr-content" data-stellar-offset-parent="true">
+          <div class="helpr-text" data-wow-duration="1s" data-wow-delay="0.5s">
+            <div class="webHomeTitle">
+            <h1 class="helpr-title">Déjanos ayudarte</h1>
+            </div>
+          <div class="home-service clearfix">
+          <div class="wrapper-demo1">
+            <div id="dd1" class="wrapper-dropdown-3" tabindex="1">
+              <span class="active">Buscar</span>
+            </div>
+          </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      </section> */}
       <UserInfo />
       <ManagerInfo />
-      <h1 className="text-center" id="tituloHome">Lee lo que otros están opinando...</h1>
-      <div className="container fluid">
+      <h1 className="text-center mb-5" id="tituloHome">Lee lo que otros están opinando...</h1>
+      <div key="DIVComentarios" className="container fluid">
         <div className="row align-items-start"> 
             {comentarios && comentarios.map((comentario, index)=>{    
               return  <> 
-                <div className="col"> 
-                  <OpinionCard 
-                  comment ={comentario.comment}
-                  puntuacion={comentario.puntuacion}
-                  fecha={comentario.date}
-                  local_id={comentario.comercial_place_id}
-                  id_comment={comentario.id}
-                  nombre={comentario.user_name}
-
+                <div key={comentario.id} className="col"> 
+                  <OpinionCard  comment ={comentario.comment}
+                                puntuacion={comentario.puntuacion}
+                                fecha={comentario.date}
+                                local_id={comentario.comercial_place_id}
+                                id_comment={comentario.id}
+                                nombre={comentario.user_name}
                   />
                  </div> 
               </>
              })
             }          
         </div>
-      </div> 
-      <h1 className="text-center" id="tituloHome">Igual te interesan estos locales...</h1>
+      </div>
+      <h3 className="text-left mt-5" id="tituloHome">Los locales más populares</h3>
+      <p id="subtituloHome">Recomendación según tu actividad</p>
       <div className="container fluid">
         <div className="row align-items-start">
           {locales && locales.map((local, index) => {
               return  <div key={local.id} className="col-3">
-                        <LocalCard id="localcard"
-                          name={local.name}
-                          key={local.id}
-                          id={local.id}
-                          index={index}
-                          address={local.address}
-                          description={local.description}
-                          email={local.email}
-                          telf={local.telf}
-                          location={local.location}
-                          url={local.url}
-                          image_url={local.image_url}
+                        <LocalCard  //id="localcard"
+                                    name={local.name}
+                                    key={local.id}
+                                    id={local.id}
+                                    index={index}
+                                    address={local.address}
+                                    description={local.description}
+                                    email={local.email}
+                                    telf={local.telf}
+                                    location={local.location}
+                                    url={local.url}
+                                    image_url={local.image_url}
                         />
                       </div>
             })}
         </div>
       </div>
-    </div>
+      <h3 className="text-left" id="tituloHome">Adónde ir, ahora mismo</h3>
+      <p id="subtituloHome">Reserva en estos locales para conocer Madrid en profundidad.</p>
+      <div className="container fluid">
+        <div className="row align-items-start">
+          {locales && locales.map((local, index) => {
+              return  <div key={local.id} className="col-3">
+                        <LocalCard  //id="localcard"
+                                    name={local.name}
+                                    key={local.id}
+                                    id={local.id}
+                                    index={index}
+                                    address={local.address}
+                                    description={local.description}
+                                    email={local.email}
+                                    telf={local.telf}
+                                    location={local.location}
+                                    url={local.url}
+                                    image_url={local.image_url}
+                        />
+                      </div>
+            })}
+        </div>
+      </div>
+      <h3 className="text-left" id="tituloHome">Más por descubrir</h3>
+      <p id="subtituloHome">Descubre lo que tienes cerca</p>
+      <div className="container fluid">
+        <div className="row align-items-start">
+          {locales && locales.map((local, index) => {
+              return  <div key={local.id} className="col-3">
+                        <LocalCard  //id="localcard"
+                                    name={local.name}
+                                    key={local.id}
+                                    id={local.id}
+                                    index={index}
+                                    address={local.address}
+                                    description={local.description}
+                                    email={local.email}
+                                    telf={local.telf}
+                                    location={local.location}
+                                    url={local.url}
+                                    image_url={local.image_url}
+                        />
+                      </div>
+            })}
+        </div>
+      </div>
+      </div>
   );
 };

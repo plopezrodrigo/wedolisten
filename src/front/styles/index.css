@@ -16,6 +16,14 @@ body {
 }
 #footer {
   padding: 50px;
+  color: #5e2e2e;
+}
+#textosfooter {
+  color: #5e2e2e;
+}
+#textosfooter2 {
+  color: #FF9500;
+  font-weight: bold;
 }
 #navbarSupportedContent {
   font-size: large;
@@ -30,6 +38,30 @@ body {
   border-width: 3px;
   border-radius: 20px;
   font-weight: bold;
+}
+#dropdown {
+  background-color: #ffccf4;
+  color: #5e2e2e;
+  border-color: #ff69de;
+  font-weight: bold;
+  width: 140px;
+  border-top-width: 3px;
+  border-bottom-width: 3px;
+  border-left-width: 3px;
+}
+#dropdownarrow {
+  background-color: #ffccf4;
+  color: #5e2e2e;
+  border-color: #ff69de;
+  font-weight: bold;
+  border-top-width: 3px;
+  border-bottom-width: 3px;
+  border-right-width: 3px;
+}
+#dropdownmenu {
+  background-color: #FFE9C8;
+  border-color: #FF9500;
+  border-width: 2px;
 }
 #commentinput {
   height: 150px;
@@ -62,6 +94,14 @@ body {
   width: 300px;
   height: 400px;
 }
+#imagenlocal{
+  width: 280px;
+  height: 150px;
+  padding: 2px;
+}
+.iconbuttonmouseover{
+  color: #FFCCF4;
+}
 .heart-button {
   display: inline-block;
   border: none;
@@ -72,6 +112,6 @@ body {
 }
 
 .heart-button-active {
-    color: #FF0DE7;
-    background-color: #FFE9C8;
+  color: #FF0DE7;
+  background-color: #FFE9C8;
 }

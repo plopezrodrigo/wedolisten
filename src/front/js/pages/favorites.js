@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const Favorites = () => {
-  const [favorites, setFavorites] = useState()
+  const [favorites, setFavorites] = useState({})
   const { store, actions } = useContext(Context);
 
       const list_favorites = () => {
@@ -25,8 +25,8 @@ export const Favorites = () => {
     ,[])
 
     const deleteFavourites = (id) => {
-      fetch(`${process.env.BACKEND_URL}/api/deletefavourit/${id}`, { 
-        method: "DELETE",
+      fetch(`${process.env.BACKEND_URL}/api/favourit/${id}`, { 
+        method: "POST",
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token"), "Content-Type": "application/json" },
    })    
     .then((response) => {
@@ -50,7 +50,7 @@ export const Favorites = () => {
         </div>
       </div>
       <div className="contaniner fluid">
-        <table class="table">
+        <table className="table">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -60,30 +60,28 @@ export const Favorites = () => {
             </tr>
           </thead>
           <tbody className="listado">
-            {!favorites ? <tr>no hay favoritos</tr> : 
-            favorites.map((fav, i) => (
-              <tr>
-                <td>{fav.comercial.id}</td>
-                <td>
-                  <img 
-                  src={fav.comercial.image_url}
-                  width="50px"
-                  height="50px"
-                  />
+            {!favorites.length > 0 ? <tr>no hay favoritos</tr> 
+            : 
+              favorites.map((fav, i) => (
+                <tr>
+                  <td>{fav.comercial.id}</td>
+                  <td>
+                    <img src={fav.comercial.image_url}
+                        width="50px"
+                        height="50px"
+                    />
                   </td>
-                <td>{fav.comercial.name}</td>
-                {""}
-                 {
-                favorites.map((fav, i)=>(
-                <td>{fav.comercial.id}
-                <button className="btn" >
-                  <i className="far fa-trash-alt" onClick={() => deleteFavourites(fav.id)}/>
-                </button>
-                </td>
-          ))
-        }
-              </tr>
-            ))}
+                  <td>{fav.comercial.name}</td>
+                  {favorites.map((fav, i)=>(
+                          <td>{fav.comercial.id}
+                            <button className="btn" >
+                              <i className="far fa-trash-alt" onClick={() => deleteFavourites(fav.id)}/>
+                            </button>
+                          </td>
+                  ))}
+                </tr>
+              ))
+            }
           </tbody>
         </table>
       </div>

@@ -1,6 +1,6 @@
 import React from "react";
 
-export const About = () => {
+export const Faqs = () => {
 	return (
 		<div className="container">
 			<section className="show">

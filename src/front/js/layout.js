@@ -57,7 +57,7 @@ const Layout = () => {
                         <Route element={<NuevoLocal />} path="/nuevoLocal" />
                         <Route element={<DatosLocal />} path="/datosLocal/:local_id" />
                         <Route element={<Comentarios />} path="/comentarios" />
-                        <Route element={<h1>Not found!</h1>} />
+                        <Route path="*" element={<div>Página no encontrada</div> } />
                     </Routes>
                     <Footer />
                 </ScrollToTop>
