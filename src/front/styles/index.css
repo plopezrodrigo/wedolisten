@@ -95,8 +95,8 @@ body {
   height: 400px;
 }
 #imagenlocal{
-  width: 290px;
-  height: 180px;
+  width: 280px;
+  height: 170px;
 }
 .iconbuttonmouseover{
   color: #FFCCF4;
@@ -111,6 +111,6 @@ body {
 }
 
 .heart-button-active {
-    color: #FF0DE7;
-    background-color: #FFE9C8;
+  color: #FF0DE7;
+  background-color: #FFE9C8;
 }

@@ -60,11 +60,7 @@ export const Home = () => {
       </section> */}
       <UserInfo />
       <ManagerInfo />
-      {store.usertype == "customer" ?
       <h1 className="text-center mb-5" id="tituloHome">Lee lo que otros están opinando...</h1>
-      :
-      <h1 className="text-center mb-5" id="tituloHome">Lee lo que tus clientes opinan...</h1>
-      }
       <div key="DIVComentarios" className="container fluid">
         <div className="row align-items-start"> 
             {comentarios && comentarios.map((comentario, index)=>{    
