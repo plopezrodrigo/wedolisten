@@ -84,6 +84,7 @@ const ListLocales = () => {
                   location={local.location}
                   url={local.url}
                   image_url={local.image_url}
+                  puntuacion={local.puntuacion}
                 />
               </div>
             })}

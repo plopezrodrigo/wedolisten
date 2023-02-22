@@ -219,18 +219,20 @@ def list_Favourit():
 @api.route('/favourit/<id>', methods=['POST'])
 @jwt_required()
 def add_Favourit(id):
-    user_id=get_jwt_identity()
-    customer = Customer.query.filter_by(user_id=user_id).first()
-    favourit = Favourit.query.filter_by(customer_id=customer.id, comercial_place_id=id).first()
-    if not favourit :
-        favourit = Favourit(customer_id=customer.id, comercial_place_id=id, state=True)
-        db.session.add(favourit)
-        db.session.commit()
-    else :
-        favourit.state = not favourit.state
-        db.session.commit()
-    return jsonify(favourit.serialize()), 200
-
+    try:
+        user_id=get_jwt_identity()
+        customer = Customer.query.filter_by(user_id=user_id).first()
+        favourit = Favourit.query.filter_by(customer_id=customer.id, comercial_place_id=id).first()
+        if not favourit :
+            favourit = Favourit(customer_id=customer.id, comercial_place_id=id, state=True)
+            db.session.add(favourit)
+            db.session.commit()
+        else :
+            favourit.state = not favourit.state
+            db.session.commit()
+        return jsonify(favourit.serialize()), 200
+    except Exception as e :
+        return jsonify({"error": str(e)}), 400
 # ----------------------------------------------------------------------------
 # Alta de Customer y Manager
 # ----------------------------------------------------------------------------
