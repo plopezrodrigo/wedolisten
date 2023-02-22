@@ -36,11 +36,11 @@ def list_Comercial_Places():
     customer = Customer.query.filter_by(user_id=user_id).first() if user_id else None
 
     comercial_places = Comercial_Place.query.all()
-    q = db.session.query(Rate_Customer, func.count('*')).label('total_count').group_by(Rate_Customer.rate).subquery()
+    # q = db.session.query(Rate_Customer, func.count('*')).label('total_count').group_by(Rate_Customer.rate).subquery()
 
-    result = db.session.query(Comercial_Place, q.c.total_count).outerjoin(q, Comercial_Place.id==q.c.comercial_place_id).all()
+    # result = db.session.query(Comercial_Place, q.c.total_count).outerjoin(q, Comercial_Place.id==q.c.comercial_place_id).all()
 
-    print(result)
+    # print(result)
 
     data = [comercial_place.serialize()
             for comercial_place in comercial_places]
@@ -67,14 +67,25 @@ def list_Comercial_Places_home():
 
 
 
-    q = db.session.query(Rate_Customer.comercial_place_id, Rate_Customer.rate, func.count('*').label('total_count')).group_by(Rate_Customer.comercial_place_id,  Rate_Customer.rate).subquery()
+    # q = db.session.query(Rate_Customer.comercial_place_id, Rate_Customer.rate, func.count('*').label('total_count')).group_by(Rate_Customer.comercial_place_id,  Rate_Customer.rate).subquery()
 
-    result = db.session.query(Comercial_Place, q.c.total_count).outerjoin(q, Comercial_Place.id==q.c.comercial_place_id).all()
+    # result = db.session.query(Comercial_Place, q.c.total_count, q.c.rate).outerjoin(q, Comercial_Place.id==q.c.comercial_place_id).limit(4).all()
 
-    print(result)
-    for r in result:
-        print(r)
-
+    # counts = 0
+    # rating = 0
+    # info = []
+    # for data in result:
+    #     counts += data[1]
+    #     rating = int(data[2]) * data[1]
+    #     info.append({
+    #         'counts': counts,
+    #         'rating': rating,
+    #         'comercial': data[0]
+    #     })
+    
+    # print(info)
+    # print(result)
+    
 
     comercial_places = Comercial_Place.query.limit(4).all()
     data = [comercial_place.serialize()
