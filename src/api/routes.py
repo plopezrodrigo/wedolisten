@@ -2,11 +2,12 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Customer, Manager, Comment, Comercial_Place, Photos_Comments, Favourit
+from api.models import db, User, Customer, Manager, Comment, Comercial_Place, Photos_Comments, Favourit, Rate_Customer
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
+from sqlalchemy.sql import func
 
 api = Blueprint('api', __name__)
 
@@ -35,6 +36,12 @@ def list_Comercial_Places():
     customer = Customer.query.filter_by(user_id=user_id).first() if user_id else None
 
     comercial_places = Comercial_Place.query.all()
+    q = db.session.query(Rate_Customer, func.count('*')).label('total_count').group_by(Rate_Customer.rate).subquery()
+
+    result = db.session.query(Comercial_Place, q.c.total_count).outerjoin(q, Comercial_Place.id==q.c.comercial_place_id).all()
+
+    print(result)
+
     data = [comercial_place.serialize()
             for comercial_place in comercial_places]
 
@@ -56,6 +63,18 @@ def list_Comercial_Places_home():
     favorits_id = []
     user_id = get_jwt_identity()
     customer = Customer.query.filter_by(user_id=user_id).first() if user_id else None
+
+
+
+
+    q = db.session.query(Rate_Customer.comercial_place_id, Rate_Customer.rate, func.count('*').label('total_count')).group_by(Rate_Customer.comercial_place_id,  Rate_Customer.rate).subquery()
+
+    result = db.session.query(Comercial_Place, q.c.total_count).outerjoin(q, Comercial_Place.id==q.c.comercial_place_id).all()
+
+    print(result)
+    for r in result:
+        print(r)
+
 
     comercial_places = Comercial_Place.query.limit(4).all()
     data = [comercial_place.serialize()
