@@ -60,11 +60,7 @@ export const Home = () => {
       </section> */}
       <UserInfo />
       <ManagerInfo />
-      {store.usertype == "customer" ?
       <h1 className="text-center mb-5" id="tituloHome">Lee lo que otros están opinando...</h1>
-      :
-      <h1 className="text-center mb-5" id="tituloHome">Lee lo que tus clientes opinan...</h1>
-      }
       <div key="DIVComentarios" className="container fluid">
         <div className="row align-items-start"> 
             {comentarios && comentarios.map((comentario, index)=>{    
@@ -83,11 +79,7 @@ export const Home = () => {
             }          
         </div>
       </div>
-      {store.usertype == "customer" ?
-      <h3 className="text-center mb-5" id="tituloHome">Los locales más populares</h3>
-      :
-      <h1 className="text-center mb-5" id="tituloHome">tus últimos locales añadidos</h1>
-      }
+      <h3 className="text-left mt-5" id="tituloHome">Los locales más populares</h3>
       <p id="subtituloHome">Recomendación según tu actividad</p>
       <div className="container fluid">
         <div className="row align-items-start">
@@ -110,8 +102,6 @@ export const Home = () => {
             })}
         </div>
       </div>
-      {store.usertype == "customer" ?
-      <>
       <h3 className="text-left" id="tituloHome">Adónde ir, ahora mismo</h3>
       <p id="subtituloHome">Reserva en estos locales para conocer Madrid en profundidad.</p>
       <div className="container fluid">
@@ -135,12 +125,6 @@ export const Home = () => {
             })}
         </div>
       </div>
-      </>
-      :
-      ""
-      }
-      {store.usertype == "customer" ?
-      <>
       <h3 className="text-left" id="tituloHome">Más por descubrir</h3>
       <p id="subtituloHome">Descubre lo que tienes cerca</p>
       <div className="container fluid">
@@ -164,10 +148,6 @@ export const Home = () => {
             })}
         </div>
       </div>
-      </>
-      :
-      ""
-      }
-    </div>
+      </div>
   );
 };
