@@ -121,7 +121,7 @@ const LocalDetail = (props) => {
             height="250"
             frameBorder="0"  
             referrerPolicy="no-referrer-when-downgrade"
-            src={`https://www.google.com/maps/embed/v1/MAP_MODE?key=AIzaSyAv5ZYraM9a5QF6hOcon0IFnHIiuox66Cw&q=${local.google_address}`}
+            src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyAv5ZYraM9a5QF6hOcon0IFnHIiuox66Cw&q=${local.google_address}`}
             allowFullScreen>
           </iframe>
         </div>

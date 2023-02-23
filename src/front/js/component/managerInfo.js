@@ -28,8 +28,6 @@ const ManagerInfo = (props) => {
             <img  src={imagen}
                   className="card-img-top"
                   alt=""
-                  width="300"
-                  height="500"
             />
           </div>
         </div>
