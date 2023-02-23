@@ -513,10 +513,10 @@ def create_token():
     return jsonify({    "token": access_token, 
                         "user_id": user.id, 
                         "usertype": user.type, 
-                        "name": usuario.name,
-                        "email": user.email
-                        #"user": user
-                        #"usuario": usuario
+                        #"name": usuario.name,
+                        #"email": user.email,
+                        "user": user.serialize(),
+                        "usuario": usuario.serialize()
                     })
 
 

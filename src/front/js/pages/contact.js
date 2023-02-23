@@ -24,7 +24,7 @@ export const Contact = (props) => {
                       <input  className="form-control mb-2"
                               type="text"
                               name="name"
-                              defaultValue={ store.nameUser}
+                              defaultValue={ store.name}
                               required
                       />
                       <div className="valid-feedback">Campo nombre y apellidos es válido.</div>

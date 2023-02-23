@@ -100,16 +100,14 @@ const getState = ({ getStore, getActions, setStore }) => {
           sessionStorage.setItem("usertype", data.usertype);
           setStore({ usertype: data.usertype });
 
-          sessionStorage.setItem("nameUser", data.name);
-          setStore({ nameUser: data.name });
+          sessionStorage.setItem("nameUser", data.usuario.name);
+          setStore({ nameUser: data.usuario.name });
 
-          sessionStorage.setItem("email", data.email);
-          setStore({ email: data.email });
+          sessionStorage.setItem("email", data.user.email);
+          setStore({ email: data.user.email });
 
-          //console.log("flux", data.user)
-          //setStore({ user: data.user});
-          //console.log("flux2", user)
-          //setStore({ usuario: data.usuario});
+          setStore({ user: data.user});
+          setStore({ usuario: data.usuario});
 
           return true;
         } catch (error) {

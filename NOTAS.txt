@@ -13,6 +13,6 @@ TypeError: Object of type Customer is not JSON serializable
                     
 Crear un página par ver los comentarios completos
 favicon
-recordar contraseña
+recordar contraseña  email.js
 visualizar contraseña
-API para adjuntar imagines --> Cloudinary 
+maquetación nueva

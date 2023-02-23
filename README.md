@@ -105,6 +105,12 @@ This boilerplate it's 100% read to deploy with Render.com and Herkou in a matter
 
 
 
+
+pipenv shell
+pip install flask-jwt-extended
+pip install geopy
+
+
 rm -R -f ./migrations &&
 pipenv run init &&
 psql -U gitpod -c 'DROP DATABASE example;' || true &&
@@ -113,3 +119,4 @@ psql -U gitpod -c 'CREATE EXTENSION unaccent;' -d example &&
 pipenv run migrate &&
 pipenv run upgrade
 flask insert-test-inicial 
+
