@@ -20,8 +20,6 @@ const Login = () => {
     }
   }, []);
 
-
-
   const switchShown = () => setShown(!shown);
 
   const handleChangePwd = (e) => {
@@ -67,16 +65,19 @@ const Login = () => {
                         onChange={handleChange}
                       />
                       <label className="form-label alinear-izquierda" htmlFor="typeEmailX">Contraseña</label>
-                      <input
-                        type={shown ? 'text' : 'password'}
-                        id="typePasswordX-2"
-                        name="password"
-                        className="form-control mb-2 me-2"
-                        onChange={handleChange}
-                      />
-                      <button onClick={switchShown}>
-                          {shown ? 'Ocultar' : 'Mostrar'}
-                      </button>
+                      <div className="col-md-6">
+                        <div className="input-group">
+                          <input  ID="typePasswordX-2" 
+                                  type={shown ? 'text' : 'password'}
+                                  className="form-control mb-2 me-2"
+                                  name="password"
+                                  onChange={handleChange} 
+                          />
+                          <div class="input-group-append">
+                            <button id="show_password" className="btn btn-primary" type="button" onClick={switchShown}> <span className={shown ? "fas fa-eye-slash": "far fa-eye" }  id="iconbutton"></span> </button>
+                          </div>
+                        </div>
+                      </div>
                       <p className="small mt-2 alinear-izquierda2">
                         <a href="#!">¿Olvidaste la contraseña?</a>
                       </p>
