@@ -90,7 +90,7 @@ class Comercial_Place(db.Model):
     productos_higiene = db.Column(db.Boolean(), unique=False, default=False)
 
     def __repr__(self):
-        return f'<User {self.name}>'
+        return f'<Comercial_Place {self.name}>'
 
     def serialize(self):
         return {    "id": self.id,
@@ -138,13 +138,13 @@ class Rate_Customer(db.Model):
     __tablename__ = "rates_customers"
     id = db.Column(db.Integer, primary_key=True)
     customer_id = db.Column(db.ForeignKey("customers.id"), nullable=False)
-    customer = db.Column(db.ForeignKey("customers.id"), nullable=False)
+    customer = db.relationship('Customer', backref='rates_customers', lazy=True)
     comercial_place_id = db.Column(db.ForeignKey("comercial_places.id"), nullable=False)
     comercial_place = db.relationship('Comercial_Place', backref='rates_customers', lazy=True)
     rate = db.Column(db.Enum("1","2","3","4","5", name='rate_types'), unique=False, nullable=False)
 
     def __repr__(self):
-        return f'<User {self.customer_id}>'
+        return f'<Rate_Customer {self.customer_id}>'
 
     def serialize(self):
         return {    "id": self.id,
