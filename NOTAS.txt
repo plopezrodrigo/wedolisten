@@ -15,4 +15,4 @@ Crear un página par ver los comentarios completos
 favicon
 recordar contraseña
 visualizar contraseña
-API para adjuntar imagines --> Cloudinary 
+maquetación nueva
