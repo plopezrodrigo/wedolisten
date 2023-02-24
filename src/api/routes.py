@@ -36,26 +36,34 @@ def list_Comercial_Places():
     customer = Customer.query.filter_by(user_id=user_id).first() if user_id else None
 
     comercial_places = Comercial_Place.query.all()
-    # q = db.session.query(Rate_Customer, func.count('*')).label('total_count').group_by(Rate_Customer.rate).subquery()
 
-    # result = db.session.query(Comercial_Place, q.c.total_count).outerjoin(q, Comercial_Place.id==q.c.comercial_place_id).all()
+    comercials = []
+    for comercial in comercial_places:
+        q = db.session.query(Rate_Customer.comercial_place_id, Rate_Customer.rate, func.count('*').label('total_count')).filter_by(comercial_place_id=comercial.id).group_by(Rate_Customer.comercial_place_id,  Rate_Customer.rate).subquery()
+        result = db.session.query(Comercial_Place, q.c.total_count, q.c.rate).filter_by(id=comercial.id).outerjoin(q, Comercial_Place.id==q.c.comercial_place_id).all()
+        total = 0
+        count = 0
 
-    # print(result)
-
-    data = [comercial_place.serialize()
-            for comercial_place in comercial_places]
+        for data in result:
+            total += data[1] * (int(data[2]) / 100) if data[2] and data[1] else 0
+            count += data[1] if data[1] else 0
+        
+        info = data[0].serialize()
+        count = count if count > 0 else 1
+        info['raking'] = int(total * 100 / count)
+        comercials.append(info)
 
     if customer:
         favourits = Favourit.query.filter_by(customer_id=customer.id)
         favorits_id = [favorit.comercial_place_id for favorit in favourits]
 
-    for element in data:
+    for element in comercials:
         if element['id'] in favorits_id:
             element['favorite'] = True 
         else:
             element['favorite'] = False 
 
-    return jsonify(data), 200
+    return jsonify(comercials), 200
 
 @api.route('/comercial-place-home', methods=['GET'])
 @jwt_required(optional = True)
@@ -64,44 +72,36 @@ def list_Comercial_Places_home():
     user_id = get_jwt_identity()
     customer = Customer.query.filter_by(user_id=user_id).first() if user_id else None
 
-
-
-
-    # q = db.session.query(Rate_Customer.comercial_place_id, Rate_Customer.rate, func.count('*').label('total_count')).group_by(Rate_Customer.comercial_place_id,  Rate_Customer.rate).subquery()
-
-    # result = db.session.query(Comercial_Place, q.c.total_count, q.c.rate).outerjoin(q, Comercial_Place.id==q.c.comercial_place_id).limit(4).all()
-
-    # counts = 0
-    # rating = 0
-    # info = []
-    # for data in result:
-    #     counts += data[1]
-    #     rating = int(data[2]) * data[1]
-    #     info.append({
-    #         'counts': counts,
-    #         'rating': rating,
-    #         'comercial': data[0]
-    #     })
-    
-    # print(info)
-    # print(result)
-    
-
     comercial_places = Comercial_Place.query.limit(4).all()
-    data = [comercial_place.serialize()
-            for comercial_place in comercial_places]
+    comercials = []
+    for comercial in comercial_places:
+        q = db.session.query(Rate_Customer.comercial_place_id, Rate_Customer.rate, func.count('*').label('total_count')).filter_by(comercial_place_id=comercial.id).group_by(Rate_Customer.comercial_place_id,  Rate_Customer.rate).subquery()
+        result = db.session.query(Comercial_Place, q.c.total_count, q.c.rate).filter_by(id=comercial.id).outerjoin(q, Comercial_Place.id==q.c.comercial_place_id).all()
+        total = 0
+        count = 0
+
+        for data in result:
+            total += data[1] * (int(data[2]) / 100) if data[2] and data[1] else 0
+            count += data[1] if data[1] else 0
+        
+        info = data[0].serialize()
+        count = count if count > 0 else 1
+        info['raking'] = int(total * 100 / count)
+        comercials.append(info)
 
     if customer:
         favourits = Favourit.query.filter_by(customer_id=customer.id)
         favorits_id = [favorit.comercial_place_id for favorit in favourits]
 
-    for element in data:
+    for element in comercials:
         if element['id'] in favorits_id:
             element['favorite'] = True 
         else:
             element['favorite'] = False 
+    
+    print(comercials)
 
-    return jsonify(data), 200
+    return jsonify(comercials), 200
 
 # ----------------------------------------------------------------------------
 # Búsqueda de Locales
@@ -114,20 +114,34 @@ def list_Comercial_Places_search(buscar):
     customer = Customer.query.filter_by(user_id=user_id).first() if user_id else None
 
     comercial_places = Comercial_Place.query.filter(Comercial_Place.name.contains(buscar)).all()
-    data = [comercial_place.serialize()
-            for comercial_place in comercial_places]
 
+    comercials = []
+    for comercial in comercial_places:
+        q = db.session.query(Rate_Customer.comercial_place_id, Rate_Customer.rate, func.count('*').label('total_count')).filter_by(comercial_place_id=comercial.id).group_by(Rate_Customer.comercial_place_id,  Rate_Customer.rate).subquery()
+        result = db.session.query(Comercial_Place, q.c.total_count, q.c.rate).filter_by(id=comercial.id).outerjoin(q, Comercial_Place.id==q.c.comercial_place_id).all()
+        total = 0
+        count = 0
+
+        for data in result:
+            total += data[1] * (int(data[2]) / 100) if data[2] and data[1] else 0
+        count += data[1] if data[1] else 0
+        
+        info = data[0].serialize()
+        count = count if count > 0 else 1
+        info['raking'] = int(total * 100 / count)
+        comercials.append(info)
+        
     if customer:
         favourits = Favourit.query.filter_by(customer_id=customer.id)
         favorits_id = [favorit.comercial_place_id for favorit in favourits]
 
-    for element in data:
+    for element in comercials:
         if element['id'] in favorits_id:
             element['favorite'] = True 
         else:
             element['favorite'] = False 
 
-    return jsonify(data), 200
+    return jsonify(comercials), 200
 
 # ----------------------------------------------------------------------------
 # Locales de un Manager
@@ -156,16 +170,29 @@ def Comercial_Places_Detail(comercial_place_id):
 
     comercial_places = Comercial_Place.query.filter_by(id=comercial_place_id).first()
 
-    data = comercial_places.serialize_location()
+
+    comercial = None
+    q = db.session.query(Rate_Customer.comercial_place_id, Rate_Customer.rate, func.count('*').label('total_count')).filter_by(comercial_place_id=comercial_places.id).group_by(Rate_Customer.comercial_place_id,  Rate_Customer.rate).subquery()
+    result = db.session.query(Comercial_Place, q.c.total_count, q.c.rate).filter_by(id=comercial_places.id).outerjoin(q, Comercial_Place.id==q.c.comercial_place_id).all()
+    total = 0
+    count = 0
+
+    for data in result:
+        total += data[1] * (int(data[2]) / 100) if data[2] and data[1] else 0
+        count += data[1] if data[1] else 0
+    
+    comercial = data[0].serialize_location()
+    count = count if count > 0 else 1
+    comercial['raking'] = int(total * 100 / count)
 
     if customer:
         favourits = Favourit.query.filter_by(customer_id=customer.id, comercial_place_id=comercial_places.id).first()
-        data['favorite'] = True if favourits else False
+        comercial['favorite'] = True if favourits else False
     else:
-        data['favorite'] = False
+        comercial['favorite'] = False
 
     if comercial_places:
-        return jsonify(data), 200
+        return jsonify(comercial), 200
     else:
         return jsonify({"msg": "No existen datos"}), 402
 
@@ -176,9 +203,25 @@ def Comercial_Places_Detail(comercial_place_id):
 def Comercial_Places_2(comercial_place_id):
     comercial_places = Comercial_Place.query.filter_by(id=comercial_place_id).first()
 
-    data = comercial_places.serialize()
+
+    comercial = None
+    q = db.session.query(Rate_Customer.comercial_place_id, Rate_Customer.rate, func.count('*').label('total_count')).filter_by(comercial_place_id=comercial_places.id).group_by(Rate_Customer.comercial_place_id,  Rate_Customer.rate).subquery()
+    
+    result = db.session.query(Comercial_Place, q.c.total_count, q.c.rate).filter_by(id=comercial_places.id).outerjoin(q, Comercial_Place.id==q.c.comercial_place_id).all()
+    total = 0
+    count = 0
+    for data in result:
+        total += data[1] * (int(data[2]) / 100) if data[2] and data[1] else 0
+        print(data[1])
+        count += data[1] if data[1] else 0
+    
+    comercial = data[0].serialize()
+    count = count if count > 0 else 1
+    print(count)
+    comercial['raking'] = int(total * 100 / count) 
+
     if comercial_places:
-        return jsonify(data), 200
+        return jsonify(comercial), 200
     else:
         return jsonify({"msg": "No existen datos"}), 402
 
