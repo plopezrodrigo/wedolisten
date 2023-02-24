@@ -2,7 +2,7 @@ import React, { useState , useContext , useRef } from "react";
 import { Context } from "../store/appContext";
 import CustomModal from "../component/customModal";
 import { useModal } from "../hooks/UseModal";
-//import emailjs from '@emailjs/browser';
+import emailjs from '@emailjs/browser';
 
 export const Contact = (props) => {
   const [mensaje, setMensaje] = useState(null); 
@@ -15,8 +15,9 @@ export const Contact = (props) => {
 	}
 
   const EnvioEmail = (datos) => {
-    const form = useRef();
+    //const form = useRef();
 
+    //console.log(".........", datos);
     console.log(".........", form.current);
 /*
     emailjs.sendForm(process.env.SERVICE_ID, process.env.TEMPLATE_ID, form.current, process.env.PUBLIC_KEY)
@@ -51,7 +52,7 @@ export const Contact = (props) => {
             <div className="col-12 col-md-8 col-lg-6 col-xl-5 ">
               <div className="card px-3" id="card">
                 <h3 className="mt-3" id="iconbutton">Escríbenos</h3>
-                  <form className="form-outline" noValidate  onSubmit={handleSubmit}>
+                  <form className="form-outline" onSubmit={handleSubmit}>
                     <div className="col-md-12">
                       <label forhtml="basic-url" className="form-label alinear-izquierda mt-3">Nombre y Apellidos</label>
                       <input  className="form-control mb-2"
