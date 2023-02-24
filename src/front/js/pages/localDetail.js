@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import imagen from "../../img/mapa.jpeg";
-import OpinionCard from "../component/opinionCard";
+import OpinionCarddetail from "../component/opinionCarddetail";
 import { useParams, Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
@@ -65,7 +65,7 @@ const LocalDetail = (props) => {
   return (
     <div className="container fluid">
       <div className="row">
-        <div className="col-10 ms-1">{local ? <h1>{local.name}</h1> : ""}</div>
+        <div className="col-10 ms-2">{local ? <h3>{local.name}</h3> : ""}</div>
         <div className="col-12 ms-2">
           {sessionStorage.getItem("token") ? (
             <button className={`heart-button ${active?"active":""}`}
@@ -83,16 +83,16 @@ const LocalDetail = (props) => {
       </div>
       <div className="row ms-1">
       <div>
-            {Array.from(Array(5).keys()).map((e,i)=>{return props.puntuacion <= i ? 
-            (<i className="far fa-star" key={i} id="iconbutton"/>)
-            : 
-            (<i className="fas fa-star" key={i} id="iconbutton"/>)
-            })
-            }
-            {comentarios ? comentarios.length : 0} Opiniones
-            </div>
-        <div className="col-6">
-          <p>
+        {Array.from(Array(5).keys()).map((e,i)=>{return props.raking <= i ? 
+        (<i className="far fa-star" key={i} id="iconbutton"/>)
+        : 
+        (<i className="fas fa-star" key={i} id="iconbutton"/>)
+        })
+        }
+        {props.raking ? props.raking.length : 0} Opiniones
+      </div>
+        <div className="col-12 mt-2">
+          <p id="infolocal">
             <i className="fas fa-map-marker-alt"></i> {local.address} -
             <i className="fas fa-laptop"></i> {local.url} -
             <i className="fas fa-phone"></i> {local.telf} -
@@ -102,7 +102,7 @@ const LocalDetail = (props) => {
       </div>
       <div className="container">
         <div className="row">
-          <div className="col">
+          <div className="col-3">
             <div className="card" id="card2">
               <div className="card-body">
               <h5 className="card-title">Características a destacar</h5>
@@ -135,7 +135,7 @@ const LocalDetail = (props) => {
             </div>
           </div>
           </div>
-          <div className="col">
+          <div className="col-6">
           <img 
             src={local.image_url}
             className="imagenDetalle"
@@ -144,40 +144,41 @@ const LocalDetail = (props) => {
             alt={local.image_url}
           />
           </div>
-          <div className="col">
-          <div className="row">
-          <img
-            src={local.image_url}
-            className="imagenDetalle"
-            width="212px"
-            height="171px"
-            alt={local.image_url}
-          />
-          <img
-            src={local.image_url}
-            width="212px"
-            height="169px"
-            alt={local.image_url}
-          />
-          </div>  
+          <div className="col-3">
+            <div className="row" id="card2">
+            <img
+              src={local.image_url}
+              className="imagenDetalle"
+              width="212px"
+              height="171px"
+              alt={local.image_url}
+            />
+            <img
+              src={local.image_url}
+              width="212px"
+              height="171px"
+              alt={local.image_url}
+            />
+            </div>  
           </div>
         </div>
       </div>
       <div className="container mt-3">
         <div className="row">
-          <div className="col">
+          <div className="col-3">
             <div className="card" id="card2">
               <div className="card-body">
-              <h5 className="card-title">Descripción</h5>
+              <h5 className="card-title">Notas importantes</h5>
                 <div className="descripcion" id="descripcion">
                   <p>{local.description}</p>
                 </div>
               </div>
             </div>
           </div>
-          <div className="card" id="card3">
-            <h2>Ubicación y contacto</h2>
-            <div>
+          <div className="col-6">
+            <div className="card" id="card3">
+            <h5 className="mt-3 ms-3">Ubicación</h5>
+            <div className="ms-3">
             <iframe
               width="450"
               height="250"
@@ -187,58 +188,59 @@ const LocalDetail = (props) => {
               allowFullScreen>
             </iframe>
             </div>
+            </div>
           </div>
-          <div className="col">
-          <div className="row">
-          </div>  
+          <div className="col-3">
+          <div className="card" id="card4">
+              <div className="card-body">
+              <h5 className="card-title">Información de contacto</h5>
+              <div className="" id="ubicacionelements">
+                <span>
+                  <a href="https://maps.google.com/maps?saddr=&amp;daddr=Calle+Bah%C3%ADa+de+Palma%2C+4B%2C+28042+Madrid+Espa%C3%B1a@40.46229,-3.591468">
+                    <span className="">
+                      <i className="fas fa-map-marker-alt"></i> {local.address}
+                    </span>
+                    <span className=""></span>
+                  </a>
+                </span>
+              </div>
+              <div className="" id="ubicacionelements">
+                <span className="">
+                  <i className="fas fa-laptop"></i> {local.url}
+                </span>
+              </div>
+              <div className="" id="ubicacionelements">
+                <span className="">
+                  <i className="fas fa-phone"></i> {local.telf}
+                </span>
+              </div>
+              <div className="" id="ubicacionelements">
+                <span className="">
+                  <i className="fas fa-envelope"></i> {local.email}
+                </span>
+              </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div className="row">
-        <div className="mobile_flex_container full_width">
-          
-        </div>
 
-      </div>
       <div className="row" id="ubicacion">
         
-        <div className="" id="ubicacionelements">
-          <span>
-            <a href="https://maps.google.com/maps?saddr=&amp;daddr=Calle+Bah%C3%ADa+de+Palma%2C+4B%2C+28042+Madrid+Espa%C3%B1a@40.46229,-3.591468">
-              <span className="">
-                <i className="fas fa-map-marker-alt"></i> {local.address}
-              </span>
-              <span className=""></span>
-            </a>
-          </span>
-        </div>
-        <div className="" id="ubicacionelements">
-          <span className="">
-            <i className="fas fa-laptop"></i> {local.url}
-          </span>
-        </div>
-        <div className="" id="ubicacionelements">
-          <span className="">
-            <i className="fas fa-phone"></i> {local.telf}
-          </span>
-        </div>
-        <div className="" id="ubicacionelements">
-          <span className="">
-            <i className="fas fa-envelope"></i> {local.email}
-          </span>
-        </div>
+
       </div>
-      <div className="row" id="rating">
-        <h2 id="descripcion">Lee lo que otros usuarios opinan</h2>
+      <div className="row ms-2" id="rating">
+        <h3 className="mb-3" id="descripcion">Lee lo que otros usuarios opinan:</h3>
         {comentarios && comentarios.map((comentario, index)=>{   
-            return  <> 
-                <div  key={comentario.id} className="col mt-5"> 
-                  <OpinionCard  comment={comentario.comment}
-                                fecha={comentario.date}
-                                nombre={comentario.user_name}
-                                puntuacion={comentario.puntuacion}
-                                local_id={comentario.comercial_place_id}
-                                id_comment={comentario.id}
+            return<> 
+                <div key={comentario.id}>
+                  <OpinionCarddetail 
+                    comment={comentario.comment}
+                    fecha={comentario.date}
+                    nombre={comentario.user_name}
+                    puntuacion={comentario.puntuacion}
+                    local_id={comentario.comercial_place_id}
+                    id_comment={comentario.id}
                   />
                 </div>
                 </>
