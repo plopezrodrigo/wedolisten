@@ -1,11 +1,25 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
+import CustomModal from "../component/customModal";
+import { useModal } from "../hooks/UseModal";
 
 
 export const Contact = (props) => {
   const { store, actions } = useContext(Context);
   const params = useParams();
+  const [isModalOpened, setIsModalOpened, toggleModal] = useModal(false);
+  const [mensaje, setMensaje] = useState(null);
+
+
+  const handleClick = () => {
+    actions.login(data.email, data.password).then((response) => {
+    if (response) navigate("/");
+    else{ setMensaje("Su mensaje ha sido enviado correctamente");
+          toggleModal();
+        } 
+    })
+  };
 
   return (
     <div className="bg-contact3">
@@ -54,7 +68,8 @@ export const Contact = (props) => {
                     <div className="col-md-12">
                       <label forhtml="basic-url" className="form-label alinear-izquierda">Tema de consulta</label>
                       <select className="form-select mt-3" required>
-                        <option selected value="hgestor">Hacerme Gestor </option>
+                        <option defaultValue="hgestor">Selecciona un tema de consulta </option>
+                        <option value="hgestor">Hacerme Gestor </option>
                         <option value="jweb">Información sobre Baby Friendly</option>
                         <option value="sweb">Claves de acceso</option>
                         <option value="pmanager">Otras consultas</option>
@@ -84,8 +99,12 @@ export const Contact = (props) => {
                       <div className="invalid-feedback">Por favor, confirma que has leido y aceptas la Política de Privacidad y Aviso Legal.</div>
                     </div>
                     <div className="form-button mt-3 mb-3">
-                      <button id="button" type="submit" className="btn btn-primary col-md-12 btn-lg px-5 mb-3 mt-3">
-                          Enviar
+                    <button
+                        className="col-md-12 btn-lg px-5 mb-3 mt-3"
+                        onClick={handleClick}
+                        id="button"
+                      >
+                        Enviar
                       </button>
                     </div>
                   </form>
@@ -94,5 +113,10 @@ export const Contact = (props) => {
           </div>
         </div>
       </div>
+      <CustomModal  show={isModalOpened}
+                    titulo="Gracias por ponerse en contacto con nosotros"
+                    handleClose={() => setIsModalOpened(false)}>
+        <div>{mensaje}</div>
+      </CustomModal>
     </div>
   );};

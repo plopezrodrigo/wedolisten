@@ -8,7 +8,7 @@ const CustomModal = ({show, children, titulo, handleClose}) => {
     return (
         <>
           <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
+            <Modal.Header>
               <Modal.Title >{titulo}</Modal.Title>
             </Modal.Header>
             <Modal.Body>{children}</Modal.Body>

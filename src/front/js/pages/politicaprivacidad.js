@@ -20,42 +20,49 @@ export const Politicaprivacidad = () => {
           <h6 className="">
           USUARIOS DEL SITIO WEB
           </h6>
-          <p id="textoslegales">El acceso al Sitio Web tiene carácter libre y gratuito, no siendo necesario el previo registro de los Usuarios. No obstante, para acceder a la condición de socio de Baby Friendly se requerirá el previo registro -hazte socio- de los profesionales que estén interesados en beneficiarse de las ventajas y los servicios que se ofrecen en el Sitio Web. La solicitud, registro y alta de socio en Baby Friendly es gratuita.</p>
-          <p id="textoslegales">Los pasosa seguir para registrarse como socio son:</p>
+          <p id="textoslegales">El acceso al Sitio Web tiene carácter libre y gratuito, no siendo necesario el previo registro de los Usuarios. No obstante, para acceder a la condición de usuario de Baby Friendly se requerirá el previo registro -hazte usuario- de los clientes que estén interesados en beneficiarse de las ventajas y los servicios que se ofrecen en el Sitio Web. La solicitud, registro y alta de usuario en Baby Friendly es gratuita.</p>
+          <p id="textoslegales">Los pasosa seguir para registrarse como usuario son:</p>
           <ul id="textoslegales">
-            <li>Completar el formulario “Hazte Socio” del Sitio Web con los datos que se solicitan.</li>
-            <li>A continuación, un agente comercial de Baby Friendly contactará con el solicitante para concertar una visita personal para informarle y darle de alta -formulario de inscripción- como socio de Myteam.</li>
-            <li>A continuación, se recibirá un mail con la clave de Usuario que deberá ser introducida en www.myteam.es para entrar en el área reservada del socio y empezar a disfrutar de las ventajas y servicios de Myteam.</li>
+            <li>Completar el formulario “Hazte usuario” del Sitio Web con los datos que se solicitan.</li>
+            <li>A continuación, un agente comercial de Baby Friendly contactará con el solicitante para concertar una visita personal para informarle y darle de alta -formulario de inscripción- como usuario de Baby Friendly.</li>
+            <li>A continuación, se recibirá un mail con la clave de Usuario que deberá ser introducida en www.babyfriendly.es para entrar en el área reservada del usuario y empezar a disfrutar de las ventajas y servicios de Baby Friendly.</li>
           </ul>
           <h6 className="">
           FINALIDAD DEL TRATAMIENTO.
           </h6>
           <ul id="textoslegales">
-            <li>Completar el formulario “Hazte Socio” del Sitio Web con los datos que se solicitan.</li>
-            <li>A continuación, un agente comercial de Baby Friendly contactará con el solicitante para concertar una visita personal para informarle y darle de alta -formulario de inscripción- como socio de Myteam.</li>
-            <li>A continuación, se recibirá un mail con la clave de Usuario que deberá ser introducida en www.myteam.es para entrar en el área reservada del socio y empezar a disfrutar de las ventajas y servicios de Myteam.</li>
+            <li>Gestionar las solicitudes de usuario de Baby Friendly -hazte usuario- realizadas por los clientes.</li>
+            <li>Gestionar la relación comercial con los usuarios de Baby Friendly que incluye comunicaciones sobre promociones y campañas exclusivas deservicios y productos de interés para los usuarios, y el proceso de canje de puntos acumulados por regalos, premios y otras ventajas de Baby Friendly.</li>
+            <li>Realizar estudios estadísticos sobre los servicios productos utilizados por los usuarios.</li>
+            <li>Dar respuesta a las solicitudes de información realizadas por los Usuarios a través de las formas de contacto habilitadas en el Sitio Web.</li>
+            <li>El envío de información comercial, publicidad y promoción de productos, servicios y actividades de Baby Friendly por cualquier medio incluido el electrónico (correo electrónico o medios equivalentes, como sms, teléfonos móviles, etc.)</li>
+            <li>Remitir el boletín de noticias del Sitio Web.</li>
+            <li>Cumplir con las obligaciones legales aplicables a Baby Friendly.</li>
           </ul>
           <h6 className="">
-          EXONERACIÓN DE RESPONSABILIDAD.
+          CATEGORÍA DE DATOS PERSONALES.
           </h6>
-          <p id="textoslegales">Baby Friendly realiza los máximos esfuerzos para que el uso del Sitio Web se realice en las mejores condiciones y para facilitar una información actualizada, no obstante, Baby Friendly no garantiza la inexistencia de errores u omisiones en el contenido del Sitio Web ni garantiza que el acceso al Sitio Web sea ininterrumpido, estando facultado para suspender temporalmente y sin previo aviso la accesibilidad al Sitio Web.</p>
-          <p id="textoslegales">Baby Friendly no se responsabiliza de los daños y perjuicios de cualquier naturaleza que pudieran derivarse de:</p>
+          <p id="textoslegales">La categoría de datos que trata Baby Friendly en el Sitio Web son:</p>
           <ul id="textoslegales">
-            <li>La falta de disponibilidad, actualidad, mantenimiento y efectivo funcionamiento del Sitio Web y/o de sus servicios o contenidos</li>
-            <li>El incumplimiento de las expectativas de los Usuarios en relación con el Sitio Web o en el servidor que lo suministra.</li>
-            <li>La invulnerabilidad del Sitio Web y/o la invulnerabilidad de las medidas de seguridad que se adopten en el mismo.</li>
-            <li>Los errores u omisiones que pudiera tener el contenido del Sitio Web o de los links o enlaces.</li>
-            <li>La existencia de virus o programas lesivos en los contenidos que puedan producir alteraciones en el sistema informático, en los documentos electrónicos o en los ficheros almacenados de los Usuarios</li>
-            <li>Averías telefónicas o de redes motivados por causas ajenas al titular del Sitio Web.</li>
-            <li>Retrasos o bloqueos en el funcionamiento operativo del sistema causado por deficiencias o sobrecarga en las líneas telefónicas o en Internet.</li>
-            <li>Intromisiones ilegítimas fuera de control del titular del Sitio Web.</li>
+            <li>Datos identificativos: nombre, apellidos, número del documento de identidad, fecha de nacimiento, dirección postal, dirección de correo electrónico, código postal, teléfono.</li>
+            <li>Datos de la cuenta bancaria del socio registrado para gestionar el canje de los puntos acumulados por euros mediante transferencia bancaria.</li>
+            <p>Todos los datos personales que se soliciten como obligatorios, marcados con un asterisco (*) en los formularios son necesarios para que Baby Friendly gestione y tramite la solicitud haz tesocio y gestione el alta del socio en Baby Friendly. De manera que la falta de cualquiera de estos datos o la negativa a suministrarlos comportará la imposibilidad de que Baby Friendly tramite la solicitud de información o de registrarse como socio realizada por el Usuario.</p>
+            <p>En todo caso, el Usuario garantiza que los datos facilitados son verdaderos, exactos, completos y actualizados, y se compromete a comunicar a Baby Friendly los cambios que se produzcan de los mismos. El Usuario es el único responsable de cualquier daño o perjuicio, directo o indirecto, que pudiera ocasionarse como consecuencia del incumplimiento de esta obligación. Baby Friendly se reserva el derecho a rechazar las solicitudes que se hayan solicitado con datos falsos o inexactos.</p>
+            <p>En el caso que el Usuario facilite datos personales de terceros, manifiesta contar el consentimiento de aquellos y se compromete a trasladarles la información contenida en este punto, eximiendo a Baby Friendly de cualquier responsabilidad.</p>
           </ul>
           <h6 className="">
-          ENLACES O LINKS DE DOMINIOS DE BAY FRIENDLY
+          BASE DE LEGITIMACIÓN
           </h6>
-          <p id="textoslegales">Este Sitio Web puede contener links o enlaces a otros Sitios Web de titularidad de Baby Friendly que tienen una finalidad meramente informativa sobre actividades, servicios o productos específicos de Baby Friendly. Dichos Sitios Web disponen de sus propias Condiciones de Uso, Políticas de Privacidad y Tratamiento de Cookies que el Usuario deberá aceptar para el uso y utilización de las funcionalidades habilitadas en dichos dominios.</p>
+          <p id="textoslegales">La base de legitimación de Baby Friendly para el tratamiento de los datos personales de los Usuarios es:</p>
+          <ul id="textoslegales">
+            <li> El consentimiento expreso del interesado-Usuario, respecto a las solicitudes de información sobre productos y/o servicios de Baby Friendly y el envío de información publicitaria.</li>
+            <li>La gestión y ejecución de la relación comercial con los socios de Baby Friendly.</li>
+            <li>El interés legítimo respecto a estudios estadísticos, acciones comerciales y envío de información comercial y de promociones.</li>
+            <li>El cumplimiento de obligaciones legales aplicables a Baby Friendly.</li>
+            <p>En aquellos tratamientos en los que la base legítima sea el consentimiento el Usuario podrá revocar el consentimiento en cualquier momento. No obstante, el tratamiento sobre los datos personales realizado con anterioridad a la revocación del consentimiento será lícito.</p>
+          </ul>
           <h6 className="">
-          REDES SOCIALES
+          CONSERVACIÓNDE LOS DATOS
           </h6>
           <p id="textoslegales">Este Sitio Web puede poner a disposición de los Usuarios enlaces que permiten acceder a los canales y Sitios Web que Baby Friendly mantiene en diferentes plataformas y redes sociales pertenecientes y/o gestionadas por terceros (p.ej. Facebook, Twitter, Google, YouTube). Estos enlaces en el Sitio Web tienen por único objeto facilitar a los Usuarios el acceso a dichos canales en las diferentes plataformas y redes sociales para informales de las actividades y novedades de los productos y servicios de Baby Friendly.</p>
           <p id="textoslegales">Baby Friendly no comparte con dichas plataformas o redes sociales ningún tipo de información personal y privada de sus Usuarios, siendo su única finalidad la indicada en las presentes Condiciones Generales de Uso, así como en la Política de Privacidad del Sitio Web. En este sentido, toda información que el Usuario proporcione a estas plataformas será bajo su propia y exclusiva responsabilidad.</p>
@@ -64,13 +71,36 @@ export const Politicaprivacidad = () => {
           <h6 className="">
           PROTECCIÓN DE DATOS PERSONALES.
           </h6>
-          <p id="textoslegales">Baby Friendly, como titular del Sitio Web, informa a los Usuarios que es el responsable de los tratamientos que se realicen de los datos personales solicitados y facilitados durante la utilización del Sitio Web.</p>
-          <p id="textoslegales">De conformidad con lo establecido en la legislación aplicable en materia de protección de datos, Baby Friendly respeta la privacidad de los Usuarios y el secreto y seguridad de los datos personales, adoptando para ello las medidas técnicas y organizativas necesarias para evitar la pérdida, mal uso, alteración, acceso no autorizado y robo de los datos personales facilitados, habida cuenta el estado de la tecnología, la naturaleza de los datos y los riesgos a los que están expuestos.</p>
-          <p id="textoslegales">Los datos personales de los Usuarios del Sitio Web, solo se obtendrán para ser tratados cuando sean adecuados, pertinentes y no excesivos en relación con el ámbito y las finalidades determinadas, explícitas, consentidas y/o legítimas para las que se hayan recabado. Cuando se recaben datos personales a través del Sitio Web, se informará previamente al Usuario de forma clara e inequívoca delas circunstancias relativas al tratamiento de sus datos.</p>
+          <p id="textoslegales">Los datos se conservarán durante el plazo estrictamente necesario para dar cumplimiento a la finalidad para la que fueron recabados, mientras el Usuario no revoque su consentimiento cuando éste sea la base legítima del tratamiento. No obstante, Baby Friendly podrá conservar los datos para su puesta a disposición de las autoridades competentes o para hacer frente a posibles reclamaciones, en cuyo caso los datos se conservarán bloqueados hasta la finalización de los plazos de prescripción, momento en que serán eliminados con las medidas de seguridad adecuadas.</p>
           <h6 className="">
-          LEGISLACIÓN APLICABLE Y JURISDICCIÓN.
+          COMUNICACIÓNDE DATOS.
           </h6>
-          <p id="textoslegales">Las condiciones generales del presente Aviso Legal se rigen por la ley española. En caso de conflicto sobre la interpretación, cumplimiento o aplicación del mismo, los Usuarios podrán plantear su reclamación judicial ante los tribunales competentes que correspondan a su domicilio.</p>
+          <p id="textoslegales">Baby Friendly no cederá a terceros los datos facilitados por los Usuarios del Sitio Web, salvo consentimiento previo y expreso de éstos o sea necesario por imperativo legal(Administraciones públicas, Fuerzas y Cuerpos de Seguridad del Estado, Ministerio Fiscal, Agencia Española de Protección de Datos, etc).</p>
+          <p id="textoslegales">Baby Friendly informa a los Usuarios que los datos personales podrán comunicarse a entidades del Grupo Baby Friendly, así como a proveedores de Baby Friendly para poder atender y gestionarlas solicitudes de información y la relación comercial con los socios de Baby Friendly, en cuyo caso, se formalizará un contrato en el que los proveedores tendrán la condición de encargados del tratamiento y deberán tratar los datos personales en nombre y por cuenta de Baby Friendly para las finalidades a atender.</p>
+          <h6 className="">
+          DERECHOS DE LOS USUARIOS.
+          </h6>
+          <p id="textoslegales">Baby Friendly informa a los Usuarios que en referencia al tratamiento de sus datos personales pueden ejercer los siguientes derechos:</p>
+          <h6 className="">
+          ENLACES DE DOMINIO DE BABY FRIENDLY.
+          </h6>
+          <p id="textoslegales">Este Sitio Web contiene un enlace al dominio de titularidad de Baby Friendly (www.babyfriednly.com)en el que se informa y ofrecen distintos productos y servicios de Baby Friendly. Dicho dominio dispone de sus propias Condiciones de Uso, Política de Privacidad y Política de Cookies que deberán ser aceptadas por el Usuario cuando acceda a dicho dominio o utilice las distintas funcionalidades de información, solicitud de productos o prestación de servicios ofertados en dicho dominio.</p>
+          <h6 className="">
+          REDES SOCIALES.
+          </h6>
+          <p id="textoslegales">Este Sitio Web puede poner a disposición de los Usuarios enlaces que permiten acceder a los canales y Sitios Web que Baby Friendly mantiene en diferentes plataformas y redes sociales pertenecientes y/o gestionadas por terceros (p.ej. Facebook, Instagram, YouTube). Estos enlaces en el Sitio Web tienen por único objeto facilitar a los Usuarios el acceso a dichos canales en las diferentes plataformas y redes sociales para informales de las actividades y novedades de los productos y servicios de Baby Friendly. Para obtener más información acceda a nuestro Aviso Legal</p>
+          <h6 className="">
+          COOKIES.
+          </h6>
+          <p id="textoslegales">Este Sitio Web utiliza cookies propias y terceros, por ello y en cumplimiento del artículo 22 de la Ley de Sociedad de la Información vigente, se solita al Usuario su consentimiento informado para el tratamiento de Cookies, informándole de la posibilidad de rechazarlas o configurar sus preferencias de tratamiento. Para una información más detallada acceda a la Política de Cookies.</p>
+          <h6 className="">
+          CONFIDENCIALIDAD Y SEGURIDAD DEL TRATAMIENTO.
+          </h6>
+          <p id="textoslegales">Los datos personales son tratados por Baby Friendly con la máxima reserva, confidencialidad y seguridad, estableciendo los medios técnicos y organizativos a su alcance para evitar la pérdida, mal uso, alteración, acceso no autorizado o copia de los datos facilitados en el Sitio Web.</p>
+          <h6 className="">
+          COODIFICACIONES DE LA POLÍTICA DE PRIVACIDAD.
+          </h6>
+          <p id="textoslegales">Baby Friendly se reserva el derecho a modificar esta Política de privacidad en función de exigencias legislativas, reglamentarias o con la finalidad de adaptar dicha política a las instrucciones dictadas por la Agencia Española de Protección de Datos, por ello se aconseja a los Usuarios que la visiten periódicamente. Cuando se produzcan cambios significativos en esta Política, éstos se publicarán en el Sitio Web.</p>
         </div>
   );
 };

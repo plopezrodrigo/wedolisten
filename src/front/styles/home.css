@@ -27,12 +27,20 @@ body {
   border: none;
   background-color: none;
 }
-#iconbutton2{
+#iconbutton{
   color: #FF9500;
   border: none;
   background-color: none;
-  align-items: left;
 }
+#iconbutton3{
+  color: #ff69de;
+  background-color: #ffccf4;
+  border: none;
+}
+#iconbutton4{
+  color: #ff69de;
+}
+
 #opinionbutton{
   border: none;
   background-color: #ffc6708a;
@@ -144,6 +152,7 @@ body {
   font-size: small; 
   align-items: right; 
 }
+
 /* .section {
   position: relative;
   background-repeat: repeat-x;

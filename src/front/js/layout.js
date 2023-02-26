@@ -26,7 +26,8 @@ import { NuevoLocal } from "./pages/nuevoLocal";
 import { Comentarios } from "./pages/comentarios";
 import { Avisolegal } from "./pages/avisolegal";
 import { Politicaprivacidad } from "./pages/politicaprivacidad";
-
+import { Faqs} from "./pages/faqs";
+import { Terminosdeuso } from "./pages/terminosdeuso";
 
 //create your first component
 const Layout = () => {
@@ -62,6 +63,8 @@ const Layout = () => {
                         <Route element={<Comentarios />} path="/comentarios" />
                         <Route element={<Avisolegal />} path="/avisolegal" />
                         <Route element={<Politicaprivacidad />} path="/politicaprivacidad" />
+                        <Route element={<Terminosdeuso />} path="/terminosdeuso" />
+                        <Route element={<Faqs />} path="/faqs" />
                         <Route path="*" element={<div>Página no encontrada</div> } />
                     </Routes>
                     <Footer />
