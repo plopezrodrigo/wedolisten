@@ -19,9 +19,9 @@ export const Navbar = () => {
 	const handleSubmit = (evento)=>{
 		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
 
-    if (formData.busca.length > 0){
+    if (formData.buscar.length > 0){
         // Cargamos store.locales para usarlo en listLocales
-        actions.cargaLocales(formData.busca).then((response) => {
+        actions.cargaLocales(formData.buscar).then((response) => {
               if (response){
                   navigate("/listLocales");
               }else{
