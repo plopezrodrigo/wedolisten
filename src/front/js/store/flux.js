@@ -7,18 +7,6 @@ const getState = ({ getStore, getActions, setStore }) => {
       token: null,
       message: null,
       locales: null,
-      demo: [
-        {
-          title: "FIRST",
-          background: "white",
-          initial: "white",
-        },
-        {
-          title: "SECOND",
-          background: "white",
-          initial: "white",
-        },
-      ],
     },
     actions: {
       // Use getActions to call a function within a fuction
@@ -53,6 +41,9 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
       },
 
+      // -------------------------------------------------------------------
+      // Sincronización del token
+      // -------------------------------------------------------------------
       syncTokenFromSessionStore: () => {
         const token = sessionStorage.getItem("token");
         const usertype = sessionStorage.getItem("usertype");
@@ -64,12 +55,26 @@ const getState = ({ getStore, getActions, setStore }) => {
           setStore({ usertype: usertype });
       },
 
+      // -------------------------------------------------------------------
+      // Logout
+      // -------------------------------------------------------------------
       logout: () => {
         sessionStorage.removeItem("token");
-        console.log("Login out");
         setStore({ token: null });
+
+        sessionStorage.removeItem("usertype");
+        setStore({ usertype: null });
+
+        sessionStorage.removeItem("name");
+        setStore({ nameUser: null });
+
+        sessionStorage.removeItem("email");
+        setStore({ email: null });
       },
 
+      // -------------------------------------------------------------------
+      // Login
+      // -------------------------------------------------------------------
       login: async (email, password) => {
         const opts = {
           method: "POST",
@@ -95,16 +100,14 @@ const getState = ({ getStore, getActions, setStore }) => {
           sessionStorage.setItem("usertype", data.usertype);
           setStore({ usertype: data.usertype });
 
-          sessionStorage.setItem("nameUser", data.name);
-          setStore({ nameUser: data.name });
+          sessionStorage.setItem("nameUser", data.usuario.name);
+          setStore({ nameUser: data.usuario.name });
 
-          sessionStorage.setItem("email", data.email);
-          setStore({ email: data.email });
+          sessionStorage.setItem("email", data.user.email);
+          setStore({ email: data.user.email });
 
-          //console.log("flux", data.user)
-          //setStore({ user: data.user});
-          //console.log("flux2", user)
-          //setStore({ usuario: data.usuario});
+          setStore({ user: data.user});
+          setStore({ usuario: data.usuario});
 
           return true;
         } catch (error) {
@@ -113,6 +116,36 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
+      // -------------------------------------------------------------------
+      // Alta de un local
+      // -------------------------------------------------------------------
+      altaLocal: async (formData) => {
+        try {
+          const resp = await fetch(process.env.BACKEND_URL + "/api/Comercial_Place", 
+                                    {method: 'POST',
+                                     headers:{"Content-Type": "application/json",
+                                              "Authorization": 'Bearer '+ sessionStorage.getItem("token")
+                                             },
+                                     body: JSON.stringify(formData),
+                                    });
+          if (resp.ok){
+              setStore({ message: "Local creado correctamente" });
+              return true;
+          }else{
+            setStore({ message: "Error creando el local" });
+            return false
+          }
+
+        } catch (error) {
+            console.error("Error al crear el local");
+            setStore({ message: error.message });
+            return false;
+        }
+      },
+
+      // -------------------------------------------------------------------
+      // Almancena mensaje genérico
+      // -------------------------------------------------------------------
       getMessage: async () => {
         try {
           // fetching data from the backend
@@ -125,6 +158,10 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log("Error loading message from backend", error);
         }
       },
+      /*
+      // -------------------------------------------------------------------
+      // CAmbiando el color. DEMO
+      // ------------------------------------------------------------------- 
       changeColor: (index, color) => {
         //get the store
         const store = getStore();
@@ -143,6 +180,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         //reset the global store
         setStore({ demo: demo });
       },
+      */
     },
   };
 };

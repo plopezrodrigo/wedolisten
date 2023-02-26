@@ -27,20 +27,14 @@ export const NuevoLocal = () => {
 	
 	const handleSubmit = async (evento)=>{
 		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
-		console.log("Comercial_Place crear", formData);
 
-		const resp = await fetch(process.env.BACKEND_URL + "/api/Comercial_Place", 
-			{method: 'POST',
-			headers:{"Content-Type": "application/json",
-					 "Authorization": 'Bearer '+ sessionStorage.getItem("token")
-					},
-			body: JSON.stringify(formData),
-			});
-
-		if (resp.ok) return navigate("/misLocales");
-		else         return setMensaje(await resp.json());  
+		if (actions.altaLocal(formData))
+			navigate("/misLocales");
+		else
+			return setMensaje(store.message);  
 	}
 
+	
 	return (
 		<div className="vh-100 gradient-custom">
 			<div className="container text-center">
@@ -154,26 +148,3 @@ export const NuevoLocal = () => {
 		</div>
 	  );
 };
-
-{/*
-														<input type="checkbox" name="trona" className="form-check-input" id="InputTrona1" aria-describedby="tronaHelp" onChange={handleChangecheck} />
-														<label  htmlFor="InputTrona1">trona</label><br/>
-
-														<input type="checkbox" name="cambiador" className="form-check-input" id="InputCambiador2" aria-describedby="cambiadorHelp"  onChange={handleChangecheck}/>
-														<label className="alinear-izquierda-checkbox" htmlFor="InputCambiador2">cambiador</label><br/>
-
-														<input type="checkbox" name="accessible_carrito" className="form-check-input" id="InputAccessible_carrito3" aria-describedby="accessible_carritoHelp" onChange={handleChangecheck}/>
-														<label className="alinear-izquierda-checkbox" htmlFor="InputAccessible_carrito3">accessible_carrito</label><br/>
-
-														<input type="checkbox" name="espacio_carrito" className="form-check-input" id="InputEspacio_carrito3" aria-describedby="espacio_carritoHelp" onChange={handleChangecheck} />
-														<label className="alinear-derecha-checkbox" htmlFor="InputEspacio_carrito3">espacio_carrito</label><br/>
-
-														<input type="checkbox" name="ascensor" className="form-check-input" id="InputAscensor5" aria-describedby="ascensorHelp" onChange={handleChangecheck} />
-														<label className="alinear-derecha-checkbox" htmlFor="InputAscensor5">ascensor</label><br/>
-
-														<input type="checkbox" name="productos_higiene" className="form-check-input" id="InputProductos_higiene5" aria-describedby="productos_higieneHelp" onChange={handleChangecheck} />
-														<label className="alinear-derecha-checkbox" htmlFor="InputProductos_higiene5">productos_higiene</label><br/>
-
-	
-
-*/}

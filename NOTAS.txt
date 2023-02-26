@@ -11,12 +11,8 @@ TypeError: Object of type Customer is not JSON serializable
                     })
 
                     
-
-* El contacto debe cargar datos cuando es de un usuario logado, lo he conseguido pero solo con el nombre cuando es manager, no entiendo porque no lo carga cuando es customer, además del email,... (a medias)
- 
-
 Crear un página par ver los comentarios completos
 favicon
-recordar contraseña
+recordar contraseña  email.js
 visualizar contraseña
-API para adjuntar imagines --> Cloudinary 
+maquetación nueva

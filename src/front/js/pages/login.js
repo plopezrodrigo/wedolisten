@@ -8,11 +8,31 @@ import { useModal } from "../hooks/UseModal";
 const Login = () => {
   const { store, actions } = useContext(Context);
   const [data, setData] = useState({});
-	const [mensaje, setMensaje] = useState(null); 
+	const [mensaje, setMensaje] = useState(null);
+  const [shown, setShown] = useState(false);
   const navigate = useNavigate();
   const [isModalOpened, setIsModalOpened, toggleModal] = useModal(false);
 
+
+  useEffect(() => {
+    if (store.token && store.token != "" && store.token != undefined) {
+      navigate("/");
+    }
+  }, []);
+
+  const switchShown = () => setShown(!shown);
+
+  const handleChangePwd = (e) => {
+    handleChange(e);
+    setPassword(e.target.value);
+  };
+    
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
+
   const handleClick = () => {
+    console.log(data.password);
     actions.login(data.email, data.password).then((response) => {
     if (response) navigate("/");
     else{ setMensaje("Las credenciales no son correctas");
@@ -21,16 +41,6 @@ const Login = () => {
     })
   };
 
-  useEffect(() => {
-    if (store.token && store.token != "" && store.token != undefined) {
-      navigate("/");
-    }
-  }, []);
-
-  const handleChange = (e) => {
-    setData({ ...data, [e.target.name]: e.target.value });
-  };
-    
   return (
     <div className="vh-100 gradient-custom">
       <div className="container text-center">
@@ -54,18 +64,22 @@ const Login = () => {
                         name="email"
                         onChange={handleChange}
                       />
-                      <label className="form-label alinear-izquierda" htmlFor="typeEmailX">
-                        Contraseña
-                      </label>
-                      <input
-                        type="password"
-                        id="typePasswordX-2"
-                        name="password"
-                        className="form-control mb-2 me-2"
-                        onChange={handleChange}
-                      />
+                      <label className="form-label alinear-izquierda" htmlFor="typeEmailX">Contraseña</label>
+                      <div className="col-md-6">
+                        <div className="input-group">
+                          <input  ID="typePasswordX-2" 
+                                  type={shown ? 'text' : 'password'}
+                                  className="form-control mb-2 me-2"
+                                  name="password"
+                                  onChange={handleChange} 
+                          />
+                          <div class="input-group-append">
+                            <button id="show_password" className="btn btn-primary" type="button" onClick={switchShown}> <span className={shown ? "fas fa-eye-slash": "far fa-eye" }  id="iconbutton"></span> </button>
+                          </div>
+                        </div>
+                      </div>
                       <p className="small mt-2 alinear-izquierda2">
-                      <a href="#!">¿Olvidaste la contraseña?</a>
+                        <a href="#!">¿Olvidaste la contraseña?</a>
                       </p>
                       <div className="form-check alinear-izquierda2">
                       <input  className="form-check-input"

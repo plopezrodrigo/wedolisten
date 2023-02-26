@@ -65,7 +65,7 @@ It is recomended to install the backend first, make sure you have Python 3.8, Pi
                               pip install geopy
 4. Migrate the migrations: `$ pipenv run migrate` (skip if you have not made changes to the models on the `./src/api/models.py`)
 5. Run the migrations: `$ pipenv run upgrade`
-                          flask insert-test-inicial 
+                          flask insert-test-inicial  
 6. Run the application: `$ pipenv run start`
  
 ### Backend Populate Table Users 
@@ -105,6 +105,12 @@ This boilerplate it's 100% read to deploy with Render.com and Herkou in a matter
 
 
 
+
+pipenv shell
+pip install flask-jwt-extended
+pip install geopy
+
+
 rm -R -f ./migrations &&
 pipenv run init &&
 psql -U gitpod -c 'DROP DATABASE example;' || true &&
@@ -113,3 +119,4 @@ psql -U gitpod -c 'CREATE EXTENSION unaccent;' -d example &&
 pipenv run migrate &&
 pipenv run upgrade
 flask insert-test-inicial 
+

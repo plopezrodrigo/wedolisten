@@ -11,7 +11,8 @@ const LocalCard = (props) => {
   const [local, setLocales] = useState({}); 
 
     const add_favourites = (id) => {
-      fetch(`${process.env.BACKEND_URL}/api/favourit/${id}`, { 
+      if (sessionStorage.getItem("token")){
+        fetch(`${process.env.BACKEND_URL}/api/favourit/${id}`, { 
           method: "POST",
           headers: { Authorization: "Bearer " + sessionStorage.getItem("token"), "Content-Type": "application/json" },
      })    
@@ -21,6 +22,9 @@ const LocalCard = (props) => {
       .then((response) => {
         setLocales(response);
       });
+      } else {
+        alert("message")
+      }
     }
 
   return (
@@ -33,9 +37,8 @@ const LocalCard = (props) => {
         />
         <div className="card-body">
           <h6>
-            <Link to={`/localDetail/${props.id}`} className="card-title mb-1"><strong>{props.name}</strong>
+            <Link to={`/localDetail/${props.id}`} className="card-title mb-1"><strong>{props.name}</strong></Link>
             <button id="iconbutton" onClick={()=>{add_favourites(props.id)}}> <i className="fas fa-heart"></i></button>
-            </Link>
           </h6>
             <div>
             {Array.from(Array(5).keys()).map((e,i)=>{return props.puntuacion <= i ? 
