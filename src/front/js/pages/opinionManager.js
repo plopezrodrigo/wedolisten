@@ -9,8 +9,6 @@ import imagen from "../../img/logo.png";
 export const OpinionManager = () => {
 	const params = useParams()
 	const [local, setLocales] = useState({})
-	const [comentario, setComentario] = useState();
-	const [fotos, setFotos] = useState();
 	const [formData, setFormData] = useState({tipo:"manager", comercial_place_id:params.id_local, comment_id: params.id_comment, puntuacion: null});
 	const [mensaje, setMensaje] = useState(null); 
 	const navigate = useNavigate();
@@ -18,25 +16,12 @@ export const OpinionManager = () => {
 	const [isModalOpened, setIsModalOpened, toggleModal] = useModal(false);
 
 	const useEffectComentario = async () => { 
-		const resp = await fetch(`${process.env.BACKEND_URL}/api/comment/${params.id_comment}`,{
-			method: 'GET',
-			headers: {"Content-Type": "application/json",
-					  "Authorization": 'Bearer '+ sessionStorage.getItem("token") // hará falta?
-			} 
-		  })
-		if (resp.ok) return setComentario(await resp.json()); 
-		else         return setMensaje(await resp.json());  
-	} 
-
-	const useEffectfotosComentario = async () => { 
-		const resp = await fetch(`${process.env.BACKEND_URL}/api/photos_comment/${params.id_comment}`,{
-			method: 'GET',
-			headers: {"Content-Type": "application/json",
-					  "Authorization": 'Bearer '+ sessionStorage.getItem("token") // hará falta?
-			} 
-		  })
-		if (resp.ok) return setFotos(await resp.json()); 
-		else         return setMensaje(await resp.json());  
+		if (actions.getComment(params.id_comment)){
+			// Cargados stores: comentario y comentarioFotos
+			return true;
+		}else{
+			return setMensaje(store.message );  
+		}
 	} 
 
 	useEffect (()=> {
@@ -54,8 +39,7 @@ export const OpinionManager = () => {
 
 		useEffectComentario();
 
-		useEffectfotosComentario();
-	
+		//useEffectfotosComentario();	
 	}, [])
 
 	const handleChange = (evento) =>{
@@ -104,29 +88,24 @@ export const OpinionManager = () => {
                     </div>
                 </div>
                 <div className="row">
-                    <h1 className="text-center">El usuario es:</h1>
-                    <h5 className="text-center">{comentario && comentario.user_name}</h5>
-					{/*<button id="opinionbutton">
-						{Array.from(Array(comentario.puntuacion).keys()).map(()=>{return (<i className="fas fa-star" id="iconbutton"/>)})}
-						{comentario.puntuacion <5 ? Array.from(Array(5-comentario.puntuacion).keys()).map(()=>{return (<i className="far fa-star" id="iconbutton"/>)}):""}
-					</button>*/}
-                    <h5 className="text-center">Ha puntuado con {comentario && comentario.puntuacion} estrellas</h5>
+                    <h1 className="text-center">El usuario es: {store.comentario && store.comentario.user_name}</h1>
+                    <h5 className="text-center">Ha puntuado con <strong>{store.comentario && store.comentario.puntuacion} estrellas</strong></h5>
                 </div>
 				
 				<div className="border border-warning my-3">
-					<span className="p-2"><p>{comentario && comentario.comment}</p></span>
+					<span className="p-2"><p>{store.comentario && store.comentario.comment}</p></span>
 				</div>
 
 				<div className="col-md-12">
 					<div className="text ma-home-section">  
-                          <p><strong>Sobre la relación calidad/precio: </strong>{comentario && comentario.price}</p> 
-                          <p><strong>Indicó si se sive a domicilio: </strong>{comentario && comentario.a_domicilio}</p> 
-                          <p><strong>Indicó si se sive en la mesa: </strong>{comentario && comentario.mesa}</p> 
-                          <p><strong>Indicó si se sive Alcohol: </strong>{comentario && comentario.alcohol}</p> 
-                          <p><strong>Fue una visita: </strong>{comentario && comentario.visita}</p> 
-                          <p><strong>Fue una visita: </strong>{comentario && comentario.photo_location1}</p> 
-						  {fotos && fotos.map((foto, index) => {
-								return  <img src={foto.location}></img>
+                          <p><strong>Sobre la relación calidad/precio: </strong>{store.comentario && store.comentario.price}</p> 
+                          <p><strong>Indicó si se sive a domicilio: </strong>{store.comentario && store.comentario.a_domicilio}</p> 
+                          <p><strong>Indicó si se sive en la mesa: </strong>{store.comentario && store.comentario.mesa}</p> 
+                          <p><strong>Indicó si se sive Alcohol: </strong>{store.comentario && store.comentario.alcohol}</p> 
+                          <p><strong>Fue una visita: </strong>{store.comentario && store.comentario.visita}</p> 
+                          <p><strong>Fue una visita: </strong>{store.comentario && store.comentario.photo_location1}</p> 
+						  {store.comentarioFotos && store.comentarioFotos.map((foto, index) => {
+								return  <img  className="m-4" src={foto.location}></img>
 						   })}
                      </div>
 				</div>
@@ -156,3 +135,29 @@ export const OpinionManager = () => {
 		</div>
 	  );
 };
+
+
+/**
+ * 
+ * const useEffectComentario = async () => { 
+		const resp = await fetch(`${process.env.BACKEND_URL}/api/comment/${params.id_comment}`,{
+			method: 'GET',
+			headers: {"Content-Type": "application/json",
+					  "Authorization": 'Bearer '+ sessionStorage.getItem("token") // hará falta?
+			} 
+		  })
+		if (resp.ok) return setComentario(await resp.json()); 
+		else         return setMensaje(await resp.json());  
+	} 
+
+	const useEffectfotosComentario = async () => { 
+		const resp = await fetch(`${process.env.BACKEND_URL}/api/photos_comment/${params.id_comment}`,{
+			method: 'GET',
+			headers: {"Content-Type": "application/json",
+					  "Authorization": 'Bearer '+ sessionStorage.getItem("token") // hará falta?
+			} 
+		  })
+		if (resp.ok) return setFotos(await resp.json()); 
+		else         return setMensaje(await resp.json());  
+	} 
+ */

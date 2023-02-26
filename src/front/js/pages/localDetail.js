@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect } from "react";
-import imagen from "../../img/mapa.jpeg";
 import OpinionCarddetail from "../component/opinionCarddetail";
 import { useParams, Link } from "react-router-dom";
 import { Context } from "../store/appContext";
@@ -9,7 +8,7 @@ const LocalDetail = (props) => {
   const params = useParams();
   const [comentarios, setComentarios] = useState();
   const [local, setLocal] = useState({});
-  const [favoritos, setFavoritos] = useState({});
+  // const [favoritos, setFavoritos] = useState({});
   const { store, actions } = useContext(Context);
   const [active, setActive] = useState(false);
   let options = {

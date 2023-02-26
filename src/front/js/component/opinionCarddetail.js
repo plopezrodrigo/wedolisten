@@ -55,24 +55,22 @@ const OpinionCarddetail = (props) => {
         </div>
         <div className="col-10">
         <div className="card-body text-left">
-          <h6 className="card-title">{props.nombre}</h6>
-          <button id="opinionbutton">
-            {/*Array.from(Array(props.puntuacion).keys()).map(()=>{return (<i className="fas fa-star" id="iconbutton"/>)})}
-            {props.puntuacion <5 ? Array.from(Array(5-props.puntuacion).keys()).map(()=>{return (<i className="far fa-star" id="iconbutton"/>)}):""*/}
-            {Array.from(Array(5).keys()).map((e,i)=>{return props.puntuacion <= i ? (<i className="far fa-star" key={i} id="iconbutton"/>)
-                                                                                  : (<i className="fas fa-star" key={i} id="iconbutton"/>)
-                                            })
-            }
-          </button>
-          <p className="card-text"> 
-            {props.comment}
-          </p>
-          <div className="col-12">
-            <p id="textofecha">Fecha de la visita: {props.fecha}</p> 
-          </div>
+          <h6 className="card-title">{props.nombre} - {props.id_comment}</h6>
+                    
+          <Link to={`/vercomentario/${props.id_comment}`}>
+            <p>
+              {Array.from(Array(5).keys()).map((e,i)=>{return props.puntuacion <= i ? (<i className="far fa-star" key={i} id="iconbutton"/>)
+                                                                                    : (<i className="fas fa-star" key={i} id="iconbutton"/>)
+                                              })
+              }
+            </p>
+          </Link>
+
+          <p className="card-text">{props.comment}</p>
+
+          <div className="col-12"><p id="textofecha">Fecha de la visita: {props.fecha}</p></div>
 
           {paraManager()}
-          
         </div>
         </div>
         </div>
