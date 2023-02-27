@@ -6,13 +6,13 @@ import "../../styles/home.css";
 export const DatosLocal = () => {
   const params = useParams();
   const [local, setLocal] = useState({});
+  const [localFotos, setLocalFotos] = useState({});
   const [mensaje, setMensaje] = useState(null);
   const navigate = useNavigate();
   const { store, actions } = useContext(Context);
 
   const miUseEffect = async () => {
-    const resp = await fetch(
-      `${process.env.BACKEND_URL}/api/comercial-place/${params.local_id}`
+    const resp = await fetch(`${process.env.BACKEND_URL}/api/comercial-place/${params.local_id}`
     );
 
     if (resp.ok) return await resp.json();
@@ -20,8 +20,7 @@ export const DatosLocal = () => {
   };
 
   const miUseEffectFotos = async () => {
-    const resp = await fetch(
-      `${process.env.BACKEND_URL}/api/Photo_Comercial_Place/${params.local_id}`
+    const resp = await fetch(`${process.env.BACKEND_URL}/api/Photo_Comercial_Place/${params.local_id}`
     );
 
     if (resp.ok) return await resp.json();
@@ -36,11 +35,10 @@ export const DatosLocal = () => {
     miUseEffect().then((resp) => setLocal(resp)); 
 
     miUseEffectFotos().then((resp) => {
-      console.log("que saco?", resp);
-      /*setLocal({ ...local, [image_url1]: resp });
-      setLocal({ ...local, [image_url2]: resp });
-      */
+      if (resp[0].location){ setLocalFotos({ ...localFotos, "image_url1": resp[0].location }); }
+      if (resp[1].location){ setLocalFotos({ ...localFotos, "image_url2": resp[1].location }); }
     }); 
+
   }, []);
 
   const handleChange = (evento) => {
@@ -48,14 +46,11 @@ export const DatosLocal = () => {
   };
 
   const handleChangecheck = (evento) => { 
-	console.log("Chequed",evento.target.checked);
 	setLocal({...local, [evento.target.name]: local[evento.target.name] ? false : true})
-    // console.log(local[evento.target.name]);
   };
 
   const handleSubmit = async (evento) => {
     evento.preventDefault(); // para evitar la recarga ya que cancela el evento
-    console.log("Comercial_Place actualizar", local);
 
     const resp = await fetch(
       process.env.BACKEND_URL + "/api/Comercial_Place/" + params.local_id,
@@ -75,13 +70,13 @@ export const DatosLocal = () => {
 
   return (
     <div className="container fluid align-center">
+
+{console.log("Datos local", localFotos)}
+
       <div className="form-body">
         <div className="row">
           <h1 className="text-center">Registro</h1>
-          <h5 className="text-center">
-            Da de alta tus locales y mantenlos actualizados para recibir
-            opiniones de tus usuarios
-          </h5>
+          <h5 className="text-center">Da de alta tus locales y mantenlos actualizados para recibir opiniones de tus usuarios</h5>
         </div>
         <div className="row">
           <div className="col-md-12">
@@ -89,8 +84,8 @@ export const DatosLocal = () => {
               <div className="form-group py-3 m-0 img-responsive">
                 <img src={local.image_url} className="imagenLocal" alt="" />
                 <input type="text" name="image_url"  defaultValue={local.image_url} required className="form-control imagenLocal" id="Inputimage_url"  aria-describedby="image_urlHelp" placeholder="image principal" onChange={handleChange} />
-                <input type="text" name="image_url1" defaultValue={local.image_url1}         className="form-control imagenLocal" id="Inputimage_url1" aria-describedby="image_urlHelp" placeholder="Otra image"      onChange={handleChange} />
-                <input type="text" name="image_url2" defaultValue={local.image_url2}         className="form-control imagenLocal" id="Inputimage_url2" aria-describedby="image_urlHelp" placeholder="Otra image"      onChange={handleChange} />
+                <input type="text" name="image_url1" defaultValue={localFotos.image_url1 ? localFotos.image_url1:""} className="form-control imagenLocal" id="Inputimage_url1" aria-describedby="image_urlHelp" placeholder="Otra image"      onChange={handleChange} />
+                <input type="text" name="image_url2" defaultValue={localFotos.image_url2 ? localFotos.image_url2:""} className="form-control imagenLocal" id="Inputimage_url2" aria-describedby="image_urlHelp" placeholder="Otra image"      onChange={handleChange} />
               </div>
 
               <div className="form-group">
@@ -189,7 +184,7 @@ export const DatosLocal = () => {
               </div>
 
               <br />
-              {console.log("Local antes ", local)}
+
               <div className="py-3 px-0 mx-0 d-flex justify-content-around">
                 <button type="submit" className="btn btn-primary" id="button">
                   Guardar

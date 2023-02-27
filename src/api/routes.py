@@ -234,9 +234,6 @@ def get_photos_comercial_place(id):
     datos = [una.serialize() for una in fotos]
     return jsonify(datos), 200
 
-
-
-
 # ----------------------------------------------------------------------------
 # Comentarios de customers
 # ----------------------------------------------------------------------------
@@ -389,15 +386,19 @@ def Comercial_Place_add():
         db.session.add(Place)
         db.session.commit()
 
+        print("-----------------------------------------------");
+        print(request.json.get('image_url1'));
+        print(request.json.get('image_url2'));
+        print("-----------------------------------------------");
 
-        if data.get('image_url1'):
-            photos = Photo_Comercial_Place(comercial_place_id = place.id,
-                                           location   = data['image_url1'])
+        if request.json.get('image_url1'):
+            photos = Photo_Comercial_Place(comercial_place_id = Place.id,
+                                           location   = request.json.get('image_url1'))
             db.session.add(photos)
 
-        if data.get('image_url2'):
-            photos = Photo_Comercial_Place(comercial_place_id = place.id,
-                                           location   = data['image_url2'])
+        if request.json.get('image_url2'):
+            photos = Photo_Comercial_Place(comercial_place_id = Place.id,
+                                           location   = request.json.get('image_url2'))
             db.session.add(photos)
 
         db.session.commit()
