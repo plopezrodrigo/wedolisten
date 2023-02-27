@@ -65,7 +65,7 @@ const Login = () => {
                         onChange={handleChange}
                       />
                       <label className="form-label alinear-izquierda" htmlFor="typeEmailX">Contraseña</label>
-                      <div className="col-md-6">
+                      <div className="col-md-12">
                         <div className="input-group">
                           <input  ID="typePasswordX-2" 
                                   type={shown ? 'text' : 'password'}
@@ -74,7 +74,7 @@ const Login = () => {
                                   onChange={handleChange} 
                           />
                           <div class="input-group-append">
-                            <button id="show_password" className="btn btn-primary" type="button" onClick={switchShown}> <span className={shown ? "fas fa-eye-slash": "far fa-eye" }  id="iconbutton"></span> </button>
+                            <button id="iconbutton3" className="btn btn-primary" type="button" onClick={switchShown}> <span className={shown ? "fas fa-eye-slash": "far fa-eye" }  id="iconbutton4"></span> </button>
                           </div>
                         </div>
                       </div>
@@ -117,7 +117,7 @@ const Login = () => {
       </div>
 
       <CustomModal  show={isModalOpened}
-                    titulo="Login en BabyFriendly"
+                    titulo="Ha surgido un problema"
                     handleClose={() => setIsModalOpened(false)}>
         <div>{mensaje}</div>
       </CustomModal>

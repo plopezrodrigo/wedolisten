@@ -44,10 +44,18 @@ export const Footer = () => (
           <h6 className="text-uppercase fw-bold mb-4" id="textosfooter">
             Links útiles
           </h6>
-          <Link to="/">             <p id="textosfooter">FAQS</p>           </Link>
-          <Link to="/">             <p id="textosfooter">Aviso Legal</p>           </Link>
-          <Link to="/">             <p id="textosfooter">Política de Privacidad</p>           </Link>
-          <Link to="/">             <p id="textosfooter">Términos de uso</p>           </Link>
+          <Link to="/faqs">
+            <p id="textosfooter">FAQS</p>
+          </Link>
+          <Link to="/avisolegal">
+            <p id="textosfooter">Aviso Legal</p>
+          </Link>
+          <Link to="/politicaprivacidad">
+            <p id="textosfooter">Política de Privacidad</p>
+          </Link>
+          <Link to="/terminosdeuso">
+            <p id="textosfooter">Términos de uso</p>
+          </Link>
           </div>
         </div>
       </div>

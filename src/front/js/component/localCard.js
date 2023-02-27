@@ -23,7 +23,7 @@ const LocalCard = (props) => {
         setLocales(response);
       });
       } else {
-        alert("message")
+        alert("Este local se ha guardado correctamente como favorito en tu cuenta")
       }
     }
 
