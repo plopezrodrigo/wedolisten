@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import CustomModal from "../component/customModal";
 import { useModal } from "../hooks/UseModal";
@@ -10,16 +10,37 @@ export const Contact = (props) => {
   const params = useParams();
   const [isModalOpened, setIsModalOpened, toggleModal] = useModal(false);
   const [mensaje, setMensaje] = useState(null);
+  const [formData, setFormData] = useState();
+  const navigate = useNavigate();
 
 
-  const handleClick = () => {
-    actions.login(data.email, data.password).then((response) => {
-    if (response) navigate("/");
-    else{ setMensaje("Su mensaje ha sido enviado correctamente");
-          toggleModal();
-        } 
-    })
-  };
+	const handleChange = (evento) =>{
+		setFormData({...formData, [evento.target.name]: evento.target.value});
+	}
+
+	const handleClick = (evento)=>{
+		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
+		console.log("A ver que token", sessionStorage.getItem("token"));
+
+		fetch(`${process.env.BACKEND_URL}/api/comment/${params.id_comment}`,		
+			{method: 'POST',
+				headers:{"Content-Type": "application/json",
+				"Authorization": 'Bearer '+ sessionStorage.getItem("token"), 
+			},
+			body: JSON.stringify(formData),
+			})
+		.then(response => {
+			if (response.status == 200){ 
+				setMensaje("Respuesta cargada correctamente")
+				toggleModal();
+			}else{ 
+				setMensaje("En breve, recibirás noticias nuestras")
+				toggleModal();
+			}
+		})
+	}
+
+  
 
   return (
     <div className="bg-contact3">
@@ -34,7 +55,7 @@ export const Contact = (props) => {
                 <h3 className="mt-3" id="iconbutton">Escríbenos</h3>
                   <form className="form-outline" noValidate>
                     <div className="col-md-12">
-                      <label forhtml="basic-url" className="form-label alinear-izquierda mt-3">Nombre y Apellidos</label>
+                      <label htmlFor="InputEmail1" className="alinear-izquierda">Nombre y Apellidos</label>
                       <input  className="form-control mb-2"
                               type="text"
                               name="name"
@@ -114,9 +135,11 @@ export const Contact = (props) => {
         </div>
       </div>
       <CustomModal  show={isModalOpened}
-                    titulo="Gracias por ponerse en contacto con nosotros"
-                    handleClose={() => setIsModalOpened(false)}>
-        <div>{mensaje}</div>
-      </CustomModal>
+           		        titulo="Gracias por ponerte en contacto con nosotros"
+                	    handleClose={() => {setIsModalOpened(false);
+										   navigate(`/contact`);}
+									}>
+				<div>{mensaje}</div>
+		  </CustomModal>
     </div>
   );};
