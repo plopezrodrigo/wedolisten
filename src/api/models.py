@@ -167,8 +167,8 @@ class Photo_Comercial_Place(db.Model):
 
     def serialize(self):
         return {    "id": self.id,
-                    "comercial_Place_id": self.comercial_Place_id,
-                    "comercial_Place_name": self.comercial_Place.name,
+                    "comercial_Place_id": self.comercial_place_id,
+                    "comercial_Place_name": self.comercial_place.name,
                     "location": self.location
                }
 

@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Customer, Manager, Comment, Comercial_Place, Photos_Comments, Favourit, Rate_Customer
+from api.models import db, User, Customer, Manager, Comment, Comercial_Place, Photos_Comments, Favourit, Rate_Customer, Photo_Comercial_Place
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -226,6 +226,15 @@ def Comercial_Places_2(comercial_place_id):
         return jsonify({"msg": "No existen datos"}), 402
 
 # ----------------------------------------------------------------------------
+# Fotos de Un Local
+# ----------------------------------------------------------------------------
+@api.route('/Photo_Comercial_Place/<id>', methods=['GET'])
+def get_photos_comercial_place(id):
+    fotos = Photo_Comercial_Place.query.filter_by(comercial_place_id = id).all()
+    datos = [una.serialize() for una in fotos]
+    return jsonify(datos), 200
+
+# ----------------------------------------------------------------------------
 # Comentarios de customers
 # ----------------------------------------------------------------------------
 @api.route('/comment', methods=['GET'])
@@ -361,7 +370,7 @@ def Comercial_Place_add():
             name            = request.json.get('name'),
             address         = request.json.get('address'),
             url             = request.json.get('url'),
-            image_url       = request.json.get('image_url'),
+            image_url       = request.json.get('image_url'), 
             telf            = request.json.get('telf'),
             email           = request.json.get('email'),
             location        = request.json.get('location'),
@@ -376,6 +385,25 @@ def Comercial_Place_add():
         )
         db.session.add(Place)
         db.session.commit()
+
+        print("-----------------------------------------------");
+        print(request.json.get('image_url1'));
+        print(request.json.get('image_url2'));
+        print("-----------------------------------------------");
+
+        if request.json.get('image_url1'):
+            photos = Photo_Comercial_Place(comercial_place_id = Place.id,
+                                           location   = request.json.get('image_url1'))
+            db.session.add(photos)
+
+        if request.json.get('image_url2'):
+            photos = Photo_Comercial_Place(comercial_place_id = Place.id,
+                                           location   = request.json.get('image_url2'))
+            db.session.add(photos)
+
+        db.session.commit()
+
+
 
         return jsonify({"msg": "Usuario creado correctamente"}), 200
 
@@ -397,6 +425,7 @@ def Comercial_Place_add():
 @jwt_required()
 def Comercial_Place_update(idLocal):
     userId = get_jwt_identity()
+
     try:
         place = Comercial_Place.query.get(idLocal)
         if place:
@@ -415,7 +444,21 @@ def Comercial_Place_update(idLocal):
             place.ascensor            = request.json.get('ascensor')
             place.productos_higiene   = request.json.get('productos_higiene')
 
+            db.session.commit();
+
+            if request.json.get('image_url1'):
+                place = Photo_Comercial_Place.query.get(idLocal)
+                photos = Photo_Comercial_Place(comercial_place_id = place.id,
+                                               location   = request.json['image_url1'])
+                db.session.add(photos)
+
+            if request.json.get('image_url2'):
+                photos = Photo_Comercial_Place(comercial_place_id = place.id,
+                                               location   = request.json['image_url2'])
+                db.session.add(photos)
+
             db.session.commit()
+
             return jsonify({"msg": "Local modificado correctamente"}), 200
         else:
             return jsonify({"msg": "No existen datos"}), 402
