@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 const LocalCard = (props) => {
   const { store, actions } = useContext(Context);
   const [comentarios, setComentarios] = useState();
+  const [message, setMessage] = useState();
   const params = useParams();
   const [local, setLocales] = useState({}); 
 
@@ -23,12 +24,16 @@ const LocalCard = (props) => {
         setLocales(response);
       });
       } else {
-        alert("Este local se ha guardado correctamente como favorito en tu cuenta")
+        setMessage(true)
       }
     }
 
   return (
       <div className="card" id="localcard">
+        {message ? <h4>
+          se creo
+        </h4> : ""
+        }
         <img 
         src={props.image_url} 
         className="card-img-top"
