@@ -25,8 +25,8 @@ export const Favorites = () => {
     ,[])
 
     const deleteFavourites = (id) => {
-      fetch(`${process.env.BACKEND_URL}/api/favourit/${id}`, { 
-        method: "POST",
+      fetch(`${process.env.BACKEND_URL}/deletefavourit/${id}`, { 
+        method: "DELETE",
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token"), "Content-Type": "application/json" },
    })    
     .then((response) => {
@@ -76,6 +76,7 @@ export const Favorites = () => {
                           <td>{fav.comercial.id}
                             <button className="btn" >
                               <i className="far fa-trash-alt" onClick={() => deleteFavourites(fav.id)}/>
+                              <a href="/account" className="btn btn-primary" id="button">Volver</a>
                             </button>
                           </td>
                   ))}
