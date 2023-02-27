@@ -19,4 +19,8 @@ https://dev.to/gedgonz/haciendo-deploy-de-una-app-en-react-a-github-pages-95p
 
 
 
+Reflex
+alte de fotos y local
+
+
 maquetación nueva

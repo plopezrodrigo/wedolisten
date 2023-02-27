@@ -20,7 +20,7 @@ export const OpinionManager = () => {
 			// Cargados stores: comentario y comentarioFotos
 			return true;
 		}else{
-			return setMensaje(store.message );  
+			return setMensaje(store.message ); 
 		}
 	} 
 

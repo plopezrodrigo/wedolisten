@@ -19,12 +19,28 @@ export const DatosLocal = () => {
     else return setMensaje(await resp.json()); 
   };
 
+  const miUseEffectFotos = async () => {
+    const resp = await fetch(
+      `${process.env.BACKEND_URL}/api/Photo_Comercial_Place/${params.local_id}`
+    );
+
+    if (resp.ok) return await resp.json();
+    else return setMensaje(await resp.json()); 
+  };
+
   useEffect(() => {
     if (store.token && store.token != "" && store.token != undefined) {
       navigate.push("/login");
     }
 
     miUseEffect().then((resp) => setLocal(resp)); 
+
+    miUseEffectFotos().then((resp) => {
+      console.log("que saco?", resp);
+      /*setLocal({ ...local, [image_url1]: resp });
+      setLocal({ ...local, [image_url2]: resp });
+      */
+    }); 
   }, []);
 
   const handleChange = (evento) => {
@@ -72,44 +88,19 @@ export const DatosLocal = () => {
             <form onSubmit={handleSubmit}>
               <div className="form-group py-3 m-0 img-responsive">
                 <img src={local.image_url} className="imagenLocal" alt="" />
-                <input
-                  type="text"
-                  name="image_url"
-                  defaultValue={local.image_url}
-                  required
-                  className="form-control imagenLocal"
-                  id="Inputimage_url"
-                  aria-describedby="image_urlHelp"
-                  placeholder="image url"
-                  onChange={handleChange}
-                />
+                <input type="text" name="image_url"  defaultValue={local.image_url} required className="form-control imagenLocal" id="Inputimage_url"  aria-describedby="image_urlHelp" placeholder="image principal" onChange={handleChange} />
+                <input type="text" name="image_url1" defaultValue={local.image_url1}         className="form-control imagenLocal" id="Inputimage_url1" aria-describedby="image_urlHelp" placeholder="Otra image"      onChange={handleChange} />
+                <input type="text" name="image_url2" defaultValue={local.image_url2}         className="form-control imagenLocal" id="Inputimage_url2" aria-describedby="image_urlHelp" placeholder="Otra image"      onChange={handleChange} />
               </div>
 
               <div className="form-group">
                 <label htmlFor="InputEmail1">Nombre del local</label>
-                <input
-                  type="text"
-                  name="name"
-                  defaultValue={local.name}
-                  required
-                  className="form-control"
-                  id="InputName1"
-                  aria-describedby="nameHelp"
-                  placeholder="Nombre del local"
-                  onChange={handleChange}
-                />
+                <input type="text" name="name" defaultValue={local.name} required className="form-control" id="InputName1" aria-describedby="nameHelp" placeholder="Nombre del local" onChange={handleChange}/>
               </div>
               <br />
               <div className="form-group">
                 <h5>Descripción</h5>
-                <textarea
-                  name="description"
-                  defaultValue={local.description}
-                  required
-                  rows="3"
-                  cols="100"
-                  onChange={handleChange}
-                ></textarea>
+                <textarea name="description" defaultValue={local.description} required rows="3" cols="100" onChange={handleChange}> </textarea>
               </div>
               <br />
 

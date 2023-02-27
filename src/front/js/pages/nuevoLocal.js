@@ -50,6 +50,7 @@ export const NuevoLocal = () => {
 								<div className="col-md-12">
 									<form className="form-outline" onSubmit={handleSubmit}>
 										<div className="form-group">
+											<p>{" "}</p>
 											<label className="alinear-izquierda" htmlFor="InputEmail1">Nombre del local</label>
 											<input type="text" name="name" required className="form-control" id="InputName1" aria-describedby="nameHelp" placeholder="Nombre del local" onChange={handleChange} />
 										</div>
@@ -60,7 +61,9 @@ export const NuevoLocal = () => {
 													<img src={formData.image_url} className="alinear-derecha" alt="" />
 												</div>*/}
 												<label className="alinear-izquierda" htmlFor="InputEmail1">Url de la imagen del local</label>
-												<input className="form-control mb-2" type="text" name="image_url" required id="InputImage_url" aria-describedby="image_urlHelp" placeholder="Url d la imagen del local" onChange={handleChange} />
+												<input className="form-control mb-2" type="text" name="image_url" required id="InputImage_url"  aria-describedby="image_urlHelp"  placeholder="Url de la imagen principal del local" onChange={handleChange} />
+												<input className="form-control mb-2" type="text" name="image_url1"         id="InputImage_url1" aria-describedby="image_urlHelp1" placeholder="Añade otra Url del local" onChange={handleChange} />
+												<input className="form-control mb-2" type="text" name="image_url2"         id="InputImage_url2" aria-describedby="image_urlHelp2" placeholder="Añade otra Url del local" onChange={handleChange} />
 											</div>
 										</div>
 										<br/>
