@@ -100,7 +100,7 @@ export const Contact = (props) => {
                     </div>
                     <div className="form-button mt-3 mb-3">
                     <button
-                        className="col-md-12 btn-lg px-5 mb-3 mt-3"
+                        className="mb-3 col-md-12 btn-lg px-5 mb-3 mt-3"
                         onClick={handleClick}
                         id="button"
                       >

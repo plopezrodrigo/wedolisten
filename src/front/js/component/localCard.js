@@ -2,14 +2,26 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { useParams } from "react-router-dom";
-
+import CustomModal from "../component/customModal";
+import { useModal } from "../hooks/UseModal";
 
 const LocalCard = (props) => {
   const { store, actions } = useContext(Context);
   const [comentarios, setComentarios] = useState();
   const [message, setMessage] = useState();
   const params = useParams();
-  const [local, setLocales] = useState({}); 
+  const [local, setLocales] = useState({});
+  const [isModalOpened, setIsModalOpened, toggleModal] = useModal(false);
+
+  const handleClick = () => {
+    actions.login(data.email, data.password).then((response) => {
+    if (response) navigate("/");
+    else{ setMensaje("Su mensaje ha sido enviado correctamente");
+          toggleModal();
+        } 
+    })
+  };
+ 
 
     const add_favourites = (id) => {
       if (sessionStorage.getItem("token")){
@@ -30,9 +42,12 @@ const LocalCard = (props) => {
 
   return (
       <div className="card" id="localcard">
-        {message ? <h4>
-          se creo
-        </h4> : ""
+        {message ? 
+        <CustomModal  show={isModalOpened}
+        titulo="Guardado en favoritos"
+        handleClose={() => setIsModalOpened(false)}>
+        <div>{message}</div>
+        </CustomModal> : ""
         }
         <img 
         src={props.image_url} 
