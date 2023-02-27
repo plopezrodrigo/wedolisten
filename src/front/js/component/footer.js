@@ -64,13 +64,13 @@ export const Footer = () => (
       <section className="d-flex justify-content-center justify-content-lg-between p-4 border-bottom" id="textosfooter2">
         <div className="me-5 d-none d-lg-block">
           <span className="me-3" id="textosfooter2">Conéctate con nosotros en redes sociales:</span>
-          <a href="" className="me-4 tex t-reset" >
+          <a href="https://www.facebook.com/babyfriendly/?locale=es_LA" className="me-4 tex t-reset" >
             <i className="fab fa-facebook-f" id="iconbutton"></i>
           </a>
-          <a href="" className="me-4 text-reset">
+          <a href="https://twitter.com/babyfriendly?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor" className="me-4 text-reset">
             <i className="fab fa-twitter" id="iconbutton"></i>
           </a>
-          <a href="" className="me-4 text-reset" >
+          <a href="https://twitter.com/babyfriendly?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor" className="me-4 text-reset" >
           <i className="fab fa-instagram" id="iconbutton"></i>
           </a>
         </div>
