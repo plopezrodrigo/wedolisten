@@ -24,7 +24,10 @@ import { MisLocales } from "./pages/misLocales";
 import { DatosLocal } from "./pages/datosLocal";
 import { NuevoLocal } from "./pages/nuevoLocal";
 import { Comentarios } from "./pages/comentarios";
-import { VerComentario } from "./pages/verComentario";
+import { Avisolegal } from "./pages/avisolegal";
+import { Politicaprivacidad } from "./pages/politicaprivacidad";
+import { Faqs} from "./pages/faqs";
+import { Terminosdeuso } from "./pages/terminosdeuso";
 
 //create your first component
 const Layout = () => {
@@ -58,7 +61,10 @@ const Layout = () => {
                         <Route element={<NuevoLocal />} path="/nuevoLocal" />
                         <Route element={<DatosLocal />} path="/datosLocal/:local_id" />
                         <Route element={<Comentarios />} path="/comentarios" />
-                        <Route element={<VerComentario />} path="/verComentario/:id_comment" />
+                        <Route element={<Avisolegal />} path="/avisolegal" />
+                        <Route element={<Politicaprivacidad />} path="/politicaprivacidad" />
+                        <Route element={<Terminosdeuso />} path="/terminosdeuso" />
+                        <Route element={<Faqs />} path="/faqs" />
                         <Route path="*" element={<div>Página no encontrada</div> } />
                     </Routes>
                     <Footer />

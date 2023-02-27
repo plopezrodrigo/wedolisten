@@ -21,6 +21,7 @@ export const Data = () => {
               <div className="row d-flex justify-content-center h-100">
                 <div className="col-12 col-md-8 col-lg-6 col-xl-5">
                   <div className="card" id="card">
+                    <a href="/account"><i className="fas fa-chevron-square-left" id="iconbutton"></i></a>
                     <h6 className="mt-3">Datos personales</h6>
                   <form className="requires-validation" noValidate>
                     <div className="d-flex justify-content-center ms-3 me-3">
@@ -89,8 +90,8 @@ export const Data = () => {
                         Privacidad y Aviso Legal.
                       </div>
                     </div>
-                    <div className="form-button mt-3 mb-3 d-flex justify-content-center">
-                      <button id="button" type="submit" className="col-md-10 btn-lg px-5 mb-3 mt-3">
+                    <div className="py-3 px-0 mx-0 d-flex justify-content-around">
+                      <button id="button" type="submit" className="mb-3 col-md-10 btn-lg px-5 mb-3 mt-3">
                         Guardar cambios
                       </button>
                     </div>

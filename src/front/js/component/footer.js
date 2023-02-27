@@ -44,10 +44,18 @@ export const Footer = () => (
           <h6 className="text-uppercase fw-bold mb-4" id="textosfooter">
             Links útiles
           </h6>
-          <Link to="/">             <p id="textosfooter">FAQS</p>           </Link>
-          <Link to="/">             <p id="textosfooter">Aviso Legal</p>           </Link>
-          <Link to="/">             <p id="textosfooter">Política de Privacidad</p>           </Link>
-          <Link to="/">             <p id="textosfooter">Términos de uso</p>           </Link>
+          <Link to="/faqs">
+            <p id="textosfooter">FAQS</p>
+          </Link>
+          <Link to="/avisolegal">
+            <p id="textosfooter">Aviso Legal</p>
+          </Link>
+          <Link to="/politicaprivacidad">
+            <p id="textosfooter">Política de Privacidad</p>
+          </Link>
+          <Link to="/terminosdeuso">
+            <p id="textosfooter">Términos de uso</p>
+          </Link>
           </div>
         </div>
       </div>
@@ -56,13 +64,13 @@ export const Footer = () => (
       <section className="d-flex justify-content-center justify-content-lg-between p-4 border-bottom" id="textosfooter2">
         <div className="me-5 d-none d-lg-block">
           <span className="me-3" id="textosfooter2">Conéctate con nosotros en redes sociales:</span>
-          <a href="" className="me-4 tex t-reset" >
+          <a href="https://www.facebook.com/babyfriendly/?locale=es_LA" className="me-4 tex t-reset" >
             <i className="fab fa-facebook-f" id="iconbutton"></i>
           </a>
-          <a href="" className="me-4 text-reset">
+          <a href="https://twitter.com/babyfriendly?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor" className="me-4 text-reset">
             <i className="fab fa-twitter" id="iconbutton"></i>
           </a>
-          <a href="" className="me-4 text-reset" >
+          <a href="https://twitter.com/babyfriendly?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor" className="me-4 text-reset" >
           <i className="fab fa-instagram" id="iconbutton"></i>
           </a>
         </div>

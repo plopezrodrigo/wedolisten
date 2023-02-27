@@ -39,12 +39,22 @@ export const NuevoLocal = () => {
 		<div className="vh-100 gradient-custom">
 			<div className="container text-center">
 				<h3>Registro</h3>
-				<p className="mb-3">Da de altas tus locales y empieza a recibir opiniones de tus usuarios</p>
-				<div className="row d-flex justify-content-center align-items-center h-10">
-					<div className="col-12 col-md-8 col-lg-6 col-xl-5 ">
+				<p className="mb-0">Da de altas tus locales y empieza a </p>
+				<p className="mt-0 mb-5">recibir opiniones de tus usuarios</p>
+				<div className="row d-flex justify-content-center h-100">
+					<div className="col-12 col-md-8 col-lg-6 col-xl-5">
 						<div className="card px-3" id="card">
-							<div className="form-body"> 
-							<div className="row">
+							<form className="form-outline" noValidate onSubmit={handleSubmit}>
+							<div className="col-md-12">
+								{/* <a href="/misLocales" className="btn btn-primary" id="button">Volver</a> */}
+								<label className="alinear-izquierda mt-3" htmlFor="InputEmail1">Nombre del local</label>
+								<input type="text" 
+										name="name" 
+										required 
+										className="form-control mb-2 mt-3" 
+										aria-describedby="nameHelp"
+										placeholder="Nombre del local" 
+										onChange={handleChange} />
 							</div>
 							<div className="row"> 
 								<div className="col-md-12">
@@ -90,7 +100,7 @@ export const NuevoLocal = () => {
 											<div className="row alinear-izquierda-checkbox">
 												<div className="col-12">
 													<input type="checkbox" name="trona" className="form-check-input mx-2" id="InputTrona1" aria-describedby="tronaHelp" onChange={handleChangecheck} />
-													<label htmlFor="InputTrona1">trona</label>
+													<label htmlFor="InputTrona1">Trona</label>
 												</div>
 											</div>
 											<br/>
@@ -98,7 +108,7 @@ export const NuevoLocal = () => {
 											<div className="row alinear-izquierda-checkbox">
 												<div className="col-12">
 														<input type="checkbox" name="cambiador" className="form-check-input mx-2" id="InputCambiador2" aria-describedby="cambiadorHelp"  onChange={handleChangecheck}/>
-														<label htmlFor="InputCambiador2">cambiador</label><br/>
+														<label htmlFor="InputCambiador2">Cambiador</label><br/>
 												</div>
 											</div>
 											<br/>
@@ -106,7 +116,7 @@ export const NuevoLocal = () => {
 											<div className="row alinear-izquierda-checkbox">
 												<div className="col-12">
 														<input type="checkbox" name="accessible_carrito" className="form-check-input mx-2" id="InputAccessible_carrito3" aria-describedby="accessible_carritoHelp" onChange={handleChangecheck}/>
-														<label htmlFor="InputAccessible_carrito3">accessible_carrito</label><br/>
+														<label htmlFor="InputAccessible_carrito3">Accessible con carrito</label><br/>
 												</div>
 											</div>
 											<br/>
@@ -114,7 +124,7 @@ export const NuevoLocal = () => {
 											<div className="row alinear-izquierda-checkbox">
 												<div className="col-12">
 														<input type="checkbox" name="espacio_carrito" className="form-check-input mx-2" id="InputEspacio_carrito3" aria-describedby="espacio_carritoHelp" onChange={handleChangecheck} />
-														<label htmlFor="InputEspacio_carrito3">espacio_carrito</label><br/>
+														<label htmlFor="InputEspacio_carrito3">Espacio para carrito</label><br/>
 												</div>
 											</div>
 											<br/>
@@ -122,7 +132,7 @@ export const NuevoLocal = () => {
 											<div className="row alinear-izquierda-checkbox">
 												<div className="col-12">
 														<input type="checkbox" name="ascensor" className="form-check-input mx-2" id="InputAscensor5" aria-describedby="ascensorHelp" onChange={handleChangecheck} />
-														<label htmlFor="InputAscensor5">ascensor</label><br/>
+														<label htmlFor="InputAscensor5">Ascensor</label><br/>
 												</div>
 											</div>
 											<br/>
@@ -130,20 +140,22 @@ export const NuevoLocal = () => {
 											<div className="row alinear-izquierda-checkbox">
 												<div className="col-12">
 														<input type="checkbox" name="productos_higiene" className="form-check-input mx-2" id="InputProductos_higiene5" aria-describedby="productos_higieneHelp" onChange={handleChangecheck} />
-														<label htmlFor="InputProductos_higiene5">productos_higiene</label><br/>
+														<label htmlFor="InputProductos_higiene5">Productos de Higiene</label><br/>
 												</div>
 											</div>
 											<br/>
-										</div>
+							</div>
+							<div className="col-md-12 mt-3">
+								<label className="alinear-izquierda" htmlFor="InputEmail1">¿Tienes alguna foto que compartir?</label>
+								<input className="form-control mb-2" type="text" name="image_url" required id="InputImage_url" aria-describedby="image_urlHelp" placeholder="Añadir url de la imagen" onChange={handleChange} />
+							</div>
 										<div className="py-3 px-0 mx-0 d-flex justify-content-around">
-											<button type="submit" className="btn btn-primary" id="button">Guardar</button>
-											<a href="/misLocales" className="btn btn-primary" id="button">Volver</a>
+											<button type="submit" className="mb-3 col-md-12 btn-lg px-5 mb-3 mt-3" id="button">Guardar</button>
 										</div>
 										{(mensaje != null) && <p>{mensaje}</p>}
 									</form>				  
-								</div>
-							</div>
-							</div>
+
+
 						</div>
 					</div>
 				</div>
