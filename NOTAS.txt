@@ -1,18 +1,22 @@
-  File "/workspace/Baby_friendly_new/.venv/lib/python3.10/site-packages/flask/json/provider.py", line 122, in _default
-    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
-TypeError: Object of type Customer is not JSON serializable
+Pull Request 26/2/2023-1
+NAVBAR
+ -* Encolumnado navbar
+ * no sale la hamburguesa
 
-   return jsonify({    "token": access_token, 
-                        "user_id": user.id, 
-                        "usertype": user.type, 
-                        "email_user": user.email,
-                        "user": usuario,
-                        "name": usuario.name
-                    })
+Pull Request 26/2/2023-2
+NAVBAR
+* buscador
+* Crear un página par ver los comentarios completos
+* respuesta manager
+* se lleva  flux las llamasdas comentarios y fotos
 
-                    
-Crear un página par ver los comentarios completos
-favicon
-recordar contraseña  email.js
-visualizar contraseña
+
+--------------------------------------------------------------------------------
+
+recordar contraseña  email.js en contact
+https://hackernoon.com/es/integrando-un-formulario-de-contacto-con-emailjs-in-react
+https://dev.to/gedgonz/haciendo-deploy-de-una-app-en-react-a-github-pages-95p
+
+
+
 maquetación nueva
