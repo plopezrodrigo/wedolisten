@@ -60,7 +60,7 @@ const LocalCard = (props) => {
             }
             {comentarios ? comentarios.length : 0} Opiniones
             </div>
-            <p className="mt-1" id="localcardtext">{props.description.substring(0,50)}...</p>
+            <p className="mt-1" id="localcardtext">{props.description.substring(0,60)}...</p>
             <div className="mt-0">
             {/* <Link to="/opinionUser/:id_local/:id_comment">
               <button id="iconbutton"><i className="far fa-comment" /></button>
