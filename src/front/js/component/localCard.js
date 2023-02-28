@@ -13,15 +13,6 @@ const LocalCard = (props) => {
   const [local, setLocales] = useState({});
   const [isModalOpened, setIsModalOpened, toggleModal] = useModal(false);
 
-  const handleClick = () => {
-    actions.login(data.email, data.password).then((response) => {
-    if (response) navigate("/");
-    else{ setMensaje("Su mensaje ha sido enviado correctamente");
-          toggleModal();
-        } 
-    })
-  };
- 
 
     const add_favourites = (id) => {
       if (sessionStorage.getItem("token")){
@@ -69,7 +60,7 @@ const LocalCard = (props) => {
             }
             {comentarios ? comentarios.length : 0} Opiniones
             </div>
-            <p className="mt-1" id="localcardtext">Española, Contemporánea €€€</p>
+            <p className="mt-1" id="localcardtext">{props.description}</p>
             <div className="mt-0">
             {/* <Link to="/opinionUser/:id_local/:id_comment">
               <button id="iconbutton"><i className="far fa-comment" /></button>
