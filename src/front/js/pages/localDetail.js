@@ -124,31 +124,25 @@ const LocalDetail = (props) => {
           <div className="col-3">
             <div className="card" id="card2">
               <div className="card-body">
-              <h5 className="card-title">Características a destacar</h5>
+              <h5 className="card-title ms-3">Características a destacar</h5>
           <ul className="list-group list-group-flush" >
             <li className="list-group-item">
-              <input type="checkbox" checked={(local.trona) ? "checked" : "" } className="form-check-input" id="Input_trona"/>
-              <label className="form-check-label" for="Input_trona">Trona</label>
+            <label className={`form-check-label ${(local.trona) ? "" : "tachado" }` } for="Input_trona">Trona</label>
             </li>
             <li className="list-group-item">
-              <input type="checkbox" checked={(local.cambiador) ? "checked" : "" } className="form-check-input" id="Input_cambiador"/>
-              <label className="form-check-label" for="Input_cambiador">Cambiador</label>
+            <label className={`form-check-label ${(local.cambiador) ? "" : "tachado" }` } for="Input_cambiador">Cambiador</label>
             </li>
             <li className="list-group-item">
-              <input type="checkbox" checked={(local.accesible) ? "checked" : "" } className="form-check-input" id="Input_accesible"/>
-              <label className="form-check-label" for="Input_accesible">Accesible con carrito</label>
+            <label className={`form-check-label ${(local.accesible_carrito) ? "" : "tachado" }` } for="Input_productos_higiene">Accesible con carrito</label>
             </li>
             <li className="list-group-item">
-              <input type="checkbox" checked={(local.espacio_carrito) ? "checked" : "" } className="form-check-input" id="Input_espacio_carrito"/>
-              <label className="form-check-label" for="Input_espacio_carrito">Espacio Carrito</label>
+            <label className={`form-check-label ${(local.espacio_carrito) ? "" : "tachado" }` } for="Input_espacio_carrito">Espacio para carrito</label>
             </li>
             <li className="list-group-item">
-              <input type="checkbox" checked={(local.ascensor) ? "checked" : "" } className="form-check-input" id="Input_ascensor"/>
-              <label className="form-check-label" for="Input_ascensor">Ascensor</label>
+            <label className={`form-check-label ${(local.ascensor) ? "" : "tachado" }` } for="Input_ascensor">Ascensor</label>
             </li>
             <li className="list-group-item">
-              <input type="checkbox" checked={(local.productos_higiene) ? "checked" : "" } className="form-check-input" id="Input_productos_higiene"/>
-              <label className="form-check-label" for="Input_productos_higiene">Productos higiene</label>
+              <label className={`form-check-label ${(local.productos_higiene) ? "" : "tachado" }` } for="Input_productos_higiene">Productos higiene</label>
             </li>
           </ul>
             </div>
