@@ -147,8 +147,7 @@ const LocalDetail = (props) => {
               <label className="form-check-label" for="Input_ascensor">Ascensor</label>
             </li>
             <li className="list-group-item">
-              <input type="checkbox" checked={(local.productos_higiene) ? "checked" : "" } className="form-check-input" id="Input_productos_higiene"/>
-              <label className="form-check-label" for="Input_productos_higiene">Productos higiene</label>
+              <label className={`form-check-label ${(local.productos_higiene) ? "" : "tachado" }` } for="Input_productos_higiene">Productos higiene</label>
             </li>
           </ul>
             </div>

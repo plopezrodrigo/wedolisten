@@ -9,7 +9,7 @@ export const Account = () => {
   return (
     <form>
       <div className="vh-100 gradient-custom">
-        <div className="container text-center">
+        <div className="container">
           <h4 className="my-account-section-title ma-title" id="iconbutton">
             Mi cuenta 
           </h4>
@@ -17,15 +17,15 @@ export const Account = () => {
           <p className="my-account-section-description mt-0 mb-4">Aquí puedes ver tus locales favoritos, editar tus datos o realizar cualquier gestión</p>
           <div className="row d-flex justify-content-center h-100">
             <div className="col-12 col-md-8 col-lg-6 col-xl-5">
-              <div className="card" id="card">
+              <div className="card d-flex flex-column justify-content-start" id="card">
                 <div className="ma-home-sections">
                     <p className="text ma-home-section mt-3 mb-3">
                     <Link to="/data">
-                      <i className="fas fa-user-edit" id="iconaccount" />
-                      <strong className="strong"> Mis datos</strong>
+                      <i className="fas fa-user-edit " id="iconaccount" />
+                      <strong className="strong "> Mis datos</strong>
                     </Link>
                     </p>
-                    <p className="description">Edita tus datos personales.</p>
+                    <p className="description ">Edita tus datos personales.</p>
                     {store.usertype == "customer" ? 
                       <>
                         <p className="text ma-home-section">
