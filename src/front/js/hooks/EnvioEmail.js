@@ -1,13 +1,14 @@
 import { useRef } from 'react';
-//import emailjs from '@emailjs/browser';
+import emailjs from '@emailjs/browser';
 
-export const EnvioEmail = (datos) => {
-    const form = useRef();
+export const EnvioEmail = (form, setMensaje, toggleModal) => {
 
-    emailjs.sendForm(process.env.SERVICE_ID, process.env.TEMPLATE_ID, form.current, process.env.PUBLIC_KEY)
+    emailjs.sendForm(process.env.EMAIL_SERVICE_ID, process.env.EMAIL_TEMPLATE_ID, form.current, process.env.EMAIL_PUBLIC_KEY)
         .then((result) => {
-            console.log(result.text);
+            setMensaje("Correo enviado satisfactoriamente");
+            toggleModal();
         }, (error) => {
-            console.log(error.text);
-                });
+            setMensaje(error.text)
+            toggleModal();
+        });
 };

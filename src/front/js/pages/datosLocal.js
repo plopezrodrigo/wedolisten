@@ -24,7 +24,7 @@ export const DatosLocal = () => {
     );
 
     if (resp.ok) return await resp.json();
-    else return setMensaje(await resp.json()); 
+    else         return setMensaje(await resp.json()); 
   };
 
   useEffect(() => {
@@ -34,9 +34,13 @@ export const DatosLocal = () => {
 
     miUseEffect().then((resp) => setLocal(resp)); 
 
+    console.log("Para Fotos:", local);
+
     miUseEffectFotos().then((resp) => {
-      if (resp[0].location){ setLocalFotos({ ...localFotos, "image_url1": resp[0].location }); }
-      if (resp[1].location){ setLocalFotos({ ...localFotos, "image_url2": resp[1].location }); }
+      console.log("Fotos:", resp);
+      //if (resp[0].location){ setLocalFotos({ ...localFotos, "image_url1": resp[0].location }); }
+      //if (resp[1].location){ setLocalFotos({ ...localFotos, "image_url2": resp[1].location }); }
+      console.log("Fotos1:", localFotos);
     }); 
 
   }, []);

@@ -1,46 +1,41 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useRef , useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import CustomModal from "../component/customModal";
 import { useModal } from "../hooks/UseModal";
+import emailjs from '@emailjs/browser';
+import { EnvioEmail } from "../hooks/EnvioEmail";
 
 
 export const Contact = (props) => {
   const { store, actions } = useContext(Context);
-  const params = useParams();
   const [isModalOpened, setIsModalOpened, toggleModal] = useModal(false);
   const [mensaje, setMensaje] = useState(null);
   const [formData, setFormData] = useState();
   const navigate = useNavigate();
+  const form = useRef();
 
+  const submit = (e) => {
+    e.preventDefault();
+
+    EnvioEmail(form, setMensaje, toggleModal);
+
+    /*
+    emailjs.sendForm(process.env.EMAIL_SERVICE_ID, process.env.EMAIL_TEMPLATE_ID, form.current, process.env.EMAIL_PUBLIC_KEY)
+    .then((result) => {
+        setMensaje("Correo enviado stisfactroiamente");
+        toggleModal();
+    }, (error) => {
+        setMensaje(error.text)
+        return false;
+    });
+   */
+    return true;
+  };
 
 	const handleChange = (evento) =>{
 		setFormData({...formData, [evento.target.name]: evento.target.value});
-	}
-
-	const handleClick = (evento)=>{
-		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
-		console.log("A ver que token", sessionStorage.getItem("token"));
-
-		fetch(`${process.env.BACKEND_URL}/api/comment/${params.id_comment}`,		
-			{method: 'POST',
-				headers:{"Content-Type": "application/json",
-				"Authorization": 'Bearer '+ sessionStorage.getItem("token"), 
-			},
-			body: JSON.stringify(formData),
-			})
-		.then(response => {
-			if (response.status == 200){ 
-				setMensaje("Respuesta cargada correctamente")
-				toggleModal();
-			}else{ 
-				setMensaje("En breve, recibirás noticias nuestras")
-				toggleModal();
-			}
-		})
-	}
-
-  
+	}  
 
   return (
     <div className="bg-contact3">
@@ -53,7 +48,7 @@ export const Contact = (props) => {
             <div className="col-12 col-md-8 col-lg-6 col-xl-5 ">
               <div className="card px-3" id="card">
                 <h3 className="mt-3" id="iconbutton">Escríbenos</h3>
-                  <form className="form-outline" noValidate>
+                  <form ref={form} className="form-outline" noValidate>
                     <div className="col-md-12">
                       <label htmlFor="InputEmail1" className="alinear-izquierda">Nombre y Apellidos</label>
                       <input  className="form-control mb-2"
@@ -122,9 +117,8 @@ export const Contact = (props) => {
                     <div className="form-button mt-3 mb-3">
                     <button
                         className="mb-3 col-md-12 btn-lg px-5 mb-3 mt-3"
-                        onClick={handleClick}
-                        id="button"
-                      >
+                        onClick={submit}
+                        id="button">
                         Enviar
                       </button>
                     </div>
