@@ -10,6 +10,7 @@ const LocalDetail = (props) => {
   const [local, setLocal] = useState({});
   // const [favoritos, setFavoritos] = useState({});
   const { store, actions } = useContext(Context);
+  const [formData, setFormData] = useState({});
   const [active, setActive] = useState(false);
   let options = {
     method: "GET",
@@ -60,6 +61,25 @@ const LocalDetail = (props) => {
         return response.json();
       })
   };
+
+  const handleSubmit = (evento)=>{
+		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
+
+    if (formData.buscar.length > 0){
+        actions.cargaComentarios(formData.buscar).then((response) => {
+              if (response){
+                  navigate("/comentarios");
+              }else{
+                  setMensaje(store.message);
+                  toggleModal();
+              }
+        })
+    }
+  }
+
+  const handleChange = (evento) =>{
+		setFormData({...formData, [evento.target.name]: evento.target.value}); 
+	}
 
   return (
     <div className="container fluid">
@@ -223,13 +243,23 @@ const LocalDetail = (props) => {
           </div>
         </div>
       </div>
-
       <div className="row" id="ubicacion">
-        
-
       </div>
       <div className="row ms-2" id="rating">
-        <h3 className="mb-3" id="descripcion">Lee lo que otros usuarios opinan:</h3>
+        <div className="col-6">
+        <h4 className="mb-3" id="descripcion">Lee lo que otros usuarios opinan:</h4>
+        </div>
+        <div className="col-6 alinear-derecha">
+        {store.usertype == "customer" &&
+        <Link to={`/OpinionUser/${params.id}/0`} className="btn btn-outline-primary mb-3 alinear-derecha me-5" id="button">
+          Escribe tu opinión
+        </Link>  
+       }
+        </div>
+        <form onSubmit={handleSubmit}>
+          <input name="buscar" id="inputbuscar" className="form-control mt-4 mr-2" type="search" placeholder="Buscar" aria-label="Buscar"onChange={handleChange}/>
+          <button className="" type="submit" id="iconbutton"></button>
+        </form>
         {comentarios && comentarios.map((comentario, index)=>{   
             return<> 
                 <div key={comentario.id}>
@@ -246,16 +276,6 @@ const LocalDetail = (props) => {
             })
         }
       </div>
-      {store.usertype == "customer" &&
-          <p className="text ma-home-section">  
-            <Link to={`/OpinionUser/${params.id}/0`}>
-            <a>
-              <i className="fas fa-star" id="button" />
-              <strong className="strong"> Escribe tu opinión</strong>
-            </a>
-            </Link>
-          </p>
-      }
     </div>
   );
 };
