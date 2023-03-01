@@ -150,3 +150,18 @@ body {
 .tachado{
   text-decoration: line-through
 }
+#banner{
+  height: 200px;
+  width: 500px;
+  margin-left: 15px;
+  background-color: rgb(242, 248, 252);
+}
+#buttonbanner {
+  background-color: #ffccf4;
+  color: #5e2e2e;
+  border-color: #ff69de;
+  border-width: 3px;
+  border-radius: 20px;
+  font-weight: bold;
+  width: 150px;
+}

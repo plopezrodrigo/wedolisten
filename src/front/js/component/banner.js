@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
-import imagen from "../../img/manager.png";
+import imagen from "../../img/banner.jpg";
 
 
 const Banner = (props) => {
@@ -12,21 +12,18 @@ const Banner = (props) => {
     {(store.usertype != "customer") &&  
         <div className="row mb-5 pb-md-4 align-items-center">
           <div className="col-md-5">
-            <h2 className="display-5 fw-normal">Publicita tu local y recibe más clientes</h2>
-            <p className="lead fw-normal">Añade tu local a nuetra red para aumentar tus visitas y que vean lo bien que funciona!!{" "}</p>
-            {!(sessionStorage.getItem("token")) ?
-                <Link to="/signupManager" className="btn btn-lg btn-outline-primary mb-3" id="button">
-                    Registro
+            <div className="card" id="banner">
+            <h5 className="ms-3 mt-3">La guía definitiva para los más pequeños</h5>
+            <p className="ms-3 me-3">La verdadera diversión empieza cuando lo disfrutas con los más pequeños{" "}</p>
+                <Link to="/signupManager" className="btn btn-primary ms-3" id="buttonbanner">
+                    Leer más
                 </Link> 
-              :
-                <Link to="/misLocales" className="btn btn-lg btn-outline-primary mb-3" id="button">
-                    Mis locales
-                </Link>        
-            }
+            </div>
+  
           </div>
           <div className="col-md-7 ps-md-5">
             <img  src={imagen}
-                  className="card-img-top"
+                  className="imagenbanner"
                   alt=""
             />
           </div>
@@ -37,4 +34,4 @@ const Banner = (props) => {
   );
 };
 
-export default  ManagerInfo;
+export default  Banner;

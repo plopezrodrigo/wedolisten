@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import OpinionCarddetail from "../component/opinionCarddetail";
+import Banner from "../component/banner";
 import { useParams, Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
@@ -239,6 +240,7 @@ const LocalDetail = (props) => {
       </div>
       <div className="row" id="ubicacion">
       </div>
+      <div><Banner/></div>
       <div className="row ms-2" id="rating">
         <div className="col-6">
         <h4 className="mb-3" id="descripcion">Lee lo que otros usuarios opinan:</h4>
