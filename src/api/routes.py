@@ -39,8 +39,20 @@ def list_Comercial_Places():
 
     comercials = []
     for comercial in comercial_places:
-        q = db.session.query(Rate_Customer.comercial_place_id, Rate_Customer.rate, func.count('*').label('total_count')).filter_by(comercial_place_id=comercial.id).group_by(Rate_Customer.comercial_place_id,  Rate_Customer.rate).subquery()
-        result = db.session.query(Comercial_Place, q.c.total_count, q.c.rate).filter_by(id=comercial.id).outerjoin(q, Comercial_Place.id==q.c.comercial_place_id).all()
+        q = db.session.query(
+            Rate_Customer.comercial_place_id, 
+            Rate_Customer.rate, 
+            func.count(
+                '*').label(
+                'total_count')).filter_by(
+                comercial_place_id=comercial.id).group_by(
+                    Rate_Customer.comercial_place_id,  
+                    Rate_Customer.rate).subquery()
+        result = db.session.query(
+            Comercial_Place, q.c.total_count, q.c.rate).filter_by(
+                id=comercial.id).outerjoin(
+                    q, 
+                    Comercial_Place.id==q.c.comercial_place_id).all()
         total = 0
         count = 0
 
@@ -244,9 +256,18 @@ def list_Comments():
     return jsonify(data), 200
 
 # ----------------------------------------------------------------------------
+# Búsqueda de comentarios
+# ----------------------------------------------------------------------------
+@api.route('/search/<search>', methods=['GET'])
+def list_search(search):
+    datos = Comment.query.filter_by(Comment.id.desc()).limit(4).all()
+    data = [comentario.serialize() for comentario in datos]
+    return jsonify(data), 200
+
+# ----------------------------------------------------------------------------
 # Un comentario
 # ----------------------------------------------------------------------------
-@api.route('/comment/<id>', methods=['GET'])
+@api.route('/comment/<int:id>', methods=['GET'])
 def get_comment(id):
     datos = Comment.query.get(id)
     return jsonify(datos.serialize()), 200
@@ -401,9 +422,7 @@ def Comercial_Place_add():
                                            location   = request.json.get('image_url2'))
             db.session.add(photos)
 
-        db.session.commit()
-
-
+        db.session.commit();
 
         return jsonify({"msg": "Usuario creado correctamente"}), 200
 
@@ -559,8 +578,8 @@ def Comments_user_add(id_comment):
 # Favoritos 
 # ----------------------------------------------------------------------------
 
-@api.route('/deletefavourit/<id>', methods=['DELETE'])
-@jwt_required()
+@api.route('/deletefavourit/<int:id>', methods=['DELETE'])
+# @jwt_required()
 def delete_Favourit(id):
     try:
         favourit = Favourit.query.filter_by(id=id).first()

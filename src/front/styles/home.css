@@ -157,6 +157,17 @@ body {
   width: 570px;
   height: 200px;
 }
+
+.imagenDetalle{
+  width: 600px;
+  height: 342px;
+}
+.imagenDetallePeq{
+  width: 250px;
+  height: 171px;
+}
+
+
 /* .section {
   position: relative;
   background-repeat: repeat-x;
