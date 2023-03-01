@@ -8,7 +8,7 @@ const LocalDetail = (props) => {
   const params = useParams();
   const [comentarios, setComentarios] = useState();
   const [local, setLocal] = useState({});
-  // const [favoritos, setFavoritos] = useState({});
+  const [localFotos, setLocalFotos] = useState({"image_url1": "", "image_url2": ""});
   const { store, actions } = useContext(Context);
   const [active, setActive] = useState(false);
   let options = {
@@ -25,7 +25,16 @@ const LocalDetail = (props) => {
     .then(res=>{return res.json()})
     .then(data=>{setComentarios(data);
     })
- }
+  }
+
+  const miUseEffectFotos = async () => {
+    const resp = await fetch(`${process.env.BACKEND_URL}/api/Photo_Comercial_Place/${params.id}`
+    );
+
+    if (resp.ok) return await resp.json();
+    else         return setMensaje(await resp.json()); 
+  };
+
 
   useEffect(() => { 
     if (sessionStorage.getItem("token") != null) {
@@ -34,18 +43,25 @@ const LocalDetail = (props) => {
         Authorization: "Bearer " + sessionStorage.getItem("token"),
       };
     }
-    fetch(`${process.env.BACKEND_URL}/api/comercial-place/${params.id}`,
-          options
-    )
-      .then((response) => { 
-        return response.json();
-      })
-      .then((response) => {
-        setLocal(response);
-        setActive(response.favorite)
-      });
+    fetch(`${process.env.BACKEND_URL}/api/comercial-place/${params.id}`, options)
+    .then((response) => { 
+      return response.json();
+    })
+    .then((response) => {
+      setLocal(response);
+      setActive(response.favorite)
+    });
 
-      useEffectComments();
+    miUseEffectFotos().then((resp) => {
+      console.log("Fotos:", resp);
+      if (resp[0].location){ setLocalFotos({ ...localFotos, "image_url1": resp[0].location }); }
+      if (resp[1].location){ setLocalFotos({ ...localFotos, "image_url2": resp[1].location }); }
+      console.log("Fotos1:", localFotos);
+    }); 
+
+
+    useEffectComments();
+
   }, []);
 
   const add_favourites = (id) => {
@@ -135,29 +151,12 @@ const LocalDetail = (props) => {
           </div>
           </div>
           <div className="col-6">
-          <img 
-            src={local.image_url}
-            className="imagenDetalle"
-            width="600px"
-            height="342px"
-            alt={local.image_url}
-          />
+            <img src={local.image_url} className="imagenDetalle" alt={local.image_url}/>
           </div>
           <div className="col-3">
             <div className="row" id="card2">
-            <img
-              src={local.image_url}
-              className="imagenDetalle"
-              width="212px"
-              height="171px"
-              alt={local.image_url}
-            />
-            <img
-              src={local.image_url}
-              width="212px"
-              height="171px"
-              alt={local.image_url}
-            />
+              <img src={localFotos.image_url1 ? localFotos.image_url1: local.image_url} className="imagenDetallePeq" alt={local.image_url} />
+              <img src={localFotos.image_url2 ? localFotos.image_url2: local.image_url} className="imagenDetallePeq" alt={local.image_url} />
             </div>  
           </div>
         </div>
