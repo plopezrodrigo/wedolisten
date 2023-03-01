@@ -12,13 +12,26 @@ from sqlalchemy.sql import func
 api = Blueprint('api', __name__)
 
 
+# ----------------------------------------------------------------------------
+# Listasdo de Customers
+# ----------------------------------------------------------------------------
 @api.route('/Customer', methods=['GET'])
 def list_customers():
     Customers = Customer.query.all()
     data = [Customer.serialize() for Customers in Customer]
     return jsonify(data), 200
 
+# ----------------------------------------------------------------------------
+# Un Customer
+# ----------------------------------------------------------------------------
+@api.route('/GetCustomer/<id>', methods=['GET'])
+def get_customer(id):
+    datos = Customer.query.filter_by(user_id=id).first()
+    return jsonify(datos.serialize()), 200
 
+# ----------------------------------------------------------------------------
+# Lsitado de Managers
+# ----------------------------------------------------------------------------
 @api.route('/Manager', methods=['GET'])
 def list_Managers():
     Managers = Manager.query.all()

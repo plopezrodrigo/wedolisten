@@ -100,6 +100,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         sessionStorage.removeItem("email");
         setStore({ email: null });
+
+        setStore({ user: null });
+        setStore({ usuario: null });
       },
 
       // -------------------------------------------------------------------

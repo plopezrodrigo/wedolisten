@@ -10,7 +10,9 @@ const Login = () => {
   const [data, setData] = useState({});
 	const [mensaje, setMensaje] = useState(null);
   const [shown, setShown] = useState(false);
-  const navigate = useNavigate();
+  const [tituloModal, setTituloModal] = useState("Ha surgido un problema");
+  const [salir, setSalir] = useState(false);
+  const navigate = useNavigate(); 
   const [isModalOpened, setIsModalOpened, toggleModal] = useModal(false);
 
 
@@ -21,12 +23,7 @@ const Login = () => {
   }, []);
 
   const switchShown = () => setShown(!shown);
-
-  const handleChangePwd = (e) => {
-    handleChange(e);
-    setPassword(e.target.value);
-  };
-    
+  
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
@@ -34,11 +31,35 @@ const Login = () => {
   const handleClick = () => {
     console.log(data.password);
     actions.login(data.email, data.password).then((response) => {
-    if (response) navigate("/");
-    else{ setMensaje("Las credenciales no son correctas");
-          toggleModal();
+    if (response){ 
+           setTituloModal("Todo OK");
+           setMensaje("Las credenciales están superbien");
+           toggleModal();
+           setSalir(true);
+    }else{ setMensaje("Las credenciales no son correctas");
+           toggleModal();
         } 
     })
+  };
+
+
+  const datosCustomer = async (id) => {
+    const resp = await fetch(`${process.env.BACKEND_URL}/api/GetCustomer/${id}`
+    );
+  
+    if (resp.ok) return await resp.json();
+    else         return setMensaje(await resp.json()); 
+  };
+  
+  const salimos = () => {
+      if (store.usertype == "customer"){
+        datosCustomer(store.user.id).then((resp) => {
+            console.log("Customer:", resp);
+            if (!(resp.name) || !(resp.birthday) || !(resp.gender) || !(resp.address) || !(resp.telefono))
+              navigate("/data");
+          }); 
+      }
+      navigate("/");
   };
 
   return (
@@ -82,20 +103,11 @@ const Login = () => {
                         <a href="#!">¿Olvidaste la contraseña?</a>
                       </p>
                       <div className="form-check alinear-izquierda2">
-                      <input  className="form-check-input"
-                              type="checkbox"
-                              value=""
-                              id="invalidCheck"
-                              required
-                      />
+                      <input  className="form-check-input" type="checkbox" value="" id="invalidCheck" required />
                       <label className="form-check-label alinear-izquierda2"> Confirmo que he leido y acepto la Política de Privacidad y Aviso Legal.</label>
                       <div className="invalid-feedback">Por favor, confirma que has leido y aceptas la Política de Privacidad y Aviso Legal.</div>
                       </div>
-                      <button
-                        className="mb-3 col-md-12 btn-lg px-5 mb-3 mt-3"
-                        onClick={handleClick}
-                        id="button"
-                      >
+                      <button className="mb-3 col-md-12 btn-lg px-5 mb-3 mt-3" onClick={handleClick} id="button">
                         Iniciar Sesión
                       </button>
                     </div>
@@ -112,10 +124,11 @@ const Login = () => {
       </div>
 
       <CustomModal  show={isModalOpened}
-                    titulo="Ha surgido un problema"
+                    titulo={tituloModal}
                     handleClose={() => setIsModalOpened(false)}>
         <div>{mensaje}</div>
       </CustomModal>
+      {(salir) && salimos()}
     </div>
   );
 };
