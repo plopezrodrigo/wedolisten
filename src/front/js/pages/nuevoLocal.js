@@ -77,7 +77,7 @@ export const NuevoLocal = () => {
 													</div>
 												</div>
 												<br />
-
+											</div>
 											<div className="form-group">
 												<label className="alinear-izquierda mb-2" htmlFor="Inputurl1">Información de contacto</label>
 												<input type="text" name="url" className="form-control mb-1" id="Inputurl1" aria-describedby="urlHelp" placeholder="Página web" onChange={handleChange} />
@@ -151,7 +151,6 @@ export const NuevoLocal = () => {
 									{(mensaje != null) && <p>{mensaje}</p>}
 								</div>
 							</form>				  
-
 						</div>
 					</div>
 				</div>
