@@ -401,9 +401,7 @@ def Comercial_Place_add():
                                            location   = request.json.get('image_url2'))
             db.session.add(photos)
 
-        db.session.commit()
-
-
+        db.session.commit();
 
         return jsonify({"msg": "Usuario creado correctamente"}), 200
 

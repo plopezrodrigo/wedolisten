@@ -24,7 +24,7 @@ export const DatosLocal = () => {
     );
 
     if (resp.ok) return await resp.json();
-    else return setMensaje(await resp.json()); 
+    else         return setMensaje(await resp.json()); 
   };
 
   useEffect(() => {
@@ -34,9 +34,13 @@ export const DatosLocal = () => {
 
     miUseEffect().then((resp) => setLocal(resp)); 
 
+    console.log("Para Fotos:", local);
+
     miUseEffectFotos().then((resp) => {
+      console.log("Fotos:", resp);
       if (resp[0].location){ setLocalFotos({ ...localFotos, "image_url1": resp[0].location }); }
       if (resp[1].location){ setLocalFotos({ ...localFotos, "image_url2": resp[1].location }); }
+      console.log("Fotos1:", localFotos);
     }); 
 
   }, []);
@@ -83,9 +87,9 @@ export const DatosLocal = () => {
             <form onSubmit={handleSubmit}>
               <div className="form-group py-3 m-0 img-responsive">
                 <img src={local.image_url} className="imagenLocal" alt="" />
-                <input type="text" name="image_url"  defaultValue={local.image_url} required className="form-control imagenLocal" id="Inputimage_url"  aria-describedby="image_urlHelp" placeholder="image principal" onChange={handleChange} />
-                <input type="text" name="image_url1" defaultValue={localFotos.image_url1 ? localFotos.image_url1:""} className="form-control imagenLocal" id="Inputimage_url1" aria-describedby="image_urlHelp" placeholder="Otra image"      onChange={handleChange} />
-                <input type="text" name="image_url2" defaultValue={localFotos.image_url2 ? localFotos.image_url2:""} className="form-control imagenLocal" id="Inputimage_url2" aria-describedby="image_urlHelp" placeholder="Otra image"      onChange={handleChange} />
+                <input type="text" name="image_url"  defaultValue={local.image_url} required                       className="form-control imagenLocal" id="Inputimage_url"  aria-describedby="image_urlHelp" placeholder="image principal" onChange={handleChange} />
+                <input type="text" name="image_url1" defaultValue={localFotos.image_url1 && localFotos.image_url1} className="form-control imagenLocal" id="Inputimage_url1" aria-describedby="image_urlHelp" placeholder="Otra imagen" onChange={handleChange} />
+                <input type="text" name="image_url2" defaultValue={localFotos.image_url2 && localFotos.image_url2} className="form-control imagenLocal" id="Inputimage_url2" aria-describedby="image_urlHelp" placeholder="Otra imagen" onChange={handleChange} />
               </div>
 
               <div className="form-group">

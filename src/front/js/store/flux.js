@@ -158,6 +158,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                                              },
                                      body: JSON.stringify(formData),
                                     });
+
+
+                                    
           if (resp.ok){
               setStore({ message: "Local creado correctamente" });
               return true;

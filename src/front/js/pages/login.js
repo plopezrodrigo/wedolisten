@@ -67,13 +67,13 @@ const Login = () => {
                       <label className="form-label alinear-izquierda" htmlFor="typeEmailX">Contraseña</label>
                       <div className="col-md-12">
                         <div className="input-group">
-                          <input  ID="typePasswordX-2" 
+                          <input  id="typePasswordX-2" 
                                   type={shown ? 'text' : 'password'}
                                   className="form-control mb-2 me-2"
                                   name="password"
                                   onChange={handleChange} 
                           />
-                          <div class="input-group-append">
+                          <div className="input-group-append">
                             <button id="iconbutton3" className="btn btn-primary" type="button" onClick={switchShown}> <span className={shown ? "fas fa-eye-slash": "far fa-eye" }  id="iconbutton4"></span> </button>
                           </div>
                         </div>
@@ -100,14 +100,9 @@ const Login = () => {
                       </button>
                     </div>
                   <div>
-                      <p className="ms-3 me-3 mb-3 text-center">
-                      ¿No tienes una cuenta?
-                      <p className="ms-3 me-3 mt-3 text-center">
-                      <Link to="/signupUser">
-                      <strong className="strong "> Registrate </strong>
-                      </Link>
-                      para descubrir lo mejor de Baby Friendly</p>
-                    </p>
+                      <p className="ms-3 me-3 mb-3 text-center">¿No tienes una cuenta?</p>
+                      <Link to="/signupUser"><strong className="strong "> Registrate </strong></Link>
+                      <p className="ms-3 me-3 mt-3 text-center">para descubrir lo mejor de Baby Friendly</p>
                   </div>
                 </div>
               </div>
