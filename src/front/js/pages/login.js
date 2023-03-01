@@ -12,7 +12,7 @@ const Login = () => {
   const [shown, setShown] = useState(false);
   const [tituloModal, setTituloModal] = useState("Ha surgido un problema");
   const [salir, setSalir] = useState(false);
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
   const [isModalOpened, setIsModalOpened, toggleModal] = useModal(false);
 
 
@@ -42,7 +42,23 @@ const Login = () => {
     })
   };
 
+
+  const datosCustomer = async (id) => {
+    const resp = await fetch(`${process.env.BACKEND_URL}/api/GetCustomer/${id}`
+    );
+  
+    if (resp.ok) return await resp.json();
+    else         return setMensaje(await resp.json()); 
+  };
+  
   const salimos = () => {
+      if (store.usertype == "customer"){
+        datosCustomer(store.user.id).then((resp) => {
+            console.log("Customer:", resp);
+            if (!(resp.name) || !(resp.birthday) || !(resp.gender) || !(resp.address) || !(resp.telefono))
+              navigate("/data");
+          }); 
+      }
       navigate("/");
   };
 

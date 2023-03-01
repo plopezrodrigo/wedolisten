@@ -32,7 +32,7 @@ export const DatosLocal = () => {
       navigate.push("/login");
     }
 
-    miUseEffect().then((resp) => setLocal(resp)); 
+    miUseEffect().then((resp) => setLocal(resp));  
 
     console.log("Para Fotos:", local);
 
@@ -87,9 +87,9 @@ export const DatosLocal = () => {
             <form onSubmit={handleSubmit}>
               <div className="form-group py-3 m-0 img-responsive">
                 <img src={local.image_url} className="imagenLocal" alt="" />
-                <input type="text" name="image_url"  defaultValue={local.image_url} required                       className="form-control imagenLocal" id="Inputimage_url"  aria-describedby="image_urlHelp" placeholder="image principal" onChange={handleChange} />
-                <input type="text" name="image_url1" defaultValue={localFotos.image_url1 && localFotos.image_url1} className="form-control imagenLocal" id="Inputimage_url1" aria-describedby="image_urlHelp" placeholder="Otra imagen" onChange={handleChange} />
-                <input type="text" name="image_url2" defaultValue={localFotos.image_url2 && localFotos.image_url2} className="form-control imagenLocal" id="Inputimage_url2" aria-describedby="image_urlHelp" placeholder="Otra imagen" onChange={handleChange} />
+                <input type="url" name="image_url"  defaultValue={local.image_url} required                       className="form-control imagenLocal" id="Inputimage_url"  aria-describedby="image_urlHelp" placeholder="image principal" onChange={handleChange} />
+                <input type="url" name="image_url1" defaultValue={localFotos.image_url1 && localFotos.image_url1} className="form-control imagenLocal" id="Inputimage_url1" aria-describedby="image_urlHelp" placeholder="Otra imagen" onChange={handleChange} />
+                <input type="url" name="image_url2" defaultValue={localFotos.image_url2 && localFotos.image_url2} className="form-control imagenLocal" id="Inputimage_url2" aria-describedby="image_urlHelp" placeholder="Otra imagen" onChange={handleChange} />
               </div>
 
               <div className="form-group">
@@ -106,7 +106,7 @@ export const DatosLocal = () => {
               <div className="form-group">
                 <label htmlFor="Inputurl1">Información de contacto</label>
                 <input
-                  type="text"
+                  type="url"
                   name="url"
                   className="form-control"
                   id="Inputurl1"
@@ -127,7 +127,7 @@ export const DatosLocal = () => {
                   onChange={handleChange}
                 />
                 <input
-                  type="text"
+                  type="tel"
                   name="telf"
                   required
                   className="form-control"

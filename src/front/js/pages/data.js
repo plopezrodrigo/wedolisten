@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 
 export const Data = () => {
   const { store, actions } = useContext(Context);
+
   return (
     <>
       <div className="myDetails">
@@ -45,17 +46,54 @@ export const Data = () => {
                       <div className="valid-feedback">Campo Email es válido.</div>
                       <div className="invalid-feedback">Campo Email no puede estar en blanco.</div>
                     </div>
+
                     <div className="d-flex justify-content-center ms-3 me-3 mt-2">
                       <input  className="form-control p-2"
-                              type="telefono"
-                              name="Teléfono"
+                              type="tel"
+                              name="telefono"
                               placeholder="Teléfono"
-                              required
-                              defaultValue={store.user?.telefono}
+                              defaultValue={store.usuario?.telefono}
                       />
                       <div className="valid-feedback">Campo Teléfono es válido</div>
-                      <div className="invalid-feedback">Campo Teléfono no puede estar en blanco</div>
                     </div>
+                    <div className="d-flex justify-content-center ms-3 me-3 mt-2">
+                      <input  className="form-control p-2"
+                              type="date"
+                              name="birthday"
+                              placeholder="birthday"
+                              defaultValue={store.usuario?.birthday}
+                      />
+                      <div className="valid-feedback">Campo birthday es válido</div>
+                    </div>
+                    <div className="d-flex justify-content-center ms-3 me-3 mt-2">
+                      <select className="form-select mt-3" name="gender">
+                        <option >----- Elige una opción -----</option>
+                        <option value="female">Femenino</option>
+                        <option value="male">Masculino</option>
+                      </select>
+
+                      <div className="valid-feedback">Campo gender es válido</div>
+                    </div>
+                    <div className="d-flex justify-content-center ms-3 me-3 mt-2">
+                      <input  className="form-control p-2"
+                              type="text"
+                              name="subscription"
+                              placeholder="subscription"
+                              required
+                              defaultValue={store.usuario?.subscription}
+                      />
+                      <div className="valid-feedback">Campo subscription es válido</div>
+                    </div>
+                    <div className="d-flex justify-content-center ms-3 me-3 mt-2">
+                      <input  className="form-control p-2"
+                              type="text"
+                              name="address"
+                              placeholder="address"
+                              defaultValue={store.usuario?.address}
+                      />
+                      <div className="valid-feedback">Campo address es válido</div>
+                    </div>
+
                     <div className="d-flex justify-content-center ms-3 me-3 mt-2">
                       <input
                         className="form-control"
