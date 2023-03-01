@@ -144,4 +144,9 @@ body {
   font-size: small;
   font-weight: bold;
 }
-
+#inputbuscar{
+  width: 1050px;
+}
+.tachado{
+  text-decoration: line-through
+}

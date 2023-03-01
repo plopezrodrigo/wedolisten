@@ -7,34 +7,34 @@ import "../../styles/home.css";
 export const NuevoLocal = () => {
 	const [formData, setFormData] = useState({});
 
-	const [mensaje, setMensaje] = useState(null); 
+	const [mensaje, setMensaje] = useState(null);
 	const navigate = useNavigate();
 	const { store, actions } = useContext(Context);
-  
-    useEffect (()=> {
-		if (!(store.token && store.token != "" && store.token != undefined)) {
-			navigate("/login"); 
-		}
-    }, [])
 
-	const handleChange = (evento) =>{
-		setFormData({...formData, [evento.target.name]: evento.target.value});
+	useEffect(() => {
+		if (!(store.token && store.token != "" && store.token != undefined)) {
+			navigate("/login");
+		}
+	}, [])
+
+	const handleChange = (evento) => {
+		setFormData({ ...formData, [evento.target.name]: evento.target.value });
 	}
 
 	const handleChangecheck = (evento) => {
-		setFormData({...formData, [evento.target.name]: formData[evento.target.name] ? false : true})
-	  };
-	
-	const handleSubmit = async (evento)=>{
+		setFormData({ ...formData, [evento.target.name]: formData[evento.target.name] ? false : true })
+	};
+
+	const handleSubmit = async (evento) => {
 		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
 
 		if (actions.altaLocal(formData))
 			navigate("/misLocales");
 		else
-			return setMensaje(store.message);  
+			return setMensaje(store.message);
 	}
 
-	
+
 	return (
 		<div className="vh-100 gradient-custom">
 			<div className="container text-center">
@@ -48,6 +48,7 @@ export const NuevoLocal = () => {
 								<div className="row"> 
 									<div className="col-md-12">
 										{/*<form className="form-outline" onSubmit={handleSubmit}>*/}
+
 											<div className="form-group">
 												<p>{" "}</p>
 												<label className="alinear-izquierda" htmlFor="InputEmail1">Nombre del local</label>
@@ -68,7 +69,14 @@ export const NuevoLocal = () => {
 												<label className="alinear-izquierda" htmlFor="InputEmail1">Descripción</label>
 												<textarea name="description" required rows="3" cols="49" onChange={handleChange} ></textarea>
 											</div>
-											<br/>
+											<div className="form-group">
+												<div className="row alinear-izquierda-checkbox">
+													<div className="col-12">
+														<input type="checkbox" name="trona" className="form-check-input mx-2" id="InputTrona1" aria-describedby="tronaHelp" onChange={handleChangecheck} />
+														<label htmlFor="InputTrona1">Trona</label>
+													</div>
+												</div>
+												<br />
 
 											<div className="form-group">
 												<label className="alinear-izquierda mb-2" htmlFor="Inputurl1">Información de contacto</label>
@@ -143,10 +151,11 @@ export const NuevoLocal = () => {
 									{(mensaje != null) && <p>{mensaje}</p>}
 								</div>
 							</form>				  
+
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	  );
+				);
 };

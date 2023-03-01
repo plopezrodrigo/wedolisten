@@ -10,6 +10,7 @@ const LocalDetail = (props) => {
   const [local, setLocal] = useState({});
   const [localFotos, setLocalFotos] = useState({"image_url1": "", "image_url2": ""});
   const { store, actions } = useContext(Context);
+  const [formData, setFormData] = useState({});
   const [active, setActive] = useState(false);
   let options = {
     method: "GET",
@@ -77,6 +78,25 @@ const LocalDetail = (props) => {
       })
   };
 
+  const handleSubmit = (evento)=>{
+		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
+
+    if (formData.buscar.length > 0){
+        actions.cargaComentarios(formData.buscar).then((response) => {
+              if (response){
+                  navigate("/comentarios");
+              }else{
+                  setMensaje(store.message);
+                  toggleModal();
+              }
+        })
+    }
+  }
+
+  const handleChange = (evento) =>{
+		setFormData({...formData, [evento.target.name]: evento.target.value}); 
+	}
+
   return (
     <div className="container fluid">
       <div className="row">
@@ -120,31 +140,25 @@ const LocalDetail = (props) => {
           <div className="col-3">
             <div className="card" id="card2">
               <div className="card-body">
-              <h5 className="card-title">Características a destacar</h5>
+              <h5 className="card-title ms-3">Características a destacar</h5>
           <ul className="list-group list-group-flush" >
             <li className="list-group-item">
-              <input type="checkbox" checked={(local.trona) ? "checked" : "" } className="form-check-input" id="Input_trona"/>
-              <label className="form-check-label" for="Input_trona">Trona</label>
+            <label className={`form-check-label ${(local.trona) ? "" : "tachado" }` } for="Input_trona">Trona</label>
             </li>
             <li className="list-group-item">
-              <input type="checkbox" checked={(local.cambiador) ? "checked" : "" } className="form-check-input" id="Input_cambiador"/>
-              <label className="form-check-label" for="Input_cambiador">Cambiador</label>
+            <label className={`form-check-label ${(local.cambiador) ? "" : "tachado" }` } for="Input_cambiador">Cambiador</label>
             </li>
             <li className="list-group-item">
-              <input type="checkbox" checked={(local.accesible) ? "checked" : "" } className="form-check-input" id="Input_accesible"/>
-              <label className="form-check-label" for="Input_accesible">Accesible con carrito</label>
+            <label className={`form-check-label ${(local.accesible_carrito) ? "" : "tachado" }` } for="Input_productos_higiene">Accesible con carrito</label>
             </li>
             <li className="list-group-item">
-              <input type="checkbox" checked={(local.espacio_carrito) ? "checked" : "" } className="form-check-input" id="Input_espacio_carrito"/>
-              <label className="form-check-label" for="Input_espacio_carrito">Espacio Carrito</label>
+            <label className={`form-check-label ${(local.espacio_carrito) ? "" : "tachado" }` } for="Input_espacio_carrito">Espacio para carrito</label>
             </li>
             <li className="list-group-item">
-              <input type="checkbox" checked={(local.ascensor) ? "checked" : "" } className="form-check-input" id="Input_ascensor"/>
-              <label className="form-check-label" for="Input_ascensor">Ascensor</label>
+            <label className={`form-check-label ${(local.ascensor) ? "" : "tachado" }` } for="Input_ascensor">Ascensor</label>
             </li>
             <li className="list-group-item">
-              <input type="checkbox" checked={(local.productos_higiene) ? "checked" : "" } className="form-check-input" id="Input_productos_higiene"/>
-              <label className="form-check-label" for="Input_productos_higiene">Productos higiene</label>
+              <label className={`form-check-label ${(local.productos_higiene) ? "" : "tachado" }` } for="Input_productos_higiene">Productos higiene</label>
             </li>
           </ul>
             </div>
@@ -222,13 +236,23 @@ const LocalDetail = (props) => {
           </div>
         </div>
       </div>
-
       <div className="row" id="ubicacion">
-        
-
       </div>
       <div className="row ms-2" id="rating">
-        <h3 className="mb-3" id="descripcion">Lee lo que otros usuarios opinan:</h3>
+        <div className="col-6">
+        <h4 className="mb-3" id="descripcion">Lee lo que otros usuarios opinan:</h4>
+        </div>
+        <div className="col-6 alinear-derecha">
+        {store.usertype == "customer" &&
+        <Link to={`/OpinionUser/${params.id}/0`} className="btn btn-outline-primary mb-3 alinear-derecha me-5" id="button">
+          Escribe tu opinión
+        </Link>  
+       }
+        </div>
+        <form onSubmit={handleSubmit}>
+          <input name="buscar" id="inputbuscar" className="form-control mt-4 mr-2" type="search" placeholder="Buscar" aria-label="Buscar"onChange={handleChange}/>
+          <button className="" type="submit" id="iconbutton"></button>
+        </form>
         {comentarios && comentarios.map((comentario, index)=>{   
             return<> 
                 <div key={comentario.id}>
@@ -245,16 +269,6 @@ const LocalDetail = (props) => {
             })
         }
       </div>
-      {store.usertype == "customer" &&
-          <p className="text ma-home-section">  
-            <Link to={`/OpinionUser/${params.id}/0`}>
-            <a>
-              <i className="fas fa-star" id="button" />
-              <strong className="strong"> Escribe tu opinión</strong>
-            </a>
-            </Link>
-          </p>
-      }
     </div>
   );
 };
