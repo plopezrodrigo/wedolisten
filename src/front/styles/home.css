@@ -27,8 +27,8 @@ body {
   border: none;
   background-color: none;
 }
-#iconbutton{
-  color: #FF9500;
+#iconsocial{
+  color: #5e2e2e;
   border: none;
   background-color: none;
 }
@@ -165,6 +165,9 @@ body {
 .imagenDetallePeq{
   width: 250px;
   height: 171px;
+}
+.linkfooter{
+  text-decoration:none;
 }
 
 

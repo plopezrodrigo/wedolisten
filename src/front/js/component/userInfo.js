@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
-import imagen from "../../img/user.png";
+import imagen from "../../img/user2.png";
 import {tokenValid} from "../utils"
 
 
@@ -15,10 +15,8 @@ const UserInfo = (props) => {
 
       <div className="col-6">
       <img  src={imagen}
-            className="card-img-top"
+            className="card-img-top2"
             alt=""
-            width="500"
-            height="500"
       />
       </div>
       <div className="col-6">

@@ -44,11 +44,11 @@ const LocalCard = (props) => {
         src={props.image_url} 
         className="card-img-top"
         id="imagenlocal"
-        alt="" 
+        alt=""
         />
         <div className="card-body">
           <h6>
-            <Link to={`/localDetail/${props.id}`} className="card-title mb-1"><strong>{props.name}</strong></Link>
+            <Link to={`/localDetail/${props.id}`} className="card-title mb-1 linkfooter" id="cardtitle"><strong>{props.name}</strong></Link>
             <button id="iconbutton" onClick={()=>{add_favourites(props.id)}}> <i className="fas fa-heart"></i></button>
           </h6>
             <div>

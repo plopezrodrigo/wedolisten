@@ -35,25 +35,25 @@ export const Footer = () => (
           <h6 className="text-uppercase fw-bold mb-4">
             Secciones
           </h6>
-            <Link to="/">             <p id="textosfooter">Home</p>           </Link>
-            <Link to="/about">        <p id="textosfooter">Quienes somos</p>  </Link>
-            <Link to="/contact">      <p id="textosfooter">Contact</p>        </Link>
-            <Link to="/signupmanager"><p id="textosfooter">Gestores</p>       </Link>
+            <Link className="linkfooter" to="/">             <p id="textosfooter">Home</p>           </Link>
+            <Link className="linkfooter" to="/about">        <p id="textosfooter">Quienes somos</p>  </Link>
+            <Link className="linkfooter" to="/contact">      <p id="textosfooter">Contact</p>        </Link>
+            <Link className="linkfooter" to="/signupmanager"><p id="textosfooter">Gestores</p>       </Link>
           </div>
           <div className="col-md-3 col-lg-2 col-xl-2 mb-4">
           <h6 className="text-uppercase fw-bold mb-4" id="textosfooter">
             Links útiles
           </h6>
-          <Link to="/faqs">
+          <Link className="linkfooter" to="/faqs">
             <p id="textosfooter">FAQS</p>
           </Link>
-          <Link to="/avisolegal">
+          <Link className="linkfooter" to="/avisolegal">
             <p id="textosfooter">Aviso Legal</p>
           </Link>
-          <Link to="/politicaprivacidad">
+          <Link className="linkfooter" to="/politicaprivacidad">
             <p id="textosfooter">Política de Privacidad</p>
           </Link>
-          <Link to="/terminosdeuso">
+          <Link className="linkfooter" to="/terminosdeuso">
             <p id="textosfooter">Términos de uso</p>
           </Link>
           </div>
@@ -65,13 +65,13 @@ export const Footer = () => (
         <div className="me-5 d-none d-lg-block">
           <span className="me-3" id="textosfooter2">Conéctate con nosotros en redes sociales:</span>
           <a href="https://www.facebook.com/babyfriendly/?locale=es_LA" className="me-4 tex t-reset" >
-            <i className="fab fa-facebook-f" id="iconbutton"></i>
+            <i className="fab fa-facebook-f" id="iconsocial"></i>
           </a>
           <a href="https://twitter.com/babyfriendly?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor" className="me-4 text-reset">
-            <i className="fab fa-twitter" id="iconbutton"></i>
+            <i className="fab fa-twitter" id="iconsocial"></i>
           </a>
           <a href="https://twitter.com/babyfriendly?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor" className="me-4 text-reset" >
-          <i className="fab fa-instagram" id="iconbutton"></i>
+          <i className="fab fa-instagram" id="iconsocial"></i>
           </a>
         </div>
       </section>

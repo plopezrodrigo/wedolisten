@@ -117,7 +117,7 @@ const LocalDetail = (props) => {
           )}
         </div>
       </div>
-      <div className="row ms-1">
+      <div className="row ms-1 mb-2">
       <div>
         {Array.from(Array(5).keys()).map((e,i)=>{return props.raking <= i ? 
         (<i className="far fa-star" key={i} id="iconbutton"/>)
@@ -128,12 +128,12 @@ const LocalDetail = (props) => {
         {props.raking ? props.raking.length : 0} Opiniones
       </div>
         <div className="col-12 mt-2">
-          <p id="infolocal">
+          {/* <p id="infolocal">
             <i className="fas fa-map-marker-alt"></i> {local.address} -
             <i className="fas fa-laptop"></i> {local.url} -
             <i className="fas fa-phone"></i> {local.telf} -
             <i className="fas fa-envelope"></i> {local.email}
-          </p>
+          </p> */}
         </div>
       </div>
       <div className="container">
@@ -239,10 +239,10 @@ const LocalDetail = (props) => {
       </div>
       <div className="row" id="ubicacion">
       </div>
-      <div><Banner/></div>
+      <div className="mb-0"><Banner/></div>
       <div className="row ms-2" id="rating">
         <div className="col-6">
-        <h4 className="mb-3" id="descripcion">Lee lo que otros usuarios opinan:</h4>
+        <h4 className="mb-3 mt-0" id="descripcion">Lee lo que otros usuarios opinan:</h4>
         </div>
         <div className="col-6 alinear-derecha">
         {store.usertype == "customer" &&
@@ -251,10 +251,10 @@ const LocalDetail = (props) => {
         </Link>  
        }
         </div>
-        <form onSubmit={handleSubmit}>
+        {/* <form onSubmit={handleSubmit}>
           <input name="buscar" id="inputbuscar" className="form-control mt-4 mr-2" type="search" placeholder="Buscar" aria-label="Buscar"onChange={handleChange}/>
           <button className="" type="submit" id="iconbutton"></button>
-        </form>
+        </form> */}
         {comentarios && comentarios.map((comentario, index)=>{   
             return<> 
                 <div key={comentario.id}>

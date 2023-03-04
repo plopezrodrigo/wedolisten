@@ -22,7 +22,7 @@ body {
   color: #5e2e2e;
 }
 #textosfooter2 {
-  color: #FF9500;
+  color:#5e2e2e;
   font-weight: bold;
 }
 #textofecha {
@@ -164,4 +164,20 @@ body {
   border-radius: 20px;
   font-weight: bold;
   width: 150px;
+}
+.card-img-top2{
+  width: 502px;
+  height: auto;
+  margin-left: 10px;
+}
+#about{
+  margin-left: 77px;
+}
+#cardabout{
+  align-items: center;
+  background-color: #FFE9C8 ;
+  border: none;
+}
+#cardtitle{
+  color: #5e2e2e;
 }
