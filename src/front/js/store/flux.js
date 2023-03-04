@@ -49,7 +49,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       // -------------------------------------------------------------------
       cargaComentarios: async (buscar) => {
         try{
-            const resp = await fetch(`${process.env.BACKEND_URL}/api/comment`);
+            const resp = await fetch(`${process.env.BACKEND_URL}/api/search/${buscar}`);
 
             if (resp.status !== 200){ 
                 setStore({message: `No se han encontrado resultados para: "${buscar}"` });

@@ -153,7 +153,10 @@ body {
   font-size: small; 
   align-items: right; 
 }
-
+.imagenbanner{
+  width: 570px;
+  height: 200px;
+}
 
 .imagenDetalle{
   width: 600px;
