@@ -1,10 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
+import LocalCardfav from "../component/localCardfav";
+
 
 export const Favorites = () => {
   const [favorites, setFavorites] = useState({});
   const { store, actions } = useContext(Context);
+  const [locales, setLocales] = useState();
+
 
   const list_favorites = () => {
     fetch(`${process.env.BACKEND_URL}/api/favourit/`, {
@@ -26,22 +30,6 @@ export const Favorites = () => {
     list_favorites();
   }, []);
 
-  const deleteFavourites = (id) => {
-    fetch(`${process.env.BACKEND_URL}/api/deletefavourit/${id}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: "Bearer " + sessionStorage.getItem("token"),
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((response) => {
-        setFavorites(response);
-      });
-  };
-
   return (
     <div className="container fluid">
       <div className="myDetails">
@@ -55,15 +43,24 @@ export const Favorites = () => {
         </div>
       </div>
       <div className="contaniner fluid">
-        <table className="table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Foto</th>
-              <th scope="col">Local</th>
-              <th scope="col">Acción</th>
-            </tr>
-          </thead>
+        <div className="row align-items-start">
+        {locales && locales.map((local, index) => {
+        return <div key={local.id} className="col-3">
+          <LocalCardfav
+                  name={local.name}
+                  key={local.id}
+                  id={local.id}
+                  index={index}
+                  address={local.address}
+                  description={local.description}
+                  email={local.email}
+                  telf={local.telf}
+                  location={local.location}
+                  url={local.url}
+                  image_url={local.image_url}
+          />
+          </div>
+          })}
           <tbody className="listado">
             {!favorites.length > 0 ? (
               <tr>no hay favoritos</tr>
@@ -101,7 +98,7 @@ export const Favorites = () => {
               ))
             )}
           </tbody>
-        </table>
+        </div>
       </div>
     </div>
   );

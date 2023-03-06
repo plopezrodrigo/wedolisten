@@ -20,16 +20,16 @@ export const Contact = (props) => {
 
     EnvioEmail(form, setMensaje, toggleModal);
 
-    /*
-    emailjs.sendForm(process.env.EMAIL_SERVICE_ID, process.env.EMAIL_TEMPLATE_ID, form.current, process.env.EMAIL_PUBLIC_KEY)
-    .then((result) => {
-        setMensaje("Correo enviado stisfactroiamente");
-        toggleModal();
-    }, (error) => {
-        setMensaje(error.text)
-        return false;
-    });
-   */
+
+    // emailjs.sendForm(process.env.EMAIL_SERVICE_ID, process.env.EMAIL_TEMPLATE_ID, form.current, process.env.EMAIL_PUBLIC_KEY)
+    // .then((result) => {
+    //     setMensaje("Correo enviado stisfactroiamente");
+    //     toggleModal();
+    // }, (error) => {
+    //     setMensaje(error.text)
+    //     return false;
+    // });
+
     return true;
   };
 

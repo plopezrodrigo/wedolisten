@@ -246,9 +246,11 @@ const LocalDetail = (props) => {
         </div>
         <div className="col-6 alinear-derecha">
         {store.usertype == "customer" &&
-        <Link to={`/OpinionUser/${params.id}/0`} className="btn btn-outline-primary mb-3 alinear-derecha me-5" id="button">
+        <button className="btn btn-primary px-5 mb-3 mt-3" id="button">
+        <Link to={`/OpinionUser/${params.id}/0`}>
           Escribe tu opinión
         </Link>  
+        </button>
        }
         </div>
         {/* <form onSubmit={handleSubmit}>
