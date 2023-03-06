@@ -68,7 +68,7 @@ export const SignupManager = () => {
                       		</Link>
                     		</p>
                   			</div>
-							<button className="mb-3 col-md-12 btn-lg px-5 mb-3 mt-3" type="submit"  id="button">Registrarme</button>
+							<button className="btn btn-primary px-5 mb-3 mt-3" type="submit"  id="button">Registrarme</button>
 							{(mensaje != null) && <p>{mensaje}</p>}
 					</form>	
 						

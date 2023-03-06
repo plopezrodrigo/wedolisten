@@ -5,7 +5,6 @@ import ScrollToTop from "./component/scrollToTop";
 import { Home } from "./pages/home";
 import { About } from "./pages/about";
 import { Contact } from "./pages/contact";
-import { Account } from "./pages/account";
 import { Data } from "./pages/data";
 import { Favorites } from "./pages/favorites";
 import { Comments } from "./pages/comments";
@@ -49,7 +48,6 @@ const Layout = () => {
                         <Route element={<About />} path="/about" />
                         <Route element={<Contact />} path="/contact" />
                         <Route element={<Login />} path="/login" />
-                        <Route element={<Account />} path="/account" />
                         <Route element={<Data />} path="/data" />
                         <Route element={<Favorites/>} path="/favorites" />
                         <Route element={<Comments/>} path="/comments" />
