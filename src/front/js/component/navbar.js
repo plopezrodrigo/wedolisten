@@ -7,37 +7,13 @@ import imagen from "../../img/logo.png";
 
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
-	const [mensaje, setMensaje] = useState(null); 
 	const navigate = useNavigate();
-	const [formData, setFormData] = useState({});
-  const [isModalOpened, setIsModalOpened, toggleModal] = useModal(false);
 	
-	const handleChange = (evento) =>{
-		setFormData({...formData, [evento.target.name]: evento.target.value}); 
-	}
-
-	const handleSubmit = (evento)=>{
-		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
-
-    if (formData.buscar.length > 0){
-        // Cargamos store.locales para usarlo en listLocales
-        actions.cargaLocales(formData.buscar).then((response) => {
-              if (response){
-                  navigate("/listLocales");
-              }else{
-                  setMensaje(store.message);
-                  toggleModal();
-              }
-        })
-    }
-  }
-
-
   return (
     <div>
       <div className="container-fluid">
         <nav className="navbar navbar-expand-lg navbar-light">
-          <div className="container-fluid me-5 ms-3">
+          <div className="container-fluid me-5 ms-5">
             <Link to="/">
               <span className="navbar-brand mb-0 h1">
                 {" "}
@@ -57,18 +33,14 @@ export const Navbar = () => {
             <div className="collapse navbar-collapse " id="navbarSupportedContent">
               <ul className="navbar-nav me-auto mb-lg-0 text-end">
                 <li className="nav-item">
-                  <Link to="/about" className="nav-link active mt-4 mr-2" aria-current="page" id="navbarSupportedContent">Quienes Somos</Link>
+                  <Link to="/about" className="nav-link active mt-2 mr-2" aria-current="page" id="navbarSupportedContent">Quienes Somos</Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/listlocales" className="nav-link active mt-4 mr-2" aria-current="page" id="navbarSupportedContent">Locales</Link>
+                  <Link to="/listlocales" className="nav-link active mt-2 mr-2" aria-current="page" id="navbarSupportedContent">Locales</Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/contact" className="nav-link active mt-4 mr-2" id="navbarSupportedContent">Contacto</Link>
+                  <Link to="/contact" className="nav-link active mt-2 mr-2" id="navbarSupportedContent">Contacto</Link>
                 </li>
-                <form onSubmit={handleSubmit}>
-                  <input name="buscar" className="form-control mt-4 mr-2" type="search" placeholder="Buscar" aria-label="Buscar"onChange={handleChange}/>
-                  <button className="" type="submit" id="iconbutton"/>
-                </form>
               </ul>
 
               <div><span>{""}</span></div>
@@ -76,7 +48,7 @@ export const Navbar = () => {
               <div className="">
                 {!store.token 
                   ? (<div>
-                      <Link to="/login" className="btn btn-primary" id="button">Iniciar Sesión</Link>
+                      <Link to="/login" className="btn btn-primary me-5" id="button">Iniciar Sesión</Link>
                      </div>) 
                   : (<div className="btn-group">
                           <Link to="/account" type="button" className="btn btn-primary" id="dropdown"><i className="fas fa-user-circle me-1"></i>Mi cuenta</Link>
@@ -105,12 +77,6 @@ export const Navbar = () => {
           </div>
         </nav>
       </div>
-
-      <CustomModal  show={isModalOpened}
-                    titulo="Búsqueda de Locales"
-                    handleClose={() => setIsModalOpened(false)}>
-        <div>{mensaje}</div>
-      </CustomModal>
     </div>
   );
 };

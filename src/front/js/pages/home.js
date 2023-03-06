@@ -5,7 +5,7 @@ import UserInfo from "../component/userInfo";
 import ManagerInfo from "../component/managerInfo";
 import OpinionCard from "../component/opinionCard";
 import LocalCard from "../component/localCard";
-
+import Buscador from "../component/buscador";
 
 export const Home = () => {
   const [comentarios, setComentarios] = useState();
@@ -40,24 +40,7 @@ export const Home = () => {
 
   return (
     <div className="container">
-      {/* <section id="home" className="helpr-section helpr-layout-1 section section-inverse-color" >
-      <div class="container">
-        <div class="helpr-content" data-stellar-offset-parent="true">
-          <div class="helpr-text" data-wow-duration="1s" data-wow-delay="0.5s">
-            <div class="webHomeTitle">
-            <h1 class="helpr-title">Déjanos ayudarte</h1>
-            </div>
-          <div class="home-service clearfix">
-          <div class="wrapper-demo1">
-            <div id="dd1" class="wrapper-dropdown-3" tabindex="1">
-              <span class="active">Buscar</span>
-            </div>
-          </div>
-          </div>
-          </div>
-        </div>
-      </div>
-      </section> */}
+      <div><Buscador /></div>
       <div><UserInfo /></div>
       <div><ManagerInfo /></div>
       <h1 className="text-center mb-5" id="tituloHome">Lee lo que otros están opinando...</h1>
