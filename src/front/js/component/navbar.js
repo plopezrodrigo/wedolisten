@@ -37,7 +37,7 @@ export const Navbar = () => {
     <div>
       <div className="container-fluid">
         <nav className="navbar navbar-expand-lg navbar-light">
-          <div className="container-fluid me-5 ms-5">
+          <div className="container-fluid me-5 ms-3">
             <Link to="/">
               <span className="navbar-brand mb-0 h1">
                 {" "}

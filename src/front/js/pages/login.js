@@ -107,14 +107,13 @@ const Login = () => {
                       <label className="form-check-label alinear-izquierda2"> Confirmo que he leido y acepto la Política de Privacidad y Aviso Legal.</label>
                       <div className="invalid-feedback">Por favor, confirma que has leido y aceptas la Política de Privacidad y Aviso Legal.</div>
                       </div>
-                      <button className="mb-3 col-md-12 btn-lg px-5 mb-3 mt-3" onClick={handleClick} id="button">
+                      <button className="btn btn-primary px-5 mb-3 mt-3" onClick={handleClick} id="button">
                         Iniciar Sesión
                       </button>
                     </div>
                   <div>
-                      <p className="ms-3 me-3 mb-3 text-center">¿No tienes una cuenta?</p>
-                      <Link to="/signupUser"><strong className="strong "> Registrate </strong></Link>
-                      <p className="ms-3 me-3 mt-3 text-center">para descubrir lo mejor de Baby Friendly</p>
+                      <p className="ms-3 me-3 mb-0 text-center">¿No tienes una cuenta? <Link to="/signupUser"><strong className="strong "> Registrate </strong></Link></p>
+                      <p className="ms-3 me-3 mt-0 text-center">para descubrir lo mejor de Baby Friendly</p>
                   </div>
                 </div>
               </div>

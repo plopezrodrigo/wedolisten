@@ -114,9 +114,9 @@ export const Contact = (props) => {
                       <label className="form-check-label"> Confirmo que he leido y acepto la Política de Privacidad y Aviso Legal.</label>
                       <div className="invalid-feedback">Por favor, confirma que has leido y aceptas la Política de Privacidad y Aviso Legal.</div>
                     </div>
-                    <div className="form-button mt-3 mb-3">
+                    <div className="">
                     <button
-                        className="mb-3 col-md-12 btn-lg px-5 mb-3 mt-3"
+                        className="btn btn-primary px-5 mb-3 mt-3"
                         onClick={submit}
                         id="button">
                         Enviar

@@ -193,7 +193,7 @@ const LocalDetail = (props) => {
             <h5 className="mt-3 ms-3">Ubicación</h5>
             <div className="ms-3">
             <iframe
-              width="450"
+              width="520"
               height="250"
               frameBorder="0"
               referrerPolicy="no-referrer-when-downgrade"

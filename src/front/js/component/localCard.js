@@ -40,18 +40,20 @@ const LocalCard = (props) => {
         <div>{message}</div>
         </CustomModal> : ""
         }
+        <a href = {`/localDetail/${props.id}`}>
         <img 
         src={props.image_url} 
         className="card-img-top"
         id="imagenlocal"
         alt=""
         />
+        </a>
         <div className="card-body">
           <h6>
             <Link to={`/localDetail/${props.id}`} className="card-title mb-1 linkfooter" id="cardtitle"><strong>{props.name}</strong></Link>
             <button id="iconbutton" onClick={()=>{add_favourites(props.id)}}> <i className="fas fa-heart"></i></button>
           </h6>
-            <div>
+            <div id="textoslegales">
             {Array.from(Array(5).keys()).map((e,i)=>{return props.puntuacion <= i ? 
             (<i className="far fa-star" key={i} id="iconbutton"/>)
             : 

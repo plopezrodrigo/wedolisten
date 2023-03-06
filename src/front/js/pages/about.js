@@ -133,7 +133,7 @@ export const About = () => {
 									Ayuda a marcar la diferencia para mejorar la relación de nuestros miembros con el dinero y únase a nuestro equipo en crecimiento.
 								</p>
 								</div>
-							<button data-testid="jobOpeningsButton" id="button">Ver ofertas de trabajo</button>
+							<button className="btn btn-primary" data-testid="jobOpeningsButton" id="button">Ver ofertas de trabajo</button>
 						</div>
 					</div>
 				</div>
