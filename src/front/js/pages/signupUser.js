@@ -1,6 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate, Link } from "react-router-dom";
+import "../../styles/home.css";
+import CustomModal from "../component/customModal";
+import { useModal } from "../hooks/UseModal";
+import emailjs from '@emailjs/browser';
 
 import "../../styles/home.css";
 
@@ -10,6 +14,11 @@ export const SignupUser = () => {
 	const [mensaje, setMensaje] = useState(null);
 	const navigate = useNavigate();
 	const { store, actions } = useContext(Context);
+	const [isModalOpened, setIsModalOpened, toggleModal] = useModal(false);
+	const [tituloModal, setTituloModal] = useState("Ha surgido un problema");
+	const [salir, setSalir] = useState(false);
+
+
 
 	const handleChange = (evento) =>{
 		setFormData({...formData, [evento.target.name]: evento.target.value});
@@ -42,6 +51,20 @@ export const SignupUser = () => {
 			navigate.push("/login");
 		}
 	  },[]);
+
+	  const submit = (e) => {
+		e.preventDefault();
+		emailjs.sendForm(process.env.EMAIL_SERVICE_ID, process.env.EMAIL_TEMPLATE_ID, form.current, process.env.EMAIL_PUBLIC_KEY)
+		.then((result) => {
+			setMensaje("Correo enviado satisfactoriamente");
+			toggleModal();
+		}, (error) => {
+			setMensaje(error.text)
+			return false;
+		});
+	
+		return true;
+	  };
 
 	return (
 		<div className="vh-100 gradient-custom">
@@ -92,6 +115,12 @@ export const SignupUser = () => {
 			</div>
 			</div>
 		  </div>
+		  <CustomModal  show={isModalOpened}
+                    titulo={tituloModal}
+                    handleClose={() => setIsModalOpened(false)}>
+        	<div>{mensaje}</div>
+      		</CustomModal>
+      		{(salir) && salimos()}
 		</div>
 	  );
 };

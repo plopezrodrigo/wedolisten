@@ -18,7 +18,7 @@ export const Contact = (props) => {
   const submit = (e) => {
     e.preventDefault();
 
-    EnvioEmail(form, setMensaje, toggleModal);
+    EnvioEmail(form, setMensaje, toggleModal, "template_3tm47vd");
 
 
     // emailjs.sendForm(process.env.EMAIL_SERVICE_ID, process.env.EMAIL_TEMPLATE_ID, form.current, process.env.EMAIL_PUBLIC_KEY)
@@ -64,7 +64,7 @@ export const Contact = (props) => {
                       <label forhtml="basic-url" className="form-label alinear-izquierda">Email</label>
                       <input  className="form-control mb-2"
                               type="email"
-                              name="email"
+                              name="user_email"
                               defaultValue={ store.email }
                               required
                       />
