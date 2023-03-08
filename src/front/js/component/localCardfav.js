@@ -11,6 +11,7 @@ const LocalCardfav = (props) => {
   const [message, setMessage] = useState();
   const params = useParams();
   const [local, setLocales] = useState({});
+  const [favorites, setFavorites] = useState();
   const [isModalOpened, setIsModalOpened, toggleModal] = useModal(false);
 
 
@@ -22,13 +23,13 @@ const LocalCardfav = (props) => {
         "Content-Type": "application/json",
       },
     })
-      .then((response) => {
-        return response.json();
-      })
-      .then((response) => {
-        setFavorites(response);
-      });
-  };
+    .then((response) => {
+      return response.json();
+    })
+    .then((response) => {
+      setFavorites(response);
+    });
+};
 
   return (
       <div className="card" id="localcard">
@@ -50,7 +51,7 @@ const LocalCardfav = (props) => {
         <div className="card-body">
           <h6>
             <Link to={`/localDetail/${props.id}`} className="card-title mb-1 linkfooter" id="cardtitle"><strong>{props.name}</strong></Link>
-            <button id="iconbutton" onClick={()=>{add_favourites(props.id)}}> <i className="fas fa-heart"></i></button>
+            <button id="iconbutton" onClick={()=>{deleteFavourites(props.id)}}> <i className="far fa-trash-alt"></i></button>
           </h6>
             <div id="textoslegales">
             {Array.from(Array(5).keys()).map((e,i)=>{return props.puntuacion <= i ? 

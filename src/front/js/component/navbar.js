@@ -51,7 +51,7 @@ export const Navbar = () => {
                       <Link to="/login" className="btn btn-primary me-5" id="button">Iniciar Sesión</Link>
                      </div>) 
                   : (<div className="btn-group">
-                          <Link to="/account" type="button" className="btn btn-primary" id="dropdown"><i className="fas fa-user-circle me-1"></i>Mi cuenta</Link>
+                          <Link to="" type="button" className="btn btn-primary" id="dropdown"><i className="fas fa-user-circle me-1"></i>Mi cuenta</Link>
                           <button type="button" className="btn btn-danger dropdown-toggle dropdown-toggle-split" id="dropdownarrow" data-bs-toggle="dropdown" aria-expanded="false">
                             <span className="visually-hidden">Toggle Dropdown</span>
                           </button>

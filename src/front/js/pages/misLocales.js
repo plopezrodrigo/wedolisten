@@ -28,8 +28,8 @@ export const MisLocales = () => {
                 <div className="row">
                     <div className="col-sm-10"></div>
                     <div className="col-2 align-self-end">
-                        <button className="btn btn-primary px-5 mb-3 mt-3">
-                        <Link to="/nuevoLocal" className="btn btn-primary" id="button" key="miLocalAlta">Nuevo</Link>
+                        <button  className="btn btn-primary me-5" id="button">
+                        <Link to="/nuevoLocal"  key="miLocalAlta">Nuevo</Link>
                         </button>
                     </div>
                 </div>
