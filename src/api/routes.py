@@ -592,11 +592,10 @@ def Comments_user_add(id_comment):
 # ----------------------------------------------------------------------------
 
 @api.route('/deletefavourit/<int:id>', methods=['DELETE'])
-# @jwt_required()
+@jwt_required()
 def delete_Favourit(id):
     try:
         favourit = Favourit.query.filter_by(id=id).first()
-        print(favourit)
         db.session.delete(favourit)
         db.session.commit()
     except Exception as e:

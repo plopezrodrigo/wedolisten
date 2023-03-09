@@ -51,7 +51,12 @@ const LocalCard = (props) => {
         <div className="card-body">
           <h6>
             <Link to={`/localDetail/${props.id}`} className="card-title mb-1 linkfooter" id="cardtitle"><strong>{props.name}</strong></Link>
-            <button id="iconbutton" onClick={()=>{add_favourites(props.id)}}> <i className="fas fa-heart"></i></button>
+            {
+              sessionStorage.getItem("token") ? 
+              <button id="iconbutton" onClick={()=>{add_favourites(props.id)}}> <i className="fas fa-heart"></i></button>
+              : <Link to={`/login`} className="" id="iconbutton"><i className="fas fa-heart"></i></Link>
+
+            }
           </h6>
             <div id="textoslegales">
             {Array.from(Array(5).keys()).map((e,i)=>{return props.puntuacion <= i ? 

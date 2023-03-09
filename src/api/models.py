@@ -95,6 +95,7 @@ class Comercial_Place(db.Model):
         return f'<Comercial_Place {self.name}>'
 
     def serialize(self):
+        print(self.photos_comercial_place)
         return {    "id": self.id,
                     "user_id": self.user_id,
                     "name": self.name,
@@ -111,9 +112,10 @@ class Comercial_Place(db.Model):
                     "espacio_carrito": self.espacio_carrito,
                     "ascensor": self.ascensor,
                     "productos_higiene": self.productos_higiene,
+                    "imagenes": [imagen.location for imagen in self.photos_comercial_place]
                }
     def serialize_location(self):
-        print(self.address)
+        print(self.photos_comercial_place)
         location = geolocator.geocode(self.address)
         return {    "id": self.id,
                     "user_id": self.user_id,
@@ -134,6 +136,8 @@ class Comercial_Place(db.Model):
                     "espacio_carrito": self.espacio_carrito,
                     "ascensor": self.ascensor,
                     "productos_higiene": self.productos_higiene,
+                    "imagenes": [imagen.location for imagen in self.photos_comercial_place]
+
                }
 
 class Rate_Customer(db.Model):
@@ -165,7 +169,7 @@ class Photo_Comercial_Place(db.Model):
     location = db.Column(db.String(120), unique=True, nullable=False)
     
     def __repr__(self):
-        return f'<User {self.customer_id}>'
+        return f'<Photo {self.id}>'
 
     def serialize(self):
         return {    "id": self.id,

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useRef, useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate, Link } from "react-router-dom";
 import "../../styles/home.css";
@@ -19,6 +19,8 @@ export const SignupUser = () => {
 	const [isModalOpened, setIsModalOpened, toggleModal] = useModal(false);
 	const [tituloModal, setTituloModal] = useState("Ha surgido un problema");
 	const [salir, setSalir] = useState(false);
+	const form = useRef();
+
 
 
 
@@ -70,7 +72,7 @@ export const SignupUser = () => {
 			  <p className="mb-3">Bienvenido a tu App para valorar establecimientos</p>
 			<div className="col-12 col-md-8 col-lg-6 col-xl-5">
 				<div className="card px-3" id="card">
-					<form className="form-outline" onSubmit={handleSubmit}>
+					<form ref={form} className="form-outline" onSubmit={handleSubmit}>
 							<div className="form-group">
 								<label className="alinear-izquierda mt-3 ms-2" htmlFor="InputEmail1">Nombre y Apellidos</label>
 								<input type="text" name="name" required className="form-control mb-2" id="InputName1" aria-describedby="nameHelp" onChange={handleChange} />

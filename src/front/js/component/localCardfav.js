@@ -51,7 +51,7 @@ const LocalCardfav = (props) => {
         <div className="card-body">
           <h6>
             <Link to={`/localDetail/${props.id}`} className="card-title mb-1 linkfooter" id="cardtitle"><strong>{props.name}</strong></Link>
-            <button id="iconbutton" onClick={()=>{deleteFavourites(props.id)}}> <i className="far fa-trash-alt"></i></button>
+            <button id="iconbutton" onClick={()=>{deleteFavourites(props.id_favourite)}}> <i className="far fa-trash-alt"></i></button>
           </h6>
             <div id="textoslegales">
             {Array.from(Array(5).keys()).map((e,i)=>{return props.puntuacion <= i ? 

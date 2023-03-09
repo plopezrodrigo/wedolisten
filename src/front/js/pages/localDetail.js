@@ -170,8 +170,12 @@ const LocalDetail = (props) => {
           </div>
           <div className="col-3">
             <div className="row" id="card2">
-              <img src={localFotos.image_url1 ? localFotos.image_url1: local.image_url} className="imagenDetallePeq" alt={local.image_url} />
-              <img src={localFotos.image_url2 ? localFotos.image_url2: local.image_url} className="imagenDetallePeq" alt={local.image_url} />
+              {
+                local.imagenes ? local.imagenes.map((imagen, index)=>{
+                  return <img key={index} src={imagen} className="imagenDetallePeq" alt={imagen} />
+                }) :
+                ""
+              }
             </div>  
           </div>
         </div>

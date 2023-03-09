@@ -51,6 +51,7 @@ export const Favorites = () => {
                   index={index}
                   description={fav.comercial.description}
                   image_url={fav.comercial.image_url}
+                  id_favourite={fav.id}
           />
           </div>
           })}
