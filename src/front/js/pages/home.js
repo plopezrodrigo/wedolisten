@@ -9,7 +9,8 @@ import Buscador from "../component/buscador";
 
 export const Home = () => {
   const [comentarios, setComentarios] = useState();
-  const [locales, setLocales] = useState();
+  const [localesrandom, setLocalesrandom] = useState();
+  const [lastlocales, setLastlocales] = useState();
   const { store, actions } = useContext(Context);
 
   const useEffectComentarios = async () => {
@@ -23,19 +24,30 @@ export const Home = () => {
       else         return setMensaje(await resp.json());  
   } 
 
-  const useEffectLocales = async () => {
-    await fetch(process.env.BACKEND_URL + "/api/comercial-place-home")
+  const useEffectLocalesRandom = async () => {
+    await fetch(process.env.BACKEND_URL + "/api/random-comercial-place")
       .then((response) => {
         return response.json();
       })
       .then((response) => {
-        setLocales(response);
+        setLocalesrandom(response);
+      });
+  }
+
+  const useEffectLastLocales = async () => {
+    await fetch(process.env.BACKEND_URL + "/api/last-comercial-place")
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        setLastlocales(response);
       });
   }
 
   useEffect (()=> {
       useEffectComentarios(); 
-      useEffectLocales();
+      useEffectLastLocales();
+      useEffectLocalesRandom();
   }, [])
 
   return (
@@ -65,8 +77,8 @@ export const Home = () => {
       <p id="subtituloHome">Recomendación según tu actividad</p>
       <div className="container fluid">
         <div className="row align-items-start">
-          {locales && locales.map((local, index) => {
-              return  <div key={`A${index}`} className="col-3">
+          {localesrandom && localesrandom.map((local, index) => {
+              return  <div key={local.id} className="col-3">
                         <LocalCard  //id="localcard"
                                     name={local.name}
                                     key={local.id}
@@ -90,9 +102,9 @@ export const Home = () => {
       <p id="subtituloHome">Reserva en estos locales para conocer Madrid en profundidad.</p>
       <div className="container fluid">
         <div className="row align-items-start">
-          {locales && locales.map((local, index) => {
-              return  <div key={`B${index}`} className="col-3">
-                        <LocalCard  //id="localcard"
+          {lastlocales && lastlocales.map((local, index) => {
+              return  <div key={local.id}className="col-3">
+                        <LocalCard  
                                     name={local.name}
                                     key={local.id}
                                     id={local.id}
@@ -110,7 +122,7 @@ export const Home = () => {
         </div>
       </div>
       </div>
-      <div >
+      {/* <div >
         <h3 className="text-left mt-0" id="tituloHome">Más por descubrir</h3>
         <p id="subtituloHome">Descubre lo que tienes cerca</p>
         <div className="container fluid">
@@ -134,7 +146,7 @@ export const Home = () => {
               })}
           </div>
         </div>
-      </div>
+      </div> */}
       </div>
   );
 };

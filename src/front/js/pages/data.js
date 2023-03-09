@@ -67,7 +67,7 @@ export const Data = () => {
                     </div>
                     <div className="d-flex justify-content-center ms-3 me-3 mt-2">
                       <select className="form-select mt-3" name="gender">
-                        <option >----- Elige una opción -----</option>
+                        <option > Género</option>
                         <option value="female">Femenino</option>
                         <option value="male">Masculino</option>
                       </select>
@@ -75,20 +75,18 @@ export const Data = () => {
                       <div className="valid-feedback">Campo gender es válido</div>
                     </div>
                     <div className="d-flex justify-content-center ms-3 me-3 mt-2">
-                      <input  className="form-control p-2"
-                              type="text"
-                              name="subscription"
-                              placeholder="subscription"
-                              required
-                              defaultValue={store.usuario?.subscription}
-                      />
+                    <select className="form-select mt-3" name="gender">
+                        <option >Suscripción a la newsletter</option>
+                        <option value="female">Sí</option>
+                        <option value="male">No</option>
+                      </select>
                       <div className="valid-feedback">Campo subscription es válido</div>
                     </div>
                     <div className="d-flex justify-content-center ms-3 me-3 mt-2">
                       <input  className="form-control p-2"
                               type="text"
                               name="address"
-                              placeholder="address"
+                              placeholder="Dirección"
                               defaultValue={store.usuario?.address}
                       />
                       <div className="valid-feedback">Campo address es válido</div>

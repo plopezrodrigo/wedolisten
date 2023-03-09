@@ -5,6 +5,8 @@ import "../../styles/home.css";
 import CustomModal from "../component/customModal";
 import { useModal } from "../hooks/UseModal";
 import emailjs from '@emailjs/browser';
+import { EnvioEmail } from "../hooks/EnvioEmail";
+
 
 import "../../styles/home.css";
 
@@ -54,16 +56,10 @@ export const SignupUser = () => {
 
 	  const submit = (e) => {
 		e.preventDefault();
-		emailjs.sendForm(process.env.EMAIL_SERVICE_ID, process.env.EMAIL_TEMPLATE_ID, form.current, process.env.EMAIL_PUBLIC_KEY)
-		.then((result) => {
-			setMensaje("Correo enviado satisfactoriamente");
-			toggleModal();
-		}, (error) => {
-			setMensaje(error.text)
-			return false;
-		});
 	
-		return true;
+		EnvioEmail(form, setMensaje, toggleModal, "template_k5ctw6a");
+	
+	
 	  };
 
 	return (
