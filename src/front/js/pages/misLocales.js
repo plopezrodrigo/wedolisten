@@ -60,7 +60,7 @@ export const MisLocales = () => {
                         </div>
                     })}
                 </div>
-                <div className="row align-items-start">
+                {/* <div className="row align-items-start">
                     {locales && locales.map((local, index)=>{   
                         return  (
                         <tr key={index}>
@@ -73,7 +73,7 @@ export const MisLocales = () => {
                                             
                     })
                     }
-                </div>
+                </div> */}
             </div>
                 </>);
 	}

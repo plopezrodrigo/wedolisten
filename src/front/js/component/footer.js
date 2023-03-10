@@ -38,7 +38,7 @@ export const Footer = () => (
             <Link className="linkfooter" to="/">             <p id="textosfooter">Home</p>           </Link>
             <Link className="linkfooter" to="/about">        <p id="textosfooter">Quienes somos</p>  </Link>
             <Link className="linkfooter" to="/contact">      <p id="textosfooter">Contact</p>        </Link>
-            <Link className="linkfooter" to="/signupmanager"><p id="textosfooter">Gestores</p>       </Link>
+            <Link className="linkfooter" to="/signupManager"><p id="textosfooter">Gestores</p>       </Link>
           </div>
           <div className="col-md-3 col-lg-2 col-xl-2 mb-4">
           <h6 className="text-uppercase fw-bold mb-4" id="textosfooter">

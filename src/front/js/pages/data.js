@@ -46,8 +46,8 @@ export const Data = () => {
                       <div className="valid-feedback">Campo Email es válido.</div>
                       <div className="invalid-feedback">Campo Email no puede estar en blanco.</div>
                     </div>
-
-                    <div className="d-flex justify-content-center ms-3 me-3 mt-2">
+                    {store.usertype == "customer" ?
+                      <div className="d-flex justify-content-center ms-3 me-3 mt-2">
                       <input  className="form-control p-2"
                               type="tel"
                               name="telefono"
@@ -55,7 +55,11 @@ export const Data = () => {
                               defaultValue={store.usuario?.telefono}
                       />
                       <div className="valid-feedback">Campo Teléfono es válido</div>
-                    </div>
+                      </div>
+                      :
+                      ""
+                    }
+                    {store.usertype == "customer" ?
                     <div className="d-flex justify-content-center ms-3 me-3 mt-2">
                       <input  className="form-control p-2"
                               type="date"
@@ -65,6 +69,10 @@ export const Data = () => {
                       />
                       <div className="valid-feedback">Campo birthday es válido</div>
                     </div>
+                      :
+                      ""
+                    }
+                    {store.usertype == "customer" ?
                     <div className="d-flex justify-content-center ms-3 me-3 mt-2">
                       <select className="form-select mt-3" name="gender">
                         <option > Género</option>
@@ -74,6 +82,10 @@ export const Data = () => {
 
                       <div className="valid-feedback">Campo gender es válido</div>
                     </div>
+                      :
+                      ""
+                    }
+                    {store.usertype == "customer" ?
                     <div className="d-flex justify-content-center ms-3 me-3 mt-2">
                     <select className="form-select mt-3" name="gender">
                         <option >Suscripción a la newsletter</option>
@@ -82,6 +94,10 @@ export const Data = () => {
                       </select>
                       <div className="valid-feedback">Campo subscription es válido</div>
                     </div>
+                      :
+                      ""
+                    }
+                    {store.usertype == "customer" ?
                     <div className="d-flex justify-content-center ms-3 me-3 mt-2">
                       <input  className="form-control p-2"
                               type="text"
@@ -91,6 +107,9 @@ export const Data = () => {
                       />
                       <div className="valid-feedback">Campo address es válido</div>
                     </div>
+                      :
+                      ""
+                    }
 
                     <div className="d-flex justify-content-center ms-3 me-3 mt-2">
                       <input

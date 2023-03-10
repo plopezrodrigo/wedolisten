@@ -51,8 +51,12 @@ const MilocalCard = (props) => {
         <div className="card-body">
           <h6>
             <Link to={`/localDetail/${props.id}`} className="card-title mb-1 linkfooter" id="cardtitle"><strong>{props.name}</strong></Link>
-              <button id="iconbutton"> <i className="fas fa-pencil-alt"></i></button>
-              <button id="iconbutton"> <i className="fas fa-eye"></i></button>
+            <a href={`/datosLocal/${props.id}`}>
+            <button id="iconbutton"> <i className="fas fa-pencil-alt"></i></button>
+            </a>
+            <a href={`/localDetail/${props.id}`} id="iconbutton">
+            <button id="iconbutton"> <i className="fas fa-eye"></i></button>        
+            </a>            
           </h6>
             <div id="textoslegales">
             {Array.from(Array(5).keys()).map((e,i)=>{return props.puntuacion <= i ? 

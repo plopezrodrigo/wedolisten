@@ -5,11 +5,47 @@ import LocalCard from "../component/localCard";
 const ListLocales = () => {
   const { store, actions } = useContext(Context);
   const [locales, setLocales] = useState();
+  const [localesrandom, setLocalesrandom] = useState();
+  const [lastlocales, setLastlocales] = useState();
+  const [localeshome, setLocaleshome] = useState();
   let options = {
     method: "GET",
   };
 
+  const useEffectLocalesRandom = async () => {
+    await fetch(process.env.BACKEND_URL + "/api/random-comercial-place")
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        setLocalesrandom(response);
+      });
+  }
+
+  const useEffectLastLocales = async () => {
+    await fetch(process.env.BACKEND_URL + "/api/last-comercial-place")
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        setLastlocales(response);
+      });
+  }
+
+  const useEffectLocalesHome = async () => {
+    await fetch(process.env.BACKEND_URL + "/api/comercial-place-home")
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        setLocaleshome(response);
+      });
+  }
+
   useEffect(() => {
+    useEffectLastLocales();
+    useEffectLocalesRandom();
+    useEffectLocalesHome();
     if (sessionStorage.getItem("token") != null) {
       options.headers = {
         "Content-Type": "application/json",
@@ -30,7 +66,7 @@ const ListLocales = () => {
     <div className="container fluid">
       <h3>Al aire libre en familia</h3>
       <div className="row align-items-start">
-          {locales && locales.map((local, index) => {
+        {localeshome && localeshome.map((local, index) => {
             return <div key={local.id} className="col-3">
                 <LocalCard
                   name={local.name}
@@ -50,7 +86,7 @@ const ListLocales = () => {
       </div>
       <h3>Locales de la Guía #FoodieKids</h3>
       <div className="row align-items-start">
-          {locales && locales.map((local, index) => {
+        {lastlocales && lastlocales.map((local, index) => {
             return <div key={local.id} className="col-3">
                 <LocalCard
                   name={local.name}
@@ -91,7 +127,7 @@ const ListLocales = () => {
       </div>
       <h3>Jardines secretos para tu familia</h3>
       <div className="row align-items-start">
-          {locales && locales.map((local, index) => {
+          {localesrandom && localesrandom.map((local, index) => {
             return <div key={local.id} className="col-3">
                 <LocalCard
                   name={local.name}
