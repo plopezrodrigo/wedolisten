@@ -23,48 +23,17 @@ const getState = ({ getStore, getActions, setStore }) => {
       cargaLocales: async (buscar) => {
         try{
             const resp = await fetch(`${process.env.BACKEND_URL}/api/comercial-place-search/${buscar}`);
-
             if (resp.status !== 200){ 
                 setStore({message: `No se han encontrado resultados para: "${buscar}"` });
                 return false;
             }
             const data = await resp.json();
-
             if (data.length == 0){ 
                   setStore({message: `No se han encontrado resultados para: "${buscar}"` });
                   return false;
             };
-
           setStore({ locales: data});
           return true;
-
-        }catch (error) {
-            console.error("No se han podido cargar datos", error);
-            return false;
-          }
-      },
-
-      // -------------------------------------------------------------------
-      // Carga lista de comentarios con un string de búsqueda para el nombre
-      // -------------------------------------------------------------------
-      cargaComentarios: async (buscar) => {
-        try{
-            const resp = await fetch(`${process.env.BACKEND_URL}/api/search/${buscar}`);
-
-            if (resp.status !== 200){ 
-                setStore({message: `No se han encontrado resultados para: "${buscar}"` });
-                return false;
-            }
-            const data = await resp.json();
-
-            if (data.length == 0){ 
-                  setStore({message: `No se han encontrado resultados para: "${buscar}"` });
-                  return false;
-            };
-
-          setStore({ comentario: data});
-          return true;
-
         }catch (error) {
             console.error("No se han podido cargar datos", error);
             return false;

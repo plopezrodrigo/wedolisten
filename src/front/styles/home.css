@@ -9,6 +9,7 @@ body {
     background-color: #ffe9c8;
     color: #5e2e2e;
     font-family: poppins;
+    position: relative;
   }
 #footer{
   color: #5e2e2e;

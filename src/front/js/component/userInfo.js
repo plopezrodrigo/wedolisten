@@ -9,7 +9,7 @@ const UserInfo = (props) => {
   const { store, actions } = useContext(Context);
 
   return (
-    <>
+    <div className="containe-fluid">
     {(store.usertype != "manager") &&  
     <div className="row mb-5 pb-md-4 align-items-center">
 
@@ -33,7 +33,7 @@ const UserInfo = (props) => {
       </div>
     </div>
   }
- </> 
+ </div> 
   );
 };
 

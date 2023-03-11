@@ -28,6 +28,9 @@ body {
 #textofecha {
   font-size: small;
 }
+#navbar {
+  position: sticky;
+}
 #navbarSupportedContent {
   font-size: large;
   font-weight: bold;
@@ -184,30 +187,35 @@ body {
 #cardtitle{
   color: #5e2e2e;
 }
-/* .containerbuscador{
+.containerbuscador{
   box-sizing: border-box;
   margin-left: auto;
   margin-right: auto;
   max-width: 100%;
-  display: block;
+  margin: 0;
+  padding: 0;
 }
-.fondobuscador{
+.fondo{
   height: 348px;
   position: relative;
   display: grid;
   margin: 0;
   padding: 0;
-} */
-.imagenbuscador{
-  height: auto;
-  margin: -10px;
-  width: 1100px;
 }
-.buscando{
+.imagenbuscador{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+}
+.cajabuscador{
   justify-self: center;
   width: 807px;
-  align-self: center;
-  display: block;
+  padding-left: 0;
+  padding-right: 0;
 }
 .searchbox{
   height: 60px;
@@ -216,5 +224,4 @@ body {
   z-index: 0;
   text-align: left;
   padding: 0;
-  display: block;
 }

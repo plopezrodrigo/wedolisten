@@ -10,7 +10,7 @@ export const Navbar = () => {
 	const navigate = useNavigate();
 	
   return (
-    <div>
+    <div id="navbar">
       <div className="container-fluid">
         <nav className="navbar navbar-expand-lg navbar-light">
           <div className="container-fluid me-5 ms-5">
