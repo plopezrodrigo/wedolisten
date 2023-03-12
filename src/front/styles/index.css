@@ -130,19 +130,6 @@ body {
 .iconbuttonmouseover{
   color: #FFCCF4;
 }
-.heart-button {
-  display: inline-block;
-  border: none;
-  color: #8a8787;
-  background-color: #FFE9C8;
-  display: inline-block;
-  text-align:center;
-}
-
-.heart-button-active {
-  color: #FF0DE7;
-  background-color: #FFE9C8;
-}
 #textoslegales{
   font-size: small;
 }

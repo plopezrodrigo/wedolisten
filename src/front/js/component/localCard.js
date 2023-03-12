@@ -49,15 +49,24 @@ const LocalCard = (props) => {
         />
         </a>
         <div className="card-body">
-          <h6>
+          <div className="row">
+          <h6 className="col-10">
             <Link to={`/localDetail/${props.id}`} className="card-title mb-1 linkfooter" id="cardtitle"><strong>{props.name}</strong></Link>
-            {
+          </h6>
+          <div className="col-2 me-0">
+          {
               sessionStorage.getItem("token") ? 
-              <button id="iconbutton" onClick={()=>{add_favourites(props.id)}}> <i className="fas fa-heart"></i></button>
-              : <Link to={`/login`} className="" id="iconbutton"><i className="fas fa-heart"></i></Link>
+              <button 
+              className="heart-button"
+              id="favbutton2"
+              onClick={()=>{add_favourites(props.id)}}> 
+              <i className="fas fa-heart" id="favicon2"></i>
+              </button>
+              : <Link to={`/login`} id="favbutton2" className="heart-button"><i className="fas fa-heart" id="favicon2"></i></Link>
 
             }
-          </h6>
+          </div>
+          </div>
             <div id="textoslegales">
             {Array.from(Array(5).keys()).map((e,i)=>{return props.puntuacion <= i ? 
             (<i className="far fa-star" key={i} id="iconbutton"/>)
