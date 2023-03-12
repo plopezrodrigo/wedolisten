@@ -22,7 +22,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       // -------------------------------------------------------------------
       cargaLocales: async (buscar) => {
         try{
-            const resp = await fetch(`${process.env.BACKEND_URL}/api/comercial-place-search/${buscar}`);
+            const resp = await fetch(`${process.env.BACKEND_URL}/api/comercial-place-search/${buscar}/`);
             if (resp.status !== 200){ 
                 setStore({message: `No se han encontrado resultados para: "${buscar}"` });
                 return false;

@@ -22,7 +22,7 @@ const Buscador = () => {
       // Cargamos store.locales para usarlo en listLocales
       actions.cargaLocales(formData.buscar).then((response) => {
         if (response){
-                  navigate("/listLocales");
+                  navigate(`/buscarlistlocales/${formData.buscar}`);
               }else{
                   setMensaje(store.message);
                   toggleModal();
@@ -32,8 +32,8 @@ const Buscador = () => {
   }
 
   return (
-    <div className="container-buscador">
-      <div className="bloquebuscador">
+    <div className="container-buscador row">
+      <div className="bloquebuscador col-12">
         <div className="fondo">
           <div className="picture">
           <img 

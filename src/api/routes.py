@@ -131,15 +131,16 @@ def list_Comercial_Places_home():
 # ----------------------------------------------------------------------------
 # Búsqueda de Locales
 # ----------------------------------------------------------------------------
-@api.route('/comercial-place-search/<buscar>', methods=['GET'])
+@api.route('/comercial-place-search/<buscar>/', methods=['GET'])
 @jwt_required(optional = True)
 def list_Comercial_Places_search(buscar):
     favorits_id = []
     user_id = get_jwt_identity()
     customer = Customer.query.filter_by(user_id=user_id).first() if user_id else None
 
-    comercial_places = Comercial_Place.query.filter(Comercial_Place.name.contains(buscar)).all()
-
+    comercial_places = Comercial_Place.query.filter(func.lower(Comercial_Place.name) == func.lower(buscar)).all()
+    print(comercial_places)
+    print(buscar)
     comercials = []
     for comercial in comercial_places:
         q = db.session.query(Rate_Customer.comercial_place_id, Rate_Customer.rate, func.count('*').label('total_count')).filter_by(comercial_place_id=comercial.id).group_by(Rate_Customer.comercial_place_id,  Rate_Customer.rate).subquery()

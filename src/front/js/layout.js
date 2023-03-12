@@ -10,6 +10,7 @@ import { Favorites } from "./pages/favorites";
 import { Comments } from "./pages/comments";
 import LocalDetail from "./pages/localDetail";
 import ListLocales from "./pages/listlocales";
+import BuscarlistLocales from "./pages/buscarlistlocales";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -52,6 +53,7 @@ const Layout = () => {
                         <Route element={<Favorites/>} path="/favorites" />
                         <Route element={<Comments/>} path="/comments" />
                         <Route element={<ListLocales/>} path="/listlocales" />
+                        <Route element={<BuscarlistLocales/>} path="/buscarlistlocales/:busqueda" />
                         <Route element={<LocalDetail/>} path="/localDetail/:id"/>
                         <Route element={<OpinionUser/>} path="/opinionUser/:id_local/:id_comment" />
                         <Route element={<OpinionManager/>} path="/opinionManager/:id_local/:id_comment" />

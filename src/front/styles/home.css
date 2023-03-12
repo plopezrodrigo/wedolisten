@@ -36,6 +36,9 @@ body {
   color: var(--onLightButtonText);
   cursor: pointer;
 }
+i.fa-heart:hover {
+  color: #FF0DE7;
+}
 .heart-button {
   border: none;
   color: #8a8787;
