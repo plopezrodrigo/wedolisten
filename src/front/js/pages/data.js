@@ -3,7 +3,7 @@ import { Context } from "../store/appContext";
 
 export const Data = () => {
   const { store, actions } = useContext(Context);
-
+ 
   return (
     <>
       <div className="myDetails">

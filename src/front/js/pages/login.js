@@ -58,7 +58,7 @@ const Login = () => {
         datosCustomer(store.user.id).then((resp) => {
             console.log("Customer:", resp);
             if (!(resp.name) || !(resp.birthday) || !(resp.gender) || !(resp.address) || !(resp.telefono))
-              navigate("/data");
+              navigate("/");
           }); 
       }
       navigate("/");

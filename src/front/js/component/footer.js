@@ -5,7 +5,7 @@ import imagen from "../../img/logo.png";
 export const Footer = () => (
   <footer className="text-center text-lg-start text-muted" id="footer">
     <section>
-      <div className="container text-center text-md-start mt-5">
+      <div className="container text-center text-md-start">
         <div className="row mt-3">
           <div className="col-md-4 col-lg-6 col-xl-4 ms-4">
             <Link to="/">
@@ -22,8 +22,8 @@ export const Footer = () => (
             Baby Friendly te ayuda a dar tu opinión sobre tus locales favoritos y que éstas puedan ser consultadas por otros usuarios.
             </p>
           </div>
-          <div className="col-md-3 col-lg-2 col-xl-2 mb-4" id="textosfooter">
-          <h6 className="text-uppercase fw-bold mb-4">
+          <div className="col-md-3 col-lg-2 col-xl-2 " id="textosfooter">
+          <h6 className="text-uppercase fw-bold">
           
           </h6>
             <p id="textosfooter"></p>

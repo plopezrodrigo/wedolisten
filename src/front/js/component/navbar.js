@@ -1,8 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
 import { Link, useNavigate } from "react-router-dom";
-import CustomModal from "../component/customModal";
-import { useModal } from "../hooks/UseModal";
 import imagen from "../../img/logo.png";
 
 export const Navbar = () => {

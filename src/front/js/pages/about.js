@@ -2,7 +2,7 @@ import React from "react";
 
 export const About = () => {
 	return (
-		<div className="container" id="about">
+		<div className="container" >
 			<section className="show">
 				<div className="flex-dave-layout-main_inner">
 					<div className="row mb-5 pb-md-4 align-items-center">

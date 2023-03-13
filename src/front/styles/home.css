@@ -17,7 +17,6 @@ body {
 
 #tituloHome{
   margin-left: 12px;
-  margin-top: 50px;
   margin-bottom: 10px;
 }
 #subtituloHome{
@@ -70,7 +69,7 @@ i.fa-heart:hover {
 
 #opinionbutton{
   border: none;
-  background-color: #ffc6708a;
+  background-color: #fcd08f8a;
 }
 #opinioncard{
   background-color: #ffc6708a;

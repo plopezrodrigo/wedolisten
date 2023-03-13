@@ -62,7 +62,7 @@ const LocalCard = (props) => {
               onClick={()=>{add_favourites(props.id)}}> 
               <i className="fas fa-heart" id="favicon2"></i>
               </button>
-              : <Link to={`/login`} id="favbutton2" className="heart-button"><i className="fas fa-heart" id="favicon2"></i></Link>
+              : <Link to={`/login`} id="favbutton2"><i className="fas fa-heart heart-button-active" id="favicon2"></i></Link>
 
             }
           </div>

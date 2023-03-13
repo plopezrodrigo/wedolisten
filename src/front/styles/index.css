@@ -15,7 +15,7 @@ body {
   font-family: poppins;
 }
 #footer {
-  padding: 50px;
+  margin-top: 50px;
   color: #5e2e2e;
 }
 #textosfooter {
@@ -162,9 +162,6 @@ body {
   width: 502px;
   height: auto;
   margin-left: 10px;
-}
-#about{
-  margin-left: 77px;
 }
 #cardabout{
   align-items: center;
