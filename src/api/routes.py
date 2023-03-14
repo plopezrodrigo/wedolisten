@@ -68,7 +68,6 @@ def list_Comercial_Places():
                     Comercial_Place.id==q.c.comercial_place_id).all()
         total = 0
         count = 0
-
         for data in result:
             total += data[1] * (int(data[2]) / 100) if data[2] and data[1] else 0
             count += data[1] if data[1] else 0
@@ -77,11 +76,10 @@ def list_Comercial_Places():
         count = count if count > 0 else 1
         info['raking'] = int(total * 100 / count)
         comercials.append(info)
-
     if customer:
         favourits = Favourit.query.filter_by(customer_id=customer.id)
         favorits_id = [favorit.comercial_place_id for favorit in favourits]
-
+        
     for element in comercials:
         if element['id'] in favorits_id:
             element['favorite'] = True 
@@ -118,15 +116,15 @@ def list_Comercial_Places_home():
         favourits = Favourit.query.filter_by(customer_id=customer.id)
         favorits_id = [favorit.comercial_place_id for favorit in favourits]
 
+    result = []
     for element in comercials:
+        print(element['id'] in favorits_id)
         if element['id'] in favorits_id:
             element['favorite'] = True 
         else:
             element['favorite'] = False 
-    
-    print(comercials)
-
-    return jsonify(comercials), 200
+        result.append(element)
+    return jsonify(result), 200
 
 # ----------------------------------------------------------------------------
 # Búsqueda de Locales
@@ -139,8 +137,7 @@ def list_Comercial_Places_search(buscar):
     customer = Customer.query.filter_by(user_id=user_id).first() if user_id else None
 
     comercial_places = Comercial_Place.query.filter(func.lower(Comercial_Place.name) == func.lower(buscar)).all()
-    print(comercial_places)
-    print(buscar)
+    
     comercials = []
     for comercial in comercial_places:
         q = db.session.query(Rate_Customer.comercial_place_id, Rate_Customer.rate, func.count('*').label('total_count')).filter_by(comercial_place_id=comercial.id).group_by(Rate_Customer.comercial_place_id,  Rate_Customer.rate).subquery()
@@ -161,13 +158,16 @@ def list_Comercial_Places_search(buscar):
         favourits = Favourit.query.filter_by(customer_id=customer.id)
         favorits_id = [favorit.comercial_place_id for favorit in favourits]
 
+    result = []
     for element in comercials:
+        print(element['id'] in favorits_id)
         if element['id'] in favorits_id:
             element['favorite'] = True 
         else:
             element['favorite'] = False 
+        result.append(element)
 
-    return jsonify(comercials), 200
+    return jsonify(result), 200
 
 # ----------------------------------------------------------------------------
 # Locales de un Manager
@@ -238,12 +238,10 @@ def Comercial_Places_2(comercial_place_id):
     count = 0
     for data in result:
         total += data[1] * (int(data[2]) / 100) if data[2] and data[1] else 0
-        print(data[1])
         count += data[1] if data[1] else 0
     
     comercial = data[0].serialize()
     count = count if count > 0 else 1
-    print(count)
     comercial['raking'] = int(total * 100 / count) 
 
     if comercial_places:
@@ -706,13 +704,16 @@ def list_Last_Comercial_Places():
         favourits = Favourit.query.filter_by(customer_id=customer.id)
         favorits_id = [favorit.comercial_place_id for favorit in favourits]
 
+    result = []
     for element in comercials:
+        print(element['id'] in favorits_id)
         if element['id'] in favorits_id:
             element['favorite'] = True 
         else:
             element['favorite'] = False 
+        result.append(element)
 
-    return jsonify(comercials), 200
+    return jsonify(result), 200
 
 # ----------------------------------------------------------------------------
 # Lista de Locales Random
@@ -758,10 +759,14 @@ def list_Random_Comercial_Places():
         favourits = Favourit.query.filter_by(customer_id=customer.id)
         favorits_id = [favorit.comercial_place_id for favorit in favourits]
 
+    
+    result = []
     for element in comercials:
+        print(element['id'] in favorits_id)
         if element['id'] in favorits_id:
             element['favorite'] = True 
         else:
             element['favorite'] = False 
+        result.append(element) 
 
-    return jsonify(comercials), 200
+    return jsonify(result), 200

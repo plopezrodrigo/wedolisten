@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import UserInfo from "../component/userInfo";
 import ManagerInfo from "../component/managerInfo";
+import ManagerlogInfo from "../component/managerlogInfo";
 import OpinionCard from "../component/opinionCard";
 import LocalCard from "../component/localCard";
 import Buscador from "../component/buscador";
@@ -57,23 +58,30 @@ export const Home = () => {
 
       <div className="container mt-5"><UserInfo /></div>
       <div className="container"><ManagerInfo /></div>
-      <h1 className="text-center mb-5" id="tituloHome">Lee lo que otros están opinando...</h1>
-      <div key="DIVComentarios" className="container fluid">
-        <div className="row align-items-start"> 
-            {comentarios && comentarios.map((comentario, index)=>{    
-              return  <div key={`Co${index}`} className="col"> 
-                        <OpinionCard  comment ={comentario.comment}
-                                      puntuacion={comentario.puntuacion}
-                                      fecha={comentario.date}
-                                      local_id={comentario.comercial_place_id}
-                                      id_comment={comentario.id}
-                                      nombre={comentario.user_name}
-                        />
-                      </div> 
-             })
-            }          
+      {store.usertype == "customer" ?
+        <div>
+        <h1 className="text-center mb-5" id="tituloHome">Lee lo que otros están opinando...</h1>
+        <div key="DIVComentarios" className="container fluid">
+          <div className="row align-items-start"> 
+              {comentarios && comentarios.map((comentario, index)=>{    
+                return  <div key={`Co${index}`} className="col"> 
+                          <OpinionCard  comment ={comentario.comment}
+                                        puntuacion={comentario.puntuacion}
+                                        fecha={comentario.date}
+                                        local_id={comentario.comercial_place_id}
+                                        id_comment={comentario.id}
+                                        nombre={comentario.user_name}
+                          />
+                        </div> 
+              })
+              }          
+          </div>
         </div>
-      </div>
+        </div>
+      :
+      <div className="container"><ManagerlogInfo /></div>
+      }
+      {store.usertype == "customer" ?
       <div className="mt-0">
       <h3 className="text-left mt-4" id="tituloHome">Los locales más populares</h3>
       <p id="subtituloHome">Recomendación según tu actividad</p>
@@ -99,6 +107,10 @@ export const Home = () => {
         </div>
       </div>
       </div>
+      :
+      ""
+      }
+      {store.usertype == "customer" ?
       <div className="mt-0">
       <h3 className="text-left mt-0" id="tituloHome">Adónde ir, ahora mismo</h3>
       <p id="subtituloHome">Reserva en estos locales para conocer Madrid en profundidad.</p>
@@ -124,6 +136,9 @@ export const Home = () => {
         </div>
       </div>
       </div>
+      :
+      ""
+      }
       {/* <div >
         <h3 className="text-left mt-0" id="tituloHome">Más por descubrir</h3>
         <p id="subtituloHome">Descubre lo que tienes cerca</p>

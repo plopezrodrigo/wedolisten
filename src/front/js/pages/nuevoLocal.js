@@ -79,14 +79,18 @@ export const NuevoLocal = () => {
                   />
                 </div>
                 <div className="col-md-12">
-                  <label className="alinear-izquierda" htmlFor="InputEmail1">
+                <label className="alinear-izquierda" htmlFor="InputEmail1">
                     Descripción
                   </label>
                   <textarea
-                    id="textarea"
-                    name="description"
                     required
-                    rows="3"
+                    className="form-control"
+                    type="description"
+                    name="description"
+                    id="textarea"
+                    aria-describedby="Descripción"
+                    row="3"
+                    cols="109"
                     onChange={handleChange}
                   ></textarea>
                 </div>
@@ -144,7 +148,7 @@ export const NuevoLocal = () => {
                   />
                 </div>
               </div>
-              <div className="col-6 col-md-4 col-lg-3 col-xl-3">
+              <div className="col-md-10 mt-1">
                 <form
                   className="form-outline"
                   noValidate
@@ -173,75 +177,76 @@ export const NuevoLocal = () => {
                       onChange={handleChange}
                     />
                   </div>
-                  <div className="col-md-12">
+                  <div className="col-md-12 mt-2">
                     <label className="alinear-izquierda" htmlFor="InputEmail1">
                       Características
                     </label>
+                    <div className="col-12">
+                      <input
+                        type="checkbox"
+                        name="trona"
+                        className="form-check-input ms-2"
+                        id="InputTrona1"
+                        aria-describedby="tronaHelp"
+                        onChange={handleChangecheck}
+                      />
+                      <label htmlFor="InputTrona1">Trona</label>
+                      <input
+                        type="checkbox"
+                        name="cambiador"
+                        className="form-check-input ms-2"
+                        id="InputCambiador2"
+                        aria-describedby="cambiadorHelp"
+                        onChange={handleChangecheck}
+                      />
+                      <label htmlFor="InputCambiador2">Cambiador</label>
+                      <input
+                        type="checkbox"
+                        name="accessible_carrito"
+                        className="form-check-input ms-2"
+                        id="InputAccessible_carrito3"
+                        aria-describedby="accessible_carritoHelp"
+                        onChange={handleChangecheck}
+                      />
+                      <label htmlFor="InputAccessible_carrito3">
+                        Accessible con carrito
+                      </label>
+                      <input
+                        type="checkbox"
+                        name="espacio_carrito"
+                        className="form-check-input ms-2"
+                        id="InputEspacio_carrito3"
+                        aria-describedby="espacio_carritoHelp"
+                        onChange={handleChangecheck}
+                      />
+                      <label htmlFor="InputEspacio_carrito3">
+                        Espacio para carrito
+                      </label>
+                      <input
+                        type="checkbox"
+                        name="ascensor"
+                        className="form-check-input ms-2"
+                        id="InputAscensor5"
+                        aria-describedby="ascensorHelp"
+                        onChange={handleChangecheck}
+                      />
+                      <label htmlFor="InputAscensor5">Ascensor</label>
+                      <input
+                        type="checkbox"
+                        name="productos_higiene"
+                        className="form-check-input ms-2"
+                        id="InputProductos_higiene5"
+                        aria-describedby="productos_higieneHelp"
+                        onChange={handleChangecheck}
+                      />
+                      <label htmlFor="InputProductos_higiene5">
+                        Productos de Higiene
+                      </label>
+                    </div>
                   </div>
                 </form>
               </div>
-              <div className="col-12">
-                <input
-                  type="checkbox"
-                  name="trona"
-                  className="form-check-input"
-                  id="InputTrona1"
-                  aria-describedby="tronaHelp"
-                  onChange={handleChangecheck}
-                />
-                <label htmlFor="InputTrona1">Trona</label>
-                <input
-                  type="checkbox"
-                  name="cambiador"
-                  className="form-check-input"
-                  id="InputCambiador2"
-                  aria-describedby="cambiadorHelp"
-                  onChange={handleChangecheck}
-                />
-                <label htmlFor="InputCambiador2">Cambiador</label>
-                <input
-                  type="checkbox"
-                  name="accessible_carrito"
-                  className="form-check-input"
-                  id="InputAccessible_carrito3"
-                  aria-describedby="accessible_carritoHelp"
-                  onChange={handleChangecheck}
-                />
-                <label htmlFor="InputAccessible_carrito3">
-                  Accessible con carrito
-                </label>
-                <input
-                  type="checkbox"
-                  name="espacio_carrito"
-                  className="form-check-input"
-                  id="InputEspacio_carrito3"
-                  aria-describedby="espacio_carritoHelp"
-                  onChange={handleChangecheck}
-                />
-                <label htmlFor="InputEspacio_carrito3">
-                  Espacio para carrito
-                </label>
-                <input
-                  type="checkbox"
-                  name="ascensor"
-                  className="form-check-input"
-                  id="InputAscensor5"
-                  aria-describedby="ascensorHelp"
-                  onChange={handleChangecheck}
-                />
-                <label htmlFor="InputAscensor5">Ascensor</label>
-                <input
-                  type="checkbox"
-                  name="productos_higiene"
-                  className="form-check-input"
-                  id="InputProductos_higiene5"
-                  aria-describedby="productos_higieneHelp"
-                  onChange={handleChangecheck}
-                />
-                <label htmlFor="InputProductos_higiene5">
-                  Productos de Higiene
-                </label>
-              </div>
+
               <div className="col-12">
                 <div className="py-3 px-0 mx-0 d-flex justify-content-around">
                   <button

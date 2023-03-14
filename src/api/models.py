@@ -95,7 +95,7 @@ class Comercial_Place(db.Model):
         return f'<Comercial_Place {self.name}>'
 
     def serialize(self):
-        print(self.photos_comercial_place)
+        print(self.comments)
         return {    "id": self.id,
                     "user_id": self.user_id,
                     "name": self.name,
@@ -112,7 +112,8 @@ class Comercial_Place(db.Model):
                     "espacio_carrito": self.espacio_carrito,
                     "ascensor": self.ascensor,
                     "productos_higiene": self.productos_higiene,
-                    "imagenes": [imagen.location for imagen in self.photos_comercial_place]
+                    "imagenes": [imagen.location for imagen in self.photos_comercial_place],
+                    "comments": len(self.comments)
                }
     def serialize_location(self):
         print(self.photos_comercial_place)
@@ -136,7 +137,8 @@ class Comercial_Place(db.Model):
                     "espacio_carrito": self.espacio_carrito,
                     "ascensor": self.ascensor,
                     "productos_higiene": self.productos_higiene,
-                    "imagenes": [imagen.location for imagen in self.photos_comercial_place]
+                    "imagenes": [imagen.location for imagen in self.photos_comercial_place],
+                    "comments": len(self.comments)
 
                }
 
