@@ -37,6 +37,7 @@ export const NuevoLocal = () => {
   return (
     <div className="vh-100 gradient-custom">
       <div className="container text-center">
+      <div className="form-body">
         <h3 className="mt-3" id="iconbutton">
           Registro
         </h3>
@@ -262,6 +263,7 @@ export const NuevoLocal = () => {
             </div>
           </form>
         </div>
+      </div>
       </div>
     </div>
   );
