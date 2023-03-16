@@ -58,7 +58,7 @@ export const Navbar = () => {
                           {store.usertype == "customer" ?
                           <li><Link to="/favorites" className="dropdown-item" >Mis Favoritos</Link></li>
                           :
-                          <li><Link to="/comentarios" className="dropdown-item" >Mis Comentarios</Link></li>
+                          ""
                           }
                           {store.usertype == "manager" ?
                           <li><Link to="/misLocales" className="dropdown-item" >Mis Locales</Link></li>
