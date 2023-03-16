@@ -77,61 +77,63 @@ export const OpinionUser = () => {
                   					</label>
 									<input type="text" name="name" defaultValue={local.name} required className="form-control" id="textarea" aria-describedby="nameHelp" onChange={handleChange}/>
 								</div>
-								<div className="col-md-12 mt-2">
-								<label className="alinear-izquierda" htmlFor="Inputurl1">
-									Información de contacto
-								</label>
-								<input
-									type="text"
-									name="url"
-									className="form-control mb-1"
-									id="Inputurl1"
-									aria-describedby="urlHelp"
-									placeholder="Página web"
-									defaultValue={local.url}
-									onChange={handleChange}
-								/>
-								<input
-									type="text"
-									name="email"
-									required
-									className="form-control mb-1"
-									id="InputEmail1"
-									aria-describedby="emailHelp"
-									defaultValue={local.email}
-									placeholder="Email"
-									onChange={handleChange}
-								/>
-								<input
-									type="text"
-									name="telf"
-									required
-									className="form-control mb-1"
-									id="InputTelf1"
-									aria-describedby="TelfHelp"
-									defaultValue={local.telf}
-									placeholder="Teléfono"
-									onChange={handleChange}
-								/>
-								<input
-									type="text"
-									name="address"
-									required
-									className="form-control mb-1"
-									id="InputAddress1"
-									ria-describedby="AddressHelp"
-									defaultValue={local.address}
-									placeholder="Dirección"
-									onChange={handleChange}
-								/>
-                				</div>
-								<div className="col-12 mt-2">
+								<div className="row">
+								<div className="col-4 mt-2 ms-0">
 								<p className="alinear-izquierda">Tu puntuación general de este local</p>
-								<input type="radio" required name="puntuacion" className="form-check-input" id="InputPuntua1" aria-describedby="nameHelp" value="uno" onChange={handleChange} />
-								<input type="radio" required name="puntuacion" className="form-check-input" id="InputPuntua2" aria-describedby="nameHelp" value="dos" onChange={handleChange} />
-								<input type="radio" required name="puntuacion" className="form-check-input" id="InputPuntua3" aria-describedby="nameHelp" value="tres" onChange={handleChange} />
-								<input type="radio" required name="puntuacion" className="form-check-input" id="InputPuntua4" aria-describedby="nameHelp" value="cuatro" onChange={handleChange} />
-								<input type="radio" required name="puntuacion" className="form-check-input" id="InputPuntua5" aria-describedby="nameHelp" value="cinco" onChange={handleChange} />
+								</div>
+								<div className="col-4 mt-2">
+								<input
+                        			type="checkbox"
+                        			name="puntuacion"
+                        			className="form-check-input ms-2"
+                        			id="InputPuntua1"
+									aria-describedby="nameHelp"
+									value="uno"
+									onChange={handleChange}
+                      			/>
+                      			<label htmlFor="InputPuntua1">Uno</label>
+								<input
+                        			type="checkbox"
+                        			name="puntuacion"
+                        			className="form-check-input ms-2"
+                        			id="InputPuntua1"
+									aria-describedby="nameHelp"
+									value="uno"
+									onChange={handleChange}
+                      			/>
+                      			<label htmlFor="InputPuntua2">Dos</label>
+								<input
+                        			type="checkbox"
+                        			name="puntuacion"
+                        			className="form-check-input ms-2"
+                        			id="InputPuntua1"
+									aria-describedby="nameHelp"
+									value="uno"
+									onChange={handleChange}
+                      			/>
+                      			<label htmlFor="InputPuntua3">Tres</label>
+								<input
+                        			type="checkbox"
+                        			name="puntuacion"
+                        			className="form-check-input ms-2"
+                        			id="InputPuntua3"
+									aria-describedby="nameHelp"
+									value="uno"
+									onChange={handleChange}
+                      			/>
+                      			<label htmlFor="InputPuntua4">Cuatro</label>
+								<input
+                        			type="checkbox"
+                        			name="puntuacion"
+                        			className="form-check-input ms-2"
+                        			id="InputPuntua4"
+									aria-describedby="nameHelp"
+									value="uno"
+									onChange={handleChange}
+                      			/>
+                      			<label htmlFor="InputPuntua5">Cinco</label>
+								</div>
+								
 								</div>
 							<div className="col-md-12 mt-2">
 								<label className="alinear-izquierda" htmlFor="InputEmail1">
@@ -184,7 +186,7 @@ export const OpinionUser = () => {
 									<option value="No">No</option>
 								</select>
 								<select name="alcohol" id="InputAlcohol1" className="form-control" aria-describedby="AlcoholHelp" onChange={handleChange} >
-									<option value="">¿Repetrías la experiencia?</option>
+									<option value="">¿Repetirías la experiencia?</option>
 									<option value="Si">Si</option>
 									<option value="No">No</option>
 								</select>

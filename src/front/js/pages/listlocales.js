@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import LocalCard from "../component/localCard";
+import MilocalCard from "../component/milocalCard";
+
 
 const ListLocales = () => {
   const { store, actions } = useContext(Context);
@@ -86,6 +88,7 @@ const ListLocales = () => {
 
   return (
     <div className="container fluid">
+      <div>
       <h3>Al aire libre en familia</h3>
       <div className="row align-items-start">
         {localeshome &&
@@ -112,6 +115,11 @@ const ListLocales = () => {
             );
           })}
       </div>
+      </div>
+ 
+
+
+      <div>
       <h3>Locales de la Guía #FoodieKids</h3>
       <div className="row align-items-start">
         {lastlocales &&
@@ -138,6 +146,9 @@ const ListLocales = () => {
             );
           })}
       </div>
+      </div>
+
+      <div>
       <h3>Terrazas family friendly</h3>
       <div className="row align-items-start">
         {locales &&
@@ -165,6 +176,9 @@ const ListLocales = () => {
             );
           })}
       </div>
+      </div>
+
+      <div>
       <h3>Jardines secretos para tu familia</h3>
       <div className="row align-items-start">
         {localesrandom &&
@@ -191,6 +205,8 @@ const ListLocales = () => {
             );
           })}
       </div>
+      </div>
+
     </div>
   );
 };

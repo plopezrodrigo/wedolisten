@@ -92,7 +92,7 @@ const LocalCard = (props) => {
             </Link>
           </h6>
           <div className="col-2 me-0">
-            {sessionStorage.getItem("token") ? (
+            {sessionStorage.getItem("token") && store.usertype == "customer" ? (
               <button
                 className="heart-button"
                 id="favbutton2"

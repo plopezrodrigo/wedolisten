@@ -99,17 +99,22 @@ body {
   border-color: #cccaca;
 }
 #card2{
-  width: 250px;
+  width: 300px;
+  height: 342px;
+  font-size: small;
+}
+#card2b{
+  width: 320px;
   height: 342px;
   font-size: small;
 }
 #card3{
-  width: 600px;
+  width: 620px;
   height: 342px;
   font-size: small;
 }
 #card4{
-  width: 230px;
+  width: 300px;
   height: 342px;
   font-size: x-small
 }
@@ -119,7 +124,7 @@ body {
 
 #localcard{
   margin-bottom: 20px;
-  width: 300px;
+  width: 350px;
   height: 400px;
 }
 #imagenlocal{
@@ -145,7 +150,7 @@ body {
 }
 #banner{
   height: 200px;
-  width: 500px;
+  width: 600px;
   margin-left: 15px;
   background-color: rgb(242, 248, 252);
 }
@@ -161,6 +166,11 @@ body {
 .card-img-top2{
   width: 502px;
   height: auto;
+  margin-left: 10px;
+}
+.card-img-top3{
+  width: 570px;
+  height: 400px;
   margin-left: 10px;
 }
 #cardabout{

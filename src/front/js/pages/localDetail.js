@@ -145,7 +145,7 @@ const LocalDetail = (props) => {
       <div className="row">
         <div className="col-10 ms-2">{local ? <h3>{local.name}</h3> : ""}</div>
         <div className="col-12 ms-2">
-          {sessionStorage.getItem("token") ? (
+        {sessionStorage.getItem("token") && store.usertype == "customer" ? (
             <button
               className={`heart-button ${active ? "active" : ""}`}
               onClick={() => {
@@ -168,14 +168,7 @@ const LocalDetail = (props) => {
         <div>
           {getStarts()} {local.comments ? local.comments : 0} Opiniones
         </div>
-        <div className="col-12 mt-2">
-          {/* <p id="infolocal">
-            <i className="fas fa-map-marker-alt"></i> {local.address} -
-            <i className="fas fa-laptop"></i> {local.url} -
-            <i className="fas fa-phone"></i> {local.telf} -
-            <i className="fas fa-envelope"></i> {local.email}
-          </p> */}
-        </div>
+
       </div>
       <div className="container">
         <div className="row">
@@ -256,7 +249,7 @@ const LocalDetail = (props) => {
             />
           </div>
           <div className="col-3">
-            <div className="row" id="card2">
+            <div className="row" id="card2b">
               {local.imagenes
                 ? local.imagenes.map((imagen, index) => {
                     return (
@@ -336,16 +329,20 @@ const LocalDetail = (props) => {
         </div>
       </div>
       <div className="row" id="ubicacion"></div>
+      {sessionStorage.getItem("token") && store.usertype == "customer" ? (
       <div className="mb-0">
-        <Banner />
+      <Banner />
       </div>
+      ) : 
+      ""
+      }
       <div className="row ms-2" id="rating">
-        <div className="col-6">
+        <div className="col-9">
           <h4 className="mb-3 mt-0" id="descripcion">
             Lee lo que otros usuarios opinan:
           </h4>
         </div>
-        <div className="col-6 alinear-derecha">
+        <div className="col-3 alinear-derecha">
           {store.usertype == "customer" && (
             <button className="btn btn-primary px-5 mb-3 mt-3" id="button">
               <Link to={`/OpinionUser/${params.id}/0`}>Escribe tu opinión</Link>

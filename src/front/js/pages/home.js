@@ -58,8 +58,9 @@ export const Home = () => {
 
       <div className="container mt-5"><UserInfo /></div>
       <div className="container"><ManagerInfo /></div>
-        <div>
-        <h1 className="text-center mb-5" id="tituloHome">Lee lo que otros están opinando...</h1>
+      <div>
+        {sessionStorage.getItem("token") && store.usertype == "customer" ? (
+        <div><h1 className="text-center mb-5" id="tituloHome">Lee lo que otros están opinando...</h1>
         <div key="DIVComentarios" className="container fluid">
           <div className="row align-items-start"> 
               {comentarios && comentarios.map((comentario, index)=>{    
@@ -77,7 +78,18 @@ export const Home = () => {
           </div>
         </div>
         </div>
-      
+        ) : 
+        ""
+        }
+      </div>
+      <div>
+      {sessionStorage.getItem("token") && store.usertype == "manager" ? (
+      <div className="container"><ManagerlogInfo /></div>
+      ) : 
+        ""
+        }
+      </div>
+
       <div className="mt-0">
       <h3 className="text-left mt-4" id="tituloHome">Los locales más populares</h3>
       <p id="subtituloHome">Recomendación según tu actividad</p>
@@ -129,7 +141,7 @@ export const Home = () => {
         </div>
       </div>
       </div>
-      
+    
       {/* <div >
         <h3 className="text-left mt-0" id="tituloHome">Más por descubrir</h3>
         <p id="subtituloHome">Descubre lo que tienes cerca</p>

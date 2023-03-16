@@ -30,6 +30,15 @@ const MilocalCard = (props) => {
         setMessage(true)
       }
     }
+    const getStarts = () => {
+      return [...Array(props.raking).keys()].map((rate, index) => {
+        return props.raking <= rate ? (
+          <i className="far fa-star" key={index} id="iconbutton" />
+        ) : (
+          <i className="fas fa-star" key={index} id="iconbutton" />
+        );
+      });
+    };
 
   return (
       <div className="card" id="localcard">
@@ -49,33 +58,39 @@ const MilocalCard = (props) => {
         />
         </a>
         <div className="card-body">
-          <h6>
-            <Link to={`/localDetail/${props.id}`} className="card-title mb-1 linkfooter" id="cardtitle"><strong>{props.name}</strong></Link>
+          <div className="row">
+          <h6 className="col-8">
+            <Link
+              to={`/localDetail/${props.id}`}
+              className="card-title mb-1 linkfooter"
+              id="cardtitle"
+            >
+              <strong>{props.name}</strong>
+            </Link>          
+          </h6>
+          <div className="col-4 me-0">
             <a href={`/datosLocal/${props.id}`}>
-            <button id="iconbutton"> <i className="fas fa-pencil-alt"></i></button>
+            <button id="iconbutton2"> <i className="fas fa-pencil-alt"></i></button>
             </a>
             <a href={`/localDetail/${props.id}`} id="iconbutton">
-            <button id="iconbutton"> <i className="fas fa-eye"></i></button>        
-            </a>            
-          </h6>
-            <div id="textoslegales">
-            {Array.from(Array(5).keys()).map((e,i)=>{return props.puntuacion <= i ? 
-            (<i className="far fa-star" key={i} id="iconbutton"/>)
-            : 
-            (<i className="fas fa-star" key={i} id="iconbutton"/>)
-            })
-            }
-            {comentarios ? comentarios.length : 0} Opiniones
-            </div>
-            <p className="mt-1" id="localcardtext">{props.description.substring(0,60)}...</p>
-            <div className="mt-0">
+            <button id="iconbutton2"> <i className="fas fa-eye"></i></button>        
+            </a>  
+          </div>
+          <div id="textoslegales">
+          {getStarts()} {props.comments ? props.comments : 0} Opiniones
+          </div>
+          <p className="mt-1" id="localcardtext">
+          {props.description.substring(0, 60)}...
+          </p>          
+          <div className="mt-0">
             {/* <Link to="/opinionUser/:id_local/:id_comment">
               <button id="iconbutton"><i className="far fa-comment" /></button>
             </Link>
             <Link to="/localDetail/:id">
               <button id="iconbutton"><i className="fas fa-map-marker-alt" /></button>
             </Link> */}
-            </div>
+          </div>
+          </div>
         </div>
       </div>
   );

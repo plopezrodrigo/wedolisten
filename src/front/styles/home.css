@@ -27,6 +27,11 @@ body {
   border: none;
   background-color: none;
 }
+#iconbutton2{
+  color: #FF9500;
+  border: none;
+  background-color: #ffffff;
+}
 #favicon{
   fill: currentColor;
 }
@@ -86,7 +91,7 @@ i.fa-heart:hover {
   box-shadow: 10px;
   height: auto;
   margin-top: 5px;
-  width: 1050px;
+  width: 1260px;
 }
 #comentario{
   width: 300px;
@@ -179,15 +184,15 @@ i.fa-heart:hover {
   align-items: right; 
 }
 .imagenbanner{
-  width: 570px;
+  width: 700px;
   height: 200px;
 }
 .imagenDetalle{
-  width: 600px;
+  width: 620px;
   height: 342px;
 }
 .imagenDetallePeq{
-  width: 250px;
+  width: 400px;
   height: 171px;
 }
 .linkfooter{
