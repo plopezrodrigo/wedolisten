@@ -55,7 +55,7 @@ const OpinionCarddetail = (props) => {
         </div>
         <div className="col-10">
         <div className="card-body text-left">
-          <h6 className="card-title">{props.nombre} - {props.id_comment}</h6>
+          <h6 className="card-title">{props.nombre}</h6>
                     
           <Link to={`/vercomentario/${props.id_comment}`}>
             <p>

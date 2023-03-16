@@ -59,7 +59,6 @@ export const Home = () => {
       <div className="container mt-5"><UserInfo /></div>
       <div className="container"><ManagerInfo /></div>
       <div>
-        {sessionStorage.getItem("token") && store.usertype == "customer" ? (
         <div><h1 className="text-center mb-5" id="tituloHome">Lee lo que otros están opinando...</h1>
         <div key="DIVComentarios" className="container fluid">
           <div className="row align-items-start"> 
@@ -78,9 +77,6 @@ export const Home = () => {
           </div>
         </div>
         </div>
-        ) : 
-        ""
-        }
       </div>
       <div>
       {sessionStorage.getItem("token") && store.usertype == "manager" ? (

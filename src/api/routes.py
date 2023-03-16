@@ -263,7 +263,7 @@ def get_photos_comercial_place(id):
 # ----------------------------------------------------------------------------
 @api.route('/comment', methods=['GET'])
 def list_Comments():
-    datos = Comment.query.order_by(Comment.id.desc()).limit(4).all()
+    datos = Comment.query.order_by(Comment.id.desc()).limit(3).all()
     data = [comentario.serialize() for comentario in datos]
     return jsonify(data), 200
 

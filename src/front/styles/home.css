@@ -58,6 +58,21 @@ i.fa-heart:hover {
   display: inline-block;
   text-align:center;
 }
+.heart-button2 {
+  border: none;
+  color: #8a8787;
+  background-color: #ffe9c8;
+  display: inline-block;
+  text-align:center;
+}
+
+.heart-button-active2 {
+  color: #FF0DE7;
+  background-color: #ffe9c8;
+  border: none;
+  display: inline-block;
+  text-align:center;
+}
 #iconsocial{
   color: #5e2e2e;
   border: none;

@@ -143,18 +143,18 @@ const LocalDetail = (props) => {
   return (
     <div className="container fluid">
       <div className="row">
-        <div className="col-10 ms-2">{local ? <h3>{local.name}</h3> : ""}</div>
-        <div className="col-12 ms-2">
+        <div className="col-3 ms-2">{local ? <h3>{local.name}</h3> : ""}
         {sessionStorage.getItem("token") && store.usertype == "customer" ? (
             <button
-              className={`heart-button ${active ? "active" : ""}`}
+              className={`heart-button2 ${active ? "active2" : ""}`}
               onClick={() => {
                 add_favourites(local.id);
                 setActive(!active);
               }}
             >
+              Guardar en Favoritos
               <i
-                className={`heart-button${
+                className={`ms-2 heart-button2${
                   active ? "-active" : ""
                 } fas fa-heart `}
               ></i>
@@ -162,7 +162,7 @@ const LocalDetail = (props) => {
           ) : (
             ""
           )}
-        </div>
+          </div>
       </div>
       <div className="row ms-1 mb-2">
         <div>
