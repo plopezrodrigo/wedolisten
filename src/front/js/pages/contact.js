@@ -1,11 +1,41 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import React, { useRef , useState, useEffect, useContext } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
+import CustomModal from "../component/customModal";
+import { useModal } from "../hooks/UseModal";
+import emailjs from '@emailjs/browser';
+import { EnvioEmail } from "../hooks/EnvioEmail";
 
 
 export const Contact = (props) => {
   const { store, actions } = useContext(Context);
-  const params = useParams();
+  const [isModalOpened, setIsModalOpened, toggleModal] = useModal(false);
+  const [mensaje, setMensaje] = useState(null);
+  const [formData, setFormData] = useState();
+  const navigate = useNavigate();
+  const form = useRef();
+
+  const submit = (e) => {
+    e.preventDefault();
+
+    EnvioEmail(form, setMensaje, toggleModal, "template_3tm47vd");
+
+
+    // emailjs.sendForm(process.env.EMAIL_SERVICE_ID, process.env.EMAIL_TEMPLATE_ID, form.current, process.env.EMAIL_PUBLIC_KEY)
+    // .then((result) => {
+    //     setMensaje("Correo enviado stisfactroiamente");
+    //     toggleModal();
+    // }, (error) => {
+    //     setMensaje(error.text)
+    //     return false;
+    // });
+
+    return true;
+  };
+
+	const handleChange = (evento) =>{
+		setFormData({...formData, [evento.target.name]: evento.target.value});
+	}  
 
   return (
     <div className="bg-contact3">
@@ -18,9 +48,9 @@ export const Contact = (props) => {
             <div className="col-12 col-md-8 col-lg-6 col-xl-5 ">
               <div className="card px-3" id="card">
                 <h3 className="mt-3" id="iconbutton">Escríbenos</h3>
-                  <form className="form-outline" noValidate>
+                  <form ref={form} className="form-outline" noValidate>
                     <div className="col-md-12">
-                      <label forhtml="basic-url" className="form-label alinear-izquierda mt-3">Nombre y Apellidos</label>
+                      <label htmlFor="InputEmail1" className="alinear-izquierda">Nombre y Apellidos</label>
                       <input  className="form-control mb-2"
                               type="text"
                               name="name"
@@ -34,7 +64,7 @@ export const Contact = (props) => {
                       <label forhtml="basic-url" className="form-label alinear-izquierda">Email</label>
                       <input  className="form-control mb-2"
                               type="email"
-                              name="email"
+                              name="user_email"
                               defaultValue={ store.email }
                               required
                       />
@@ -54,7 +84,8 @@ export const Contact = (props) => {
                     <div className="col-md-12">
                       <label forhtml="basic-url" className="form-label alinear-izquierda">Tema de consulta</label>
                       <select className="form-select mt-3" required>
-                        <option selected value="hgestor">Hacerme Gestor </option>
+                        <option defaultValue="hgestor">Selecciona un tema de consulta </option>
+                        <option value="hgestor">Hacerme Gestor </option>
                         <option value="jweb">Información sobre Baby Friendly</option>
                         <option value="sweb">Claves de acceso</option>
                         <option value="pmanager">Otras consultas</option>
@@ -83,9 +114,12 @@ export const Contact = (props) => {
                       <label className="form-check-label"> Confirmo que he leido y acepto la Política de Privacidad y Aviso Legal.</label>
                       <div className="invalid-feedback">Por favor, confirma que has leido y aceptas la Política de Privacidad y Aviso Legal.</div>
                     </div>
-                    <div className="form-button mt-3 mb-3">
-                      <button id="button" type="submit" className="btn btn-primary col-md-12 btn-lg px-5 mb-3 mt-3">
-                          Enviar
+                    <div className="">
+                    <button
+                        className="btn btn-primary px-5 mb-3 mt-3"
+                        onClick={submit}
+                        id="button">
+                        Enviar
                       </button>
                     </div>
                   </form>
@@ -94,5 +128,12 @@ export const Contact = (props) => {
           </div>
         </div>
       </div>
+      <CustomModal  show={isModalOpened}
+           		        titulo="Gracias por ponerte en contacto con nosotros"
+                	    handleClose={() => {setIsModalOpened(false);
+										   navigate(`/contact`);}
+									}>
+				<div>{mensaje}</div>
+		  </CustomModal>
     </div>
   );};

@@ -1,43 +1,34 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
+import LocalCardfav from "../component/localCardfav";
+
 
 export const Favorites = () => {
-  const [favorites, setFavorites] = useState({})
   const { store, actions } = useContext(Context);
-
-      const list_favorites = () => {
-      fetch(`${process.env.BACKEND_URL}/api/favourit/`, { 
-          method: "GET",
-          headers: { Authorization: "Bearer " + sessionStorage.getItem("token"), "Content-Type": "application/json" },
-     })    
+  const [favorites, setFavorites] = useState();
+  
+  const list_favorites = () => {
+    fetch(`${process.env.BACKEND_URL}/api/favourit/`, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token"),
+        "Content-Type": "application/json",
+      },
+    })
       .then((response) => {
         return response.json();
       })
       .then((response) => {
         setFavorites(response);
       });
-    }
+  };
 
-    useEffect(() => {
-      list_favorites()
-    }
-    ,[])
+  useEffect(() => {
+    list_favorites();
+  }, []);
 
-    const deleteFavourites = (id) => {
-      fetch(`${process.env.BACKEND_URL}/api/favourit/${id}`, { 
-        method: "POST",
-        headers: { Authorization: "Bearer " + sessionStorage.getItem("token"), "Content-Type": "application/json" },
-   })    
-    .then((response) => {
-      return response.json();
-    })
-    .then((response) => {
-      setFavorites(response);
-    });
-    }
-
-    return (
+  return (
     <div className="container fluid">
       <div className="myDetails">
         <div className="headerSection">
@@ -50,40 +41,21 @@ export const Favorites = () => {
         </div>
       </div>
       <div className="contaniner fluid">
-        <table className="table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Foto</th>
-              <th scope="col">Local</th>
-              <th scope="col">Acción</th>
-            </tr>
-          </thead>
-          <tbody className="listado">
-            {!favorites.length > 0 ? <tr>no hay favoritos</tr> 
-            : 
-              favorites.map((fav, i) => (
-                <tr>
-                  <td>{fav.comercial.id}</td>
-                  <td>
-                    <img src={fav.comercial.image_url}
-                        width="50px"
-                        height="50px"
-                    />
-                  </td>
-                  <td>{fav.comercial.name}</td>
-                  {favorites.map((fav, i)=>(
-                          <td>{fav.comercial.id}
-                            <button className="btn" >
-                              <i className="far fa-trash-alt" onClick={() => deleteFavourites(fav.id)}/>
-                            </button>
-                          </td>
-                  ))}
-                </tr>
-              ))
-            }
-          </tbody>
-        </table>
+        <div className="row align-items-start">
+        {favorites && favorites.map((fav, index) => {
+        return <div key={fav.comercial.id} className="col-3 mt-3 ms-2">
+          <LocalCardfav
+                  name={fav.comercial.name}
+                  key={fav.comercial.id}
+                  id={fav.comercial.id}
+                  index={index}
+                  description={fav.comercial.description}
+                  image_url={fav.comercial.image_url}
+                  id_favourite={fav.id}
+          />
+          </div>
+          })}
+        </div>
       </div>
     </div>
   );

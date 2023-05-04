@@ -62,52 +62,114 @@ export const OpinionUser = () => {
 		<div className="vh-100 gradient-custom">
 			<div className="container text-center">
 			<div className="form-body">
-				<div className="row">
-					<h3 className="text-center">Escribe una opinión y ayúdanos a mejorar</h3>
-					<p className="text-center">Historias como la yuya ayudan a mejorar. Comparte tu experiencia y ayúdanos</p>
-				</div>
-				<div className="row d-flex justify-content-center align-items-center h-10">
-					<div className="col-12 col-md-8 col-lg-6 col-xl-5 ">
-						<div className="card px-3" id="card">
-							<div class="container">
-								<div class="row">
-									<div class="col-4 alinear-izquierda">
-									<img src={imagen} className="mt-2" alt="" height="150px" width="150px"/>
-									</div>
-									<div class="col-8 mt-2">
-									<p className="my-0"><strong>{local.name} ({params.id_local})</strong></p>
-									<p className="my-0">{local.address} </p>
-									<p className="my-0">{local.telf} - {local.email}</p>
-									<p className="my-0">{local.url}</p>
-									</div>
+				<h3 className="mt-3" id="iconbutton">
+				Escribe una opinión y ayúdanos a mejorar
+        		</h3>
+       			<p className="mb-0">Historias como la tuya ayudan a mejorar. Comparte tu experiencia y ayúdanos.</p>
+					<div className="card px-3" id="card">
+						<form className="form-outline" noValidate onSubmit={handleSubmit}>
+							<div class="row d-flex justify-content-center align-items-center h-10">
+								<p></p>
+								<div class="col-12 mt-2">
+									<p></p>
+									<label htmlFor="InputEmail1" className="alinear-izquierda" defaultValue={local.name}>
+                    				Nombre del local
+                  					</label>
+									<input type="text" name="name" defaultValue={local.name} required className="form-control" id="textarea" aria-describedby="nameHelp" onChange={handleChange}/>
 								</div>
-							</div>
-							<div className="row">
-						<h4 className="text-center">Tu experiencia es muy valiosa para nosotros.</h4>
-					</div>
-					<div className="col-md-12">
-						<form onSubmit={handleSubmit}>
-							<div className="form-group">
+								<div className="row">
+								<div className="col-4 mt-2 ms-0">
 								<p className="alinear-izquierda">Tu puntuación general de este local</p>
-								<input type="radio" required name="puntuacion" className="form-check-input" id="InputPuntua1" aria-describedby="nameHelp" value="uno" onChange={handleChange} />
-								<input type="radio" required name="puntuacion" className="form-check-input" id="InputPuntua2" aria-describedby="nameHelp" value="dos" onChange={handleChange} />
-								<input type="radio" required name="puntuacion" className="form-check-input" id="InputPuntua3" aria-describedby="nameHelp" value="tres" onChange={handleChange} />
-								<input type="radio" required name="puntuacion" className="form-check-input" id="InputPuntua4" aria-describedby="nameHelp" value="cuatro" onChange={handleChange} />
-								<input type="radio" required name="puntuacion" className="form-check-input" id="InputPuntua5" aria-describedby="nameHelp" value="cinco" onChange={handleChange} />
-							</div>	   
-							<br/>
-							<div className="form-group mb-0">
-								<p className="alinear-izquierda">Título de tu opinión</p>
-								<textarea placeholder="Resume tu visita o destaca algún detalle importante" name="comment" required rows="3" cols="50" onChange={handleChange} ></textarea>
-							</div>
-							<br/>
-							<br/>
-							<div className="form-group mt-0">
-								<p className="alinear-izquierda">Tu opinión</p>
-								<textarea placeholder="Cuenta tu experiencia a la gente: comida, ambiente, servicio..." name="comment" required rows="3" cols="50" onChange={handleChange} ></textarea>
-							</div>
-							<br/>
-							<div className="form-group">
+								</div>
+								<div className="col-4 mt-2">
+								<input
+                        			type="checkbox"
+                        			name="puntuacion"
+                        			className="form-check-input ms-2"
+                        			id="InputPuntua1"
+									aria-describedby="nameHelp"
+									value="uno"
+									onChange={handleChange}
+                      			/>
+                      			<label htmlFor="InputPuntua1">Uno</label>
+								<input
+                        			type="checkbox"
+                        			name="puntuacion"
+                        			className="form-check-input ms-2"
+                        			id="InputPuntua1"
+									aria-describedby="nameHelp"
+									value="uno"
+									onChange={handleChange}
+                      			/>
+                      			<label htmlFor="InputPuntua2">Dos</label>
+								<input
+                        			type="checkbox"
+                        			name="puntuacion"
+                        			className="form-check-input ms-2"
+                        			id="InputPuntua1"
+									aria-describedby="nameHelp"
+									value="uno"
+									onChange={handleChange}
+                      			/>
+                      			<label htmlFor="InputPuntua3">Tres</label>
+								<input
+                        			type="checkbox"
+                        			name="puntuacion"
+                        			className="form-check-input ms-2"
+                        			id="InputPuntua3"
+									aria-describedby="nameHelp"
+									value="uno"
+									onChange={handleChange}
+                      			/>
+                      			<label htmlFor="InputPuntua4">Cuatro</label>
+								<input
+                        			type="checkbox"
+                        			name="puntuacion"
+                        			className="form-check-input ms-2"
+                        			id="InputPuntua4"
+									aria-describedby="nameHelp"
+									value="uno"
+									onChange={handleChange}
+                      			/>
+                      			<label htmlFor="InputPuntua5">Cinco</label>
+								</div>
+								
+								</div>
+							<div className="col-md-12 mt-2">
+								<label className="alinear-izquierda" htmlFor="InputEmail1">
+								Título de tu opinión
+								</label>
+								<textarea
+									required
+									className="form-control"
+									type="description"
+									name="description"
+									id="textarea"
+									aria-describedby="Descripción"
+									row="5"
+									cols="109"
+									onChange={handleChange}
+									placeholder="Resume tu visita o destaca algún detalle importante"
+								></textarea>
+                			</div>
+							<div className="col-md-12 mt-2">
+								<label className="alinear-izquierda" htmlFor="InputEmail1">
+								Tu opinión
+								</label>
+								<textarea
+									required
+									className="form-control"
+									type="description"
+									name="description"
+									id="textarea"
+									aria-describedby="Descripción"
+									row="5"
+									cols="109"
+									onChange={handleChange}
+									placeholder="Cuenta tu experiencia al resto de usuarios y comparte qué es lo más te ha gustado y lo que menos."
+								></textarea>
+                			</div>	   
+							<div className="col-12 mt-2">
 								<div>
 									<p className="d-inline alinear-izquierda">¿Nos puedes contar algo mas?</p>
 									<p className="d-inline alinear-izquierda">(opcional)</p>
@@ -118,52 +180,33 @@ export const OpinionUser = () => {
 									<option value="Normal">Normal</option>
 									<option value="Caro">Caro</option>
 								</select>
-								<select name="a_domicilio" id="InputA_domicilio1" className="form-control" aria-describedby="A_domicilioHelp" onChange={handleChange} >
-									<option value="">¿Ofrece este local entrega a domicilio?</option>
-									<option value="Si">Si</option>
-									<option value="No">No</option>
-								</select>
 								<select name="mesa" id="InputMesa1" className="form-control" aria-describedby="MesaHelp" onChange={handleChange} >
-									<option value="">¿Este local ofrece servicio de mesa?</option>
+									<option value="">¿Este local tiene jardines o parque infantil?</option>
 									<option value="Si">Si</option>
 									<option value="No">No</option>
 								</select>
 								<select name="alcohol" id="InputAlcohol1" className="form-control" aria-describedby="AlcoholHelp" onChange={handleChange} >
-									<option value="">¿Se sirve en este restaurante alcohol?</option>
+									<option value="">¿Repetirías la experiencia?</option>
 									<option value="Si">Si</option>
 									<option value="No">No</option>
 								</select>
 							</div>
-							<br/>
-							<div className="form-group">
-								<p className="alinear-izquierda">¿Que tipo de visita hiciste?</p>
-								<input type="radio" name="visita" className="form-check-input" id="InputTVisit1" aria-describedby="visitaHelp" value="Pareja" onChange={handleChange} />
-								<label htmlFor="InputTVisit1">Pareja</label><br/>
-								<input type="radio" name="visita" className="form-check-input" id="InputTVisit2" aria-describedby="visitaHelp" value="Familia" onChange={handleChange} />
-								<label htmlFor="InputTVisit2">Familia</label><br/>
-								<input type="radio" name="visita" className="form-check-input" id="InputTVisit3" aria-describedby="visitaHelp" value="Solo" onChange={handleChange} />
-								<label htmlFor="InputTVisit3">Solo</label><br/>
-								<input type="radio" name="visita" className="form-check-input" id="InputTVisit4" aria-describedby="visitaHelp" value="Amigos" onChange={handleChange} />
-								<label htmlFor="InputTVisit4">Amigos</label><br/>
-								<input type="radio" name="visita" className="form-check-input" id="InputTVisit5" aria-describedby="visitaHelp" value="Negocios" onChange={handleChange} />
-								<label htmlFor="InputTVisit5">Negocios</label><br/>
-							</div>
-							<br/>
-							<div className="form-group">
+							<div className="col-12 mt-2">
 								<p className="alinear-izquierda">¿Tienes alguna foto que compartir?</p>
 								<input type="text" name="photo_location1" className="form-control" id="InputTphoto_location1" aria-describedby="photo_locationHelp" onChange={handleChange} />
 								<input type="text" name="photo_location2" className="form-control" id="InputTphoto_location2" aria-describedby="photo_locationHelp" onChange={handleChange} />
-								<input type="text" name="photo_location3" className="form-control" id="InputTphoto_location3" aria-describedby="photo_locationHelp" onChange={handleChange} />
 							</div>
-
-							<br/>
-							<button className="col-md-10 btn-lg px-5 mb-3 mt-3 ms-2 me-2" type="submit"  id="button">Envía tu opinión</button>
-							{(mensaje != null) && <p>{mensaje}</p>}
+							<div className="col-12">
+                				<div className="py-3 px-0 mx-0 d-flex justify-content-around">
+                    				<button type="submit" className="btn btn-primary px-5 mb-3 mt-3" id="button">
+                      				Guardar
+                    				</button>
+                  				</div>
+                  			{mensaje != null && <p>{mensaje}</p>}
+             				 </div>
+							</div>
 						</form>				  
-					</div>
 						</div>
-					</div>
-					</div>
 			</div>
 
 			<CustomModal  show={isModalOpened}

@@ -15,18 +15,21 @@ body {
   font-family: poppins;
 }
 #footer {
-  padding: 50px;
+  margin-top: 50px;
   color: #5e2e2e;
 }
 #textosfooter {
   color: #5e2e2e;
 }
 #textosfooter2 {
-  color: #FF9500;
+  color:#5e2e2e;
   font-weight: bold;
 }
 #textofecha {
   font-size: small;
+}
+#navbar {
+  position: sticky;
 }
 #navbarSupportedContent {
   font-size: large;
@@ -92,18 +95,26 @@ body {
   border-width: 2px;
   box-shadow: 0px 0px 5px 1px rgb(177, 176, 176); 
 }
+#textarea{
+  border-color: #cccaca;
+}
 #card2{
-  width: 250px;
+  width: 300px;
+  height: 342px;
+  font-size: small;
+}
+#card2b{
+  width: 320px;
   height: 342px;
   font-size: small;
 }
 #card3{
-  width: 600px;
+  width: 620px;
   height: 342px;
   font-size: small;
 }
 #card4{
-  width: 230px;
+  width: 300px;
   height: 342px;
   font-size: x-small
 }
@@ -113,7 +124,7 @@ body {
 
 #localcard{
   margin-bottom: 20px;
-  width: 300px;
+  width: 350px;
   height: 400px;
 }
 #imagenlocal{
@@ -124,16 +135,86 @@ body {
 .iconbuttonmouseover{
   color: #FFCCF4;
 }
-.heart-button {
-  display: inline-block;
-  border: none;
-  color: #8a8787;
-  background-color: #FFE9C8;
-  display: inline-block;
-  text-align:center;
+#textoslegales{
+  font-size: small;
 }
-
-.heart-button-active {
-  color: #FF0DE7;
-  background-color: #FFE9C8;
+#textoslegales2{
+  font-size: small;
+  font-weight: bold;
+}
+#inputbuscar{
+  width: 1050px;
+}
+.tachado{
+  text-decoration: line-through
+}
+#banner{
+  height: 200px;
+  width: 600px;
+  margin-left: 15px;
+  background-color: rgb(242, 248, 252);
+}
+#buttonbanner {
+  background-color: #ffccf4;
+  color: #5e2e2e;
+  border-color: #ff69de;
+  border-width: 3px;
+  border-radius: 20px;
+  font-weight: bold;
+  width: 150px;
+}
+.card-img-top2{
+  width: 502px;
+  height: auto;
+  margin-left: 10px;
+}
+.card-img-top3{
+  width: 570px;
+  height: 400px;
+  margin-left: 10px;
+}
+#cardabout{
+  align-items: center;
+  background-color: #FFE9C8 ;
+  border: none;
+}
+#cardtitle{
+  color: #5e2e2e;
+}
+.containerbuscador{
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.fondo{
+  display: grid;
+  margin: 0;
+  padding: 0;
+}
+.imagenbuscador{
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+}
+.cajabuscador{
+  justify-self: center;
+  position: absolute;
+  margin-top: 150px;
+  width: 807px;
+  padding-left: 0;
+  padding-right: 0;
+}
+.searchbox{
+  height: 60px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 0;
+  text-align: left;
+  padding: 0;
 }

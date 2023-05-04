@@ -9,8 +9,6 @@ import imagen from "../../img/logo.png";
 export const OpinionManager = () => {
 	const params = useParams()
 	const [local, setLocales] = useState({})
-	const [comentario, setComentario] = useState();
-	const [fotos, setFotos] = useState();
 	const [formData, setFormData] = useState({tipo:"manager", comercial_place_id:params.id_local, comment_id: params.id_comment, puntuacion: null});
 	const [mensaje, setMensaje] = useState(null); 
 	const navigate = useNavigate();
@@ -18,25 +16,12 @@ export const OpinionManager = () => {
 	const [isModalOpened, setIsModalOpened, toggleModal] = useModal(false);
 
 	const useEffectComentario = async () => { 
-		const resp = await fetch(`${process.env.BACKEND_URL}/api/comment/${params.id_comment}`,{
-			method: 'GET',
-			headers: {"Content-Type": "application/json",
-					  "Authorization": 'Bearer '+ sessionStorage.getItem("token") // hará falta?
-			} 
-		  })
-		if (resp.ok) return setComentario(await resp.json()); 
-		else         return setMensaje(await resp.json());  
-	} 
-
-	const useEffectfotosComentario = async () => { 
-		const resp = await fetch(`${process.env.BACKEND_URL}/api/photos_comment/${params.id_comment}`,{
-			method: 'GET',
-			headers: {"Content-Type": "application/json",
-					  "Authorization": 'Bearer '+ sessionStorage.getItem("token") // hará falta?
-			} 
-		  })
-		if (resp.ok) return setFotos(await resp.json()); 
-		else         return setMensaje(await resp.json());  
+		if (actions.getComment(params.id_comment)){
+			// Cargados stores: comentario y comentarioFotos
+			return true;
+		}else{
+			return setMensaje(store.message ); 
+		}
 	} 
 
 	useEffect (()=> {
@@ -54,8 +39,7 @@ export const OpinionManager = () => {
 
 		useEffectComentario();
 
-		useEffectfotosComentario();
-	
+		//useEffectfotosComentario();	
 	}, [])
 
 	const handleChange = (evento) =>{
@@ -85,66 +69,114 @@ export const OpinionManager = () => {
 	}
 
 	return (
-		<div className="container fluid align-center">
-		  <div className="form-body">
-			<div className="row">
-			    <h1 className="text-center">Un usuario ha opinado de tu local</h1>
-			    <h5 className="text-center">Ayúdale a mejorar la experiencia o agradécele el comentario</h5>
-            </div>
-			<div className="row">
-                <div className="row justify-content-center">
-                    <div className="col-4 py-3 px-0 mx-0">
-                        <img src={local.image_url} className="alinear-derecha" alt="" width="60%" height="60%"/>
-                    </div>
-                    <div className="col-4 py-3 px-2 mx-2">
-						<p className="my-0"><strong>{local.name} ({params.id_local} - {params.id_comment})</strong></p>
-                        <p className="my-0">{local.address} </p>
-                        <p className="my-0">{local.telf} - {local.email}</p>
-                        <p className="my-0">{local.url}</p>
-                    </div>
+		<div className="bg-contact3">
+		<div className="vh-100 gradient-custom">
+		<div className="container text-center">
+		  <div className="row d-flex justify-content-center align-items-center h-10">
+		  <div className="col-12 col-md-8 col-lg-6 col-xl-5 ">
+		  	<h3 className="mt-3" id="iconbutton">Has recibido una opinión de un usuario</h3>
+			<p className="mb-3">Ayúdale a mejorar la experiencia o agradécele el comentario.</p>
+		  	<div className="card px-3" id="card">
+                <div className="col-md-12">
+                    <p className="alinear-izquierda mt-3">{store.comentario && store.comentario.user_name}</p>
                 </div>
-                <div className="row">
-                    <h1 className="text-center">El usuario es:</h1>
-                    <h5 className="text-center">{comentario && comentario.user_name}</h5>
-					{/*<button id="opinionbutton">
-						{Array.from(Array(comentario.puntuacion).keys()).map(()=>{return (<i className="fas fa-star" id="iconbutton"/>)})}
-						{comentario.puntuacion <5 ? Array.from(Array(5-comentario.puntuacion).keys()).map(()=>{return (<i className="far fa-star" id="iconbutton"/>)}):""}
-					</button>*/}
-                    <h5 className="text-center">Ha puntuado con {comentario && comentario.puntuacion} estrellas</h5>
-                </div>
-				
-				<div className="border border-warning my-3">
-					<span className="p-2"><p>{comentario && comentario.comment}</p></span>
-				</div>
-
 				<div className="col-md-12">
-					<div className="text ma-home-section">  
-                          <p><strong>Sobre la relación calidad/precio: </strong>{comentario && comentario.price}</p> 
-                          <p><strong>Indicó si se sive a domicilio: </strong>{comentario && comentario.a_domicilio}</p> 
-                          <p><strong>Indicó si se sive en la mesa: </strong>{comentario && comentario.mesa}</p> 
-                          <p><strong>Indicó si se sive Alcohol: </strong>{comentario && comentario.alcohol}</p> 
-                          <p><strong>Fue una visita: </strong>{comentario && comentario.visita}</p> 
-                          <p><strong>Fue una visita: </strong>{comentario && comentario.photo_location1}</p> 
-						  {fotos && fotos.map((foto, index) => {
-								return  <img src={foto.location}></img>
-						   })}
+					<p className="alinear-izquierda">Ha puntuado con <strong>{store.comentario && store.comentario.puntuacion} estrellas</strong></p>
+				</div>
+				<div className="col-md-12">
+					<label className="alinear-izquierda" htmlFor="InputEmail1">
+						Su Opinión:
+					</label>
+					<textarea
+						required
+						className="form-control"
+						type="description"
+						name="description"
+						id="textarea"
+						aria-describedby="Descripción"
+						row="3"
+						cols="109"
+						defaultValue={store.comentario && store.comentario.comment}
+						onChange={handleChange}
+					></textarea>
+				</div>
+				<div className="col-md-12">
+					<div className="text ma-home-section mt-2 mb-2"> 
+					<label className="alinear-izquierda" htmlFor="Inputurl1">
+                    ¿Qué tal está de precio este local?
+                  	</label>
+					<input
+                    type="text"
+                    name="url"
+                    className="form-control mb-1"
+                    id="Inputurl1"
+                    aria-describedby="urlHelp"
+                    placeholder="Sobre la relación calidad/precio:"
+					defaultValue={store.comentario && store.comentario.price}
+                    onChange={handleChange}
+                  	/>
+					<label className="alinear-izquierda" htmlFor="Inputurl1">
+                    ¿Este local tiene jardines o parque infantil?
+                  	</label>
+					<input
+                    type="text"
+                    name="url"
+                    className="form-control mb-1"
+                    id="Inputurl1"
+                    aria-describedby="urlHelp"
+                    placeholder="Sobre la relación calidad/precio:"
+					defaultValue={store.comentario && store.comentario.a_domicilio}
+                    onChange={handleChange}
+                  	/>
+					<label className="alinear-izquierda" htmlFor="Inputurl1">
+                    ¿Repetirías la experiencia?
+                  	</label>
+					<input
+                    type="text"
+                    name="url"
+                    className="form-control mb-1"
+                    id="Inputurl1"
+                    aria-describedby="urlHelp"
+                    placeholder="Sobre la relación calidad/precio:"
+					defaultValue={store.comentario && store.comentario.mesa}
+                    onChange={handleChange}
+                  	/>
+					
                      </div>
 				</div>
 
 				<div className="col-md-12">
 					<form onSubmit={handleSubmit}>
-						<div className="form-group">
-							<h5>Responde al usuario</h5>
-							<textarea name="comment" required rows="3" cols="100" onChange={handleChange} ></textarea>
+						<div className="col-md-12">
+						<label className="alinear-izquierda" htmlFor="InputEmail1">
+						Responde al usuario:
+						</label>
+						<textarea
+						required
+						className="form-control"
+						type="comment"
+						name="comment"
+						id="textarea"
+						aria-describedby="Descripción"
+						row="3"
+						cols="109"
+						onChange={handleChange}
+						></textarea>
 						</div>
-
-						<br/>
-						<button type="submit"  id="button">Comentario</button>
+						<div className="">
+                    	<button
+                        className="btn btn-primary px-5 mb-3 mt-3"
+                        id="button">
+                        Responder
+                     	 </button>
+                    	</div>				
 						{(mensaje != null) && <p>{mensaje}</p>}
 					</form>				  
 				</div>
 			</div>
 		  </div>
+		  </div>
+		</div>
 
 		  <CustomModal  show={isModalOpened}
            		        titulo="Tu respuesta al mensaje"
@@ -154,5 +186,32 @@ export const OpinionManager = () => {
 				<div>{mensaje}</div>
 		  </CustomModal>
 		</div>
+		</div>
 	  );
 };
+
+
+/**
+ * 
+ * const useEffectComentario = async () => { 
+		const resp = await fetch(`${process.env.BACKEND_URL}/api/comment/${params.id_comment}`,{
+			method: 'GET',
+			headers: {"Content-Type": "application/json",
+					  "Authorization": 'Bearer '+ sessionStorage.getItem("token") // hará falta?
+			} 
+		  })
+		if (resp.ok) return setComentario(await resp.json()); 
+		else         return setMensaje(await resp.json());  
+	} 
+
+	const useEffectfotosComentario = async () => { 
+		const resp = await fetch(`${process.env.BACKEND_URL}/api/photos_comment/${params.id_comment}`,{
+			method: 'GET',
+			headers: {"Content-Type": "application/json",
+					  "Authorization": 'Bearer '+ sessionStorage.getItem("token") // hará falta?
+			} 
+		  })
+		if (resp.ok) return setFotos(await resp.json()); 
+		else         return setMensaje(await resp.json());  
+	} 
+ */

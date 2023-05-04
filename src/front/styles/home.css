@@ -9,6 +9,7 @@ body {
     background-color: #ffe9c8;
     color: #5e2e2e;
     font-family: poppins;
+    position: relative;
   }
 #footer{
   color: #5e2e2e;
@@ -16,7 +17,6 @@ body {
 
 #tituloHome{
   margin-left: 12px;
-  margin-top: 50px;
   margin-bottom: 10px;
 }
 #subtituloHome{
@@ -30,12 +30,66 @@ body {
 #iconbutton2{
   color: #FF9500;
   border: none;
-  background-color: none;
-  align-items: left;
+  background-color: #ffffff;
 }
+#favicon{
+  fill: currentColor;
+}
+#favbutton{
+  background-color: var(--primaryCircularButtonFill);
+  color: var(--onLightButtonText);
+  cursor: pointer;
+}
+i.fa-heart:hover {
+  color: #FF0DE7;
+}
+.heart-button {
+  border: none;
+  color: #8a8787;
+  background-color: #ffffff;
+  display: inline-block;
+  text-align:center;
+}
+
+.heart-button-active {
+  color: #FF0DE7;
+  background-color: #ffffff;
+  border: none;
+  display: inline-block;
+  text-align:center;
+}
+.heart-button2 {
+  border: none;
+  color: #8a8787;
+  background-color: #ffe9c8;
+  display: inline-block;
+  text-align:center;
+}
+
+.heart-button-active2 {
+  color: #FF0DE7;
+  background-color: #ffe9c8;
+  border: none;
+  display: inline-block;
+  text-align:center;
+}
+#iconsocial{
+  color: #5e2e2e;
+  border: none;
+  background-color: none;
+}
+#iconbutton3{
+  color: #ff69de;
+  background-color: #ffccf4;
+  border: none;
+}
+#iconbutton4{
+  color: #ff69de;
+}
+
 #opinionbutton{
   border: none;
-  background-color: #ffc6708a;
+  background-color: #fcd08f8a;
 }
 #opinioncard{
   background-color: #ffc6708a;
@@ -52,6 +106,7 @@ body {
   box-shadow: 10px;
   height: auto;
   margin-top: 5px;
+  width: 1260px;
 }
 #comentario{
   width: 300px;
@@ -136,7 +191,6 @@ body {
   width: 100%;
   height: 50%;    
 }
-
 #localcardtext{
   font-size: small;  
 }
@@ -144,53 +198,19 @@ body {
   font-size: small; 
   align-items: right; 
 }
-/* .section {
-  position: relative;
-  background-repeat: repeat-x;
+.imagenbanner{
+  width: 700px;
+  height: 200px;
 }
-.helpr-section {
-  background: url('https://as2.ftcdn.net/v2/jpg/03/09/77/01/1000_F_309770182_CS9UFI0di8bHPdZpSL47eBhdooxJx0v0.jpg');
-  background-position: top center;
-  background-size: cover;
+.imagenDetalle{
+  width: 620px;
+  height: 342px;
 }
-.helpr-text {
-  height: 150px;
+.imagenDetallePeq{
+  width: 400px;
+  height: 171px;
 }
-.webHomeTitle {
-  display: block;
+.linkfooter{
+  text-decoration:none;
+  color: #5e2e2e;
 }
-.home-service {
-  width: 600px;
-  margin: 40px auto 100px auto;
-  border-radius: 8px;
-  background: #fff;
-  -webkit-box-shadow: 0 4px 8px rgba(2,2,2,0.14);
-  -moz-box-shadow: 0 4px 8px rgba(2,2,2,0.14);
-  box-shadow: 0 4px 8px rgba(2,2,2,0.14);
-  height: 65px;
-}
-.helpr-title {
-  padding: 190px 190px 10px;
-  font-size: 40px;
-  -webkit-text-shadow: 0 4px 6px rgba(0,0,0,.20);
-  -moz-text-shadow: 0 4px 6px rgba(0,0,0,.20);
-  text-shadow: 0 4px 6px rgba(0,0,0,.20);
-  text-align: center;
-  color: #ffffff;
-  margin: 0;
-  position: relative;
-}
-.helpr-content {
-  display: table;
-  width: 100%;
-}
-@media (max-width: 3000px){
-    .helpr-text {
-      display: flexbox !important;
-  }
-
-}.wrapper-demo1 {
-  float:left;
-  margin:11px 0 0 15px;
-} */
-

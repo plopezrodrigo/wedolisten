@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 
 export const Data = () => {
   const { store, actions } = useContext(Context);
+ 
   return (
     <>
       <div className="myDetails">
@@ -21,6 +21,7 @@ export const Data = () => {
               <div className="row d-flex justify-content-center h-100">
                 <div className="col-12 col-md-8 col-lg-6 col-xl-5">
                   <div className="card" id="card">
+                    <a href="/account"><i className="fas fa-chevron-square-left" id="iconbutton"></i></a>
                     <h6 className="mt-3">Datos personales</h6>
                   <form className="requires-validation" noValidate>
                     <div className="d-flex justify-content-center ms-3 me-3">
@@ -45,17 +46,71 @@ export const Data = () => {
                       <div className="valid-feedback">Campo Email es válido.</div>
                       <div className="invalid-feedback">Campo Email no puede estar en blanco.</div>
                     </div>
-                    <div className="d-flex justify-content-center ms-3 me-3 mt-2">
+                    {store.usertype == "customer" ?
+                      <div className="d-flex justify-content-center ms-3 me-3 mt-2">
                       <input  className="form-control p-2"
-                              type="telefono"
-                              name="Teléfono"
+                              type="tel"
+                              name="telefono"
                               placeholder="Teléfono"
-                              required
-                              defaultValue={store.user?.telefono}
+                              defaultValue={store.usuario?.telefono}
                       />
                       <div className="valid-feedback">Campo Teléfono es válido</div>
-                      <div className="invalid-feedback">Campo Teléfono no puede estar en blanco</div>
+                      </div>
+                      :
+                      ""
+                    }
+                    {store.usertype == "customer" ?
+                    <div className="d-flex justify-content-center ms-3 me-3 mt-2">
+                      <input  className="form-control p-2"
+                              type="date"
+                              name="birthday"
+                              placeholder="birthday"
+                              defaultValue={store.usuario?.birthday}
+                      />
+                      <div className="valid-feedback">Campo birthday es válido</div>
                     </div>
+                      :
+                      ""
+                    }
+                    {store.usertype == "customer" ?
+                    <div className="d-flex justify-content-center ms-3 me-3 mt-2">
+                      <select className="form-select mt-3" name="gender">
+                        <option > Género</option>
+                        <option value="female">Femenino</option>
+                        <option value="male">Masculino</option>
+                      </select>
+
+                      <div className="valid-feedback">Campo gender es válido</div>
+                    </div>
+                      :
+                      ""
+                    }
+                    {store.usertype == "customer" ?
+                    <div className="d-flex justify-content-center ms-3 me-3 mt-2">
+                    <select className="form-select mt-3" name="gender">
+                        <option >Suscripción a la newsletter</option>
+                        <option value="female">Sí</option>
+                        <option value="male">No</option>
+                      </select>
+                      <div className="valid-feedback">Campo subscription es válido</div>
+                    </div>
+                      :
+                      ""
+                    }
+                    {store.usertype == "customer" ?
+                    <div className="d-flex justify-content-center ms-3 me-3 mt-2">
+                      <input  className="form-control p-2"
+                              type="text"
+                              name="address"
+                              placeholder="Dirección"
+                              defaultValue={store.usuario?.address}
+                      />
+                      <div className="valid-feedback">Campo address es válido</div>
+                    </div>
+                      :
+                      ""
+                    }
+
                     <div className="d-flex justify-content-center ms-3 me-3 mt-2">
                       <input
                         className="form-control"
@@ -89,8 +144,8 @@ export const Data = () => {
                         Privacidad y Aviso Legal.
                       </div>
                     </div>
-                    <div className="form-button mt-3 mb-3 d-flex justify-content-center">
-                      <button id="button" type="submit" className="col-md-10 btn-lg px-5 mb-3 mt-3">
+                    <div className="py-3 px-0 mx-0 d-flex justify-content-around">
+                      <button id="button" type="submit" className="btn btn-primary px-5 mb-3 mt-3">
                         Guardar cambios
                       </button>
                     </div>

@@ -4,13 +4,17 @@ import { useNavigate, Link } from "react-router-dom";
 import "../../styles/home.css";
 import CustomModal from "../component/customModal";
 import { useModal } from "../hooks/UseModal";
+import emailjs from '@emailjs/browser';
+
 
 const Login = () => {
   const { store, actions } = useContext(Context);
   const [data, setData] = useState({});
 	const [mensaje, setMensaje] = useState(null);
   const [shown, setShown] = useState(false);
-  const navigate = useNavigate();
+  const [tituloModal, setTituloModal] = useState("Ha surgido un problema");
+  const [salir, setSalir] = useState(false);
+  const navigate = useNavigate(); 
   const [isModalOpened, setIsModalOpened, toggleModal] = useModal(false);
 
 
@@ -21,12 +25,7 @@ const Login = () => {
   }, []);
 
   const switchShown = () => setShown(!shown);
-
-  const handleChangePwd = (e) => {
-    handleChange(e);
-    setPassword(e.target.value);
-  };
-    
+  
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
@@ -34,14 +33,52 @@ const Login = () => {
   const handleClick = () => {
     console.log(data.password);
     actions.login(data.email, data.password).then((response) => {
-    if (response) navigate("/");
-    else{ setMensaje("Las credenciales no son correctas");
-          toggleModal();
+    if (response){ 
+           setTituloModal("Todo OK");
+           setMensaje("Las credenciales están superbien");
+           toggleModal();
+           setSalir(true);
+    }else{ setMensaje("Las credenciales no son correctas");
+           toggleModal();
         } 
     })
   };
 
-  return (
+
+  const datosCustomer = async (id) => {
+    const resp = await fetch(`${process.env.BACKEND_URL}/api/GetCustomer/${id}`
+    );
+  
+    if (resp.ok) return await resp.json();
+    else         return setMensaje(await resp.json()); 
+  };
+  
+  const salimos = () => {
+      if (store.usertype == "customer"){
+        datosCustomer(store.user.id).then((resp) => {
+            console.log("Customer:", resp);
+            if (!(resp.name) || !(resp.birthday) || !(resp.gender) || !(resp.address) || !(resp.telefono))
+              navigate("/");
+          }); 
+      }
+      navigate("/");
+  };
+
+  const submit = (e) => {
+    e.preventDefault();
+    emailjs.sendForm(process.env.EMAIL_SERVICE_ID, process.env.EMAIL_TEMPLATE_ID, form.current, process.env.EMAIL_PUBLIC_KEY)
+    .then((result) => {
+        setMensaje("Correo enviado satisfactoriamente");
+        toggleModal();
+    }, (error) => {
+        setMensaje(error.text)
+        return false;
+    });
+
+    return true;
+  };
+
+   return (
     <div className="vh-100 gradient-custom">
       <div className="container text-center">
         <h1>¡Hola de nuevo!</h1>
@@ -65,16 +102,16 @@ const Login = () => {
                         onChange={handleChange}
                       />
                       <label className="form-label alinear-izquierda" htmlFor="typeEmailX">Contraseña</label>
-                      <div className="col-md-6">
+                      <div className="col-md-12">
                         <div className="input-group">
-                          <input  ID="typePasswordX-2" 
+                          <input  id="typePasswordX-2" 
                                   type={shown ? 'text' : 'password'}
                                   className="form-control mb-2 me-2"
                                   name="password"
                                   onChange={handleChange} 
                           />
-                          <div class="input-group-append">
-                            <button id="show_password" className="btn btn-primary" type="button" onClick={switchShown}> <span className={shown ? "fas fa-eye-slash": "far fa-eye" }  id="iconbutton"></span> </button>
+                          <div className="input-group-append">
+                            <button id="iconbutton3" className="btn btn-primary" type="button" onClick={switchShown}> <span className={shown ? "fas fa-eye-slash": "far fa-eye" }  id="iconbutton4"></span> </button>
                           </div>
                         </div>
                       </div>
@@ -82,32 +119,17 @@ const Login = () => {
                         <a href="#!">¿Olvidaste la contraseña?</a>
                       </p>
                       <div className="form-check alinear-izquierda2">
-                      <input  className="form-check-input"
-                              type="checkbox"
-                              value=""
-                              id="invalidCheck"
-                              required
-                      />
+                      <input  className="form-check-input" type="checkbox" value="" id="invalidCheck" required />
                       <label className="form-check-label alinear-izquierda2"> Confirmo que he leido y acepto la Política de Privacidad y Aviso Legal.</label>
                       <div className="invalid-feedback">Por favor, confirma que has leido y aceptas la Política de Privacidad y Aviso Legal.</div>
                       </div>
-                      <button
-                        className="col-md-12 btn-lg px-5 mb-3 mt-3"
-                        onClick={handleClick}
-                        id="button"
-                      >
+                      <button className="btn btn-primary px-5 mb-3 mt-3" onClick={handleClick} id="button">
                         Iniciar Sesión
                       </button>
                     </div>
                   <div>
-                      <p className="ms-3 me-3 mb-3 text-center">
-                      ¿No tienes una cuenta?
-                      <p className="ms-3 me-3 mt-3 text-center">
-                      <Link to="/signupUser">
-                      <strong className="strong "> Registrate </strong>
-                      </Link>
-                      para descubrir lo mejor de Baby Friendly</p>
-                    </p>
+                      <p className="ms-3 me-3 mb-0 text-center">¿No tienes una cuenta? <Link to="/signupUser"><strong className="strong "> Registrate </strong></Link></p>
+                      <p className="ms-3 me-3 mt-0 text-center">para descubrir lo mejor de Baby Friendly</p>
                   </div>
                 </div>
               </div>
@@ -117,10 +139,11 @@ const Login = () => {
       </div>
 
       <CustomModal  show={isModalOpened}
-                    titulo="Login en BabyFriendly"
+                    titulo={tituloModal}
                     handleClose={() => setIsModalOpened(false)}>
         <div>{mensaje}</div>
       </CustomModal>
+      {(salir) && salimos()}
     </div>
   );
 };

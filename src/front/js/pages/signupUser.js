@@ -1,6 +1,12 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useRef, useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate, Link } from "react-router-dom";
+import "../../styles/home.css";
+import CustomModal from "../component/customModal";
+import { useModal } from "../hooks/UseModal";
+import emailjs from '@emailjs/browser';
+import { EnvioEmail } from "../hooks/EnvioEmail";
+
 
 import "../../styles/home.css";
 
@@ -10,6 +16,13 @@ export const SignupUser = () => {
 	const [mensaje, setMensaje] = useState(null);
 	const navigate = useNavigate();
 	const { store, actions } = useContext(Context);
+	const [isModalOpened, setIsModalOpened, toggleModal] = useModal(false);
+	const [tituloModal, setTituloModal] = useState("Ha surgido un problema");
+	const [salir, setSalir] = useState(false);
+	const form = useRef();
+
+
+
 
 	const handleChange = (evento) =>{
 		setFormData({...formData, [evento.target.name]: evento.target.value});
@@ -43,6 +56,14 @@ export const SignupUser = () => {
 		}
 	  },[]);
 
+	  const submit = (e) => {
+		e.preventDefault();
+	
+		EnvioEmail(form, setMensaje, toggleModal, "template_k5ctw6a");
+	
+	
+	  };
+
 	return (
 		<div className="vh-100 gradient-custom">
 		  <div className="container text-center">
@@ -51,7 +72,7 @@ export const SignupUser = () => {
 			  <p className="mb-3">Bienvenido a tu App para valorar establecimientos</p>
 			<div className="col-12 col-md-8 col-lg-6 col-xl-5">
 				<div className="card px-3" id="card">
-					<form className="form-outline" onSubmit={handleSubmit}>
+					<form ref={form} className="form-outline" onSubmit={handleSubmit}>
 							<div className="form-group">
 								<label className="alinear-izquierda mt-3 ms-2" htmlFor="InputEmail1">Nombre y Apellidos</label>
 								<input type="text" name="name" required className="form-control mb-2" id="InputName1" aria-describedby="nameHelp" onChange={handleChange} />
@@ -75,7 +96,7 @@ export const SignupUser = () => {
                       		<label className="form-check-label"> Confirmo que he leido y acepto la Política de Privacidad y Aviso Legal.</label>
                       		<div className="invalid-feedback">Por favor, confirma que has leido y aceptas la Política de Privacidad y Aviso Legal.</div>
                       		</div>
-							<button className="mb-3 col-md-12 btn-lg px-5 mb-3 mt-3" type="submit"  id="button">Registrarme</button>
+							<button className="btn btn-primary px-5 mb-3 mt-3" type="submit"  id="button">Registrarme</button>
 							{(mensaje != null) && <p>{mensaje}</p>}
 							<div>
                       		<p className="ms-3 me-3 mb-3 text-center">
@@ -92,6 +113,12 @@ export const SignupUser = () => {
 			</div>
 			</div>
 		  </div>
+		  <CustomModal  show={isModalOpened}
+                    titulo={tituloModal}
+                    handleClose={() => setIsModalOpened(false)}>
+        	<div>{mensaje}</div>
+      		</CustomModal>
+      		{(salir) && salimos()}
 		</div>
 	  );
 };
